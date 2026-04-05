@@ -3,6 +3,14 @@
     <StoreHeader />
     <CategoryNav />
 
+    <div class="catalog-sort-row">
+      <CatalogSortSelect
+        :model-value="catalogSort"
+        :options="CATALOG_SORT_OPTIONS"
+        @update:model-value="catalogStore.setCatalogSort"
+      />
+    </div>
+
     <!-- Featured section (only when no category filter) -->
     <section v-if="!activeCategory && featuredProducts.length" class="section-featured">
       <ProductGrid
@@ -24,14 +32,18 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useCatalogStore, useStoreConfigStore } from 'src/stores'
 import { useCatalogHomeHash } from 'src/composables/useCatalogHash'
+import { CATALOG_SORT_OPTIONS } from 'src/utils/catalogSort'
 import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
 import StoreHeader from '../components/StoreHeader.vue'
 import CategoryNav from '../components/CategoryNav.vue'
+import CatalogSortSelect from '../components/CatalogSortSelect.vue'
 import ProductGrid from '../components/ProductGrid.vue'
 
 const catalogStore = useCatalogStore()
+const { catalogSort } = storeToRefs(catalogStore)
 const storeConfig = useStoreConfigStore()
 useCatalogHomeHash()
 
@@ -74,5 +86,18 @@ const sectionTitle = computed(() => {
 
 .section-products {
   margin-bottom: 24px;
+}
+
+.catalog-sort-row {
+  max-width: 960px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+  .catalog-sort-row {
+    padding: 0 16px;
+    margin-bottom: 16px;
+  }
 }
 </style>

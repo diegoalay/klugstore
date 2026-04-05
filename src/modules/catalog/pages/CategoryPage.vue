@@ -5,19 +5,31 @@
       <p v-if="category?.description" class="category-description">{{ category.description }}</p>
     </div>
 
+    <div class="category-sort-row">
+      <CatalogSortSelect
+        :model-value="catalogSort"
+        :options="CATALOG_SORT_OPTIONS"
+        @update:model-value="catalogStore.setCatalogSort"
+      />
+    </div>
+
     <ProductGrid :products="products" />
   </q-page>
 </template>
 
 <script setup lang="ts">
 import { computed, watch } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
 import { useCatalogStore, useStoreConfigStore } from 'src/stores'
+import { CATALOG_SORT_OPTIONS } from 'src/utils/catalogSort'
 import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
+import CatalogSortSelect from '../components/CatalogSortSelect.vue'
 import ProductGrid from '../components/ProductGrid.vue'
 
 const route = useRoute()
 const catalogStore = useCatalogStore()
+const { catalogSort } = storeToRefs(catalogStore)
 const storeConfig = useStoreConfigStore()
 
 const category = computed(() => {
@@ -27,7 +39,7 @@ const category = computed(() => {
 
 const products = computed(() => {
   if (!category.value) return []
-  return catalogStore.getProductsByCategory(category.value.id)
+  return catalogStore.getSortedProductsByCategory(category.value.id)
 })
 
 const categoryPath = computed(() => `/catalog/categoria/${route.params.categorySlug as string}`)
@@ -89,6 +101,12 @@ watch(
   line-height: 1.5;
 }
 
+.category-sort-row {
+  max-width: 960px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+}
+
 @media (max-width: 768px) {
   .category-header-section {
     padding: 16px 16px 16px;
@@ -96,6 +114,10 @@ watch(
 
   .category-title {
     font-size: 1.3rem;
+  }
+
+  .category-sort-row {
+    padding: 0 16px;
   }
 }
 </style>

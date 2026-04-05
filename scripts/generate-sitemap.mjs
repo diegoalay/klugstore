@@ -1,6 +1,7 @@
 /**
- * Genera public/sitemap.xml desde data/products/sweethome.json.
- * La función slugify debe ser idéntica a src/utils/slugify.ts (slugifyCatalogText).
+ * Genera public/sitemap.xml desde data/products/{STORE_SLUG}.json.
+ * STORE_SLUG default: sweethome. Base URL: json.publicUrl → SITEMAP_BASE_URL → https://sweethome.com.gt
+ * slugify = src/utils/slugify.ts (slugifyCatalogText).
  */
 import { readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
@@ -8,9 +9,9 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, '..')
-const jsonPath = join(root, 'data/products/sweethome.json')
+const storeSlug = process.env.STORE_SLUG || 'sweethome'
+const jsonPath = join(root, 'data/products', `${storeSlug}.json`)
 const outPath = join(root, 'public/sitemap.xml')
-const BASE = 'https://sweethome.com.gt'
 
 function slugifyCatalogText(text) {
   return text
@@ -30,6 +31,10 @@ function escapeXml(s) {
 }
 
 const raw = JSON.parse(readFileSync(jsonPath, 'utf8'))
+const BASE = (raw.publicUrl || process.env.SITEMAP_BASE_URL || 'https://sweethome.com.gt').replace(
+  /\/$/,
+  '',
+)
 const lastmod = new Date().toISOString().slice(0, 10)
 
 /** @type {{ loc: string; changefreq: string; priority: string }[]} */
@@ -75,4 +80,4 @@ ${body}
 `
 
 writeFileSync(outPath, xml, 'utf8')
-console.log(`sitemap: ${urls.length} URLs → ${outPath}`)
+console.log(`sitemap [${storeSlug}]: ${urls.length} URLs → ${outPath} (base ${BASE})`)

@@ -217,8 +217,10 @@ import { useRoute, useRouter } from 'vue-router'
 import type { QInput } from 'quasar'
 import { useStoreConfigStore, useCatalogStore } from 'src/stores'
 import { useCatalog } from 'src/composables/useCatalog'
+import { stashCatalogHashBeforeProductNavigation } from 'src/composables/useCatalogHash'
 import { useWhatsApp } from 'src/composables/useWhatsApp'
 import { resolveStoreSlug } from 'src/utils/storeResolver'
+import { applyCatalogSortMode } from 'src/utils/catalogSort'
 
 const route = useRoute()
 const router = useRouter()
@@ -244,17 +246,16 @@ const isAboutActive = computed(() => route.path === '/about')
 const searchResults = computed(() => {
   const q = searchQuery.value.toLowerCase().trim()
   if (!q) return []
-  return catalogStore.products
-    .filter((p) => {
-      if (!p.visible) return false
-      return (
-        p.name.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        (p.tags && p.tags.some((t) => t.toLowerCase().includes(q))) ||
-        (p.categoryName && p.categoryName.toLowerCase().includes(q))
-      )
-    })
-    .slice(0, 8)
+  const list = catalogStore.products.filter((p) => {
+    if (!p.visible) return false
+    return (
+      p.name.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q) ||
+      (p.tags && p.tags.some((t) => t.toLowerCase().includes(q))) ||
+      (p.categoryName && p.categoryName.toLowerCase().includes(q))
+    )
+  })
+  return applyCatalogSortMode(list, catalogStore.catalogSort).slice(0, 8)
 })
 
 async function toggleSearch() {
@@ -278,6 +279,7 @@ function goHome() {
 }
 
 function goToProduct(product: { slug: string }) {
+  stashCatalogHashBeforeProductNavigation()
   void router.push({
     name: 'catalog-product',
     params: { productSlug: product.slug },

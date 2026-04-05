@@ -2,6 +2,7 @@
   "store": "sweethome",
   "name": "SweetHome GT",
   "currency": "GTQ",
+  "publicUrl": "https://sweethome.com.gt",
   "categories": [
     {
       "slug": "jarrones",
@@ -350,7 +351,7 @@
       "name": "Set de 4 Mini Jarrones Negros",
       "description": "Set de 4 mini jarrones de cerámica color negro estilo minimalista y moderno. Ideal para flores secas, ramitas decorativas o como composición escultural en estantes.",
       "measure": "Grande 22 cm, Medianos 14 cm, Pequeño 10 cm",
-      "price": 200,
+      "price": 250,
       "tags": [
         "jarrón",
         "mini",
@@ -425,7 +426,7 @@
       "name": "Set de 2 Jarrones Cuadrados Texturizados",
       "description": "Set de 2 floreros de cerámica color blanco con forma cuadrada y textura en líneas. Perfectos para todos los espacios y combinan elegantemente en composiciones modernas.",
       "measure": "22 cm de altura",
-      "price": 200,
+      "price": 300,
       "tags": [
         "jarrón",
         "florero",
@@ -451,7 +452,7 @@
       "name": "Set de 2 Floreros Cónicos Blancos",
       "description": "Set de 2 floreros de cerámica color blanco con forma cónica alta. Estilo minimalista perfecto para todos los espacios; ideales para ramos grandes y flores altas.",
       "measure": "35 cm de altura",
-      "price": 300,
+      "price": 250,
       "tags": [
         "florero",
         "cónico",
@@ -476,7 +477,7 @@
       "name": "Divisor de Bambú Giratorio con Bowls",
       "description": "Divisor de bambú multifuncional giratorio con dos mini bowls cerámicos blancos para servir alimentos o snacks. Ideal para reuniones y sobremesas elegantes.",
       "measure": "25 cm de diámetro, 2 cm de grosor",
-      "price": 135,
+      "price": 400,
       "tags": [
         "divisor",
         "bambú",
@@ -640,7 +641,7 @@
       "name": "Soporte Decorativo Madera Oscura",
       "description": "Soporte decorativo de madera oscura con base redonda y varilla central. Úsalo como pieza decorativa minimalista o como base para otros elementos.",
       "measure": "25 cm de altura",
-      "price": 160,
+      "price": 350,
       "tags": [
         "soporte",
         "madera oscura",
@@ -659,17 +660,17 @@
     {
       "id": "trays-04",
       "category": "trays-bandejas",
-      "name": "Decoración Apilable Home Sweet Home",
-      "description": "Set decorativo de madera apilable con figura de abeja y letrero 'Home Sweet Home'. Perfecto para estilo farmhouse y dar calidez hogareña a cualquier rincón.",
-      "measure": "Varios tamaños",
-      "price": 150,
+      "name": "Mini Try de 2 Niveles Café Oscuro",
+      "description": "Mini try de dos niveles de madera color café oscuro, elegante. Úsalo para almacenar artículos u organizar espacios de tu hogar con un toque cálido y rústico moderno.",
+      "measure": "25 cm de altura, bandeja grande 20 cm de diámetro, bandeja pequeña 15 cm de diámetro",
+      "price": 160,
       "tags": [
-        "decoración",
-        "farmhouse",
-        "abeja",
-        "home sweet home",
+        "mini try",
+        "2 niveles",
         "madera",
-        "apilable"
+        "café oscuro",
+        "rústico",
+        "almacenamiento"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-4.jpeg",
@@ -757,7 +758,7 @@
       "category": "trays-bandejas",
       "name": "Escalera Decorativa Blanca",
       "description": "Estante escalera decorativa de madera color blanco vintage. Perfecta para exhibir plantas, libros o piezas decorativas con estilo boho farmhouse.",
-      "measure": "Varios niveles",
+      "measure": "40 cm de alto, bandeja grande 44 x 12 cm, bandeja mediana 36 cm y bandeja pequeña 29 cm",
       "price": 350,
       "tags": [
         "escalera",
@@ -781,7 +782,7 @@
       "category": "trays-bandejas",
       "name": "Escalera Decorativa Madera Natural",
       "description": "Estante escalera decorativa de madera natural, aspecto rústico y moderno. Perfecta para exhibir macetas, libros o elementos decorativos con estilo natural.",
-      "measure": "Varios niveles",
+      "measure": "40 cm de alto, bandeja grande 44 x 12 cm, bandeja mediana 36 cm y bandeja pequeña 29 cm",
       "price": 350,
       "tags": [
         "escalera",
@@ -806,7 +807,7 @@
       "category": "trays-bandejas",
       "name": "Mini Escalera Madera Natural",
       "description": "Mini escalera decorativa de madera natural estilo rústico. Compacta y versátil, perfecta para rincones pequeños o sobre mesas.",
-      "measure": "Compacta",
+      "measure": "25 cm de altura, bandeja grande 20 cm de diámetro, bandeja pequeña 15 cm de diámetro",
       "price": 160,
       "tags": [
         "mini escalera",
@@ -1033,16 +1034,17 @@
       "id": "bandejas-19",
       "category": "trays-bandejas",
       "name": "Set de Cúpulas de Cristal con Base de Madera",
-      "description": "Set de cúpulas de cristal con base de madera, ideales para exhibir piezas preservadas, decoración de temporada o piezas especiales. Estilo vintage francés.",
-      "measure": "Grande 25 cm alto x 17 cm diámetro, Pequeña variable",
-      "price": 250,
+      "description": "Tipo cúpula de pastel: campana de cristal con base de madera para lucir tortas, postres o piezas decorativas, y mantenerlas a la vista con estilo. Vintage francés. El precio mostrado es por unidad.",
+      "measure": "Grande 25 cm alto x 17 cm diámetro; pequeña: medidas variables. Precio por unidad.",
+      "price": 150,
       "tags": [
         "cúpula",
+        "cúpula de pastel",
         "cristal",
         "madera",
+        "repostería",
         "vintage",
-        "exhibición",
-        "preservada"
+        "exhibición"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-19.jpeg",
@@ -1325,7 +1327,6 @@
       "category": "trays-bandejas",
       "name": "Set de 3 Tablas de Madera Rectangulares",
       "description": "Set de 3 tablas de madera rectangulares con grabados de marca. Perfectas para servir, picar o usar como tabla decorativa en la cocina.",
-      "measure": "Varios tamaños",
       "price": 275,
       "tags": [
         "tabla",
@@ -1359,9 +1360,11 @@
         "mesa",
         "elegante"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/baja-platos/baja-platos-01.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "baja-platos-02",
@@ -1377,9 +1380,11 @@
         "set",
         "textura"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/baja-platos/baja-platos-02.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "baja-platos-03",
@@ -1395,9 +1400,11 @@
         "set",
         "artesanal"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/baja-platos/baja-platos-03.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "baja-platos-04",
@@ -1413,9 +1420,11 @@
         "set",
         "elegante"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/baja-platos/baja-platos-04.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "baja-platos-05",
@@ -1431,9 +1440,11 @@
         "set",
         "moderno"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/baja-platos/baja-platos-05.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "baja-platos-06",
@@ -1449,9 +1460,11 @@
         "sobrio",
         "contemporáneo"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/baja-platos/baja-platos-06.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "baja-platos-07",
@@ -1468,9 +1481,11 @@
         "farmhouse",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/baja-platos/baja-platos-07.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "baja-platos-08",
@@ -1486,9 +1501,11 @@
         "natural",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/baja-platos/baja-platos-08.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-01",
@@ -1504,9 +1521,11 @@
         "set",
         "moderno"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-01.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-02",
@@ -1522,9 +1541,11 @@
         "set",
         "cálido"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-02.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-03",
@@ -1540,9 +1561,11 @@
         "set",
         "sofisticado"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-03.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-04",
@@ -1558,9 +1581,11 @@
         "set",
         "sobrio"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-04.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-05",
@@ -1576,9 +1601,11 @@
         "set",
         "glam"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-05.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-06",
@@ -1594,9 +1621,11 @@
         "set",
         "dramático"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-06.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-07",
@@ -1612,9 +1641,11 @@
         "compacto",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-07.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-08",
@@ -1630,9 +1661,11 @@
         "individual",
         "minimalista"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-08.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-09",
@@ -1648,9 +1681,11 @@
         "set de 3",
         "moderno"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-09.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-10",
@@ -1666,9 +1701,11 @@
         "set 6",
         "eventos"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-10.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "candeleros-11",
@@ -1683,9 +1720,11 @@
         "dorado",
         "set de 3"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-11.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "otono-01",
@@ -1702,16 +1741,17 @@
         "temporada",
         "Halloween"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/temporada-otono/temporada-otono-01.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "otono-02",
       "category": "temporada-otono",
       "name": "Set de 18 Calabazas Otoño Completo",
       "description": "Set de 18 calabazas decorativas que incluye accesorios como piñas, hojas de otoño, cerezos de temporada y bellotas. Decoración completa para ambientar tu hogar en otoño.",
-      "measure": "Varios tamaños",
       "price": 250,
       "tags": [
         "calabazas",
@@ -1722,9 +1762,11 @@
         "bellotas",
         "completo"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/temporada-otono/temporada-otono-02.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "otono-03",
@@ -1740,9 +1782,11 @@
         "hojas",
         "otoño"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/temporada-otono/temporada-otono-03.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "otono-04",
@@ -1758,9 +1802,11 @@
         "set",
         "otoño"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/temporada-otono/temporada-otono-04.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "otono-05",
@@ -1776,9 +1822,11 @@
         "set",
         "otoño"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/temporada-otono/temporada-otono-05.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "otono-06",
@@ -1794,9 +1842,11 @@
         "wreath",
         "decoración"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/temporada-otono/temporada-otono-06.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "otono-07",
@@ -1813,9 +1863,11 @@
         "funcional",
         "otoño"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/temporada-otono/temporada-otono-07.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-01",
@@ -1831,9 +1883,11 @@
         "utensilios",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-01.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-02",
@@ -1848,9 +1902,11 @@
         "acero inoxidable",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-02.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-03",
@@ -1866,9 +1922,11 @@
         "repostería",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-03.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-04",
@@ -1883,9 +1941,11 @@
         "corcho",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-04.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-05",
@@ -1901,9 +1961,11 @@
         "mesa",
         "elegante"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-05.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-06",
@@ -1919,9 +1981,11 @@
         "almacenamiento",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-06.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-07",
@@ -1936,9 +2000,11 @@
         "utensilios",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-07.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-08",
@@ -1954,9 +2020,11 @@
         "cocina",
         "divertido"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-08.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-09",
@@ -1972,9 +2040,11 @@
         "organizador",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-09.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-10",
@@ -1990,9 +2060,11 @@
         "plástico",
         "despensa"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-10.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-11",
@@ -2007,9 +2079,11 @@
         "acero inoxidable",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-11.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-12",
@@ -2025,9 +2099,11 @@
         "botellas",
         "encimera"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-12.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-13",
@@ -2043,9 +2119,11 @@
         "rústico",
         "decoración"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-13.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-14",
@@ -2061,9 +2139,11 @@
         "minimalista",
         "decoración"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-14.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-15",
@@ -2078,9 +2158,11 @@
         "try",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-15.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-16",
@@ -2096,9 +2178,11 @@
         "vinagre",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-16.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-17",
@@ -2114,9 +2198,11 @@
         "tela",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-17.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-18",
@@ -2132,9 +2218,11 @@
         "tela",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-18.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-19",
@@ -2150,9 +2238,11 @@
         "set",
         "cálido"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-19.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-20",
@@ -2168,9 +2258,11 @@
         "arte",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-20.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-21",
@@ -2186,9 +2278,11 @@
         "estufa",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-21.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-22",
@@ -2203,9 +2297,11 @@
         "MDF",
         "decorativa"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-22.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-23",
@@ -2220,9 +2316,11 @@
         "MDF",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-23.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-24",
@@ -2238,9 +2336,11 @@
         "almacenar",
         "hermético"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-24.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-25",
@@ -2256,9 +2356,11 @@
         "almacenamiento",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-25.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-26",
@@ -2274,9 +2376,11 @@
         "cabina telefónica",
         "metal"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-26.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-27",
@@ -2292,9 +2396,11 @@
         "vela LED",
         "jardín"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-27.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-28",
@@ -2310,9 +2416,11 @@
         "festiva",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-28.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-29",
@@ -2328,9 +2436,11 @@
         "set 6",
         "festiva"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-29.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-30",
@@ -2345,9 +2455,11 @@
         "mesa",
         "comedor"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-30.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-31",
@@ -2364,9 +2476,11 @@
         "preservadas",
         "otoño"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-31.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-32",
@@ -2382,9 +2496,11 @@
         "almacenar",
         "elegante"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-32.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-33",
@@ -2400,9 +2516,11 @@
         "moderno",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-33.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-34",
@@ -2419,9 +2537,11 @@
         "blanco",
         "set"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-34.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-35",
@@ -2436,9 +2556,11 @@
         "madera",
         "exhibición"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-35.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "utensilios-36",
@@ -2453,9 +2575,11 @@
         "set",
         "cocina"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-36.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "esculturas-01",
@@ -2471,9 +2595,11 @@
         "minimalista",
         "moderna"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-01.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "esculturas-02",
@@ -2489,9 +2615,11 @@
         "decoración",
         "elegante"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-02.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "esculturas-03",
@@ -2507,9 +2635,11 @@
         "resina",
         "romántica"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-03.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "esculturas-04",
@@ -2525,9 +2655,11 @@
         "arte",
         "moderna"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-04.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "esculturas-05",
@@ -2543,9 +2675,11 @@
         "30 min",
         "decoración"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-05.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "esculturas-06",
@@ -2561,9 +2695,11 @@
         "30 min",
         "decoración"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-06.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "esculturas-07",
@@ -2578,9 +2714,11 @@
         "rosado",
         "30 min"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-07.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "esculturas-08",
@@ -2596,9 +2734,11 @@
         "vintage",
         "decoración"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-08.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "esculturas-09",
@@ -2613,9 +2753,11 @@
         "blanco",
         "compacto"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-09.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     },
     {
       "id": "esculturas-10",
@@ -2631,9 +2773,11 @@
         "elegante",
         "moderno"
       ],
-      "images": [],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-10.jpeg"
+      ],
       "discount": null,
-      "visible": false
+      "visible": true
     }
   ]
 }

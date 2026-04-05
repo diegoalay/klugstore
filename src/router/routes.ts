@@ -42,6 +42,11 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('src/modules/admin/AdminPage.vue'),
+  },
+  {
     path: '/:catchAll(.*)*',
     component: () => import('src/pages/ErrorNotFound.vue'),
   },

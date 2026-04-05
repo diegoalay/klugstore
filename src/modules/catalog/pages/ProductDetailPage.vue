@@ -111,6 +111,11 @@
 
         <p class="product-description">{{ product.description }}</p>
 
+        <div v-if="product.measure" class="product-measure">
+          <span class="product-measure__label">Medidas</span>
+          <p class="product-measure__value">{{ product.measure }}</p>
+        </div>
+
         <!-- Variants -->
         <div v-if="product.variants?.length" class="product-variants">
           <p class="variants-label">Opciones:</p>
@@ -187,6 +192,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useCatalogStore, useStoreConfigStore } from 'src/stores'
 import { useWhatsApp } from 'src/composables/useWhatsApp'
 import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
+import { CATALOG_RETURN_HASH_KEY } from 'src/composables/useCatalogHash'
 
 const route = useRoute()
 const router = useRouter()
@@ -270,10 +276,22 @@ function handleWhatsApp() {
 }
 
 function goHome() {
+  sessionStorage.removeItem(CATALOG_RETURN_HASH_KEY)
   void router.push({ name: 'catalog-home' })
 }
 
 function handleBack() {
+  const raw = sessionStorage.getItem(CATALOG_RETURN_HASH_KEY)
+  sessionStorage.removeItem(CATALOG_RETURN_HASH_KEY)
+  if (raw !== null) {
+    const hash = raw.startsWith('#') ? raw : raw ? `#${raw}` : ''
+    void router.push(
+      hash
+        ? { name: 'catalog-home', hash }
+        : { name: 'catalog-home' },
+    )
+    return
+  }
   if (window.history.length > 1) {
     router.back()
   } else {
@@ -536,6 +554,31 @@ function handleBack() {
   color: var(--ks-text-secondary, #6b7280);
   line-height: 1.6;
   margin: 0 0 24px;
+}
+
+.product-measure {
+  margin: -8px 0 24px;
+}
+
+.product-measure__label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  color: var(--ks-text-secondary, #6b7280);
+  margin-bottom: 6px;
+}
+
+.product-measure__value {
+  font-size: 0.95rem;
+  color: var(--ks-text, #1a1a2e);
+  line-height: 1.55;
+  margin: 0;
+  padding: 12px 14px;
+  background: var(--ks-surface, #ffffff);
+  border-radius: calc(var(--ks-radius, 16px) - 4px);
+  border: 1px solid color-mix(in srgb, var(--ks-secondary, #d19793) 22%, transparent);
 }
 
 .product-variants {

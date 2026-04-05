@@ -12,6 +12,7 @@
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "catalog:apply-overlay": "node scripts/apply-admin-overlay-to-json.mjs",
     "build": "npm run generate:sitemap && quasar build",
     "deploy": "npm run build && firebase deploy --only hosting",
     "deploy:preview": "npm run build && firebase hosting:channel:deploy preview",

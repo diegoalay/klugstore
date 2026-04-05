@@ -1,6 +1,12 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Product, Category } from 'src/types'
+import {
+  applyCatalogSortMode,
+  type CatalogSortMode,
+} from 'src/utils/catalogSort'
+
+export type { CatalogSortMode } from 'src/utils/catalogSort'
 
 export const useCatalogStore = defineStore('catalog', () => {
   const products = ref<Product[]>([])
@@ -8,6 +14,7 @@ export const useCatalogStore = defineStore('catalog', () => {
   const loading = ref(false)
   const activeCategory = ref<string | null>(null)
   const searchQuery = ref('')
+  const catalogSort = ref<CatalogSortMode>('default')
 
   const sortedCategories = computed(() =>
     [...categories.value].sort((a, b) => a.order - b.order),
@@ -30,7 +37,7 @@ export const useCatalogStore = defineStore('catalog', () => {
       )
     }
 
-    return result.sort((a, b) => a.order - b.order)
+    return applyCatalogSortMode(result, catalogSort.value)
   })
 
   const featuredProducts = computed(() => products.value.filter((p) => p.featured && p.available))
@@ -53,6 +60,10 @@ export const useCatalogStore = defineStore('catalog', () => {
     searchQuery.value = query
   }
 
+  function setCatalogSort(mode: CatalogSortMode) {
+    catalogSort.value = mode
+  }
+
   function getProductBySlug(slug: string): Product | undefined {
     return products.value.find((p) => p.slug === slug)
   }
@@ -65,12 +76,17 @@ export const useCatalogStore = defineStore('catalog', () => {
     return products.value.filter((p) => p.categoryId === categoryId && p.available)
   }
 
+  function getSortedProductsByCategory(categoryId: string): Product[] {
+    return applyCatalogSortMode(getProductsByCategory(categoryId), catalogSort.value)
+  }
+
   return {
     products,
     categories,
     loading,
     activeCategory,
     searchQuery,
+    catalogSort,
     sortedCategories,
     filteredProducts,
     featuredProducts,
@@ -79,6 +95,8 @@ export const useCatalogStore = defineStore('catalog', () => {
     setCategories,
     setActiveCategory,
     setSearchQuery,
+    setCatalogSort,
+    getSortedProductsByCategory,
     getProductBySlug,
     getCategoryBySlug,
     getProductsByCategory,
