@@ -460,6 +460,7 @@ Esto es claramente un **MVP temporal**. Cuando exista `klugsystem` como backend:
 | **Tema runtime con CSS variables** | Permite cargar config de tienda desde JSON/API y aplicar branding sin rebuild. |
 | **WhatsApp FAB + CTA por producto** | El público objetivo ya vende por WhatsApp. Meter carrito sería fricción innecesaria. |
 | **Overlay solo por export (sin persistencia local del catálogo)** | Evita que la tienda y el admin diverjan en `localStorage`. El JSON exportado sigue siendo el contrato natural para `apply-overlay` y para una futura API. |
+| **`ProductDetailView` como componente separado de `ProductDetailPage`** | La vista del detalle se reusa en dos contextos: página propia (`/catalog/producto/:slug`) y *quick view* modal desde el grid. La página es un wrapper delgado que maneja ruteo, SEO y back link; la vista recibe `product` por prop y emite `ask-similar`. |
 | **Font Awesome Pro** | Estilo `light`/`thin`/`duotone` encaja con marcas aspiracionales (decoración, moda). Free version se ve genérica. |
 
 ---
