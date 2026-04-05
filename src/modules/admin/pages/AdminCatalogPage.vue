@@ -141,7 +141,28 @@
               <q-icon v-else name="fa-solid fa-box" color="grey-7" class="admin-header-thumb-fallback" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>{{ p.name }}</q-item-label>
+              <q-item-label class="admin-list-title-row">
+                <span class="admin-list-title-text">{{ p.name }}</span>
+                <q-badge
+                  v-if="!draft.isProductInBaseSource(p.id)"
+                  color="amber-2"
+                  text-color="dark"
+                  rounded
+                  class="admin-draft-only-badge"
+                >
+                  Solo borrador
+                  <q-tooltip
+                    anchor="bottom middle"
+                    self="top middle"
+                    :offset="[0, 6]"
+                    class="bg-grey-9 text-body2"
+                    style="max-width: 280px"
+                  >
+                    Este ID no está en la fuente cargada. Exportá overlay JSON o CSV y aplicá en el repo /
+                    Sheets para que exista en la próxima sincronización.
+                  </q-tooltip>
+                </q-badge>
+              </q-item-label>
               <q-item-label caption>{{ p.id }} · {{ p.categoryName ?? '' }}</q-item-label>
               <q-item-label caption class="admin-list-price-measure text-grey-8">
                 {{ formatListPrice(p) }}
@@ -468,7 +489,12 @@ function submitNewProduct() {
     document.getElementById(`admin-product-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
   })
 
-  Notify.create({ type: 'positive', message: 'Producto añadido al borrador' })
+  Notify.create({
+    type: 'positive',
+    message: 'Producto añadido al borrador',
+    caption: 'Exportá CSV u overlay JSON para persistirlo en la fuente (Sheet/repo).',
+    timeout: 5000,
+  })
 }
 
 function confirmRemoveProduct(p: Product) {
@@ -706,6 +732,24 @@ function exportCsvSheetsBundle() {
   :deep(.q-item__label--caption) {
     margin-top: 4px;
     font-size: 0.8rem;
+  }
+
+  .admin-list-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+  }
+
+  .admin-list-title-text {
+    min-width: 0;
+  }
+
+  .admin-draft-only-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 3px 8px;
   }
 
   .admin-list-price-measure {

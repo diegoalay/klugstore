@@ -170,6 +170,11 @@ export const useAdminCatalogDraftStore = defineStore('adminCatalogDraft', () => 
     imageUrlLines.value = restI
   }
 
+  /** `true` si el ID existía en el snapshot al cargar la fuente (Sheet/JSON). */
+  function isProductInBaseSource(productId: string): boolean {
+    return baseProductsSnapshot.value.some((x) => x.id === productId)
+  }
+
   /** Limpia todo el borrador admin (p. ej. al hacer logout). */
   function reset() {
     products.value = []
@@ -209,5 +214,6 @@ export const useAdminCatalogDraftStore = defineStore('adminCatalogDraft', () => 
     previewPrimaryUrl,
     appendDraftProduct,
     removeDraftProduct,
+    isProductInBaseSource,
   }
 })
