@@ -1,0 +1,2639 @@
+{
+  "store": "sweethome",
+  "name": "SweetHome GT",
+  "currency": "GTQ",
+  "categories": [
+    {
+      "slug": "jarrones",
+      "name": "Jarrones y Floreros",
+      "icon": "fa-solid fa-wine-bottle",
+      "order": 1
+    },
+    {
+      "slug": "trays-bandejas",
+      "name": "Trays y Bandejas",
+      "icon": "fa-solid fa-layer-group",
+      "order": 2
+    },
+    {
+      "slug": "tablas-queso",
+      "name": "Tablas de Queso",
+      "icon": "fa-solid fa-cheese",
+      "order": 3
+    },
+    {
+      "slug": "esculturas",
+      "name": "Esculturas",
+      "icon": "fa-solid fa-chess-bishop",
+      "order": 4
+    },
+    {
+      "slug": "candeleros",
+      "name": "Candeleros",
+      "icon": "fa-solid fa-fire",
+      "order": 5
+    },
+    {
+      "slug": "baja-platos",
+      "name": "Baja Platos",
+      "icon": "fa-solid fa-utensils",
+      "order": 6
+    },
+    {
+      "slug": "temporada-otono",
+      "name": "Temporada de Otoño",
+      "icon": "fa-solid fa-leaf",
+      "order": 7
+    },
+    {
+      "slug": "utensilios-decoracion",
+      "name": "Utensilios y Decoración",
+      "icon": "fa-solid fa-kitchen-set",
+      "order": 8
+    }
+  ],
+  "products": [
+    {
+      "id": "jarrones-01",
+      "category": "jarrones",
+      "name": "Set de 2 Esculturas Entrelazadas",
+      "description": "Dos esculturas abstractas blancas que evocan conexión y abrazo. De diseño minimalista y románticas, perfectas para darle un toque artístico a cualquier rincón de tu hogar.",
+      "measure": "Grande 23 cm, Pequeña 19 cm",
+      "price": 300,
+      "tags": [
+        "escultura",
+        "abstracta",
+        "blanca",
+        "romántica",
+        "pareja",
+        "decoración",
+        "minimalista"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/escultura-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/escultura-1-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/escultura-1-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/escultura-1-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/escultura-1-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/escultura-1-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/escultura-1-6.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-02",
+      "category": "jarrones",
+      "name": "Florero Vasija Blanco Minimalista",
+      "description": "Florero de cerámica color blanco estilo minimalista de vasija con asa. Perfecto para todos los espacios de tu hogar y darle un acento cálido y rústico moderno.",
+      "measure": "25 cm de altura",
+      "price": 175,
+      "tags": [
+        "florero",
+        "blanco",
+        "cerámica",
+        "vasija",
+        "minimalista",
+        "asa"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-2-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-2-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-2-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-03",
+      "category": "jarrones",
+      "name": "Set de 2 Jarrones Dona Negro y Zapote",
+      "description": "Set de 2 jarrones de cerámica en acabado negro y zapote, forma dona, estilo minimalista. Un contraste elegante perfecto para todos los espacios de tu hogar.",
+      "measure": "Grande 23 cm, Pequeña 20 cm",
+      "price": 300,
+      "tags": [
+        "jarrón",
+        "dona",
+        "negro",
+        "zapote",
+        "terracota",
+        "cerámica",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-3-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-3-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-3-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-3-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-3-6.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-3-7.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-04",
+      "category": "jarrones",
+      "name": "Set de 2 Jarrones Entrelazados Negros",
+      "description": "Set de 2 jarrones de cerámica entrelazados estilo minimalista, en acabado negro mate. Sus formas orgánicas (creciente y dona) crean una composición escultural única para tu hogar.",
+      "measure": "Grande 23 cm, Pequeña 18 cm",
+      "price": 300,
+      "tags": [
+        "jarrón",
+        "entrelazado",
+        "negro",
+        "cerámica",
+        "creciente",
+        "dona",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-4-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-4-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-4-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-4-5.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-05",
+      "category": "jarrones",
+      "name": "Set de 2 Jarrones Dona Negro Mate",
+      "description": "Set de 2 jarrones de cerámica lisos color negro forma de dona, estilo minimalista. Perfectos para todos los espacios de tu hogar; aportan profundidad y elegancia.",
+      "measure": "Grande 23 cm, Pequeña",
+      "price": 300,
+      "tags": [
+        "jarrón",
+        "dona",
+        "negro",
+        "mate",
+        "cerámica",
+        "minimalista",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-5-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-5-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-5-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-5-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-06",
+      "category": "jarrones",
+      "name": "Set de 3 Jarrones Dona Blancos",
+      "description": "Set de 3 jarrones de cerámica blancos lisos forma de dona estilo minimalista, perfectos para todos los espacios de tu hogar. Llenan de calidez y pureza cualquier repisa.",
+      "measure": "Grande 20 cm, Mediano 18 cm, Pequeño 15 cm",
+      "price": 350,
+      "tags": [
+        "jarrón",
+        "dona",
+        "blanco",
+        "cerámica",
+        "minimalista",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-6.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-6-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-6-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-6-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-6-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-07",
+      "category": "jarrones",
+      "name": "Set de 2 Jarrones Blancos Irregulares",
+      "description": "Set de 2 jarrones de cerámica blancos irregulares con textura, estilo orgánico minimalista. Sus formas únicas aportan un aire artístico y natural a tu hogar.",
+      "measure": "Grande 20 cm, Pequeña 14 cm",
+      "price": 300,
+      "tags": [
+        "jarrón",
+        "blanco",
+        "irregular",
+        "textura",
+        "orgánico",
+        "cerámica",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-7.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-7-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-7-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-7-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-7-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-08",
+      "category": "jarrones",
+      "name": "Set de 2 Jarrones Dona Blancos Lisos",
+      "description": "Set de 2 jarrones de cerámica blancos lisos forma de dona, estilo minimalista. Perfectos para todos los espacios de tu hogar; transmiten paz y pureza.",
+      "measure": "Grande 23 cm, Pequeña",
+      "price": 300,
+      "tags": [
+        "jarrón",
+        "dona",
+        "blanco",
+        "liso",
+        "cerámica",
+        "minimalista",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-8.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-8-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-8-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-8-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-8-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-8-5.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-09",
+      "category": "jarrones",
+      "name": "Set de 2 Jarrones Blancos Orgánicos",
+      "description": "Set de 2 jarrones de cerámica blancos de formas orgánicas (arco y dona), estilo minimalista escultural. Perfectos para darle un aire contemporáneo y artístico a tu espacio.",
+      "measure": "Grande 23 cm, Pequeña 18 cm",
+      "price": 300,
+      "tags": [
+        "jarrón",
+        "blanco",
+        "orgánico",
+        "arco",
+        "dona",
+        "cerámica",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-9.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-9-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-9-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-9-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-9-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-9-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-9-6.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-9-7.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-10",
+      "category": "jarrones",
+      "name": "Set de 2 Jarrones Origami Gris Degradado",
+      "description": "Set de 2 jarrones altos con diseño geométrico tipo origami en degradado gris a blanco. Un statement piece moderno y elegante para mesas de entrada, comedores o salas.",
+      "measure": "Grande 30 cm, Pequeña 27 cm",
+      "price": 300,
+      "tags": [
+        "jarrón",
+        "gris",
+        "degradado",
+        "origami",
+        "geométrico",
+        "moderno",
+        "alto",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-10.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-10-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-10-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-10-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-11",
+      "category": "jarrones",
+      "name": "Set de 2 Jarrones Irregulares Negros",
+      "description": "Set de 2 jarrones de cerámica color negro irregulares estilo minimalista. Sus formas orgánicas únicas crean un contraste elegante en cualquier ambiente.",
+      "measure": "Grande 20 cm, Pequeña 14 cm",
+      "price": 300,
+      "tags": [
+        "jarrón",
+        "negro",
+        "irregular",
+        "orgánico",
+        "cerámica",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-11.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-11-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-11-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-11-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-11-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-11-5.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-12",
+      "category": "jarrones",
+      "name": "Set de 4 Mini Jarrones Negros",
+      "description": "Set de 4 mini jarrones de cerámica color negro estilo minimalista y moderno. Ideal para flores secas, ramitas decorativas o como composición escultural en estantes.",
+      "measure": "Grande 22 cm, Medianos 14 cm, Pequeño 10 cm",
+      "price": 200,
+      "tags": [
+        "jarrón",
+        "mini",
+        "negro",
+        "set",
+        "cerámica",
+        "minimalista",
+        "moderno"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-12.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-12-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-12-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-12-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-13",
+      "category": "jarrones",
+      "name": "Set de 3 Jarrones Beige Irregulares",
+      "description": "Set de 3 jarrones de cerámica beige irregulares modernos. Sus tonos cálidos y formas orgánicas aportan calidez y sofisticación a cualquier espacio.",
+      "measure": "Grande 22 cm, Mediano 14 cm, Pequeño 13 cm",
+      "price": 250,
+      "tags": [
+        "jarrón",
+        "beige",
+        "irregular",
+        "moderno",
+        "cerámica",
+        "cálido",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-13.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-13-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-13-2.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-14",
+      "category": "jarrones",
+      "name": "Jarrón Dona Dorado con Negro",
+      "description": "Jarrón de cerámica con forma de dona, acabado mitad dorado mitad negro. Diseño moderno que se roba todas las miradas — ideal como pieza central de decoración.",
+      "measure": "25.5 cm de altura",
+      "price": 185,
+      "tags": [
+        "jarrón",
+        "dona",
+        "dorado",
+        "negro",
+        "cerámica",
+        "moderno",
+        "statement"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-14.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-14-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-14-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-14-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-14-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-15",
+      "category": "jarrones",
+      "name": "Set de 2 Jarrones Cuadrados Texturizados",
+      "description": "Set de 2 floreros de cerámica color blanco con forma cuadrada y textura en líneas. Perfectos para todos los espacios y combinan elegantemente en composiciones modernas.",
+      "measure": "22 cm de altura",
+      "price": 200,
+      "tags": [
+        "jarrón",
+        "florero",
+        "cuadrado",
+        "blanco",
+        "textura",
+        "cerámica",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-15.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-15-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-15-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-15-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-15-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "jarrones-16",
+      "category": "jarrones",
+      "name": "Set de 2 Floreros Cónicos Blancos",
+      "description": "Set de 2 floreros de cerámica color blanco con forma cónica alta. Estilo minimalista perfecto para todos los espacios; ideales para ramos grandes y flores altas.",
+      "measure": "35 cm de altura",
+      "price": 300,
+      "tags": [
+        "florero",
+        "cónico",
+        "blanco",
+        "alto",
+        "cerámica",
+        "minimalista",
+        "set"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-16.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-16-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-16-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/jarrones/jarron-16-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "tablas-queso-01",
+      "category": "tablas-queso",
+      "name": "Divisor de Bambú Giratorio con Bowls",
+      "description": "Divisor de bambú multifuncional giratorio con dos mini bowls cerámicos blancos para servir alimentos o snacks. Ideal para reuniones y sobremesas elegantes.",
+      "measure": "25 cm de diámetro, 2 cm de grosor",
+      "price": 135,
+      "tags": [
+        "divisor",
+        "bambú",
+        "giratorio",
+        "snacks",
+        "bowls",
+        "servir"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-1-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-1-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-1-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-1-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "tablas-queso-02",
+      "category": "tablas-queso",
+      "name": "Tabla de Queso Rectangular con 4 Cuchillos",
+      "description": "Tabla de queso de madera rectangular con su juego de 4 cuchillos de bambú y compartimientos, incluye bowl central. Esencial para servir con elegancia.",
+      "measure": "40 cm de largo x 23 cm de ancho",
+      "price": 275,
+      "tags": [
+        "tabla de queso",
+        "cuchillos",
+        "madera",
+        "compartimientos",
+        "servir",
+        "rectangular"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-2-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-2-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-2-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "tablas-queso-03",
+      "category": "tablas-queso",
+      "name": "Tabla de Queso Cuadrada Madera Oscura",
+      "description": "Tabla de queso de madera oscura cuadrada con compartimientos, esencial para servir quesos, snacks o aperitivos con elegancia.",
+      "measure": "40 cm",
+      "price": 400,
+      "tags": [
+        "tabla de queso",
+        "madera oscura",
+        "cuadrada",
+        "compartimientos",
+        "servir"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-3-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-3-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-3-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "tablas-queso-04",
+      "category": "tablas-queso",
+      "name": "Tabla de Queso con Mármol y Cuchillos",
+      "description": "Tabla de queso de madera rectangular con sección de mármol integrada y set de cuchillos de bambú. Combinación elegante de materiales para una presentación sofisticada.",
+      "measure": "40 cm de largo",
+      "price": 275,
+      "tags": [
+        "tabla de queso",
+        "mármol",
+        "cuchillos",
+        "bambú",
+        "elegante",
+        "rectangular"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-4-1.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "tablas-queso-05",
+      "category": "tablas-queso",
+      "name": "Tabla de Queso con Sección de Mármol Gris",
+      "description": "Tabla de queso de madera clara con inserción de mármol gris y set de cuchillos. Perfecta para servir con estilo moderno y refinado.",
+      "measure": "40 cm de largo",
+      "price": 275,
+      "tags": [
+        "tabla de queso",
+        "mármol",
+        "gris",
+        "cuchillos",
+        "moderno",
+        "rectangular"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-5-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/tablas_de_queso/tabla-de-queso-5-2.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "trays-01",
+      "category": "trays-bandejas",
+      "name": "Try 2 Niveles Rectangular Café Claro",
+      "description": "Try de dos niveles de madera color café claro con manija negra central. Elegante y práctico, úsalo para almacenar artículos u organizar espacios de tu hogar.",
+      "measure": "47 cm de altura, bandeja grande 41 x 30 cm, bandeja mediana 29 x 22 cm",
+      "price": 350,
+      "tags": [
+        "try",
+        "2 niveles",
+        "madera",
+        "café claro",
+        "rectangular",
+        "manija"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-1-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-1-2.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "trays-02",
+      "category": "trays-bandejas",
+      "name": "Try 2 Niveles Redondo Bambú",
+      "description": "Try de dos niveles de madera color café claro con forma redonda y manija negra. Perfecto para servir o almacenar con un toque rústico moderno.",
+      "measure": "46 cm de alto, bandeja grande 33 cm, bandeja mediana 23 cm",
+      "price": 350,
+      "tags": [
+        "try",
+        "2 niveles",
+        "madera",
+        "redondo",
+        "bambú",
+        "café claro"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-2-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-2-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-2-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "trays-03",
+      "category": "trays-bandejas",
+      "name": "Soporte Decorativo Madera Oscura",
+      "description": "Soporte decorativo de madera oscura con base redonda y varilla central. Úsalo como pieza decorativa minimalista o como base para otros elementos.",
+      "measure": "25 cm de altura",
+      "price": 160,
+      "tags": [
+        "soporte",
+        "madera oscura",
+        "decorativo",
+        "minimalista"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-3-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-3-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-3-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "trays-04",
+      "category": "trays-bandejas",
+      "name": "Decoración Apilable Home Sweet Home",
+      "description": "Set decorativo de madera apilable con figura de abeja y letrero 'Home Sweet Home'. Perfecto para estilo farmhouse y dar calidez hogareña a cualquier rincón.",
+      "measure": "Varios tamaños",
+      "price": 150,
+      "tags": [
+        "decoración",
+        "farmhouse",
+        "abeja",
+        "home sweet home",
+        "madera",
+        "apilable"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-4-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-4-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-4-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "trays-05",
+      "category": "trays-bandejas",
+      "name": "Try 3 Niveles Madera con Varilla Dorada",
+      "description": "Try de tres niveles de madera café claro con varilla central dorada. Moderno y elegante, puedes utilizarlo para almacenar artículos u organizar espacios.",
+      "measure": "35 cm de altura, bandejas 25, 20 y 15 cm de diámetro",
+      "price": 325,
+      "tags": [
+        "try",
+        "3 niveles",
+        "madera",
+        "dorado",
+        "café claro",
+        "varilla"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-5-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-5-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-5-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "trays-06",
+      "category": "trays-bandejas",
+      "name": "Try 3 Niveles Pedestal Blanco",
+      "description": "Try de tres niveles estilo pedestal en color blanco vintage. Elegante y perfecto para almacenar artículos o exhibir piezas decorativas.",
+      "measure": "40 cm de alto",
+      "price": 350,
+      "tags": [
+        "try",
+        "3 niveles",
+        "blanco",
+        "vintage",
+        "pedestal",
+        "cake stand"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-6.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-6-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-6-2.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "trays-07",
+      "category": "trays-bandejas",
+      "name": "Try 2 Niveles Blanco Vintage",
+      "description": "Try de dos niveles de madera color blanco con manija negra, estilo vintage y elegante. Úsalo para almacenar o organizar espacios de tu hogar con un toque francés.",
+      "measure": "40 cm de altura",
+      "price": 300,
+      "tags": [
+        "try",
+        "2 niveles",
+        "blanco",
+        "vintage",
+        "manija",
+        "elegante"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-8.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-8-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-8-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-8-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-8-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "trays-08",
+      "category": "trays-bandejas",
+      "name": "Escalera Decorativa Blanca",
+      "description": "Estante escalera decorativa de madera color blanco vintage. Perfecta para exhibir plantas, libros o piezas decorativas con estilo boho farmhouse.",
+      "measure": "Varios niveles",
+      "price": 350,
+      "tags": [
+        "escalera",
+        "decorativa",
+        "blanco",
+        "vintage",
+        "boho",
+        "farmhouse"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-9.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-9-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-9-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-9-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "trays-09",
+      "category": "trays-bandejas",
+      "name": "Escalera Decorativa Madera Natural",
+      "description": "Estante escalera decorativa de madera natural, aspecto rústico y moderno. Perfecta para exhibir macetas, libros o elementos decorativos con estilo natural.",
+      "measure": "Varios niveles",
+      "price": 350,
+      "tags": [
+        "escalera",
+        "decorativa",
+        "madera natural",
+        "rústico",
+        "boho"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-11.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-11-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-11-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-11-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-11-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-11-5.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "trays-10",
+      "category": "trays-bandejas",
+      "name": "Mini Escalera Madera Natural",
+      "description": "Mini escalera decorativa de madera natural estilo rústico. Compacta y versátil, perfecta para rincones pequeños o sobre mesas.",
+      "measure": "Compacta",
+      "price": 160,
+      "tags": [
+        "mini escalera",
+        "madera natural",
+        "rústico",
+        "compacto"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-12.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-12-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-12-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-12-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-12-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-12-5.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-07",
+      "category": "trays-bandejas",
+      "name": "Bandeja Metal Negra Circular",
+      "description": "Bandeja de metal color negro, moderna y elegante. Puedes utilizarla como bandeja de servir o como pieza decorativa minimalista.",
+      "measure": "30 cm de diámetro",
+      "price": 250,
+      "tags": [
+        "bandeja",
+        "metal",
+        "negro",
+        "circular",
+        "servir"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-7.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-7-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-7-2.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-10",
+      "category": "trays-bandejas",
+      "name": "Bandeja Bambú con Divisores y Bowl",
+      "description": "Bandeja redonda de bambú con compartimientos divididos y bowl central cerámico. Ideal para servir snacks, aperitivos o dips en reuniones.",
+      "measure": "32 cm de diámetro",
+      "price": 200,
+      "tags": [
+        "bandeja",
+        "bambú",
+        "divisores",
+        "bowl",
+        "servir",
+        "snacks"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-10.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-10-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-10-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-10-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-10-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-13",
+      "category": "trays-bandejas",
+      "name": "Bandeja Metal Azul con Borde Dorado",
+      "description": "Bandeja de metal color azul con borde dorado, moderna y elegante. Perfecta para servir o como pieza central decorativa con un acento statement.",
+      "measure": "33 cm de diámetro x 4 cm de altura",
+      "price": 250,
+      "tags": [
+        "bandeja",
+        "metal",
+        "azul",
+        "dorado",
+        "servir",
+        "statement"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-13.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-13-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-13-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-13-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-13-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-13-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-13-6.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-14",
+      "category": "trays-bandejas",
+      "name": "Bandeja Madera Circular Natural",
+      "description": "Bandeja de madera circular en tono natural, moderna y elegante. Úsala para servir o para almacenar artículos con un estilo orgánico y cálido.",
+      "measure": "32 cm de circunferencia",
+      "price": 175,
+      "tags": [
+        "bandeja",
+        "madera",
+        "circular",
+        "natural",
+        "servir"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-14.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-14-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-14-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-14-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-14-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-14-6.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-14-7.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-15",
+      "category": "trays-bandejas",
+      "name": "Bandeja Acrílico Cuadrada con Peonías",
+      "description": "Bandeja de acrílico cuadrada con diseño estampado de peonías azules y blancas. Moderna y elegante, úsala para servir o almacenar con un toque floral y sofisticado.",
+      "measure": "40 cm de largo",
+      "price": 300,
+      "tags": [
+        "bandeja",
+        "acrílico",
+        "cuadrada",
+        "peonías",
+        "azul",
+        "floral",
+        "estampada"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-15.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-15-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-15-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-15-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-15-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-15-5.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-16",
+      "category": "trays-bandejas",
+      "name": "Bandeja Metal Negra con Borde Decorativo",
+      "description": "Bandeja de metal color negro con borde en relieve decorativo. Moderna y elegante, úsala como bandeja de servir o como pieza decorativa central.",
+      "measure": "30 cm de diámetro",
+      "price": 250,
+      "tags": [
+        "bandeja",
+        "metal",
+        "negro",
+        "borde decorativo",
+        "servir"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-16.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-16-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-16-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-16-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-16-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-16-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-16-6.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-17",
+      "category": "trays-bandejas",
+      "name": "Bandeja Rectangular Madera Rojiza",
+      "description": "Bandeja rectangular de madera rojiza con asas laterales. Elegante y versátil, perfecta para servir o exhibir piezas con un estilo clásico cálido.",
+      "measure": "40 cm de largo",
+      "price": 225,
+      "tags": [
+        "bandeja",
+        "madera",
+        "rojiza",
+        "rectangular",
+        "asas",
+        "servir"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-17.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-17-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-17-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-17-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-17-5.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-18",
+      "category": "trays-bandejas",
+      "name": "Bandeja Redonda Blanca",
+      "description": "Bandeja redonda de madera con acabado blanco, elegante y minimalista. Úsala para servir o como pieza decorativa con un estilo limpio y luminoso.",
+      "measure": "32 cm de diámetro",
+      "price": 200,
+      "tags": [
+        "bandeja",
+        "blanca",
+        "redonda",
+        "minimalista",
+        "madera"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-18.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-18-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-18-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-18-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-18-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-18-6.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-18-7.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-19",
+      "category": "trays-bandejas",
+      "name": "Set de Cúpulas de Cristal con Base de Madera",
+      "description": "Set de cúpulas de cristal con base de madera, ideales para exhibir piezas preservadas, decoración de temporada o piezas especiales. Estilo vintage francés.",
+      "measure": "Grande 25 cm alto x 17 cm diámetro, Pequeña variable",
+      "price": 250,
+      "tags": [
+        "cúpula",
+        "cristal",
+        "madera",
+        "vintage",
+        "exhibición",
+        "preservada"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-19.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-19-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-19-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-19-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-19-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-23",
+      "category": "trays-bandejas",
+      "name": "Pedestal de Madera Rectangular",
+      "description": "Pedestal elevado de madera rectangular para servir o exhibir. Eleva cualquier presentación con un toque elegante y moderno.",
+      "measure": "32 cm de largo",
+      "price": 250,
+      "tags": [
+        "pedestal",
+        "madera",
+        "elevado",
+        "servir",
+        "exhibir"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-23.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-23-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-23-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-23-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-23-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-23-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-23-6.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-23-7.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-24",
+      "category": "trays-bandejas",
+      "name": "Bandeja Redonda Grabada Rústica",
+      "description": "Bandeja redonda de madera con grabados decorativos en la superficie. Estilo rústico con detalle artesanal, perfecta para servir o como pieza central.",
+      "measure": "30 cm de diámetro",
+      "price": 225,
+      "tags": [
+        "bandeja",
+        "madera",
+        "grabada",
+        "rústico",
+        "artesanal",
+        "redonda"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-24.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-24-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-24-2.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-25",
+      "category": "trays-bandejas",
+      "name": "Try 2 Niveles Redondo Blanco Vintage",
+      "description": "Try de dos niveles en madera blanca vintage con manija negra y base redonda. Perfecto para almacenar o exhibir artículos con estilo shabby chic.",
+      "measure": "40 cm de altura",
+      "price": 325,
+      "tags": [
+        "try",
+        "2 niveles",
+        "blanco",
+        "vintage",
+        "redondo",
+        "manija",
+        "shabby chic"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-25.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-25-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-25-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-25-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-25-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-25-5.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-26",
+      "category": "trays-bandejas",
+      "name": "Bandeja Rectangular Madera Clara con Borde",
+      "description": "Bandeja rectangular de madera clara con borde elevado. Moderna y elegante, perfecta para servir desayunos en la cama o presentar aperitivos.",
+      "measure": "45 cm de largo",
+      "price": 235,
+      "tags": [
+        "bandeja",
+        "rectangular",
+        "madera clara",
+        "borde",
+        "servir",
+        "desayuno"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-26.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-26-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-26-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-26-4.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-26-5.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-26-6.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-27",
+      "category": "trays-bandejas",
+      "name": "Bandeja Giratoria Dorada con Base Madera",
+      "description": "Bandeja giratoria de metal dorado con base de madera, moderna y elegante. Úsala para servir o almacenar artículos con un acento glamoroso.",
+      "measure": "20 cm de circunferencia",
+      "price": 200,
+      "tags": [
+        "bandeja",
+        "giratoria",
+        "dorada",
+        "madera",
+        "servir",
+        "glam"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-27.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-27-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-27-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-27-3.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-28",
+      "category": "trays-bandejas",
+      "name": "Bandeja Ovalada Madera Natural",
+      "description": "Bandeja ovalada de madera natural con acabado cálido. Elegante y versátil, perfecta para servir con un estilo clásico y orgánico.",
+      "measure": "35 cm de largo",
+      "price": 200,
+      "tags": [
+        "bandeja",
+        "ovalada",
+        "madera",
+        "natural",
+        "servir"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-28.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-28-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-28-2.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-29",
+      "category": "trays-bandejas",
+      "name": "Bandeja Redonda Madera con Borde Tallado",
+      "description": "Bandeja redonda de madera con borde tallado en relieve. Estilo rústico artesanal, perfecta para servir o como pieza central decorativa.",
+      "measure": "32 cm de diámetro",
+      "price": 225,
+      "tags": [
+        "bandeja",
+        "redonda",
+        "madera",
+        "tallada",
+        "rústico",
+        "artesanal"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-29.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-29-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-29-2.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-30",
+      "category": "trays-bandejas",
+      "name": "Bandeja Giratoria Color Durazno",
+      "description": "Bandeja giratoria redonda en color durazno cálido. Moderna y acogedora, perfecta para servir o exhibir plantas y piezas decorativas.",
+      "measure": "30 cm de diámetro",
+      "price": 200,
+      "tags": [
+        "bandeja",
+        "giratoria",
+        "durazno",
+        "redonda",
+        "cálido"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-30.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-30-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-30-2.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-hoja",
+      "category": "trays-bandejas",
+      "name": "Bandeja Decorativa Hoja Amarilla",
+      "description": "Bandeja decorativa de MDF en forma de hoja color amarillo, ideal para almacenar pequeños artículos con un toque de color y elegancia natural.",
+      "measure": "49 cm de largo x 18 cm de ancho",
+      "price": 160,
+      "tags": [
+        "bandeja",
+        "hoja",
+        "amarillo",
+        "MDF",
+        "decorativa",
+        "natural"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-de-hoja-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-de-hoja-1-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-de-hoja-1-2.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-ovalada",
+      "category": "trays-bandejas",
+      "name": "Set de Bandejas Ovaladas Texturizadas",
+      "description": "Set de 2 bandejas ovaladas decorativas con textura estriada en acabado dorado-negro. Ideales para almacenar pequeños artículos con un aire elegante y moderno.",
+      "measure": "Grande 40 cm, Pequeña 29 cm de largo",
+      "price": 200,
+      "tags": [
+        "bandeja",
+        "ovalada",
+        "set",
+        "dorada",
+        "texturizada",
+        "MDF"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-ovalada-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-ovalada-2-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-ovalada-2-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-ovalada-2-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "bandejas-giratoria-divisor",
+      "category": "trays-bandejas",
+      "name": "Bandeja Giratoria con Divisor de Madera",
+      "description": "Bandeja giratoria estilo circular con divisor de madera multifuncional. Perfecta para servir alimentos o snacks compartidos en la mesa.",
+      "measure": "25 cm de diámetro, 2 cm de grosor",
+      "price": 160,
+      "tags": [
+        "bandeja",
+        "giratoria",
+        "divisor",
+        "madera",
+        "snacks",
+        "servir"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-giratoria-con-divisor-21.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-giratoria-con-divisor-21-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-giratoria-con-divisor-21-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-giratoria-con-divisor-21-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-giratoria-con-divisor-21-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "tablas-madera-20",
+      "category": "trays-bandejas",
+      "name": "Set de 3 Tablas de Madera Rectangulares",
+      "description": "Set de 3 tablas de madera rectangulares con grabados de marca. Perfectas para servir, picar o usar como tabla decorativa en la cocina.",
+      "measure": "Varios tamaños",
+      "price": 275,
+      "tags": [
+        "tabla",
+        "madera",
+        "rectangular",
+        "set",
+        "grabada",
+        "cocina"
+      ],
+      "images": [
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/tablas-de-madera-20.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/tablas-de-madera-20-1.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/tablas-de-madera-20-2.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/tablas-de-madera-20-3.jpeg",
+        "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/tablas-de-madera-20-4.jpeg"
+      ],
+      "discount": null,
+      "visible": true
+    },
+    {
+      "id": "baja-platos-01",
+      "category": "baja-platos",
+      "name": "Set de 6 Baja Platos Dorados",
+      "description": "Set de 6 baja platos decorativos para mesa en color dorado. Aportan elegancia instantánea a tu mesa y transforman cualquier comida en una ocasión especial.",
+      "measure": "32 cm",
+      "price": 200,
+      "tags": [
+        "baja platos",
+        "dorado",
+        "set",
+        "mesa",
+        "elegante"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "baja-platos-02",
+      "category": "baja-platos",
+      "name": "Set de 6 Baja Platos Dorados de Puntos",
+      "description": "Set de 6 baja platos decorativos para mesa dorados con diseño de puntos. Aportan elegancia instantánea con un toque de textura moderna.",
+      "measure": "33 cm",
+      "price": 200,
+      "tags": [
+        "baja platos",
+        "dorado",
+        "puntos",
+        "set",
+        "textura"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "baja-platos-03",
+      "category": "baja-platos",
+      "name": "Set de 6 Baja Platos Dorados Tejidos",
+      "description": "Set de 6 baja platos decorativos para mesa dorados con diseño tejido. Elegancia artesanal que se convierte en el detalle que todos notan.",
+      "measure": "33 cm",
+      "price": 200,
+      "tags": [
+        "baja platos",
+        "dorado",
+        "tejido",
+        "set",
+        "artesanal"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "baja-platos-04",
+      "category": "baja-platos",
+      "name": "Set de 6 Baja Platos Dorados Clásicos",
+      "description": "Set de 6 baja platos decorativos estilo clásico en color dorado. Aporta elegancia instantánea con un diseño atemporal.",
+      "measure": "35 cm",
+      "price": 200,
+      "tags": [
+        "baja platos",
+        "dorado",
+        "clásico",
+        "set",
+        "elegante"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "baja-platos-05",
+      "category": "baja-platos",
+      "name": "Set de 6 Baja Platos Blancos con Puntos",
+      "description": "Set de 6 baja platos decorativos blancos con puntos. Aportan frescura y elegancia instantánea a tu mesa con un estilo limpio y moderno.",
+      "measure": "33 cm",
+      "price": 200,
+      "tags": [
+        "baja platos",
+        "blanco",
+        "puntos",
+        "set",
+        "moderno"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "baja-platos-06",
+      "category": "baja-platos",
+      "name": "Set de 6 Baja Platos Grises",
+      "description": "Set de 6 baja platos decorativos para mesa color gris. Aportan elegancia instantánea con un toque sobrio y contemporáneo.",
+      "measure": "32 cm",
+      "price": 200,
+      "tags": [
+        "baja platos",
+        "gris",
+        "set",
+        "sobrio",
+        "contemporáneo"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "baja-platos-07",
+      "category": "baja-platos",
+      "name": "Set de 5 Baja Platos de Paja de Maíz",
+      "description": "Set de 5 baja platos decorativos de paja de maíz tejida. Aportan un estilo natural y cálido, perfecto para mesas con alma boho o farmhouse.",
+      "measure": "38 cm",
+      "price": 250,
+      "tags": [
+        "baja platos",
+        "paja de maíz",
+        "natural",
+        "boho",
+        "farmhouse",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "baja-platos-08",
+      "category": "baja-platos",
+      "name": "Set de 6 Baja Platos de Mimbre",
+      "description": "Set de 6 baja platos decorativos de mimbre. Aportan elegancia rústica y natural a tu mesa, perfectos para almuerzos al aire libre.",
+      "measure": "32 cm",
+      "price": 200,
+      "tags": [
+        "baja platos",
+        "mimbre",
+        "rústico",
+        "natural",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-01",
+      "category": "candeleros",
+      "name": "Set de Candeleros Hierro Forjado Negro",
+      "description": "Set de candeleros de hierro forjado color negro con diseño único, moderno y elegante. Perfectos para crear ambientes cálidos y dramáticos.",
+      "measure": "Grande 32 cm, Mediano 29 cm, Pequeño 23 cm, diámetro de velas 3 cm",
+      "price": 250,
+      "tags": [
+        "candelero",
+        "hierro forjado",
+        "negro",
+        "set",
+        "moderno"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-02",
+      "category": "candeleros",
+      "name": "Set de Candeleros Metal Bronce",
+      "description": "Set de candeleros de metal color bronce con diseño único, moderno y elegante. Añade un toque cálido y acogedor a cualquier espacio.",
+      "measure": "Grande 24 cm, Mediano 19 cm, Pequeño 13 cm, diámetro de velas 2 cm",
+      "price": 200,
+      "tags": [
+        "candelero",
+        "metal",
+        "bronce",
+        "set",
+        "cálido"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-03",
+      "category": "candeleros",
+      "name": "Set de Candeleros Metal Blanco",
+      "description": "Set de candeleros de metal color blanco con diseño único, moderno y elegante. Crean ambientes luminosos y sofisticados.",
+      "measure": "Grande 25 cm, Mediano 20 cm, Pequeño 15 cm",
+      "price": 325,
+      "tags": [
+        "candelero",
+        "metal",
+        "blanco",
+        "set",
+        "sofisticado"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-04",
+      "category": "candeleros",
+      "name": "Set de Candeleros Metal Gris",
+      "description": "Set de candeleros de metal color gris con diseño único, moderno y elegante. Un acento sobrio para tu decoración.",
+      "measure": "Grande 23 cm, Mediano 16 cm",
+      "price": 225,
+      "tags": [
+        "candelero",
+        "metal",
+        "gris",
+        "set",
+        "sobrio"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-05",
+      "category": "candeleros",
+      "name": "Set de Candeleros Metal Dorado",
+      "description": "Set de candeleros de metal color dorado con diseño único, moderno y elegante. Brillo y calidez para cenas especiales.",
+      "measure": "Grande 31 cm, Mediano 29 cm, Pequeño 22 cm, diámetro de velas 3 cm",
+      "price": 250,
+      "tags": [
+        "candelero",
+        "metal",
+        "dorado",
+        "set",
+        "glam"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-06",
+      "category": "candeleros",
+      "name": "Set de Candeleros Metal Negro",
+      "description": "Set de candeleros de metal color negro con diseño único, moderno y elegante. Dramáticos y sofisticados.",
+      "measure": "Grande 31 cm, Mediano 29 cm, Pequeño 22 cm, diámetro de velas 3 cm",
+      "price": 250,
+      "tags": [
+        "candelero",
+        "metal",
+        "negro",
+        "set",
+        "dramático"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-07",
+      "category": "candeleros",
+      "name": "Set de Candeleros Metal Negro Compacto",
+      "description": "Set de candeleros de metal color negro en diseño compacto, moderno y elegante. Ideal para espacios pequeños o mesas íntimas.",
+      "measure": "Grande 30 cm, Mediano 24 cm, Pequeño 18 cm, diámetro de velas 2 cm",
+      "price": 150,
+      "tags": [
+        "candelero",
+        "metal",
+        "negro",
+        "compacto",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-08",
+      "category": "candeleros",
+      "name": "Candelero Metal Dorado Individual",
+      "description": "Candelero de metal color dorado con diseño único, moderno y elegante. Pieza individual para un acento minimalista.",
+      "measure": "23 cm de alto, diámetro de velas 3 cm",
+      "price": 150,
+      "tags": [
+        "candelero",
+        "metal",
+        "dorado",
+        "individual",
+        "minimalista"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-09",
+      "category": "candeleros",
+      "name": "Set de 3 Candeleros Metal Negro",
+      "description": "Set de 3 candeleros de metal color negro con diseño único, moderno y elegante. Un trío perfecto para mesas largas.",
+      "measure": "Grande 26 cm, Mediano 23 cm, Pequeño 18 cm, diámetro de velas 3 cm",
+      "price": 150,
+      "tags": [
+        "candelero",
+        "metal",
+        "negro",
+        "set de 3",
+        "moderno"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-10",
+      "category": "candeleros",
+      "name": "Candeleros Dorados Set de 6",
+      "description": "Candeleros de metal color dorado en set de 6 piezas en diferentes alturas, con diseño único, moderno y elegante. Perfecto para mesas de eventos.",
+      "measure": "2 de 24 cm, 2 de 19 cm, 2 de 16 cm",
+      "price": 150,
+      "tags": [
+        "candelero",
+        "metal",
+        "dorado",
+        "set 6",
+        "eventos"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "candeleros-11",
+      "category": "candeleros",
+      "name": "Set de 3 Candeleros Dorados",
+      "description": "Set de 3 candeleros de metal color dorado con diseño único, moderno y elegante. Crean un trío dramático en mesas de comedor.",
+      "measure": "Grande 24 cm, Mediano 19 cm, Pequeño 16 cm, diámetro de velas 3 cm",
+      "price": 140,
+      "tags": [
+        "candelero",
+        "metal",
+        "dorado",
+        "set de 3"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "otono-01",
+      "category": "temporada-otono",
+      "name": "Calabaza Decorativa Naranja de Cerámica",
+      "description": "Calabaza decorativa naranja de cerámica, un toque de sofisticación para tu hogar en la temporada otoñal.",
+      "measure": "20 x 20 cm",
+      "price": 200,
+      "tags": [
+        "calabaza",
+        "otoño",
+        "naranja",
+        "cerámica",
+        "temporada",
+        "Halloween"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "otono-02",
+      "category": "temporada-otono",
+      "name": "Set de 18 Calabazas Otoño Completo",
+      "description": "Set de 18 calabazas decorativas que incluye accesorios como piñas, hojas de otoño, cerezos de temporada y bellotas. Decoración completa para ambientar tu hogar en otoño.",
+      "measure": "Varios tamaños",
+      "price": 250,
+      "tags": [
+        "calabazas",
+        "otoño",
+        "set",
+        "piñas",
+        "hojas",
+        "bellotas",
+        "completo"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "otono-03",
+      "category": "temporada-otono",
+      "name": "Calabaza Blanca con Hojas de Cerámica",
+      "description": "Calabaza decorativa blanca con hojas de cerámica. Un toque de sofisticación y elegancia para tu hogar en la temporada de otoño.",
+      "measure": "17 x 17 cm",
+      "price": 175,
+      "tags": [
+        "calabaza",
+        "blanca",
+        "cerámica",
+        "hojas",
+        "otoño"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "otono-04",
+      "category": "temporada-otono",
+      "name": "Set de 12 Calabazas Naranjas Foami",
+      "description": "Set de 12 calabazas decorativas naranjas de foami. Un toque vibrante y acogedor para tu hogar durante la temporada otoñal.",
+      "measure": "Varios tamaños: 20 cm, 15 cm, 2 de 7 cm, 7 cm, 5 cm, 2 de 4 cm",
+      "price": 220,
+      "tags": [
+        "calabazas",
+        "naranjas",
+        "foami",
+        "set",
+        "otoño"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "otono-05",
+      "category": "temporada-otono",
+      "name": "Set de 6 Calabazas Blancas Cerámica",
+      "description": "Set de calabazas decorativas blancas con hojas de cerámica. Una decoración elegante y serena para la temporada otoñal.",
+      "measure": "2 de 15 cm, 2 de 12 cm, 2 de 7 cm",
+      "price": 300,
+      "tags": [
+        "calabazas",
+        "blancas",
+        "cerámica",
+        "set",
+        "otoño"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "otono-06",
+      "category": "temporada-otono",
+      "name": "Corona de Otoño Decorativa",
+      "description": "Corona de otoño decorativa, ideal para colgar en puerta principal o como pieza de acento en pared. Bienvenida otoñal para tus visitas.",
+      "measure": "50 cm de diámetro",
+      "price": 250,
+      "tags": [
+        "corona",
+        "otoño",
+        "puerta",
+        "wreath",
+        "decoración"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "otono-07",
+      "category": "temporada-otono",
+      "name": "Calabaza Blanca con Tapadera",
+      "description": "Calabaza decorativa blanca con tapadera de cerámica. Funcional y decorativa al mismo tiempo, puedes usarla para guardar pequeños tesoros.",
+      "measure": "10 cm de alto x 14 cm de diámetro",
+      "price": 150,
+      "tags": [
+        "calabaza",
+        "blanca",
+        "tapadera",
+        "cerámica",
+        "funcional",
+        "otoño"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-01",
+      "category": "utensilios-decoracion",
+      "name": "Organizador Giratorio de Madera para Utensilios",
+      "description": "Icónico organizador de madera giratorio para utensilios, sofisticado y versátil. Mantén todos tus utensilios de cocina al alcance con estilo.",
+      "measure": "17 cm de altura x 15 cm de diámetro",
+      "price": 200,
+      "tags": [
+        "organizador",
+        "madera",
+        "giratorio",
+        "utensilios",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-02",
+      "category": "utensilios-decoracion",
+      "name": "Tijeras Multiusos KitchenAid",
+      "description": "Tijeras multiusos KitchenAid con funda protectora, de acero inoxidable resistente. Una herramienta esencial para cualquier cocina moderna.",
+      "price": 100,
+      "tags": [
+        "tijeras",
+        "KitchenAid",
+        "multiusos",
+        "acero inoxidable",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-03",
+      "category": "utensilios-decoracion",
+      "name": "Espátulas de Silicona Bake House",
+      "description": "Espátulas de silicona BAKE HOUSE y SHOP perfectas para mezclar con diseño sofisticado. Resistentes a altas temperaturas y seguras para tus sartenes antiadherentes.",
+      "measure": "25 cm",
+      "price": 75,
+      "tags": [
+        "espátula",
+        "silicona",
+        "Bake House",
+        "repostería",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-04",
+      "category": "utensilios-decoracion",
+      "name": "Soporte Utensilios con Base de Corcho",
+      "description": "Soporte para utensilios de cocina o florero de plantas artificiales con base de corcho para proteger tu mesa. Práctico y decorativo.",
+      "measure": "17 cm de alto x 14 cm de diámetro",
+      "price": 175,
+      "tags": [
+        "soporte",
+        "utensilios",
+        "corcho",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-05",
+      "category": "utensilios-decoracion",
+      "name": "Set de Saleros Cerámica Elegante",
+      "description": "Set de saleros, recipientes de cerámica con diseño único y elegante. Un detalle que eleva cualquier mesa.",
+      "measure": "8 cm de alto",
+      "price": 125,
+      "tags": [
+        "salero",
+        "cerámica",
+        "set",
+        "mesa",
+        "elegante"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-06",
+      "category": "utensilios-decoracion",
+      "name": "Set de Contenedores Cerámica con Bambú",
+      "description": "Set de contenedores de almacenamiento de cerámica color negro brilloso y mate con cubierta de bambú. Organización estética para tu cocina.",
+      "measure": "Grande 19 cm alto x 13 cm diámetro, Mediano 15 cm alto x 10 cm diámetro",
+      "price": 225,
+      "tags": [
+        "contenedor",
+        "cerámica",
+        "bambú",
+        "almacenamiento",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-07",
+      "category": "utensilios-decoracion",
+      "name": "Organizador de Cerámica para Utensilios",
+      "description": "Organizador de cerámica para utensilios, sofisticado, versátil y de diseño único. El complemento perfecto para una cocina con estilo.",
+      "measure": "19 cm de altura x 16 cm de diámetro",
+      "price": 200,
+      "tags": [
+        "organizador",
+        "cerámica",
+        "utensilios",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-08",
+      "category": "utensilios-decoracion",
+      "name": "Estatua de Chef Decorativa",
+      "description": "Estatua de Chef para darle una decoración única y divertida a tu cocina. Un guiño con personalidad.",
+      "measure": "13 cm de alto",
+      "price": 125,
+      "tags": [
+        "estatua",
+        "chef",
+        "decoración",
+        "cocina",
+        "divertido"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-09",
+      "category": "utensilios-decoracion",
+      "name": "Set de Dispensadores Automáticos de Huevos",
+      "description": "Set de 2 dispensadores automáticos de huevos para refrigeradora, de plástico, versátiles y de fácil acceso. Mantén tus huevos organizados siempre.",
+      "measure": "35 cm de largo x 8 cm de ancho",
+      "price": 165,
+      "tags": [
+        "dispensador",
+        "huevos",
+        "refrigeradora",
+        "organizador",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-10",
+      "category": "utensilios-decoracion",
+      "name": "Set de 4 Bandejas Organizadoras Transparentes",
+      "description": "Set de 4 bandejas transparentes de plástico para organizar todos tus alimentos. Visibilidad total para una despensa en orden.",
+      "measure": "38 cm de largo x 20 cm de ancho",
+      "price": 200,
+      "tags": [
+        "bandeja",
+        "organizador",
+        "transparente",
+        "plástico",
+        "despensa"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-11",
+      "category": "utensilios-decoracion",
+      "name": "Prensa de Ajo de Acero Inoxidable",
+      "description": "Prensa de ajo de metal resistente en acero inoxidable para larga durabilidad. Eficiente para ajo instantáneo sin esfuerzo.",
+      "measure": "15 cm de largo",
+      "price": 90,
+      "tags": [
+        "prensa",
+        "ajo",
+        "acero inoxidable",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-12",
+      "category": "utensilios-decoracion",
+      "name": "Estante de Madera para 8 Botellas de Vino",
+      "description": "Estante de madera para 8 botellas de vino, aspecto simple, clásico y elegante. Una encimera de vinos que puedes exhibir con orgullo.",
+      "measure": "40 cm de largo",
+      "price": 285,
+      "tags": [
+        "estante",
+        "vino",
+        "madera",
+        "botellas",
+        "encimera"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-13",
+      "category": "utensilios-decoracion",
+      "name": "Letrero de Madera Cocina Rústico",
+      "description": "Letrero para decoración de madera de cocina para diario, estilo rústico y ligero. Añade un mensaje cálido a tu cocina.",
+      "measure": "20 x 20 cm",
+      "price": 90,
+      "tags": [
+        "letrero",
+        "madera",
+        "cocina",
+        "rústico",
+        "decoración"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-14",
+      "category": "utensilios-decoracion",
+      "name": "Esfera Decorativa Metal Dorada",
+      "description": "Esfera decorativa de metal dorada con diseño minimalista, adecuada para sala de estar, estudio, dormitorio o mesa de centro. Statement moderno.",
+      "measure": "18 cm de circunferencia",
+      "price": 200,
+      "tags": [
+        "esfera",
+        "metal",
+        "dorada",
+        "minimalista",
+        "decoración"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-15",
+      "category": "utensilios-decoracion",
+      "name": "Set de 6 Decoraciones Madera MDF para Try",
+      "description": "Decoración de madera MDF para try, set de 6 diseños, de alta calidad y linda decoración. Personaliza tus bandejas con estilo.",
+      "price": 100,
+      "tags": [
+        "decoración",
+        "madera",
+        "MDF",
+        "try",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-16",
+      "category": "utensilios-decoracion",
+      "name": "Set de Aceiteros Cerámica",
+      "description": "Set de botellas para cocina de aceite de oliva y vinagre de cerámica con boquillas de acero inoxidable. Elegante y funcional.",
+      "measure": "Grande 27 cm, Pequeño 23 cm",
+      "price": 250,
+      "tags": [
+        "aceitero",
+        "cerámica",
+        "aceite",
+        "vinagre",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-17",
+      "category": "utensilios-decoracion",
+      "name": "Set de 3 Toallas de Cocina Aqua",
+      "description": "Set de 3 toallas de tela color aqua de cocina, con suavidad y absorbencia que harán que limpiar sea un placer.",
+      "measure": "73 cm de largo x 43 cm de ancho",
+      "price": 90,
+      "tags": [
+        "toallas",
+        "cocina",
+        "aqua",
+        "tela",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-18",
+      "category": "utensilios-decoracion",
+      "name": "Set de 3 Toallas de Cocina Azules",
+      "description": "Set de 3 toallas de tela azules con distintos estilos de cocina. Suavidad y absorbencia para un hogar impecable.",
+      "measure": "73 cm de largo x 43 cm de ancho",
+      "price": 90,
+      "tags": [
+        "toallas",
+        "cocina",
+        "azul",
+        "tela",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-19",
+      "category": "utensilios-decoracion",
+      "name": "Set de 2 Lámparas Chimenea de Plástico",
+      "description": "Set de 2 lámparas de plástico simulando chimeneas, ideal para interiores o exteriores. Crean ambientes cálidos sin fuego real.",
+      "measure": "40 cm de alto",
+      "price": 225,
+      "tags": [
+        "lámpara",
+        "chimenea",
+        "led",
+        "set",
+        "cálido"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-20",
+      "category": "utensilios-decoracion",
+      "name": "Set Piezas de Pared Rústicas",
+      "description": "Set de piezas de pared estilo rústico de madera que brindan un arte creativo. Personalidad y calidez para cualquier habitación.",
+      "measure": "39 cm de alto x 25 cm de ancho",
+      "price": 150,
+      "tags": [
+        "pared",
+        "madera",
+        "rústico",
+        "arte",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-21",
+      "category": "utensilios-decoracion",
+      "name": "Soporte de Cucharas Cerámica",
+      "description": "Soporte de cucharas de cerámica para estufa, esencial para tu cocina. Disponible en negro y gris.",
+      "measure": "20 cm de largo x 9.5 cm de ancho",
+      "price": 90,
+      "tags": [
+        "soporte",
+        "cuchara",
+        "cerámica",
+        "estufa",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-22",
+      "category": "utensilios-decoracion",
+      "name": "Bandeja Decorativa MDF Hoja",
+      "description": "Bandeja decorativa de MDF con forma de hoja, ideal para almacenar pequeños artículos con elegancia.",
+      "measure": "49 cm de largo x 18 cm de ancho",
+      "price": 160,
+      "tags": [
+        "bandeja",
+        "hoja",
+        "MDF",
+        "decorativa"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-23",
+      "category": "utensilios-decoracion",
+      "name": "Set de Bandejas MDF Ovaladas",
+      "description": "Set de bandeja decorativa de MDF ovaladas, ideal para almacenar pequeños artículos con un toque elegante.",
+      "measure": "Grande 40 cm x 21 cm, Pequeña 29 cm x 16 cm",
+      "price": 200,
+      "tags": [
+        "bandeja",
+        "ovalada",
+        "MDF",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-24",
+      "category": "utensilios-decoracion",
+      "name": "Tazón de Vidrio con Tapa de Bambú",
+      "description": "Tazón de vidrio grande con tapa de bambú para almacenar comida y mantenerla fresca. Hermético y estético.",
+      "measure": "25 cm de diámetro y 12 cm de profundidad",
+      "price": 275,
+      "tags": [
+        "tazón",
+        "vidrio",
+        "bambú",
+        "almacenar",
+        "hermético"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-25",
+      "category": "utensilios-decoracion",
+      "name": "Set de Contenedores Vidrio con Tapa Metal",
+      "description": "Set de contenedores de almacenamiento de vidrio con tapadera de metal. Organización cristalina con estilo industrial chic.",
+      "measure": "Grande 16 cm, Medianos 12 cm",
+      "price": 200,
+      "tags": [
+        "contenedor",
+        "vidrio",
+        "metal",
+        "almacenamiento",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-26",
+      "category": "utensilios-decoracion",
+      "name": "Comedero Aves Cabina Telefónica",
+      "description": "Comedero para aves colgante al aire libre, de metal decorativo con forma de cabina telefónica. Funcional y encantador para tu jardín.",
+      "measure": "19 cm de largo x 9 cm de ancho",
+      "price": 125,
+      "tags": [
+        "comedero",
+        "aves",
+        "jardín",
+        "cabina telefónica",
+        "metal"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-27",
+      "category": "utensilios-decoracion",
+      "name": "Linternas Solares con Velas",
+      "description": "Linternas solares impermeables con velas LED, ideales para exteriores. Crean ambientes mágicos sin preocupaciones eléctricas.",
+      "measure": "Grande 40 cm x 14 cm, Pequeña 30 cm x 10 cm",
+      "price": 400,
+      "tags": [
+        "linterna",
+        "solar",
+        "exterior",
+        "vela LED",
+        "jardín"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-28",
+      "category": "utensilios-decoracion",
+      "name": "Set de 2 Candelas LED Grandes",
+      "description": "Set de 2 candelas LED color beige que proporcionan un ambiente festivo. Operan con baterías con aspecto realista y elegante.",
+      "measure": "22.5 cm de largo, diámetro 7.5 cm",
+      "price": 185,
+      "tags": [
+        "candela",
+        "LED",
+        "beige",
+        "festiva",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-29",
+      "category": "utensilios-decoracion",
+      "name": "Set de 6 Candelas LED",
+      "description": "Set de 6 candelas LED color beige que proporcionan un ambiente festivo. Operan con baterías, aspecto realista y elegante.",
+      "measure": "15 cm de largo, diámetro 7.2 cm",
+      "price": 225,
+      "tags": [
+        "candela",
+        "LED",
+        "beige",
+        "set 6",
+        "festiva"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-30",
+      "category": "utensilios-decoracion",
+      "name": "Set de 40 Cubiertos para 8 Personas",
+      "description": "Set para 8 personas con un total de 40 cubiertos de metal acero inoxidable. Para cenas completas con estilo.",
+      "price": 350,
+      "tags": [
+        "cubiertos",
+        "acero inoxidable",
+        "set",
+        "mesa",
+        "comedor"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-31",
+      "category": "utensilios-decoracion",
+      "name": "Cúpula de Cristal con Piñas y Naranjas",
+      "description": "Cúpula de cristal con piñas y naranjas preservadas con base de madera. Pieza exhibición perfecta para temporada otoñal o navideña.",
+      "measure": "25 cm de alto x 17 cm de diámetro",
+      "price": 250,
+      "tags": [
+        "cúpula",
+        "cristal",
+        "piñas",
+        "naranjas",
+        "preservadas",
+        "otoño"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-32",
+      "category": "utensilios-decoracion",
+      "name": "Tarro de Cristal Elegante con Tapadera",
+      "description": "Elegante tarro de cristal con tapadera de cristal. Añade un toque elegante a tu hogar o cocina con alta calidad.",
+      "measure": "Grande 31 cm diámetro, Mediana 25 cm diámetro, tapadera 14 cm",
+      "price": 250,
+      "tags": [
+        "tarro",
+        "cristal",
+        "tapadera",
+        "almacenar",
+        "elegante"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-33",
+      "category": "utensilios-decoracion",
+      "name": "Set de Saleros Eléctricos",
+      "description": "Set de saleros eléctricos con 6 funcionalidades. Tecnología moderna al servicio de tus sazones.",
+      "measure": "20 cm de alto",
+      "price": 250,
+      "tags": [
+        "salero",
+        "eléctrico",
+        "set",
+        "moderno",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-34",
+      "category": "utensilios-decoracion",
+      "name": "Set de 3 Saleros Azucarero y Pimentero",
+      "description": "Set de 3 piezas: salero, azucarero y pimentero de cerámica. Incluye cucharaditas, de color blanco elegante.",
+      "measure": "10 x 10 cm de diámetro",
+      "price": 350,
+      "tags": [
+        "salero",
+        "azucarero",
+        "pimentero",
+        "cerámica",
+        "blanco",
+        "set"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-35",
+      "category": "utensilios-decoracion",
+      "name": "Cúpula de Cristal con Base de Madera",
+      "description": "Cúpula de cristal con base de madera. Perfecta para exhibir piezas especiales, flores preservadas o decoraciones de temporada.",
+      "measure": "21 cm de diámetro, 15 cm de alto",
+      "price": 150,
+      "tags": [
+        "cúpula",
+        "cristal",
+        "madera",
+        "exhibición"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "utensilios-36",
+      "category": "utensilios-decoracion",
+      "name": "Set de Aceiteros con Accesorios",
+      "description": "Set de aceiteros con accesorios incluidos. Todo lo que necesitas para servir aceites con estilo.",
+      "measure": "27 cm de alto",
+      "price": 240,
+      "tags": [
+        "aceitero",
+        "accesorios",
+        "set",
+        "cocina"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "esculturas-01",
+      "category": "esculturas",
+      "name": "Escultura Abstracta Hombres de Cerillas",
+      "description": "Escultura abstracta de hombres de cerillas minimalistas de resina moderna. En colores blanco y café, un dúo escultural para conversaciones.",
+      "measure": "Blanca 20 cm alto x 9 cm ancho, Café 20 cm alto x 12 cm ancho",
+      "price": 325,
+      "tags": [
+        "escultura",
+        "abstracta",
+        "resina",
+        "minimalista",
+        "moderna"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "esculturas-02",
+      "category": "esculturas",
+      "name": "Estatua del Silencio",
+      "description": "Estatua del silencio en material de resina. Añade un toque de elegancia y creatividad a cualquier espacio con un mensaje reflexivo.",
+      "measure": "27 cm de altura",
+      "price": 300,
+      "tags": [
+        "estatua",
+        "silencio",
+        "resina",
+        "decoración",
+        "elegante"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "esculturas-03",
+      "category": "esculturas",
+      "name": "Estatua del Silencio Pareja",
+      "description": "Estatua del silencio de pareja en material de resina. Añade un toque de elegancia, romance y creatividad a cualquier espacio.",
+      "measure": "25 cm de altura y 14 cm de ancho",
+      "price": 300,
+      "tags": [
+        "estatua",
+        "silencio",
+        "pareja",
+        "resina",
+        "romántica"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "esculturas-04",
+      "category": "esculturas",
+      "name": "Escultura de Plata Abstracta",
+      "description": "Escultura de estatua de plata con arte abstracto para decoración del hogar. Statement piece moderno y sofisticado.",
+      "measure": "28 cm de alto",
+      "price": 300,
+      "tags": [
+        "escultura",
+        "plata",
+        "abstracta",
+        "arte",
+        "moderna"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "esculturas-05",
+      "category": "esculturas",
+      "name": "Reloj de Arena Madera Negro",
+      "description": "Reloj de arena decorativo de madera color negro con duración de 30 minutos. Ideal para medir tiempos de estudio, té o meditación.",
+      "measure": "22 cm de alto x 9 cm de ancho",
+      "price": 300,
+      "tags": [
+        "reloj de arena",
+        "madera",
+        "negro",
+        "30 min",
+        "decoración"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "esculturas-06",
+      "category": "esculturas",
+      "name": "Reloj de Arena Madera Blanco",
+      "description": "Reloj de arena decorativo de madera color blanco con duración de 30 minutos. Un acento elegante y funcional.",
+      "measure": "22 cm de alto x 9 cm de ancho",
+      "price": 300,
+      "tags": [
+        "reloj de arena",
+        "madera",
+        "blanco",
+        "30 min",
+        "decoración"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "esculturas-07",
+      "category": "esculturas",
+      "name": "Reloj de Arena Madera Rosado",
+      "description": "Reloj de arena decorativo de madera color rosado con duración de 30 minutos. Suave y cálido, perfecto para espacios femeninos.",
+      "measure": "22 cm de alto x 9 cm de ancho",
+      "price": 300,
+      "tags": [
+        "reloj de arena",
+        "madera",
+        "rosado",
+        "30 min"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "esculturas-08",
+      "category": "esculturas",
+      "name": "Balanza de Metal Bronce",
+      "description": "Balanza de metal color bronce, muy atractiva y llamativa como pieza de decoración del hogar. Evoca estilo apothecary vintage.",
+      "measure": "30 cm alto x 20 cm ancho, platos 13 cm de diámetro",
+      "price": 325,
+      "tags": [
+        "balanza",
+        "metal",
+        "bronce",
+        "vintage",
+        "decoración"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "esculturas-09",
+      "category": "esculturas",
+      "name": "Reloj de Arena Madera Blanco Compacto",
+      "description": "Reloj de arena decorativo de madera color blanco en formato compacto. Duración de 30 minutos para tus rituales diarios.",
+      "measure": "16 cm de alto",
+      "price": 275,
+      "tags": [
+        "reloj de arena",
+        "madera",
+        "blanco",
+        "compacto"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    },
+    {
+      "id": "esculturas-10",
+      "category": "esculturas",
+      "name": "Frutero de Metal con Base de Vidrio",
+      "description": "Frutero de metal con base de vidrio, elegante y moderno. Eleva la presentación de tus frutas con estilo.",
+      "measure": "10 cm de altura y 30 cm de diámetro",
+      "price": 200,
+      "tags": [
+        "frutero",
+        "metal",
+        "vidrio",
+        "elegante",
+        "moderno"
+      ],
+      "images": [],
+      "discount": null,
+      "visible": false
+    }
+  ]
+}

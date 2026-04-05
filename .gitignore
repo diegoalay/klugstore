@@ -1,0 +1,15 @@
+.DS_Store
+node_modules
+/dist
+/src-capacitor/android
+/src-capacitor/ios
+.quasar
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env.local
+.env.*.local
+*.log
+
+# npm credentials (Font Awesome Pro token)
+.npmrc
