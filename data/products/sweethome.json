@@ -684,13 +684,14 @@
     {
       "id": "trays-05",
       "category": "trays-bandejas",
-      "name": "Try 3 Niveles Madera con Varilla Dorada",
-      "description": "Try de tres niveles de madera color café claro, moderno y elegante; varilla central dorada. Puedes utilizarla para almacenar artículos u organizar espacios de tu hogar.",
-      "measure": "35 cm de altura, bandeja grande 25 cm de diámetro, bandeja mediana 20 cm de diámetro y bandeja pequeña 15 cm de diámetro",
+      "name": "Mini Try 2 Niveles Madera con Varilla Dorada",
+      "description": "Mini try de dos niveles en madera color café claro, moderno y elegante; varilla central dorada. Puedes utilizarla para almacenar artículos u organizar espacios de tu hogar.",
+      "measure": "25 cm de alto, plato grande 20 cm de diámetro, plato pequeño 15 cm de diámetro",
       "price": 325,
       "tags": [
         "try",
-        "3 niveles",
+        "mini try",
+        "2 niveles",
         "madera",
         "dorado",
         "café claro",
@@ -733,8 +734,8 @@
       "category": "trays-bandejas",
       "name": "Try 2 Niveles Blanco Vintage",
       "description": "Try de dos niveles de madera color blanco, estilo vintage y elegante. Puedes utilizarla para almacenar artículos u organizar espacios de tu hogar.",
-      "measure": "40 cm de altura",
-      "price": 300,
+      "measure": "46 cm de alto, plato grande 33 cm de diámetro, plato pequeño 33 cm de diámetro",
+      "price": 350,
       "tags": [
         "try",
         "2 niveles",
@@ -829,13 +830,13 @@
     {
       "id": "bandejas-07",
       "category": "trays-bandejas",
-      "name": "Bandeja Metal Negra Circular",
-      "description": "Bandeja de metal color negro, moderna y elegante. Puedes utilizarla como bandeja de servir o como pieza decorativa minimalista.",
+      "name": "Bandeja Madera Negra Circular",
+      "description": "Bandeja circular de madera color negro, moderna y elegante. Puedes utilizarla como bandeja de servir o como pieza decorativa minimalista.",
       "measure": "30 cm de diámetro",
-      "price": 250,
+      "price": 175,
       "tags": [
         "bandeja",
-        "metal",
+        "madera",
         "negro",
         "circular",
         "servir"
@@ -853,8 +854,8 @@
       "category": "trays-bandejas",
       "name": "Bandeja Bambú con Divisores y Bowl",
       "description": "Bandeja redonda de bambú con compartimientos divididos y bowl central cerámico. Ideal para servir snacks, aperitivos o dips en reuniones.",
-      "measure": "32 cm de diámetro",
-      "price": 200,
+      "measure": "25 cm de diámetro",
+      "price": 150,
       "tags": [
         "bandeja",
         "bambú",
@@ -876,13 +877,13 @@
     {
       "id": "bandejas-13",
       "category": "trays-bandejas",
-      "name": "Bandeja Metal Azul con Borde Dorado",
-      "description": "Bandeja de metal color azul con borde dorado, moderna y elegante. Perfecta para servir o como pieza central decorativa con un acento statement.",
+      "name": "Bandeja de Acrílico Azul con Borde Dorado",
+      "description": "Bandeja de acrílico color azul con borde dorado, moderna y elegante. Perfecta para servir o como pieza central decorativa con un acento statement.",
       "measure": "33 cm de diámetro x 4 cm de altura",
-      "price": 250,
+      "price": 200,
       "tags": [
         "bandeja",
-        "metal",
+        "acrílico",
         "azul",
         "dorado",
         "servir",
@@ -984,7 +985,7 @@
       "category": "trays-bandejas",
       "name": "Bandeja Rectangular Madera Rojiza",
       "description": "Bandeja rectangular de madera rojiza con asas laterales. Elegante y versátil, perfecta para servir o exhibir piezas con un estilo clásico cálido.",
-      "measure": "40 cm de largo",
+      "measure": "40 cm de largo x 30 cm de ancho",
       "price": 225,
       "tags": [
         "bandeja",
@@ -1009,8 +1010,8 @@
       "category": "trays-bandejas",
       "name": "Bandeja Redonda Blanca",
       "description": "Bandeja redonda de madera con acabado blanco, elegante y minimalista. Úsala para servir o como pieza decorativa con un estilo limpio y luminoso.",
-      "measure": "32 cm de diámetro",
-      "price": 200,
+      "measure": "40 cm de diámetro",
+      "price": 300,
       "tags": [
         "bandeja",
         "blanca",
@@ -1032,19 +1033,18 @@
     },
     {
       "id": "bandejas-19",
-      "category": "trays-bandejas",
-      "name": "Set de Cúpulas de Cristal con Base de Madera",
-      "description": "Tipo cúpula de pastel: campana de cristal con base de madera para lucir tortas, postres o piezas decorativas, y mantenerlas a la vista con estilo. Vintage francés. El precio mostrado es por unidad.",
-      "measure": "Cúpula para pastel: 21 cm de diámetro, 15 cm de alto. Precio por unidad.",
-      "price": 150,
+      "category": "utensilios-decoracion",
+      "name": "Tenedores Acero Inoxidable Color Dorado",
+      "description": "Tenedores de acero inoxidable con acabado color dorado. Resistentes y elegantes para la mesa diaria o reuniones especiales.",
+      "measure": "Acero inoxidable, acabado dorado",
+      "price": 200,
       "tags": [
-        "cúpula",
-        "cúpula de pastel",
-        "cristal",
-        "madera",
-        "repostería",
-        "vintage",
-        "exhibición"
+        "tenedor",
+        "acero inoxidable",
+        "dorado",
+        "cubiertos",
+        "mesa",
+        "elegante"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-19.jpeg",
@@ -1086,17 +1086,18 @@
     {
       "id": "bandejas-24",
       "category": "trays-bandejas",
-      "name": "Bandeja Redonda Grabada Rústica",
-      "description": "Bandeja redonda de madera con grabados decorativos en la superficie. Estilo rústico con detalle artesanal, perfecta para servir o como pieza central.",
-      "measure": "30 cm de diámetro",
-      "price": 225,
+      "name": "Bandeja Redonda Grabada Rústica Giratoria",
+      "description": "Bandeja redonda de madera con grabados decorativos y base giratoria. Estilo rústico y artesanal; ideal para servir quesos, aperitivos o como centro de mesa.",
+      "measure": "25 cm de diámetro",
+      "price": 180,
       "tags": [
         "bandeja",
         "madera",
         "grabada",
         "rústico",
-        "artesanal",
-        "redonda"
+        "giratoria",
+        "redonda",
+        "servir"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-24.jpeg",
@@ -1136,17 +1137,17 @@
     {
       "id": "bandejas-26",
       "category": "trays-bandejas",
-      "name": "Bandeja Rectangular Madera Clara con Borde",
-      "description": "Bandeja rectangular de madera clara con borde elevado. Moderna y elegante, perfecta para servir desayunos en la cama o presentar aperitivos.",
-      "measure": "45 cm de largo",
-      "price": 235,
+      "name": "Bandeja Estilo Vintage Rectangular",
+      "description": "Bandeja rectangular con aire vintage, ideal para servir, organizar o como pieza decorativa en mesa o aparador.",
+      "measure": "40 cm de largo x 30 cm de ancho",
+      "price": 250,
       "tags": [
         "bandeja",
         "rectangular",
-        "madera clara",
-        "borde",
+        "vintage",
         "servir",
-        "desayuno"
+        "decoración",
+        "mesa"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/bandeja-26.jpeg",
@@ -1189,7 +1190,7 @@
       "name": "Bandeja Ovalada Madera Natural",
       "description": "Bandeja ovalada de madera natural con acabado cálido. Elegante y versátil, perfecta para servir con un estilo clásico y orgánico.",
       "measure": "35 cm de largo",
-      "price": 200,
+      "price": 250,
       "tags": [
         "bandeja",
         "ovalada",
@@ -1301,15 +1302,16 @@
       "id": "bandejas-giratoria-divisor",
       "category": "trays-bandejas",
       "name": "Bandeja Giratoria con Divisor de Madera",
-      "description": "Bandeja giratoria estilo circular con divisor de madera multifuncional. Perfecta para servir alimentos o snacks compartidos en la mesa.",
-      "measure": "25 cm de diámetro, 2 cm de grosor",
+      "description": "Bandeja giratoria circular con divisor de madera: dos usos en uno — ideal para pastel o para servir botanas y snacks compartidos en la mesa.",
+      "measure": "33 cm de diámetro",
       "price": 160,
       "tags": [
         "bandeja",
         "giratoria",
         "divisor",
         "madera",
-        "snacks",
+        "pastel",
+        "botanas",
         "servir"
       ],
       "images": [
@@ -1513,7 +1515,7 @@
       "name": "Set de Candeleros Hierro Forjado Negro",
       "description": "Set de candeleros de hierro forjado color negro con diseño único, moderno y elegante. Perfectos para crear ambientes cálidos y dramáticos.",
       "measure": "Grande 32 cm, Mediano 29 cm, Pequeño 23 cm, diámetro de velas 3 cm",
-      "price": 250,
+      "price": 300,
       "tags": [
         "candelero",
         "hierro forjado",
@@ -1693,7 +1695,7 @@
       "name": "Candeleros Dorados Set de 6",
       "description": "Candeleros de metal color dorado en set de 6 piezas en diferentes alturas, con diseño único, moderno y elegante. Perfecto para mesas de eventos.",
       "measure": "2 de 24 cm, 2 de 19 cm, 2 de 16 cm",
-      "price": 150,
+      "price": 325,
       "tags": [
         "candelero",
         "metal",
@@ -1710,15 +1712,16 @@
     {
       "id": "candeleros-11",
       "category": "candeleros",
-      "name": "Set de 3 Candeleros Dorados",
-      "description": "Set de 3 candeleros de metal color dorado con diseño único, moderno y elegante. Crean un trío dramático en mesas de comedor.",
-      "measure": "Grande 24 cm, Mediano 19 cm, Pequeño 16 cm, diámetro de velas 3 cm",
+      "name": "Set de 6 Candeleros Dorados",
+      "description": "Candeleros de metal color dorado, diseño único, moderno y elegante. Incluye seis piezas: dos de 24 cm de alto, dos de 19 cm y dos de 16 cm.",
+      "measure": "2 de 24 cm de alto, 2 de 19 cm de alto, 2 de 16 cm de alto; diámetro de agujero para velas 3 cm",
       "price": 140,
       "tags": [
         "candelero",
         "metal",
         "dorado",
-        "set de 3"
+        "set de 6",
+        "elegante"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/candeleros/candeleros-11.jpeg"
@@ -2148,15 +2151,16 @@
     {
       "id": "utensilios-15",
       "category": "utensilios-decoracion",
-      "name": "Set de 6 Decoraciones Madera MDF para Try",
-      "description": "Decoración de madera MDF para try, set de 6 diseños, de alta calidad y linda decoración. Personaliza tus bandejas con estilo.",
+      "name": "Set de 2 Aceiteros Blancos",
+      "description": "Set de dos aceiteros color blanco para aceite, vinagre u otros líquidos en la cocina o la mesa. Líneas limpias y acabado elegante.",
+      "measure": "27 cm de alto y 23 cm de alto (una pieza de cada altura)",
       "price": 100,
       "tags": [
-        "decoración",
-        "madera",
-        "MDF",
-        "try",
-        "set"
+        "aceitero",
+        "blanco",
+        "cocina",
+        "set",
+        "vinagre"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-15.jpeg"
@@ -2167,16 +2171,17 @@
     {
       "id": "utensilios-16",
       "category": "utensilios-decoracion",
-      "name": "Set de Aceiteros Cerámica",
-      "description": "Set de botellas para cocina de aceite de oliva y vinagre de cerámica con boquillas de acero inoxidable. Elegante y funcional.",
-      "measure": "Grande 27 cm, Pequeño 23 cm",
-      "price": 250,
+      "name": "Set de Figuras de Madera para Decorar Try",
+      "description": "Set de figuras decorativas en madera para vestir tus tries, bandejas o rincones de la mesa. Piezas surtidas que suman calidez y un toque artesanal sin quitar protagonismo a lo que exhibes.",
+      "measure": "Varias piezas en madera; ideales para componer sobre tries o bandejas",
+      "price": 100,
       "tags": [
-        "aceitero",
-        "cerámica",
-        "aceite",
-        "vinagre",
-        "cocina"
+        "madera",
+        "figuras",
+        "decoración",
+        "try",
+        "mesa",
+        "set"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-16.jpeg"
@@ -2230,7 +2235,7 @@
       "name": "Set de 2 Lámparas Chimenea de Plástico",
       "description": "Set de 2 lámparas de plástico simulando chimeneas, ideal para interiores o exteriores. Crean ambientes cálidos sin fuego real.",
       "measure": "40 cm de alto",
-      "price": 225,
+      "price": 180,
       "tags": [
         "lámpara",
         "chimenea",
@@ -2368,7 +2373,7 @@
       "name": "Comedero Aves Cabina Telefónica",
       "description": "Comedero para aves colgante al aire libre, de metal decorativo con forma de cabina telefónica. Funcional y encantador para tu jardín.",
       "measure": "19 cm de largo x 9 cm de ancho",
-      "price": 125,
+      "price": 175,
       "tags": [
         "comedero",
         "aves",
@@ -2385,16 +2390,17 @@
     {
       "id": "utensilios-27",
       "category": "utensilios-decoracion",
-      "name": "Linternas Solares con Velas",
-      "description": "Linternas solares impermeables con velas LED, ideales para exteriores. Crean ambientes mágicos sin preocupaciones eléctricas.",
-      "measure": "Grande 40 cm x 14 cm, Pequeña 30 cm x 10 cm",
-      "price": 400,
+      "name": "Canastos de Cuerda de Algodón",
+      "description": "Canastos de cuerda de algodón, textura natural y aspecto artesanal. Ideales para organizar o decorar salón, baño o dormitorio.",
+      "measure": "40 cm de diámetro x 22 cm de fondo",
+      "price": 150,
       "tags": [
-        "linterna",
-        "solar",
-        "exterior",
-        "vela LED",
-        "jardín"
+        "canasto",
+        "cuerda",
+        "algodón",
+        "organización",
+        "decoración",
+        "natural"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-27.jpeg"
@@ -2405,15 +2411,16 @@
     {
       "id": "utensilios-28",
       "category": "utensilios-decoracion",
-      "name": "Set de 2 Candelas LED Grandes",
-      "description": "Set de 2 candelas LED color beige que proporcionan un ambiente festivo. Operan con baterías con aspecto realista y elegante.",
-      "measure": "22.5 cm de largo, diámetro 7.5 cm",
+      "name": "Set de 2 Linternas Solares Impermeables con Velas",
+      "description": "Linternas solares impermeables con velas, ideales para exteriores, jardín o terraza. Cargan con luz solar y crean un ambiente acogedor al anochecer.",
+      "measure": "Grande 40 cm de alto x 14 cm de ancho; pequeña 30 cm de alto x 10 cm de ancho",
       "price": 185,
       "tags": [
-        "candela",
-        "LED",
-        "beige",
-        "festiva",
+        "linterna",
+        "solar",
+        "impermeable",
+        "exterior",
+        "velas",
         "set"
       ],
       "images": [
@@ -2445,15 +2452,17 @@
     {
       "id": "utensilios-30",
       "category": "utensilios-decoracion",
-      "name": "Set de 40 Cubiertos para 8 Personas",
-      "description": "Set para 8 personas con un total de 40 cubiertos de metal acero inoxidable. Para cenas completas con estilo.",
+      "name": "Set de 6 Candelas LED Color Beige",
+      "description": "Set de 6 candelas LED color beige que crean un ambiente festivo y acogedor. Funcionan con pilas, con aspecto realista y elegante.",
+      "measure": "15 cm de largo, diámetro 7.2 cm",
       "price": 350,
       "tags": [
-        "cubiertos",
-        "acero inoxidable",
+        "candela",
+        "LED",
+        "beige",
+        "festivo",
         "set",
-        "mesa",
-        "comedor"
+        "decoración"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-30.jpeg"
@@ -2485,16 +2494,17 @@
     {
       "id": "utensilios-32",
       "category": "utensilios-decoracion",
-      "name": "Tarro de Cristal Elegante con Tapadera",
-      "description": "Elegante tarro de cristal con tapadera de cristal. Añade un toque elegante a tu hogar o cocina con alta calidad.",
+      "name": "Cúpula de Vidrio con Frutos Secos",
+      "description": "Cúpula de vidrio con frutos secos, ideal como pieza decorativa. Lucen muy bien en mesa, sala o el rincón que prefieras.",
       "measure": "Grande 31 cm diámetro, Mediana 25 cm diámetro, tapadera 14 cm",
       "price": 250,
       "tags": [
-        "tarro",
-        "cristal",
-        "tapadera",
-        "almacenar",
-        "elegante"
+        "cúpula",
+        "vidrio",
+        "frutos secos",
+        "decoración",
+        "mesa",
+        "centro de mesa"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-32.jpeg"
@@ -2505,16 +2515,17 @@
     {
       "id": "utensilios-33",
       "category": "utensilios-decoracion",
-      "name": "Set de Saleros Eléctricos",
-      "description": "Set de saleros eléctricos con 6 funcionalidades. Tecnología moderna al servicio de tus sazones.",
-      "measure": "20 cm de alto",
+      "name": "Set de Dulceros de Vidrio",
+      "description": "Set de dulceros de vidrio para exhibir caramelos, chocolates o snacks con estilo. Ideales en mesa dulce, sala o cocina.",
+      "measure": "Dos piezas: 21 cm de alto x 14 cm de diámetro; 25 cm de alto x 14 cm de diámetro",
       "price": 250,
       "tags": [
-        "salero",
-        "eléctrico",
+        "dulcero",
+        "vidrio",
         "set",
-        "moderno",
-        "cocina"
+        "mesa dulce",
+        "golosinas",
+        "decoración"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-33.jpeg"
@@ -2525,17 +2536,17 @@
     {
       "id": "utensilios-34",
       "category": "utensilios-decoracion",
-      "name": "Set de 3 Saleros Azucarero y Pimentero",
-      "description": "Set de 3 piezas: salero, azucarero y pimentero de cerámica. Incluye cucharaditas, de color blanco elegante.",
-      "measure": "10 x 10 cm de diámetro",
+      "name": "Set de 2 Saleros a Pilas con 6 Funciones",
+      "description": "Set de dos saleros que funcionan con pilas, con 6 funcionalidades para sazonar de forma práctica y uniforme en la cocina o en la mesa.",
+      "measure": "20 cm de alto",
       "price": 350,
       "tags": [
         "salero",
-        "azucarero",
-        "pimentero",
-        "cerámica",
-        "blanco",
-        "set"
+        "eléctrico",
+        "pilas",
+        "cocina",
+        "set",
+        "funciones"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-34.jpeg"
@@ -2546,15 +2557,17 @@
     {
       "id": "utensilios-35",
       "category": "utensilios-decoracion",
-      "name": "Cúpula de Cristal con Base de Madera",
-      "description": "Cúpula de cristal con base de madera. Perfecta para exhibir piezas especiales, flores preservadas o decoraciones de temporada.",
-      "measure": "21 cm de diámetro, 15 cm de alto",
-      "price": 150,
+      "name": "Set de Saleros de Cerámica Sal, Azúcar y Pimienta",
+      "description": "Juego de tres saleros de cerámica para sal, azúcar y pimienta. Prácticos y decorativos para la cocina o la mesa.",
+      "measure": "10 cm de alto (cada pieza)",
+      "price": 250,
       "tags": [
-        "cúpula",
-        "cristal",
-        "madera",
-        "exhibición"
+        "salero",
+        "cerámica",
+        "azúcar",
+        "pimienta",
+        "cocina",
+        "set"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-35.jpeg"
@@ -2565,15 +2578,17 @@
     {
       "id": "utensilios-36",
       "category": "utensilios-decoracion",
-      "name": "Set de Aceiteros con Accesorios",
-      "description": "Set de aceiteros con accesorios incluidos. Todo lo que necesitas para servir aceites con estilo.",
-      "measure": "27 cm de alto",
-      "price": 240,
+      "name": "Cúpula para Pastel, Cupcake o Pan",
+      "description": "Cúpula de cristal para cubrir y lucir pasteles, cupcakes o pan en la mesa. En la imagen se muestran dos; el precio mostrado es por unidad.",
+      "measure": "21 cm de diámetro x 15 cm de alto. Precio por unidad.",
+      "price": 150,
       "tags": [
-        "aceitero",
-        "accesorios",
-        "set",
-        "cocina"
+        "cúpula",
+        "pastel",
+        "cupcake",
+        "pan",
+        "cristal",
+        "repostería"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/utensilios-decoracion/utensilios-decoracion-36.jpeg"
@@ -2743,15 +2758,16 @@
     {
       "id": "esculturas-09",
       "category": "esculturas",
-      "name": "Reloj de Arena Madera Blanco Compacto",
-      "description": "Reloj de arena decorativo de madera color blanco en formato compacto. Duración de 30 minutos para tus rituales diarios.",
-      "measure": "16 cm de alto",
+      "name": "Esculturas Blancas Entrelazadas",
+      "description": "Esculturas decorativas color blanco, formas entrelazadas y diseño abstracto. Ideales para dar un toque artístico y elegante a cualquier espacio.",
+      "measure": "Escultura grande 23 cm de alto, pequeña 19 cm de alto",
       "price": 275,
       "tags": [
-        "reloj de arena",
-        "madera",
+        "escultura",
         "blanco",
-        "compacto"
+        "entrelazadas",
+        "abstracta",
+        "decoración"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/esculturas/esculturas-09.jpeg"
