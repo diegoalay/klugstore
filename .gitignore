@@ -11,5 +11,8 @@ yarn-error.log*
 .env.*.local
 *.log
 
+# Firebase CLI (caché de deploy / hosting)
+.firebase/
+
 # npm credentials (Font Awesome Pro token)
 .npmrc
