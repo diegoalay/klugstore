@@ -1,6 +1,7 @@
 import { useCatalogStore, useStoreConfigStore } from 'src/stores'
-import { getMockCatalog } from 'src/mocks/catalog.mock'
-import type { CatalogData } from 'src/types'
+import { loadCatalogFromSource } from 'src/mocks/catalog.mock'
+import { clearRemoteCatalogCache } from 'src/utils/catalogData'
+import { clearSheetsCache } from 'src/utils/googleSheetsAdapter'
 
 export function useCatalog() {
   const catalogStore = useCatalogStore()
@@ -11,13 +12,9 @@ export function useCatalog() {
     storeConfigStore.loading = true
 
     try {
-      // TODO: Replace with API call to klugsystem
-      // const response = await api.get(`/stores/${storeSlug}/catalog`)
-      // const data: CatalogData = response.data
-
-      // Simulate async load for future API parity
-      const data: CatalogData = await Promise.resolve(getMockCatalog(storeSlug))
-
+      // loadCatalogFromSource intenta `VITE_CATALOG_REMOTE_BASE` y cae al
+      // JSON empaquetado si el remoto no está disponible.
+      const data = await loadCatalogFromSource(storeSlug)
       storeConfigStore.setConfig(data.store)
       catalogStore.setCategories(data.categories)
       catalogStore.setProducts(data.products)
@@ -27,7 +24,19 @@ export function useCatalog() {
     }
   }
 
+  /**
+   * Fuerza re-fetch del catálogo limpiando TODOS los caches en memoria (Sheets,
+   * JSON remoto). Útil cuando el editor acaba de guardar cambios y quiere
+   * verlos reflejados sin esperar el TTL natural del cache.
+   */
+  async function reloadCatalog(storeSlug?: string): Promise<void> {
+    clearSheetsCache()
+    clearRemoteCatalogCache(storeSlug)
+    await loadCatalog(storeSlug)
+  }
+
   return {
     loadCatalog,
+    reloadCatalog,
   }
 }

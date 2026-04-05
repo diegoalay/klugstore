@@ -1,6 +1,10 @@
 import type { CatalogData, Category, Product, ProductImage, StoreTheme } from 'src/types'
 import type { RawCatalog } from 'src/utils/catalogData'
-import { getRawCatalogJson, resolveCatalogSlug } from 'src/utils/catalogData'
+import {
+  getRawCatalogJson,
+  resolveCatalogSlug,
+  resolveRawCatalog,
+} from 'src/utils/catalogData'
 import { slugifyCatalogText } from 'src/utils/slugify'
 import {
   applyAdminOverlaysToProducts,
@@ -131,11 +135,7 @@ export function getMergedCatalogProducts(storeSlug?: string): Product[] {
   return applyAdminOverlaysToProducts(base, overlay)
 }
 
-export function getMockCatalog(storeSlug?: string): CatalogData {
-  const slug = resolveCatalogSlug(storeSlug)
-  const raw = getRawCatalogJson(slug)
-  if (!raw) throw new Error(`Catálogo no encontrado: ${slug}`)
-
+function buildCatalogData(raw: RawCatalog, slug: string): CatalogData {
   const categories: Category[] = raw.categories.map((c) => {
     const cat: Category = {
       id: c.slug,
@@ -147,7 +147,12 @@ export function getMockCatalog(storeSlug?: string): CatalogData {
     return cat
   })
 
-  const merged = getMergedCatalogProducts(slug)
+  // Productos con overlays de admin aplicados (el overlay sigue viviendo
+  // local incluso cuando la fuente es remota — el editor local puede
+  // previsualizar cambios antes de subir el JSON).
+  const base = mapAllProducts(raw)
+  const overlay = loadAdminCatalogOverlay(slug)
+  const merged = applyAdminOverlaysToProducts(base, overlay)
   const products = merged.filter((p) => p.visible !== false)
 
   return {
@@ -155,4 +160,27 @@ export function getMockCatalog(storeSlug?: string): CatalogData {
     categories,
     products,
   }
+}
+
+/**
+ * Carga síncrona (solo bundled JSON). Mantiene compatibilidad con callers que
+ * no quieren esperar una Promise — útil para SSR/prerender o tests.
+ */
+export function getMockCatalog(storeSlug?: string): CatalogData {
+  const slug = resolveCatalogSlug(storeSlug)
+  const raw = getRawCatalogJson(slug)
+  if (!raw) throw new Error(`Catálogo no encontrado: ${slug}`)
+  return buildCatalogData(raw, slug)
+}
+
+/**
+ * Carga preferida (async). Intenta bajar el JSON remoto desde
+ * `VITE_CATALOG_REMOTE_BASE` y cae al JSON empaquetado si el remoto no está
+ * disponible. Esta es la función que usa `useCatalog.loadCatalog()`.
+ */
+export async function loadCatalogFromSource(storeSlug?: string): Promise<CatalogData> {
+  const slug = resolveCatalogSlug(storeSlug)
+  const raw = (await resolveRawCatalog(slug)) ?? getRawCatalogJson(slug)
+  if (!raw) throw new Error(`Catálogo no encontrado: ${slug}`)
+  return buildCatalogData(raw, slug)
 }

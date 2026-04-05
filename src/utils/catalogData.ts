@@ -82,6 +82,112 @@ export function getRawCatalogJson(slug: string): RawCatalog | null {
   return CATALOG_BY_SLUG[slug] ?? null
 }
 
+// ============================================
+// Catálogo remoto (CDN / S3)
+// ============================================
+// Cuando existe `VITE_CATALOG_REMOTE_BASE`, el catálogo se baja en runtime desde
+// esa URL. Esto permite a un editor no-técnico subir un JSON nuevo al bucket sin
+// redesplegar el sitio.
+//
+// Convención de URL: `{BASE}/{slug}/assets/catalog.json`
+// Ej: https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/catalog.json
+//
+// Si el fetch falla (offline, 404, CORS, JSON inválido), se cae al JSON empaquetado.
+// ============================================
+
+/** Cache en memoria del catálogo remoto por slug para no golpear la red en cada render. */
+const remoteCache: Record<string, RawCatalog> = {}
+
+function buildRemoteCatalogUrl(slug: string): string | null {
+  const base = import.meta.env.VITE_CATALOG_REMOTE_BASE?.trim()
+  if (!base) return null
+  const normalized = base.replace(/\/+$/, '')
+  return `${normalized}/${slug}/assets/catalog.json`
+}
+
+function isValidRawCatalog(data: unknown): data is RawCatalog {
+  if (!data || typeof data !== 'object') return false
+  const d = data as Record<string, unknown>
+  return (
+    typeof d['store'] === 'string' &&
+    Array.isArray(d['categories']) &&
+    Array.isArray(d['products'])
+  )
+}
+
+/**
+ * Intenta bajar el catálogo remoto para `slug`. Devuelve `null` si:
+ *  - no hay URL configurada (VITE_CATALOG_REMOTE_BASE vacío)
+ *  - el fetch falla / responde !ok
+ *  - el JSON es inválido
+ *
+ * Cachea el resultado exitoso en memoria hasta que el tab se recarga.
+ * Incluye cache-busting con `?t=` para forzar revalidación del CDN.
+ */
+export async function fetchRemoteCatalogJson(slug: string): Promise<RawCatalog | null> {
+  const cached = remoteCache[slug]
+  if (cached) return cached
+
+  const url = buildRemoteCatalogUrl(slug)
+  if (!url) return null
+
+  try {
+    // Cache-busting: el objeto en S3 puede tener max-age largo, pero al
+    // agregar ?t=<timestamp> forzamos un fetch fresco en cada boot del app.
+    const bust = `${url}${url.includes('?') ? '&' : '?'}t=${Date.now()}`
+    const res = await fetch(bust, { cache: 'no-cache' })
+    if (!res.ok) {
+      console.warn(`[catalog] Remote fetch ${slug} failed: HTTP ${res.status}`)
+      return null
+    }
+    const data: unknown = await res.json()
+    if (!isValidRawCatalog(data)) {
+      console.warn(`[catalog] Remote JSON for ${slug} is not a valid RawCatalog`)
+      return null
+    }
+    remoteCache[slug] = data
+    return data
+  } catch (err) {
+    console.warn(`[catalog] Remote fetch ${slug} threw:`, err)
+    return null
+  }
+}
+
+/**
+ * Resolución unificada del catálogo, con 3 fuentes en orden de prioridad:
+ *
+ *   1. **Google Sheets** (via CSVs publicados) — si VITE_CATALOG_SHEETS_*_URL
+ *      están definidos. La fuente más amigable para un editor no-técnico.
+ *   2. **JSON remoto** (S3/CDN) — si VITE_CATALOG_REMOTE_BASE está definido.
+ *   3. **JSON empaquetado** (data/products/{slug}.json) — fallback de desarrollo
+ *      y red de seguridad si las otras fuentes fallan.
+ *
+ * Cualquier fuente que falle (red, CORS, JSON inválido) cae silenciosamente a
+ * la siguiente. La app nunca se rompe; lo peor que pasa es mostrar el catálogo
+ * empaquetado que el equipo técnico dejó en el último deploy.
+ */
+export async function resolveRawCatalog(slug: string): Promise<RawCatalog | null> {
+  // Import dinámico para evitar ciclo entre catalogData y googleSheetsAdapter
+  // (el adapter importa tipos de este módulo).
+  const { fetchCatalogFromSheets } = await import('src/utils/googleSheetsAdapter')
+  const fromSheets = await fetchCatalogFromSheets()
+  if (fromSheets) return fromSheets
+
+  const remote = await fetchRemoteCatalogJson(slug)
+  if (remote) return remote
+
+  return getRawCatalogJson(slug)
+}
+
+/** Limpia el cache en memoria — útil para pruebas o un "reload catalog" manual. */
+export function clearRemoteCatalogCache(slug?: string): void {
+  if (slug) {
+    delete remoteCache[slug]
+  } else {
+    for (const k of Object.keys(remoteCache)) delete remoteCache[k]
+  }
+}
+
 /**
  * Slug efectivo del catálogo:
  * 1) explícito (p. ej. loadCatalog(slug))

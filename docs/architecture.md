@@ -16,9 +16,13 @@ La propuesta se resume en 4 ideas:
 3. **Los assets viven fuera del frontend.** Las imágenes y logos se sirven desde
    S3 (CDN), así el bundle se mantiene ligero y se pueden actualizar fotos sin
    redesplegar.
-4. **El frontend es un SPA simple que, a futuro, se conecta a un backend
-   (`klugsystem`).** Hoy consume JSON estático; mañana consumirá API — el
-   contrato de datos ya está preparado para esa transición.
+4. **El catálogo también vive fuera del frontend.** La fuente activa es un
+   Google Sheet que cualquier editor no-técnico puede mantener. El app lo baja
+   en runtime vía el endpoint público `gviz/tq`, así los cambios de precio,
+   stock o fotos se reflejan en minutos sin redeploy.
+5. **El frontend es un SPA simple, backend-ready.** Hoy consume Google Sheets
+   con fallback a JSON empaquetado; cuando llegue `klugsystem` (backend real),
+   solo cambia la capa de fetch — el contrato de datos ya está preparado.
 
 ### 1.1. Casos de uso principales
 
@@ -73,7 +77,8 @@ klugstore/
 ├── data/
 │   ├── sweethome.pdf            # Catálogo original del cliente (referencia)
 │   └── products/
-│       └── sweethome.json       # Fuente de verdad del catálogo actual
+│       └── sweethome.json       # Snapshot de fallback (la fuente activa
+│                                # es un Google Sheet — ver §4)
 ├── docs/
 │   ├── architecture.md          # Este documento
 │   └── installation.md          # Guía de setup
@@ -93,7 +98,8 @@ klugstore/
 │   │   ├── app.scss             # Estilos globales + CSS variables de marca
 │   │   └── quasar.variables.scss
 │   ├── mocks/
-│   │   └── catalog.mock.ts      # Lee data/products/sweethome.json y mapea a types
+│   │   └── catalog.mock.ts      # Orquesta la carga (Sheets → JSON remoto → bundled)
+│   │                            # y mapea raw JSON a los tipos de la app
 │   ├── modules/
 │   │   ├── catalog/             # Módulo público (catálogo + detalle + about)
 │   │   │   ├── CatalogLayout.vue
@@ -116,11 +122,16 @@ klugstore/
 │   └── utils/
 │       ├── adminAuth.ts         # Auth del MVP de admin (username/password env)
 │       ├── adminCatalogStorage.ts # Overlay local de ediciones del admin
-│       ├── catalogData.ts       # Merge del JSON base con overlay de admin
+│       ├── catalogData.ts       # resolveRawCatalog con 3 fuentes (Sheets/remoto/bundled)
 │       ├── catalogSort.ts       # Modos de orden del catálogo
+│       ├── googleSheetsAdapter.ts # Parser CSV + fetch de Sheets via gviz/tq
 │       ├── slugify.ts           # Slug determinístico para URLs
 │       └── storeResolver.ts     # hostname → slug de tienda
-├── .env                         # VITE_APP_NAME, VITE_WHATSAPP_DEFAULT_NUMBER, ...
+├── scripts/
+│   ├── export-catalog-to-csv.mjs  # JSON → 2 CSVs listos para pegar en Sheets
+│   ├── generate-sitemap.mjs       # Sitemap automático pre-build
+│   └── apply-admin-overlay-to-json.mjs # Persistir overlay de admin al JSON
+├── .env                         # VITE_APP_NAME, VITE_CATALOG_SHEETS_ID, ...
 ├── .npmrc                       # Token de Font Awesome Pro (gitignored)
 ├── firebase.json                # Hosting + headers (cache, CSP, HSTS, etc)
 ├── quasar.config.ts
