@@ -29,7 +29,7 @@ function restoreCatalogHashFromStashIfNeeded(routeName: string | symbol | undefi
 /** Lee estado del catálogo desde el hash: #cat=&q=&sort= */
 export function parseCatalogHash(): { cat: string | null; q: string; sort: CatalogSortMode } {
   const raw = window.location.hash.replace(/^#/, '').trim()
-  if (!raw) return { cat: null, q: '', sort: 'default' }
+  if (!raw) return { cat: null, q: '', sort: 'name-asc' as CatalogSortMode }
   const sp = new URLSearchParams(raw)
   return {
     cat: sp.get('cat'),
@@ -41,13 +41,13 @@ export function parseCatalogHash(): { cat: string | null; q: string; sort: Catal
 export function buildCatalogHash(
   cat: string | null,
   q: string,
-  sort: CatalogSortMode = 'default',
+  sort: CatalogSortMode = 'name-asc',
 ): string {
   const sp = new URLSearchParams()
   if (cat) sp.set('cat', cat)
   const qt = q.trim()
   if (qt) sp.set('q', qt)
-  if (sort !== 'default') sp.set('sort', sort)
+  if (sort !== 'name-asc') sp.set('sort', sort)
   const s = sp.toString()
   return s ? `#${s}` : ''
 }

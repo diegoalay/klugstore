@@ -15,7 +15,7 @@ export const useCatalogStore = defineStore('catalog', () => {
   const loading = ref(false)
   const activeCategory = ref<string | null>(null)
   const searchQuery = ref('')
-  const catalogSort = ref<CatalogSortMode>('default')
+  const catalogSort = ref<CatalogSortMode>('name-asc')
 
   const sortedCategories = computed(() =>
     [...categories.value].sort((a, b) => a.order - b.order),
