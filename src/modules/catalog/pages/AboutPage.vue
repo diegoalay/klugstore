@@ -79,12 +79,23 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStoreConfigStore } from 'src/stores'
 import { useWhatsApp } from 'src/composables/useWhatsApp'
+import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
 
 const router = useRouter()
 const storeConfig = useStoreConfigStore()
 const { openWhatsAppGeneral } = useWhatsApp()
 
 const accent = computed(() => storeConfig.theme?.secondaryColor ?? '#d19793')
+
+usePageSeo({
+  title: computed(() => `Sobre nosotros — ${storeConfig.storeName} | Decoración y hogar Guatemala`),
+  description: computed(() =>
+    truncateSeoDescription(
+      `${storeConfig.storeName}: decoración para el hogar, piezas curadas y compra por WhatsApp en Guatemala. Historia, valores y cómo comprar.`,
+    ),
+  ),
+  path: '/about',
+})
 
 function goCatalog() {
   void router.push({ name: 'catalog-home' })

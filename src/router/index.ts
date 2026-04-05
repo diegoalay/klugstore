@@ -15,12 +15,5 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   })
 
-  Router.beforeEach((to) => {
-    const title = (to.meta.title as string) || 'KlugStore'
-    if (typeof document !== 'undefined') {
-      document.title = `${title} | KlugStore`
-    }
-  })
-
   return Router
 })

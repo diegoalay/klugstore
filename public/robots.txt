@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /assets/
-Disallow: /*.js$
-Disallow: /*.css$
 
 Sitemap: https://sweethome.com.gt/sitemap.xml

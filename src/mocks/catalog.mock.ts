@@ -1,20 +1,12 @@
 import type { CatalogData, Category, Product, ProductImage } from 'src/types'
 import sweethomeJson from 'app/data/products/sweethome.json'
+import { slugifyCatalogText } from 'src/utils/slugify'
 
 // CDN público donde viven los assets (imágenes + logos) de SweetHome
 const CDN_BASE = 'https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/'
 
 const SWEETHOME_LOGO = CDN_BASE + 'logos/sweethome-logo.webp'
 const SWEETHOME_LOGO_WHITE = CDN_BASE + 'logos/sweethome-logo-white.webp'
-
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
-}
 
 interface RawProduct {
   id: string
@@ -70,7 +62,7 @@ function mapCatalog(raw: RawCatalog): { categories: Category[]; products: Produc
       const mapped: Product = {
         id: p.id,
         name: p.name,
-        slug: slugify(p.name) + '-' + p.id,
+        slug: slugifyCatalogText(p.name) + '-' + p.id,
         description: p.description,
         price: p.price,
         currency: raw.currency,

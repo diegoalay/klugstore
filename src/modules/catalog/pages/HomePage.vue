@@ -24,14 +24,32 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useCatalogStore } from 'src/stores'
+import { useCatalogStore, useStoreConfigStore } from 'src/stores'
 import { useCatalogHomeHash } from 'src/composables/useCatalogHash'
+import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
 import StoreHeader from '../components/StoreHeader.vue'
 import CategoryNav from '../components/CategoryNav.vue'
 import ProductGrid from '../components/ProductGrid.vue'
 
 const catalogStore = useCatalogStore()
+const storeConfig = useStoreConfigStore()
 useCatalogHomeHash()
+
+const seoTitle = computed(
+  () => `${storeConfig.storeName} — Decoración y hogar | Catálogo en línea Guatemala`,
+)
+const seoDescription = computed(() => {
+  const base =
+    storeConfig.config?.description ??
+    'Decoración para el hogar, regalos y temporadas. Compra por WhatsApp en Guatemala.'
+  return truncateSeoDescription(`${base} SweetHome GT.`)
+})
+
+usePageSeo({
+  title: seoTitle,
+  description: seoDescription,
+  path: '/catalog',
+})
 
 const activeCategory = computed(() => catalogStore.activeCategory)
 const filteredProducts = computed(() => catalogStore.filteredProducts)

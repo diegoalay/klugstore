@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { usePageSeo } from 'src/composables/usePageSeo'
+
+const route = useRoute()
+const path = computed(() => route.path || '/')
+
+usePageSeo({
+  title: 'Página no encontrada (404)',
+  description: 'La página que buscas no existe en este sitio.',
+  path,
+  noIndex: true,
+})
+</script>
+
 <template>
   <q-page class="error-page">
     <div class="error-content">

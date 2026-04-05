@@ -11,9 +11,10 @@
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
-    "build": "quasar build",
-    "deploy": "quasar build && firebase deploy --only hosting",
-    "deploy:preview": "quasar build && firebase hosting:channel:deploy preview",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "build": "npm run generate:sitemap && quasar build",
+    "deploy": "npm run build && firebase deploy --only hosting",
+    "deploy:preview": "npm run build && firebase hosting:channel:deploy preview",
     "postinstall": "quasar prepare"
   },
   "dependencies": {

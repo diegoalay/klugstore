@@ -12,11 +12,13 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useCatalogStore } from 'src/stores'
+import { useCatalogStore, useStoreConfigStore } from 'src/stores'
+import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
 import ProductGrid from '../components/ProductGrid.vue'
 
 const route = useRoute()
 const catalogStore = useCatalogStore()
+const storeConfig = useStoreConfigStore()
 
 const category = computed(() => {
   const slug = route.params.categorySlug as string
@@ -26,6 +28,31 @@ const category = computed(() => {
 const products = computed(() => {
   if (!category.value) return []
   return catalogStore.getProductsByCategory(category.value.id)
+})
+
+const categoryPath = computed(() => `/catalog/categoria/${route.params.categorySlug as string}`)
+
+const seoTitle = computed(() => {
+  if (!category.value) return `Categoría — ${storeConfig.storeName}`
+  return `${category.value.name} — Decoración hogar | ${storeConfig.storeName}`
+})
+
+const seoDescription = computed(() => {
+  if (!category.value) {
+    return truncateSeoDescription(
+      `Explora categorías de decoración y hogar en ${storeConfig.storeName}, Guatemala.`,
+    )
+  }
+  const extra =
+    category.value.description ??
+    `Piezas de ${category.value.name} para tu hogar. Envíos y compra por WhatsApp en Guatemala.`
+  return truncateSeoDescription(extra)
+})
+
+usePageSeo({
+  title: seoTitle,
+  description: seoDescription,
+  path: categoryPath,
 })
 
 watch(

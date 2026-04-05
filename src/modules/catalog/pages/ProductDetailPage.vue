@@ -186,6 +186,7 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCatalogStore, useStoreConfigStore } from 'src/stores'
 import { useWhatsApp } from 'src/composables/useWhatsApp'
+import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
 
 const route = useRoute()
 const router = useRouter()
@@ -208,6 +209,32 @@ const theme = computed(() => storeConfig.theme)
 const product = computed(() => {
   const slug = route.params.productSlug as string
   return catalogStore.getProductBySlug(slug)
+})
+
+const productPath = computed(() => {
+  const slug = route.params.productSlug as string
+  return `/catalog/producto/${slug}`
+})
+
+const seoTitle = computed(() => {
+  if (!product.value) return `Producto no encontrado — ${storeConfig.storeName}`
+  return `${product.value.name} — ${storeConfig.storeName}`
+})
+
+const seoDescription = computed(() => {
+  if (!product.value) {
+    return `El producto solicitado no existe en el catálogo de ${storeConfig.storeName}.`
+  }
+  return truncateSeoDescription(
+    `${product.value.description} ${product.value.categoryName ?? ''} · ${storeConfig.storeName}, Guatemala.`,
+  )
+})
+
+usePageSeo({
+  title: seoTitle,
+  description: seoDescription,
+  path: productPath,
+  noIndex: computed(() => !product.value),
 })
 
 const activeImage = computed(() => {

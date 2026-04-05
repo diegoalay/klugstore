@@ -2,60 +2,380 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sweethome.com.gt/</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://sweethome.com.gt/catalog</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://sweethome.com.gt/about</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sweethome.com.gt/catalog/categoria/jarrones</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sweethome.com.gt/catalog/categoria/trays-bandejas</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sweethome.com.gt/catalog/categoria/tablas-queso</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sweethome.com.gt/catalog/categoria/esculturas</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sweethome.com.gt/catalog/categoria/candeleros</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sweethome.com.gt/catalog/categoria/baja-platos</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sweethome.com.gt/catalog/categoria/temporada-otono</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sweethome.com.gt/catalog/categoria/utensilios-decoracion</loc>
+    <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-esculturas-entrelazadas-jarrones-01</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/florero-vasija-blanco-minimalista-jarrones-02</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-jarrones-dona-negro-y-zapote-jarrones-03</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-jarrones-entrelazados-negros-jarrones-04</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-jarrones-dona-negro-mate-jarrones-05</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-3-jarrones-dona-blancos-jarrones-06</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-jarrones-blancos-irregulares-jarrones-07</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-jarrones-dona-blancos-lisos-jarrones-08</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-jarrones-blancos-organicos-jarrones-09</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-jarrones-origami-gris-degradado-jarrones-10</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-jarrones-irregulares-negros-jarrones-11</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-4-mini-jarrones-negros-jarrones-12</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-3-jarrones-beige-irregulares-jarrones-13</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/jarron-dona-dorado-con-negro-jarrones-14</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-jarrones-cuadrados-texturizados-jarrones-15</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-2-floreros-conicos-blancos-jarrones-16</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/divisor-de-bambu-giratorio-con-bowls-tablas-queso-01</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/tabla-de-queso-rectangular-con-4-cuchillos-tablas-queso-02</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/tabla-de-queso-cuadrada-madera-oscura-tablas-queso-03</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/tabla-de-queso-con-marmol-y-cuchillos-tablas-queso-04</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/tabla-de-queso-con-seccion-de-marmol-gris-tablas-queso-05</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/try-2-niveles-rectangular-cafe-claro-trays-01</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/try-2-niveles-redondo-bambu-trays-02</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/soporte-decorativo-madera-oscura-trays-03</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/decoracion-apilable-home-sweet-home-trays-04</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/try-3-niveles-madera-con-varilla-dorada-trays-05</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/try-3-niveles-pedestal-blanco-trays-06</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/try-2-niveles-blanco-vintage-trays-07</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/escalera-decorativa-blanca-trays-08</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/escalera-decorativa-madera-natural-trays-09</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/mini-escalera-madera-natural-trays-10</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-metal-negra-circular-bandejas-07</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-bambu-con-divisores-y-bowl-bandejas-10</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-metal-azul-con-borde-dorado-bandejas-13</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-madera-circular-natural-bandejas-14</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-acrilico-cuadrada-con-peonias-bandejas-15</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-metal-negra-con-borde-decorativo-bandejas-16</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-rectangular-madera-rojiza-bandejas-17</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-redonda-blanca-bandejas-18</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-cupulas-de-cristal-con-base-de-madera-bandejas-19</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/pedestal-de-madera-rectangular-bandejas-23</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-redonda-grabada-rustica-bandejas-24</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/try-2-niveles-redondo-blanco-vintage-bandejas-25</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-rectangular-madera-clara-con-borde-bandejas-26</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-giratoria-dorada-con-base-madera-bandejas-27</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-ovalada-madera-natural-bandejas-28</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-redonda-madera-con-borde-tallado-bandejas-29</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-giratoria-color-durazno-bandejas-30</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-decorativa-hoja-amarilla-bandejas-hoja</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-bandejas-ovaladas-texturizadas-bandejas-ovalada</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/bandeja-giratoria-con-divisor-de-madera-bandejas-giratoria-divisor</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.com.gt/catalog/producto/set-de-3-tablas-de-madera-rectangulares-tablas-madera-20</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
   </url>
 </urlset>
