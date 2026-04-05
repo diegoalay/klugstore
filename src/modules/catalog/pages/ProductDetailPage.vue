@@ -94,20 +94,10 @@ function goHome() {
 function handleBack() {
   const raw = sessionStorage.getItem(CATALOG_RETURN_HASH_KEY)
   sessionStorage.removeItem(CATALOG_RETURN_HASH_KEY)
-  if (raw !== null) {
-    const hash = raw.startsWith('#') ? raw : raw ? `#${raw}` : ''
-    void router.push(
-      hash
-        ? { name: 'catalog-home', hash }
-        : { name: 'catalog-home' },
-    )
-    return
-  }
-  if (window.history.length > 1) {
-    router.back()
-  } else {
-    goHome()
-  }
+  const hash = raw ? (raw.startsWith('#') ? raw : `#${raw}`) : ''
+  void router.push(
+    hash ? { name: 'catalog-home', hash } : { name: 'catalog-home' },
+  )
 }
 </script>
 

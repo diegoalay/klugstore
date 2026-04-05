@@ -145,9 +145,9 @@
       </div>
 
       <div v-if="product.tags?.length" class="product-tags">
-        <q-badge v-for="tag in product.tags" :key="tag" class="tag-chip">
+        <span v-for="tag in product.tags" :key="tag" class="tag-chip">
           {{ tag }}
-        </q-badge>
+        </span>
       </div>
 
       <template v-if="!isSold">
@@ -659,13 +659,16 @@ function onAskSimilarClick() {
 }
 
 .tag-chip {
-  background: rgba(209, 151, 147, 0.12) !important;
-  color: var(--ks-secondary, #d19793) !important;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(209, 151, 147, 0.12);
+  color: var(--ks-secondary, #d19793);
   font-weight: 600;
   font-size: 0.7rem;
   padding: 5px 12px;
   border-radius: 999px;
   letter-spacing: 0.02em;
+  line-height: 1.2;
 }
 
 .cta-whatsapp {
