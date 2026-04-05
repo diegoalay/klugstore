@@ -685,8 +685,8 @@
       "id": "trays-05",
       "category": "trays-bandejas",
       "name": "Try 3 Niveles Madera con Varilla Dorada",
-      "description": "Try de tres niveles de madera café claro con varilla central dorada. Moderno y elegante, puedes utilizarlo para almacenar artículos u organizar espacios.",
-      "measure": "35 cm de altura, bandejas 25, 20 y 15 cm de diámetro",
+      "description": "Try de tres niveles de madera color café claro, moderno y elegante; varilla central dorada. Puedes utilizarla para almacenar artículos u organizar espacios de tu hogar.",
+      "measure": "35 cm de altura, bandeja grande 25 cm de diámetro, bandeja mediana 20 cm de diámetro y bandeja pequeña 15 cm de diámetro",
       "price": 325,
       "tags": [
         "try",
@@ -732,7 +732,7 @@
       "id": "trays-07",
       "category": "trays-bandejas",
       "name": "Try 2 Niveles Blanco Vintage",
-      "description": "Try de dos niveles de madera color blanco con manija negra, estilo vintage y elegante. Úsalo para almacenar o organizar espacios de tu hogar con un toque francés.",
+      "description": "Try de dos niveles de madera color blanco, estilo vintage y elegante. Puedes utilizarla para almacenar artículos u organizar espacios de tu hogar.",
       "measure": "40 cm de altura",
       "price": 300,
       "tags": [
@@ -756,17 +756,17 @@
     {
       "id": "trays-08",
       "category": "trays-bandejas",
-      "name": "Escalera Decorativa Blanca",
-      "description": "Estante escalera decorativa de madera color blanco vintage. Perfecta para exhibir plantas, libros o piezas decorativas con estilo boho farmhouse.",
-      "measure": "40 cm de alto, bandeja grande 44 x 12 cm, bandeja mediana 36 cm y bandeja pequeña 29 cm",
+      "name": "Try 3 Niveles Blanco Vintage",
+      "description": "Try de tres niveles de madera color blanco vintage, estilo elegante. Puedes utilizarla para almacenar artículos u organizar espacios de tu hogar.",
+      "measure": "40 cm de alto, bandeja grande 44 cm x 12 cm de ancho, bandeja mediana 36 cm y bandeja pequeña 29 cm",
       "price": 350,
       "tags": [
-        "escalera",
-        "decorativa",
+        "try",
+        "3 niveles",
         "blanco",
         "vintage",
-        "boho",
-        "farmhouse"
+        "elegante",
+        "organizador"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-9.jpeg",
@@ -780,16 +780,16 @@
     {
       "id": "trays-09",
       "category": "trays-bandejas",
-      "name": "Escalera Decorativa Madera Natural",
-      "description": "Estante escalera decorativa de madera natural, aspecto rústico y moderno. Perfecta para exhibir macetas, libros o elementos decorativos con estilo natural.",
-      "measure": "40 cm de alto, bandeja grande 44 x 12 cm, bandeja mediana 36 cm y bandeja pequeña 29 cm",
+      "name": "Try 3 Niveles Madera Natural",
+      "description": "Try de tres niveles de madera natural, aspecto rústico y moderno. Perfecta para exhibir macetas, libros o elementos decorativos con estilo natural.",
+      "measure": "40 cm de alto, bandeja grande 44 cm x 12 cm de ancho, bandeja mediana 36 cm y bandeja pequeña 29 cm",
       "price": 350,
       "tags": [
-        "escalera",
-        "decorativa",
+        "try",
+        "3 niveles",
         "madera natural",
         "rústico",
-        "boho"
+        "decorativa"
       ],
       "images": [
         "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/try_tablas_bandejas/try-11.jpeg",
