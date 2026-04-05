@@ -15,6 +15,11 @@ export interface RawProduct {
   images: string[]
   discount?: string | null
   visible: boolean
+  /**
+   * Producto vendido. Visible en el catálogo pero con la acción de compra
+   * deshabilitada y un badge "Vendido". Default: `false`.
+   */
+  sold?: boolean
   /** Solo destacado si viene explícito en el JSON (por defecto: ninguno). */
   featured?: boolean
 }

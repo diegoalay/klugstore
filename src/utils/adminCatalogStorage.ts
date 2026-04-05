@@ -3,13 +3,13 @@ import { slugifyCatalogText } from 'src/utils/slugify'
 
 export const ADMIN_SESSION_KEY = 'ks-admin-auth'
 
-const overlayKey = (storeSlug: string) => `ks-admin-catalog-overlay:${storeSlug}`
-
 export type AdminProductOverlay = {
   name?: string
   description?: string
   price?: number
   visible?: boolean
+  /** Marca el producto como vendido: visible pero sin acción de compra. */
+  sold?: boolean
   measure?: string
   discount?: string | null
   tags?: string[]
@@ -17,31 +17,46 @@ export type AdminProductOverlay = {
   images?: string[]
 }
 
+/** Alta completa para IDs nuevos (no estaban en el JSON base al abrir el admin). */
+export type AdminAddedProductPayload = {
+  category: string
+  name: string
+  description: string
+  measure?: string
+  price: number
+  visible: boolean
+  featured?: boolean
+  sold?: boolean
+  discount?: string | null
+  tags?: string[]
+  images: string[]
+}
+
+/** Formato del archivo que genera «Exportar overlay JSON». */
 export type AdminCatalogOverlayFile = {
   v: 1
   products: Record<string, AdminProductOverlay>
+  /** IDs que existían en la base al cargar y ya no están en el borrador. */
+  removedIds?: string[]
+  /** Productos nuevos (id → fila tipo JSON de catálogo). */
+  addedProducts?: Record<string, AdminAddedProductPayload>
 }
 
-export function loadAdminCatalogOverlay(storeSlug: string): AdminCatalogOverlayFile | null {
-  if (typeof window === 'undefined') return null
-  try {
-    const raw = localStorage.getItem(overlayKey(storeSlug))
-    if (!raw) return null
-    const parsed = JSON.parse(raw) as AdminCatalogOverlayFile
-    if (parsed?.v !== 1 || typeof parsed.products !== 'object') return null
-    return parsed
-  } catch {
-    return null
+function productToAddedPayload(p: Product): AdminAddedProductPayload {
+  const o: AdminAddedProductPayload = {
+    category: p.categoryId,
+    name: p.name,
+    description: p.description ?? '',
+    price: p.price,
+    visible: p.visible !== false,
+    images: (p.images ?? []).map((i) => i.url),
   }
-}
-
-export function saveAdminCatalogOverlay(storeSlug: string, products: Record<string, AdminProductOverlay>) {
-  const payload: AdminCatalogOverlayFile = { v: 1, products }
-  localStorage.setItem(overlayKey(storeSlug), JSON.stringify(payload))
-}
-
-export function clearAdminCatalogOverlay(storeSlug: string) {
-  localStorage.removeItem(overlayKey(storeSlug))
+  if (p.measure) o.measure = p.measure
+  if (p.featured === true) o.featured = true
+  if (p.sold === true) o.sold = true
+  if (p.discount != null && p.discount !== '') o.discount = p.discount
+  if (p.tags?.length) o.tags = [...p.tags]
+  return o
 }
 
 export function isAdminSessionActive(): boolean {
@@ -78,6 +93,15 @@ function mergeOverlayIntoProduct(p: Product, o: AdminProductOverlay): Product {
   if (o.description !== undefined) next.description = o.description
   if (o.price !== undefined) next.price = o.price
   if (o.visible !== undefined) next.visible = o.visible
+  if (o.sold !== undefined) {
+    if (o.sold) {
+      next.sold = true
+      next.available = false
+    } else {
+      delete next.sold
+      next.available = true
+    }
+  }
   if (o.measure !== undefined) {
     if (o.measure) {
       next.measure = o.measure
@@ -92,6 +116,7 @@ function mergeOverlayIntoProduct(p: Product, o: AdminProductOverlay): Product {
   return next
 }
 
+/** Útil si en el futuro se aplica un overlay en memoria o en tests. */
 export function applyAdminOverlaysToProducts(
   products: Product[],
   overlay: AdminCatalogOverlayFile | null,
@@ -103,7 +128,7 @@ export function applyAdminOverlaysToProducts(
   })
 }
 
-/** Diff draft vs JSON base → overlay a guardar (solo campos cambiados). */
+/** Diff borrador vs JSON base → overlay para exportar (solo campos cambiados). */
 export function buildAdminOverlayFromDraft(
   draft: Product[],
   baseWithoutOverlay: Product[],
@@ -119,6 +144,9 @@ export function buildAdminOverlayFromDraft(
     if (p.description !== b.description) patch.description = p.description
     if (p.price !== b.price) patch.price = p.price
     if (p.visible !== b.visible) patch.visible = p.visible
+    const soldNext = p.sold === true
+    const soldBase = b.sold === true
+    if (soldNext !== soldBase) patch.sold = soldNext
     const m = p.measure ?? ''
     const bm = b.measure ?? ''
     if (m !== bm) patch.measure = m
@@ -134,4 +162,28 @@ export function buildAdminOverlayFromDraft(
     if (Object.keys(patch).length) out[p.id] = patch
   }
   return out
+}
+
+/** Export completo: parches, altas y bajas respecto al snapshot base. */
+export function buildFullAdminExport(draft: Product[], base: Product[]): AdminCatalogOverlayFile {
+  const baseById = new Map(base.map((p) => [p.id, p]))
+  const draftById = new Map(draft.map((p) => [p.id, p]))
+  const products = buildAdminOverlayFromDraft(draft, base)
+
+  const removedIds: string[] = []
+  for (const id of baseById.keys()) {
+    if (!draftById.has(id)) removedIds.push(id)
+  }
+
+  const addedProducts: Record<string, AdminAddedProductPayload> = {}
+  for (const p of draft) {
+    if (!baseById.has(p.id)) {
+      addedProducts[p.id] = productToAddedPayload(p)
+    }
+  }
+
+  const file: AdminCatalogOverlayFile = { v: 1, products }
+  if (removedIds.length) file.removedIds = removedIds
+  if (Object.keys(addedProducts).length) file.addedProducts = addedProducts
+  return file
 }

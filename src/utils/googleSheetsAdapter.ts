@@ -19,8 +19,12 @@
 //
 // Convenciones de columnas:
 //   products:   id, category, name, description, measure, price, visible,
-//               featured, discount, tags, images
+//               sold, featured, discount, tags, images
 //   categories: slug, name, icon, order
+//
+// `sold`: TRUE marca el producto como vendido — visible en el catálogo con
+// un badge "Vendido" pero sin acción de compra. Es diferente de `visible`
+// (que oculta el producto por completo).
 //
 // Los campos multi-valor (`tags`, `images`) se separan por `,` dentro de la celda.
 // Sheets envuelve automáticamente esas celdas en comillas al exportar a CSV
@@ -194,6 +198,7 @@ function rowsToRawCatalog(
       if (discount) product.discount = discount
 
       if (parseBoolCell(r['featured'], false)) product.featured = true
+      if (parseBoolCell(r['sold'], false)) product.sold = true
 
       return product
     })

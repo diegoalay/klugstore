@@ -75,6 +75,7 @@ const productsCsv = toCSV(
     'measure',
     'price',
     'visible',
+    'sold',
     'featured',
     'discount',
     'tags',
@@ -88,6 +89,7 @@ const productsCsv = toCSV(
     measure: p.measure ?? '',
     price: p.price ?? 0,
     visible: p.visible === false ? 'FALSE' : 'TRUE',
+    sold: p.sold === true ? 'TRUE' : 'FALSE',
     featured: p.featured === true ? 'TRUE' : 'FALSE',
     discount: p.discount ?? '',
     // `tags` e `images` se serializan como lista separada por coma. Al

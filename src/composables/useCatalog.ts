@@ -12,8 +12,7 @@ export function useCatalog() {
     storeConfigStore.loading = true
 
     try {
-      // loadCatalogFromSource intenta `VITE_CATALOG_REMOTE_BASE` y cae al
-      // JSON empaquetado si el remoto no está disponible.
+      // loadCatalogFromSource: Sheets (si .env) → JSON remoto → empaquetado.
       const data = await loadCatalogFromSource(storeSlug)
       storeConfigStore.setConfig(data.store)
       catalogStore.setCategories(data.categories)

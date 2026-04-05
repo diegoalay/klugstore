@@ -10,7 +10,11 @@
     <div class="product-detail-container">
       <!-- Image -->
       <div class="product-image-section">
-        <div class="product-image-main" @click="openLightbox(activeImageIndex)">
+        <div
+          class="product-image-main"
+          :class="{ 'is-sold': isSold }"
+          @click="openLightbox(activeImageIndex)"
+        >
           <img
             v-if="activeImage"
             :src="activeImage.url"
@@ -22,8 +26,12 @@
             <q-icon name="fa-solid fa-magnifying-glass-plus" size="sm" />
           </div>
 
+          <div v-if="isSold" class="sold-overlay">
+            <span class="sold-label">Vendido</span>
+          </div>
+
           <q-badge
-            v-if="discountPercent"
+            v-if="!isSold && discountPercent"
             class="discount-badge"
             :style="{ backgroundColor: theme?.secondaryColor ?? '#d19793' }"
           >
@@ -31,7 +39,7 @@
           </q-badge>
 
           <q-badge
-            v-else-if="product.discount"
+            v-else-if="!isSold && product.discount"
             class="discount-badge"
             :style="{ backgroundColor: theme?.secondaryColor ?? '#d19793' }"
           >
@@ -92,7 +100,19 @@
 
       <!-- Info -->
       <div class="product-info-section">
-        <p class="product-category-label">{{ product.categoryName }}</p>
+        <div class="product-heading">
+          <p class="product-category-label">{{ product.categoryName }}</p>
+          <button
+            type="button"
+            class="share-btn"
+            :aria-label="shareLabel"
+            :title="shareLabel"
+            @click="copyShareLink"
+          >
+            <q-icon :name="justCopied ? 'fa-solid fa-check' : 'fa-solid fa-link'" size="xs" />
+            <span>{{ justCopied ? 'Enlace copiado' : 'Compartir' }}</span>
+          </button>
+        </div>
         <h1 class="product-title">{{ product.name }}</h1>
 
         <div class="product-pricing">
@@ -145,24 +165,43 @@
           </q-badge>
         </div>
 
-        <!-- WhatsApp CTA -->
-        <q-btn
-          class="cta-whatsapp"
-          no-caps
-          unelevated
-          icon="fa-brands fa-whatsapp"
-          label="Comprar"
-          :style="{
-            backgroundColor: theme?.primaryColor ?? '#000000',
-            color: '#ffffff',
-          }"
-          @click="handleWhatsApp"
-        />
+        <!-- WhatsApp CTA (disponible) -->
+        <template v-if="!isSold">
+          <q-btn
+            class="cta-whatsapp"
+            no-caps
+            unelevated
+            icon="fa-brands fa-whatsapp"
+            label="Comprar"
+            :style="{
+              backgroundColor: theme?.primaryColor ?? '#000000',
+              color: '#ffffff',
+            }"
+            @click="handleWhatsApp"
+          />
+          <p class="cta-hint">
+            <q-icon name="fa-solid fa-shield-check" size="xs" />
+            Compra segura por WhatsApp
+          </p>
+        </template>
 
-        <p class="cta-hint">
-          <q-icon name="fa-solid fa-shield-check" size="xs" />
-          Compra segura por WhatsApp
-        </p>
+        <!-- Estado vendido -->
+        <template v-else>
+          <q-btn
+            class="cta-whatsapp cta-sold"
+            no-caps
+            unelevated
+            disable
+            icon="fa-solid fa-circle-check"
+            label="Vendido"
+          />
+          <p class="cta-hint cta-hint--sold">
+            Esta pieza ya fue vendida.
+            <a href="#" class="cta-sold-link" @click.prevent="askForSimilar">
+              ¿Buscas algo similar?
+            </a>
+          </p>
+        </template>
       </div>
     </div>
   </q-page>
@@ -271,8 +310,63 @@ const discountPercent = computed(() => {
   )
 })
 
+const isSold = computed<boolean>(() => product.value?.sold === true)
+
 function handleWhatsApp() {
   if (product.value) openWhatsApp(product.value)
+}
+
+// ============================================
+// Compartir producto (copiar enlace al portapapeles)
+// ============================================
+const justCopied = ref(false)
+const shareLabel = computed(() =>
+  product.value ? `Copiar enlace de ${product.value.name}` : 'Copiar enlace del producto',
+)
+
+async function copyShareLink() {
+  const url = typeof window !== 'undefined' ? window.location.href : ''
+  if (!url) return
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(url)
+    } else {
+      // Fallback para navegadores sin Clipboard API (iOS < 13.4, etc.)
+      const ta = document.createElement('textarea')
+      ta.value = url
+      ta.setAttribute('readonly', '')
+      ta.style.position = 'absolute'
+      ta.style.left = '-9999px'
+      document.body.appendChild(ta)
+      ta.select()
+      document.execCommand('copy')
+      document.body.removeChild(ta)
+    }
+    justCopied.value = true
+    setTimeout(() => {
+      justCopied.value = false
+    }, 2000)
+  } catch (err) {
+    console.warn('[share] copy failed:', err)
+  }
+}
+
+/**
+ * Navega a la categoría del producto vendido para que el cliente vea piezas
+ * similares disponibles. Si no hay categoría resoluble, cae al home del catálogo.
+ */
+function askForSimilar() {
+  const p = product.value
+  if (!p) {
+    void router.push({ name: 'catalog-home' })
+    return
+  }
+  // `p.categoryId` ya es el slug de la categoría en el contrato interno.
+  void router.push({
+    name: 'catalog-category',
+    params: { categorySlug: p.categoryId },
+  })
 }
 
 function goHome() {
@@ -505,6 +599,51 @@ function handleBack() {
   padding-top: 8px;
 }
 
+.product-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+
+  .product-category-label {
+    margin: 0;
+  }
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  // Estado default = antes era el hover (más presencia visual, pill rosa)
+  background: rgba(209, 151, 147, 0.1);
+  border: 1px solid var(--ks-secondary, #d19793);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ks-secondary, #d19793);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    background: rgba(209, 151, 147, 0.18);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  :deep(.q-icon) {
+    font-size: 0.8rem;
+  }
+}
+
 .product-category-label {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -622,12 +761,13 @@ function handleBack() {
 }
 
 .tag-chip {
-  background: var(--ks-bg, #f5f5f5) !important;
-  color: var(--ks-text-secondary, #6b7280) !important;
-  font-weight: 500;
+  background: rgba(209, 151, 147, 0.12) !important;
+  color: var(--ks-secondary, #d19793) !important;
+  font-weight: 600;
   font-size: 0.7rem;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
 }
 
 .cta-whatsapp {
@@ -653,6 +793,44 @@ function handleBack() {
   align-items: center;
   justify-content: center;
   gap: 6px;
+}
+
+// Estado vendido: variante del hint con tono más cálido
+.cta-hint--sold {
+  font-size: 0.8rem;
+  color: var(--ks-text, #000);
+  flex-wrap: wrap;
+}
+
+.cta-sold-link {
+  color: var(--ks-secondary, #d19793);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: var(--ks-secondary, #d19793);
+    border-bottom-color: var(--ks-secondary, #d19793);
+  }
+}
+
+// CTA deshabilitada para productos vendidos
+.cta-sold {
+  background: #f0f0f0 !important;
+  color: #9a9a9a !important;
+  cursor: not-allowed !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  border: 1px solid #e5e5e5 !important;
+
+  :deep(.q-btn__content) {
+    letter-spacing: 0.06em;
+  }
+
+  &:hover {
+    box-shadow: none !important;
+  }
 }
 
 .product-not-found {

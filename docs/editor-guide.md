@@ -95,10 +95,16 @@ Si el sheet ya está creado y compartido contigo, salta al **paso 3.4**.
 
 ### 3.2. Poblar con los datos actuales
 
-En el proyecto de código hay un script que exporta el catálogo actual
-(`sweethome.json`) a 2 archivos CSV listos para pegar.
+**Opción A — desde el panel admin (navegador)**  
+Si tienes acceso al admin (`/admin/catalogo`), abre el menú **Exportar** y elige
+**CSV productos**, **CSV categorías** o **Ambos CSV (Sheets)**. Se descargan
+archivos al disco con el mismo formato de columnas que la opción B. Los
+**productos** reflejan el borrador actual del formulario del admin en ese momento
+(si recargas la página, vuelves al catálogo base). Las **categorías** salen del JSON empaquetado
+del proyecto (el admin MVP aún no edita categorías en pantalla).
 
-Tu programador lo corre así:
+**Opción B — script en el repo**  
+Tu programador puede exportar el catálogo en disco (`sweethome.json`) a 2 CSV:
 
 ```bash
 npm run catalog:export-sheets

@@ -2,7 +2,7 @@
   <div class="category-nav-wrapper">
     <div class="category-pill-track" role="tablist" aria-label="Categorías de productos">
       <q-btn
-        :class="['category-chip', { 'category-chip--active': !activeCategory }]"
+        :class="['category-chip', { 'category-chip--active': isTodosChipActive }]"
         flat
         no-caps
         unelevated
@@ -15,7 +15,7 @@
       <q-btn
         v-for="category in categories"
         :key="category.id"
-        :class="['category-chip', { 'category-chip--active': activeCategory === category.id }]"
+        :class="['category-chip', { 'category-chip--active': isCategoryChipActive(category.id) }]"
         flat
         no-caps
         unelevated
@@ -31,14 +31,41 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useCatalogStore } from 'src/stores'
 
+const route = useRoute()
+const router = useRouter()
 const catalogStore = useCatalogStore()
 
 const categories = computed(() => catalogStore.sortedCategories)
-const activeCategory = computed(() => catalogStore.activeCategory)
+
+/** En `/catalog` el estado viene del store (y hash); en `/catalog/categoria/:slug` de la ruta. */
+const isTodosChipActive = computed(() => {
+  if (route.name === 'catalog-category') return false
+  return !catalogStore.activeCategory
+})
+
+function isCategoryChipActive(categoryId: string): boolean {
+  if (route.name === 'catalog-category') {
+    return (route.params.categorySlug as string) === categoryId
+  }
+  return catalogStore.activeCategory === categoryId
+}
 
 function selectCategory(categoryId: string | null) {
+  if (route.name === 'catalog-category') {
+    if (categoryId === null) {
+      void router.push({ name: 'catalog-home' })
+      catalogStore.setActiveCategory(null)
+      return
+    }
+    if ((route.params.categorySlug as string) !== categoryId) {
+      void router.push({ name: 'catalog-category', params: { categorySlug: categoryId } })
+    }
+    catalogStore.setActiveCategory(categoryId)
+    return
+  }
   catalogStore.setActiveCategory(categoryId)
 }
 </script>

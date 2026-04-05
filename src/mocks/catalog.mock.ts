@@ -6,10 +6,6 @@ import {
   resolveRawCatalog,
 } from 'src/utils/catalogData'
 import { slugifyCatalogText } from 'src/utils/slugify'
-import {
-  applyAdminOverlaysToProducts,
-  loadAdminCatalogOverlay,
-} from 'src/utils/adminCatalogStorage'
 
 const CDN_HOST = 'https://klugsystem-public-storage.s3.us-east-1.amazonaws.com'
 
@@ -22,7 +18,9 @@ function mapAllProducts(raw: RawCatalog): Product[] {
 
   return raw.products.map((p, idx) => {
     const visible = p.visible !== false
-    const featured = visible && p.featured === true
+    const sold = p.sold === true
+    // Productos vendidos nunca aparecen como destacados.
+    const featured = visible && !sold && p.featured === true
 
     const images: ProductImage[] = p.images.map((url, i) => ({
       url,
@@ -41,10 +39,15 @@ function mapAllProducts(raw: RawCatalog): Product[] {
       categoryId: p.category,
       categoryName: catNameBySlug.get(p.category) ?? p.category,
       tags: p.tags ?? [],
-      available: true,
+      // Un producto vendido ya no está "available" para compra,
+      // aunque sigue siendo `visible` en el catálogo.
+      available: !sold,
       visible,
       featured,
       order: idx + 1,
+    }
+    if (sold) {
+      mapped.sold = true
     }
     if (p.measure) {
       mapped.shortDescription = p.measure
@@ -127,14 +130,6 @@ export function getBaseCatalogProductsWithoutOverlay(storeSlug?: string): Produc
   return mapAllProducts(raw)
 }
 
-/** Todos los productos (incl. ocultos) con overlays de admin aplicados. */
-export function getMergedCatalogProducts(storeSlug?: string): Product[] {
-  const slug = resolveCatalogSlug(storeSlug)
-  const base = getBaseCatalogProductsWithoutOverlay(slug)
-  const overlay = loadAdminCatalogOverlay(slug)
-  return applyAdminOverlaysToProducts(base, overlay)
-}
-
 function buildCatalogData(raw: RawCatalog, slug: string): CatalogData {
   const categories: Category[] = raw.categories.map((c) => {
     const cat: Category = {
@@ -147,13 +142,8 @@ function buildCatalogData(raw: RawCatalog, slug: string): CatalogData {
     return cat
   })
 
-  // Productos con overlays de admin aplicados (el overlay sigue viviendo
-  // local incluso cuando la fuente es remota — el editor local puede
-  // previsualizar cambios antes de subir el JSON).
   const base = mapAllProducts(raw)
-  const overlay = loadAdminCatalogOverlay(slug)
-  const merged = applyAdminOverlaysToProducts(base, overlay)
-  const products = merged.filter((p) => p.visible !== false)
+  const products = base.filter((p) => p.visible !== false)
 
   return {
     store: buildStoreConfig(raw, slug),
@@ -183,4 +173,20 @@ export async function loadCatalogFromSource(storeSlug?: string): Promise<Catalog
   const raw = (await resolveRawCatalog(slug)) ?? getRawCatalogJson(slug)
   if (!raw) throw new Error(`Catálogo no encontrado: ${slug}`)
   return buildCatalogData(raw, slug)
+}
+
+/**
+ * Misma resolución que la tienda y `loadCatalogFromSource` (Sheets publicado →
+ * JSON remoto → JSON empaquetado). Incluye **todos** los productos (`visible: false`
+ * también) para el panel admin.
+ */
+export async function loadAllProductsFromResolvedSource(storeSlug?: string): Promise<{
+  products: Product[]
+  raw: RawCatalog
+  slug: string
+}> {
+  const slug = resolveCatalogSlug(storeSlug)
+  const raw = (await resolveRawCatalog(slug)) ?? getRawCatalogJson(slug)
+  if (!raw) throw new Error(`Catálogo no encontrado: ${slug}`)
+  return { products: mapAllProducts(raw), raw, slug }
 }

@@ -2,7 +2,7 @@
   <q-card
     ref="cardRef"
     class="product-card"
-    :class="{ 'is-revealed': isRevealed }"
+    :class="{ 'is-revealed': isRevealed, 'is-sold': isSold }"
     flat
     @click="goToProduct"
   >
@@ -14,8 +14,13 @@
         loading="lazy"
       />
 
+      <!-- Overlay de producto vendido -->
+      <div v-if="isSold" class="sold-overlay">
+        <span class="sold-label">Vendido</span>
+      </div>
+
       <q-badge
-        v-if="discountPercent"
+        v-if="!isSold && discountPercent"
         class="discount-badge"
         :style="{ backgroundColor: theme?.secondaryColor ?? '#d19793' }"
       >
@@ -23,7 +28,7 @@
       </q-badge>
 
       <q-badge
-        v-else-if="product.discount"
+        v-else-if="!isSold && product.discount"
         class="discount-badge"
         :style="{ backgroundColor: theme?.secondaryColor ?? '#d19793' }"
       >
@@ -31,7 +36,7 @@
       </q-badge>
 
       <q-badge
-        v-if="product.featured"
+        v-if="!isSold && product.featured"
         class="featured-badge"
         :style="{ backgroundColor: theme?.accentColor ?? '#f4a261' }"
         text-color="dark"
@@ -57,6 +62,7 @@
 
     <q-card-actions class="product-actions">
       <q-btn
+        v-if="!isSold"
         class="whatsapp-btn"
         no-caps
         unelevated
@@ -67,6 +73,16 @@
           color: '#ffffff',
         }"
         @click.stop="handleWhatsApp"
+      />
+      <q-btn
+        v-else
+        class="whatsapp-btn sold-btn"
+        no-caps
+        unelevated
+        disable
+        icon="fa-solid fa-circle-check"
+        label="Vendido"
+        @click.stop
       />
     </q-card-actions>
   </q-card>
@@ -88,6 +104,8 @@ const props = defineProps<{
 const router = useRouter()
 const storeConfig = useStoreConfigStore()
 const { openWhatsApp } = useWhatsApp()
+
+const isSold = computed(() => props.product.sold === true)
 
 const cardRef = ref<InstanceType<typeof QCard> | null>(null)
 const isRevealed = ref(false)
@@ -252,6 +270,43 @@ function handleWhatsApp() {
   border-radius: 8px;
 }
 
+// ============================================
+// Estado "Vendido"
+// ============================================
+// Visual: la foto se desatura ligeramente y aparece una banda diagonal
+// "Vendido" sobre la imagen. La tarjeta sigue navegable (click al detalle)
+// para que la persona pueda ver la pieza vendida como prueba social.
+.product-card.is-sold {
+  .product-image {
+    filter: grayscale(60%) brightness(0.92);
+  }
+}
+
+.sold-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(0.5px);
+}
+
+.sold-label {
+  display: inline-block;
+  padding: 8px 28px;
+  background: rgba(0, 0, 0, 0.82);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transform: rotate(-6deg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
 .product-info {
   padding: 14px 16px 8px;
   flex: 1 1 auto;
@@ -323,6 +378,17 @@ function handleWhatsApp() {
   font-size: 0.85rem;
   min-height: 42px !important;
   padding: 10px 16px !important;
+}
+
+.sold-btn {
+  background: #eeeeee !important;
+  color: #9a9a9a !important;
+  cursor: not-allowed !important;
+  opacity: 1 !important;
+
+  :deep(.q-btn__content) {
+    letter-spacing: 0.06em;
+  }
 }
 
 @media (max-width: 768px) {

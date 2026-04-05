@@ -6,7 +6,7 @@
 pequeñas y medianas que venden principalmente por Instagram y WhatsApp. La primera
 tienda en producción es **SweetHome GT** (decoración del hogar, Guatemala).
 
-La propuesta se resume en 4 ideas:
+La propuesta se resume en 5 ideas:
 
 1. **El catálogo es público y sin fricción.** El cliente entra, navega, ve fotos
    buenas, elige y escribe por WhatsApp. Sin carrito, sin registro, sin checkout.
@@ -29,10 +29,11 @@ La propuesta se resume en 4 ideas:
 - **Cliente final**: explora productos, filtra por categoría, busca por nombre,
   abre detalle con carrusel de imágenes y presiona *Comprar* → se abre WhatsApp
   con un mensaje pre-armado (nombre del producto + precio formateado).
-- **Dueño de tienda (MVP)**: entra a `/admin` con contraseña, puede editar
+- **Dueño de tienda (MVP)**: entra a `/admin/catalogo` (o `/admin`, que redirige)
+  con contraseña, puede editar
   nombre, descripción, precio, visibilidad, tags, medidas, descuento e imágenes
-  de cada producto. Los cambios se guardan como *overlay* en `localStorage` —
-  cuando el backend exista, este overlay se reemplaza por llamadas a la API.
+  de cada producto. Los cambios **no persisten** en el navegador: se exportan
+  como JSON/CSV y el backend futuro reemplazará ese flujo por API.
 - **Operador de la plataforma**: despliega nuevas tiendas replicando la
   estructura `data/products/{tienda}.json` y ajustando el mapeo de dominio en
   `storeResolver`.
@@ -90,7 +91,7 @@ klugstore/
 │   ├── boot/
 │   │   └── fontawesome-pro.ts   # Carga CSS de FA Pro (all styles + brands)
 │   ├── composables/
-│   │   ├── useCatalog.ts        # Hook para cargar catálogo (mock → API futura)
+│   │   ├── useCatalog.ts        # Hook de carga con 3 fuentes + reloadCatalog()
 │   │   ├── useCatalogHash.ts    # Estado de filtros en el hash de la URL (#cat=&q=)
 │   │   ├── usePageSeo.ts        # Título/description/canonical por ruta
 │   │   └── useWhatsApp.ts       # Generar wa.me links con mensaje pre-armado
@@ -106,7 +107,8 @@ klugstore/
 │   │   │   ├── components/      # ProductCard, ProductGrid, CategoryNav, StoreHeader
 │   │   │   └── pages/           # HomePage, CategoryPage, ProductDetailPage, AboutPage
 │   │   ├── admin/               # Módulo privado (MVP de edición)
-│   │   │   └── AdminPage.vue
+│   │   │   ├── AdminLayout.vue  # Shell + router-view; logout limpia Pinia
+│   │   │   └── pages/           # AdminLoginPage, AdminCatalogPage
 │   │   └── builder/             # (reservado para constructor visual futuro)
 │   ├── pages/
 │   │   └── ErrorNotFound.vue
@@ -116,12 +118,13 @@ klugstore/
 │   ├── stores/
 │   │   ├── catalog-store.ts     # Productos, categorías, filtro, búsqueda, orden
 │   │   ├── store-config-store.ts# Config/branding/tema de la tienda cargada
+│   │   ├── admin-catalog-draft-store.ts # Borrador catálogo admin (memoria; reset al logout)
 │   │   └── index.ts             # Pinia factory (Quasar wrapper)
 │   ├── types/
 │   │   └── catalog.ts           # Product, Category, StoreConfig, StoreTheme...
 │   └── utils/
 │       ├── adminAuth.ts         # Auth del MVP de admin (username/password env)
-│       ├── adminCatalogStorage.ts # Overlay local de ediciones del admin
+│       ├── adminCatalogStorage.ts # Sesión admin + construcción de overlay para export
 │       ├── catalogData.ts       # resolveRawCatalog con 3 fuentes (Sheets/remoto/bundled)
 │       ├── catalogSort.ts       # Modos de orden del catálogo
 │       ├── googleSheetsAdapter.ts # Parser CSV + fetch de Sheets via gviz/tq
@@ -130,7 +133,7 @@ klugstore/
 ├── scripts/
 │   ├── export-catalog-to-csv.mjs  # JSON → 2 CSVs listos para pegar en Sheets
 │   ├── generate-sitemap.mjs       # Sitemap automático pre-build
-│   └── apply-admin-overlay-to-json.mjs # Persistir overlay de admin al JSON
+│   └── apply-admin-overlay-to-json.mjs # Aplicar overlay JSON exportado al JSON en disco
 ├── .env                         # VITE_APP_NAME, VITE_CATALOG_SHEETS_ID, ...
 ├── .npmrc                       # Token de Font Awesome Pro (gitignored)
 ├── firebase.json                # Hosting + headers (cache, CSP, HSTS, etc)
@@ -145,30 +148,87 @@ klugstore/
 ### 4.1. Carga inicial del catálogo
 
 ```
-Browser → main.ts (Quasar)
+Browser → Quasar boot
   → router → CatalogLayout.vue (onMounted)
     → resolveStoreSlug(hostname)                      // "sweethome"
     → useCatalog().loadCatalog(slug)
-      → getMockCatalog(slug)                           // mocks/catalog.mock.ts
-        → import sweethomeJson from data/products/sweethome.json
-        → mapCatalog(rawJson)                          // transforma a Product[]
-      → storeConfigStore.setConfig(catalog.store)      // aplica tema CSS
-      → catalogStore.setCategories / setProducts
+      → loadCatalogFromSource(slug)                    // mocks/catalog.mock.ts
+        → resolveRawCatalog(slug)                      // utils/catalogData.ts
+           ├─ 1. fetchCatalogFromSheets()              // googleSheetsAdapter.ts
+           │    └─ gviz/tq CSV x2 → parse → RawCatalog
+           ├─ 2. fetchRemoteCatalogJson(slug)          // JSON en S3/CDN
+           └─ 3. getRawCatalogJson(slug)               // JSON empaquetado
+      → buildCatalogData(raw, slug)                    // raw → Product[]
+    → storeConfigStore.setConfig(catalog.store)        // aplica tema CSS
+    → catalogStore.setCategories / setProducts
 ```
 
-Cuando haya backend, solo cambia el cuerpo de `loadCatalog`:
+### 4.2. Tres fuentes, un solo contrato
 
-```ts
-// hoy
-const data = getMockCatalog(slug)
+La función `resolveRawCatalog(slug)` intenta las 3 fuentes en orden de
+prioridad. Cualquiera que falle cae silenciosamente a la siguiente:
 
-// mañana
-const data = await api.get(`/stores/${slug}/catalog`).then(r => r.data)
+| # | Fuente | Condición para activarse | Propósito |
+|---|---|---|---|
+| 1 | **Google Sheets** | `VITE_CATALOG_SHEETS_ID` definido | Fuente **viva** editada por el cliente no-técnico. El app la lee en cada carga. |
+| 2 | **JSON remoto (S3/CDN)** | `VITE_CATALOG_REMOTE_BASE` definido | Alternativa si Sheets no aplica (otro editor más técnico, API estable, etc). |
+| 3 | **JSON empaquetado** (siempre) | `data/products/{slug}.json` existe | Red de seguridad: snapshot del último deploy. Garantiza que el sitio **nunca** muestre pantalla vacía. |
+
+La capa de resolución es agnóstica al consumidor — `useCatalog.loadCatalog()`
+solo ve un `RawCatalog` y no sabe de dónde vino.
+
+Cuando llegue `klugsystem` (backend real), solo se agrega una fuente #0 por
+encima de Sheets y se mantiene el resto como fallback para desarrollo y
+robustez. El contrato `RawCatalog` no cambia.
+
+### 4.3. Google Sheets como fuente activa
+
+El editor no-técnico trabaja contra un **único** Google Sheet con 2 pestañas:
+
+```
+📄 Sheet (ID: VITE_CATALOG_SHEETS_ID)
+   ├── products    ← id, category, name, description, measure, price,
+   │                 visible, featured, discount, tags, images
+   └── categories  ← slug, name, icon, order
 ```
 
-El resto del sistema no se entera.
+El adaptador (`src/utils/googleSheetsAdapter.ts`) usa el endpoint público
+`gviz/tq` de Google para consultar cada pestaña por nombre:
 
-### 4.2. Multi-tenancy por hostname
+```
+https://docs.google.com/spreadsheets/d/{ID}/gviz/tq?tqx=out:csv&sheet=products
+https://docs.google.com/spreadsheets/d/{ID}/gviz/tq?tqx=out:csv&sheet=categories
+```
+
+**Por qué `gviz/tq` en vez de "Publicar en la web"**:
+
+- Un **único ID** en vez de 2 URLs con `gid` impredecibles
+- **CORS habilitado** por default (funciona desde el browser)
+- Las pestañas se referencian por **nombre**, no por número de tab
+- No requiere "publicar" el sheet — solo compartirlo como "Cualquiera con el enlace: Lector"
+- Si renombras pestañas o cambias el orden, no se rompe (siempre que los 2
+  nombres sean `products` y `categories`)
+
+**Requisitos del sheet**:
+
+- Permiso: "Cualquiera con el enlace: Lector" (obligatorio, si no `gviz`
+  devuelve HTML de login)
+- 2 pestañas con nombres exactos `products` y `categories` (minúsculas)
+- Primera fila de cada pestaña son los headers (nombres de columna)
+
+**Propagación**: Google cachea el endpoint público ~1-5 min. Los cambios en el
+sheet no son instantáneos pero tampoco requieren redeploy.
+
+**Formato de listas** (tags, images): separados por `,` dentro de una celda.
+Google Sheets envuelve automáticamente esas celdas en comillas al exportar a
+CSV porque contienen comas — el editor solo escribe `jarrón, dona, negro` en
+la celda y el adaptador parsea correctamente.
+
+**Validación defensiva**: el adaptador detecta respuestas HTML (sheet privado
+o pestañas inexistentes) y cae al fallback sin romper el sitio. Los warnings
+quedan en la consola del browser para debug.
+
+### 4.4. Multi-tenancy por hostname
 
 `src/utils/storeResolver.ts` decide qué tienda cargar **sin meter el slug en la
 URL**. Reglas en orden:
@@ -183,9 +243,9 @@ URL**. Reglas en orden:
 | *cualquier otro* | `sweethome` (fallback) |
 
 **Consecuencia**: las URLs públicas son siempre `/catalog`, `/catalog/producto/...`,
-`/about`, `/admin`. Nunca `/{tienda}/catalog`.
+`/about`, `/admin` o `/admin/catalogo`. Nunca `/{tienda}/catalog`.
 
-### 4.3. Contrato de datos del catálogo (JSON)
+### 4.5. Contrato de datos del catálogo (JSON/CSV)
 
 ```jsonc
 {
@@ -211,7 +271,8 @@ URL**. Reglas en orden:
         "https://klugsystem-public-storage.../images/jarrones/jarron-3-1.jpeg",
         ...
       ],
-      "visible": true
+      "visible": true,
+      "sold": false                                // opcional; default false
     }
   ]
 }
@@ -224,10 +285,15 @@ Reglas del contrato:
 - **`visible: false` oculta el producto** en la UI pública. Sirve para productos
   con info pero sin foto, productos descontinuados temporalmente, o borradores
   desde el admin.
+- **`sold: true` marca el producto como vendido** — sigue siendo *visible* en
+  el catálogo (con badge "Vendido" sobre la imagen y acción de compra
+  deshabilitada) pero no se puede comprar. Sirve como prueba social ("ya
+  vendimos esto") y para que el cliente pueda pedir algo similar. Los
+  productos `sold: true` nunca aparecen como `featured`.
 - **`discount`** es texto libre con intención de marketing (`"-20%"`, `"2x1"`,
   `"Black Friday"`, `"Navidad"`). Si está presente aparece como badge sobre la
   imagen. Independiente de `compareAtPrice` (que hoy no se usa pero está en el
-  tipo).
+  tipo). Se oculta cuando `sold: true`.
 - **`measure`** es opcional; cuando falta, la UI simplemente no renderiza esa
   línea. No inventamos medidas — si el PDF original no las tiene, el campo se
   omite.
@@ -272,7 +338,9 @@ tienda = cambiar config, no cambiar CSS.
 /catalog/categoria/:categorySlug    → listado por categoría
 /catalog/producto/:productSlug      → detalle con carrusel lightbox + CTA WhatsApp
 /about                              → página "Sobre nosotros"
-/admin                              → MVP de edición (auth por contraseña)
+/admin                              → layout admin; redirect a `/admin/catalogo`
+/admin/login                        → acceso (guest); si ya hay sesión → `/admin/catalogo`
+/admin/catalogo                     → edición (guard: sesión admin obligatoria)
 /*                                  → 404
 ```
 
@@ -343,18 +411,21 @@ JPEG calidad 80 (se logra con `sips` o el image optimizer de Vite).
 
 ## 9. Módulo admin (MVP)
 
-`/admin` es un MVP pensado para que el dueño de la tienda pueda editar el
+`/admin/catalogo` (URL canónica; `/admin` redirige) es un MVP para editar el
 catálogo **sin tocar el JSON a mano**. Hoy:
 
 - **Auth**: `username + password` (env `VITE_ADMIN_PASSWORD`). La sesión se
-  guarda en `localStorage` bajo `ks-admin-auth`.
-- **Storage**: los cambios se guardan como **overlay** en `localStorage` bajo
-  `ks-admin-catalog-overlay:{slug}`. Es un diff contra el JSON base — solo los
-  campos cambiados.
-- **Merge**: `utils/catalogData.ts` aplica el overlay al JSON base antes de
-  entregarlo al `catalog-store`. Si borras el overlay, vuelves al JSON original.
+  guarda en `sessionStorage` bajo `ks-admin-auth`.
+- **Persistencia**: el catálogo en tienda viene solo de Sheets / JSON remoto /
+  JSON empaquetado. El borrador del editor vive en **Pinia** (`adminCatalogDraft`)
+  mientras la sesión admin está activa; **Salir** llama a `reset()` y vacía el
+  store. Solo **Exportar** genera overlay JSON o CSV. La carga usa la misma
+  cadena que la tienda (`resolveRawCatalog`).
 - **Campos editables** por producto: `name`, `description`, `price`, `visible`,
-  `measure`, `discount`, `tags`, `images[]`.
+  `sold`, `measure`, `discount`, `tags`, `images[]`.
+- **Exportar**: menú **Exportar** — overlay JSON, CSV de productos (borrador
+  actual del formulario), CSV de categorías (JSON empaquetado) o ambos CSV
+  seguidos — mismo esquema que `npm run catalog:export-sheets`.
 
 Esto es claramente un **MVP temporal**. Cuando exista `klugsystem` como backend:
 
@@ -369,12 +440,12 @@ Esto es claramente un **MVP temporal**. Cuando exista `klugsystem` como backend:
 | Decisión | Por qué |
 |---|---|
 | **SPA Vue 3 + Quasar** en vez de Next/Nuxt SSR | Catálogo pequeño + contenido no hiper-dinámico + queremos deploy barato en Firebase Hosting. El SEO lo cubrimos con `<noscript>` + JSON-LD + meta runtime. Si a futuro las tiendas crecen mucho, migrar a SSR es local al proyecto. |
-| **JSON en disco como fuente de verdad** | El cliente inicial (SweetHome) no tiene backend. El JSON con schema fijo es fácil de editar, versionar en git y reemplazar por una API cuando exista. |
+| **Google Sheets como fuente viva + JSON como fallback** | El cliente no tiene backend ni recursos técnicos para mantener un CMS. Sheets es familiar, gratis, versionado, colaborativo y con UI nativa. El JSON empaquetado queda como red de seguridad (último snapshot) para que el sitio nunca se rompa si Google está caído o el sheet tiene un error. |
 | **Hostname → slug** sin prefijo en URL | Marketing quiere URLs limpias (`sweethome.com.gt/catalog`), y multi-tenant se logra por dominio custom. Mantiene SEO simple (un dominio = una tienda). |
 | **Assets en S3 externo** | Evita que 130+ MB de fotos vivan en el bundle de Firebase. Permite a la operadora actualizar fotos sin PR. |
 | **Tema runtime con CSS variables** | Permite cargar config de tienda desde JSON/API y aplicar branding sin rebuild. |
 | **WhatsApp FAB + CTA por producto** | El público objetivo ya vende por WhatsApp. Meter carrito sería fricción innecesaria. |
-| **Overlay admin en localStorage** | Permite iterar en la UX del editor antes de comprometerse con un backend. El contrato del overlay es simple de migrar a API. |
+| **Overlay solo por export (sin persistencia local del catálogo)** | Evita que la tienda y el admin diverjan en `localStorage`. El JSON exportado sigue siendo el contrato natural para `apply-overlay` y para una futura API. |
 | **Font Awesome Pro** | Estilo `light`/`thin`/`duotone` encaja con marcas aspiracionales (decoración, moda). Free version se ve genérica. |
 
 ---
@@ -383,11 +454,17 @@ Esto es claramente un **MVP temporal**. Cuando exista `klugsystem` como backend:
 
 Features ya planeadas / en roadmap corto:
 
-- **Conexión a `klugsystem`** (backend) — reemplazar `catalog.mock.ts` por cliente
-  HTTP y eliminar overlay local.
+- **Conexión a `klugsystem`** (backend) — agregar una fuente #0 arriba de
+  Sheets con API real; Sheets queda como opción para tiendas pequeñas.
 - **Constructor visual whitelabel** (`modules/builder/`) — UI para crear y
   editar `StoreConfig` completo (paleta, logos, redes, tipografía).
-- **Galería admin con subida directa a S3** (presigned URLs).
+- **Galería admin con subida directa a S3** (presigned URLs) — hoy el editor
+  tiene que pasar las URLs de S3 ya generadas.
+- **Botón "Re-sync Sheets"** en `/admin/catalogo` — forzar re-fetch del sheet sin
+  esperar el cache de Google (útil tras ediciones grandes).
+- **Validador de sheet en `/admin/catalogo`** — detectar filas con `category` inválida,
+  URLs rotas, tipos incorrectos, etc. antes de que lleguen al sitio público.
 - **Analytics** — eventos de "ver producto", "clic WhatsApp", "buscar".
-- **Múltiples idiomas** por tienda (i18n en `StoreConfig`).
+- **Múltiples idiomas** por tienda (i18n en `StoreConfig` + columnas `name_en`,
+  `description_en` en el sheet).
 - **PWA** — instalable como app, offline del catálogo.

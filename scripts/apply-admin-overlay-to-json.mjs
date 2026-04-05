@@ -6,6 +6,11 @@
  *   node scripts/apply-admin-overlay-to-json.mjs --store=mi-tienda ./export.json
  *
  * Si no pasas archivo, usa ./{STORE_SLUG}-admin-overlay.json en la raíz del proyecto.
+ *
+ * El JSON puede incluir (opcional):
+ *   - removedIds: string[] — quita esas filas del array products
+ *   - addedProducts: Record<id, { category, name, description, price, images, ... }>
+ *     — inserta productos nuevos antes de aplicar parches
  */
 import { readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
@@ -45,6 +50,43 @@ if (overlay?.v !== 1 || typeof overlay.products !== 'object') {
 }
 
 const catalog = JSON.parse(readFileSync(CATALOG_PATH, 'utf8'))
+
+if (Array.isArray(overlay.removedIds) && overlay.removedIds.length) {
+  const rm = new Set(overlay.removedIds)
+  const before = catalog.products.length
+  catalog.products = catalog.products.filter((p) => !rm.has(p.id))
+  console.log(`Eliminados: ${before - catalog.products.length} producto(s) (removedIds)`)
+}
+
+if (overlay.addedProducts && typeof overlay.addedProducts === 'object') {
+  const existing = new Set(catalog.products.map((p) => p.id))
+  let added = 0
+  for (const [id, body] of Object.entries(overlay.addedProducts)) {
+    if (existing.has(id)) {
+      console.warn(`addedProducts: id "${id}" ya existe, se omite el alta`)
+      continue
+    }
+    const row = {
+      id,
+      category: body.category,
+      name: body.name,
+      description: body.description ?? '',
+      price: body.price ?? 0,
+      visible: body.visible !== false,
+      images: Array.isArray(body.images) ? body.images : [],
+    }
+    if (body.measure) row.measure = body.measure
+    if (body.featured === true) row.featured = true
+    if (body.sold === true) row.sold = true
+    if (body.discount != null && body.discount !== '') row.discount = body.discount
+    if (Array.isArray(body.tags) && body.tags.length) row.tags = body.tags
+    catalog.products.push(row)
+    existing.add(id)
+    added++
+  }
+  if (added) console.log(`Añadidos: ${added} producto(s) (addedProducts)`)
+}
+
 const byId = new Map(catalog.products.map((p) => [p.id, p]))
 
 let applied = 0
@@ -60,6 +102,10 @@ for (const [id, patch] of Object.entries(overlay.products)) {
   if (patch.description !== undefined) raw.description = patch.description
   if (patch.price !== undefined) raw.price = patch.price
   if (patch.visible !== undefined) raw.visible = patch.visible
+  if (patch.sold !== undefined) {
+    if (patch.sold) raw.sold = true
+    else delete raw.sold
+  }
   if (patch.measure !== undefined) {
     if (patch.measure) raw.measure = patch.measure
     else delete raw.measure
@@ -73,8 +119,8 @@ for (const [id, patch] of Object.entries(overlay.products)) {
 const out = `${JSON.stringify(catalog, null, 2)}\n`
 writeFileSync(CATALOG_PATH, out, 'utf8')
 
-console.log(`OK [${storeSlug}]: ${applied} producto(s) → ${CATALOG_PATH}`)
+console.log(`OK [${storeSlug}]: ${applied} parche(s) de producto(s) → ${CATALOG_PATH}`)
 if (missing.length) {
-  console.warn(`IDs en el overlay que no existen en el JSON (omitidos): ${missing.join(', ')}`)
+  console.warn(`IDs en products{} que no existen en el JSON (omitidos): ${missing.join(', ')}`)
 }
 console.log('Siguiente: STORE_SLUG=' + storeSlug + ' npm run generate:sitemap (o npm run build).')

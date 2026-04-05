@@ -67,6 +67,14 @@ export interface Product {
   tags?: string[]
   available: boolean
   visible: boolean
+  /**
+   * Producto vendido. Se muestra en el catálogo como prueba social
+   * (con badge "Vendido") pero la acción de compra queda deshabilitada.
+   * Diferencia con `visible: false`:
+   *   - `visible: false` → se oculta completamente del catálogo
+   *   - `sold: true`      → se muestra pero no se puede comprar
+   */
+  sold?: boolean
   featured?: boolean
   variants?: ProductVariant[]
   order: number

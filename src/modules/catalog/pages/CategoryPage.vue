@@ -5,6 +5,8 @@
       <p v-if="category?.description" class="category-description">{{ category.description }}</p>
     </div>
 
+    <CategoryNav />
+
     <div class="category-sort-row">
       <CatalogSortSelect
         :model-value="catalogSort"
@@ -24,6 +26,7 @@ import { useRoute } from 'vue-router'
 import { useCatalogStore, useStoreConfigStore } from 'src/stores'
 import { CATALOG_SORT_OPTIONS } from 'src/utils/catalogSort'
 import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
+import CategoryNav from '../components/CategoryNav.vue'
 import CatalogSortSelect from '../components/CatalogSortSelect.vue'
 import ProductGrid from '../components/ProductGrid.vue'
 
@@ -72,6 +75,14 @@ watch(
   () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   },
+)
+
+watch(
+  () => category.value?.id,
+  (id) => {
+    if (id) catalogStore.setActiveCategory(id)
+  },
+  { immediate: true },
 )
 </script>
 

@@ -43,8 +43,22 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/admin',
-    name: 'admin',
-    component: () => import('src/modules/admin/AdminPage.vue'),
+    component: () => import('src/modules/admin/AdminLayout.vue'),
+    redirect: { name: 'admin-catalog' },
+    children: [
+      {
+        path: 'login',
+        name: 'admin-login',
+        component: () => import('src/modules/admin/pages/AdminLoginPage.vue'),
+        meta: { adminGuest: true },
+      },
+      {
+        path: 'catalogo',
+        name: 'admin-catalog',
+        component: () => import('src/modules/admin/pages/AdminCatalogPage.vue'),
+        meta: { requiresAdmin: true },
+      },
+    ],
   },
   {
     path: '/:catchAll(.*)*',

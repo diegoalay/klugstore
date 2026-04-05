@@ -42,3 +42,59 @@ export function applyCatalogSortMode(products: Product[], mode: CatalogSortMode)
       return arr.sort((a, b) => a.order - b.order)
   }
 }
+
+/** Modos extra para el panel admin (listado editable). */
+export type AdminCatalogSortMode =
+  | CatalogSortMode
+  | 'category-asc'
+  | 'id-asc'
+  | 'visible-first'
+  | 'hidden-first'
+
+export const ADMIN_CATALOG_SORT_OPTIONS: { value: AdminCatalogSortMode; label: string }[] = [
+  { value: 'default', label: 'Orden de la fuente (Sheet / JSON)' },
+  { value: 'name-asc', label: 'Nombre A → Z' },
+  { value: 'name-desc', label: 'Nombre Z → A' },
+  { value: 'price-asc', label: 'Precio: menor a mayor' },
+  { value: 'price-desc', label: 'Precio: mayor a menor' },
+  { value: 'category-asc', label: 'Categoría A → Z' },
+  { value: 'id-asc', label: 'ID (A → Z)' },
+  { value: 'visible-first', label: 'Visibles primero' },
+  { value: 'hidden-first', label: 'Ocultos primero' },
+]
+
+export function applyAdminCatalogSort(products: Product[], mode: AdminCatalogSortMode): Product[] {
+  const arr = [...products]
+  switch (mode) {
+    case 'category-asc':
+      return arr.sort((a, b) => {
+        const ca = (a.categoryName ?? a.categoryId).toLowerCase()
+        const cb = (b.categoryName ?? b.categoryId).toLowerCase()
+        const c = ca.localeCompare(cb, 'es', { sensitivity: 'base', numeric: true })
+        if (c !== 0) return c
+        return a.name.localeCompare(b.name, 'es', { sensitivity: 'base', numeric: true })
+      })
+    case 'id-asc':
+      return arr.sort((a, b) =>
+        a.id.localeCompare(b.id, 'es', { sensitivity: 'base', numeric: true }),
+      )
+    case 'visible-first': {
+      return arr.sort((a, b) => {
+        const av = a.visible !== false ? 0 : 1
+        const bv = b.visible !== false ? 0 : 1
+        if (av !== bv) return av - bv
+        return a.order - b.order
+      })
+    }
+    case 'hidden-first': {
+      return arr.sort((a, b) => {
+        const av = a.visible !== false ? 0 : 1
+        const bv = b.visible !== false ? 0 : 1
+        if (av !== bv) return bv - av
+        return a.order - b.order
+      })
+    }
+    default:
+      return applyCatalogSortMode(arr, mode)
+  }
+}

@@ -9,3 +9,4 @@ export default defineStore((/* { ssrContext } */) => {
 // Re-export stores for convenient imports elsewhere
 export { useCatalogStore } from './catalog-store'
 export { useStoreConfigStore } from './store-config-store'
+export { useAdminCatalogDraftStore } from './admin-catalog-draft-store'
