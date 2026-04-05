@@ -4,7 +4,7 @@
     <div class="product-image-section">
       <div
         class="product-image-main"
-        :class="{ 'is-sold': isSold }"
+        :class="{ 'is-sold': isSold, 'is-empty': !activeImage }"
         @click="openLightbox(activeImageIndex)"
       >
         <img
@@ -13,6 +13,10 @@
           :alt="activeImage.alt || product.name"
           class="detail-image"
         />
+
+        <div v-else class="detail-image-placeholder" aria-label="Sin imagen">
+          <q-icon name="fa-regular fa-image" />
+        </div>
 
         <div v-if="activeImage" class="image-zoom-hint">
           <q-icon name="fa-solid fa-magnifying-glass-plus" size="sm" />
@@ -343,6 +347,21 @@ function onAskSimilarClick() {
   max-width: 100%;
   object-fit: cover;
   display: block;
+}
+
+.product-image-main.is-empty {
+  cursor: default;
+}
+
+.detail-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ks-text-secondary, #9ca3af);
+  background: var(--ks-bg, #f5f5f5);
+  font-size: 72px;
 }
 
 .image-zoom-hint {

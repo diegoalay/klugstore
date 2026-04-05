@@ -8,11 +8,15 @@
   >
     <div class="product-image-container">
       <img
-        :src="product.images[0]?.url"
-        :alt="product.images[0]?.alt || product.name"
+        v-if="product.images[0]?.url"
+        :src="product.images[0].url"
+        :alt="product.images[0].alt || product.name"
         class="product-image"
         loading="lazy"
       />
+      <div v-else class="product-image-placeholder" aria-label="Sin imagen">
+        <q-icon name="fa-regular fa-image" />
+      </div>
 
       <!-- Overlay de producto vendido -->
       <div v-if="isSold" class="sold-overlay">
@@ -232,6 +236,17 @@ function handleWhatsApp() {
   aspect-ratio: 1;
   overflow: hidden;
   background: var(--ks-bg, #f5f5f5);
+}
+
+.product-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ks-text-secondary, #9ca3af);
+  background: var(--ks-bg, #f5f5f5);
+  font-size: 48px;
 }
 
 .product-image {

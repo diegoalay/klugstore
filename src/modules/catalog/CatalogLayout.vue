@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hHh lpR fff">
     <q-header class="catalog-header" :style="headerStyle">
       <q-toolbar class="catalog-toolbar">
         <div class="catalog-brand" @click="goHome">
@@ -104,10 +104,19 @@
                 :alt="product.name"
                 loading="lazy"
               />
+              <q-icon
+                v-else
+                name="fa-regular fa-image"
+                class="search-result-thumb-placeholder"
+                aria-label="Sin imagen"
+              />
             </div>
             <div class="search-result-info">
               <p class="search-result-category">{{ product.categoryName }}</p>
               <p class="search-result-name">{{ product.name }}</p>
+              <p v-if="product.measure" class="search-result-measure">
+                {{ product.measure }}
+              </p>
               <p class="search-result-price">
                 {{
                   new Intl.NumberFormat('es-GT', {
@@ -138,6 +147,24 @@
     </q-page-container>
 
     <ProductQuickViewDialog />
+
+    <!-- Instagram FAB -->
+    <q-page-sticky
+      v-if="socialLinks?.instagram"
+      position="bottom-right"
+      :offset="[20, 80]"
+    >
+      <q-btn
+        fab-mini
+        icon="fa-brands fa-instagram"
+        class="instagram-fab"
+        aria-label="Síguenos en Instagram"
+        :href="socialLinks.instagram"
+        target="_blank"
+        rel="noopener noreferrer"
+        tag="a"
+      />
+    </q-page-sticky>
 
     <!-- WhatsApp FAB -->
     <q-page-sticky position="bottom-right" :offset="[20, 20]">
@@ -526,8 +553,10 @@ onMounted(async () => {
   border-radius: var(--ks-radius, 12px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--ks-bg, #f0f0f0);
-  max-height: 480px;
+  max-height: min(480px, 70vh);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   z-index: 100;
 }
 
@@ -561,11 +590,19 @@ onMounted(async () => {
   border-radius: 10px;
   overflow: hidden;
   background: var(--ks-bg, #f5f5f5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .search-result-thumb-placeholder {
+    font-size: 22px;
+    color: var(--ks-text-secondary, #9ca3af);
   }
 }
 
@@ -588,6 +625,15 @@ onMounted(async () => {
   font-weight: 600;
   color: var(--ks-text, #000);
   margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-result-measure {
+  font-size: 0.72rem;
+  color: var(--ks-text-secondary, #6b7280);
+  margin: 0 0 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -655,6 +701,32 @@ onMounted(async () => {
   &:hover {
     transform: scale(1.08);
     box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+  }
+}
+
+.instagram-fab {
+  width: 48px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  min-width: 48px !important;
+  color: #ffffff !important;
+  background: radial-gradient(
+    circle at 30% 110%,
+    #ffd776 0%,
+    #f58529 20%,
+    #dd2a7b 45%,
+    #8134af 70%,
+    #515bd4 100%
+  ) !important;
+  box-shadow: 0 4px 16px rgba(221, 42, 123, 0.35);
+
+  :deep(.q-icon) {
+    font-size: 20px;
+  }
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(221, 42, 123, 0.45);
   }
 }
 

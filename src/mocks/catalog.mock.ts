@@ -175,7 +175,7 @@ export function getMockCatalog(storeSlug?: string): CatalogData {
  */
 export async function loadCatalogFromSource(storeSlug?: string): Promise<CatalogData> {
   const slug = resolveCatalogSlug(storeSlug)
-  const raw = (await resolveRawCatalog(slug)) ?? getRawCatalogJson(slug)
+  const raw = await resolveRawCatalog(slug)
   if (!raw) throw new Error(`Catálogo no encontrado: ${slug}`)
   return buildCatalogData(raw, slug)
 }
@@ -191,7 +191,7 @@ export async function loadAllProductsFromResolvedSource(storeSlug?: string): Pro
   slug: string
 }> {
   const slug = resolveCatalogSlug(storeSlug)
-  const raw = (await resolveRawCatalog(slug)) ?? getRawCatalogJson(slug)
+  const raw = await resolveRawCatalog(slug)
   if (!raw) throw new Error(`Catálogo no encontrado: ${slug}`)
   return { products: mapAllProducts(raw), raw, slug }
 }

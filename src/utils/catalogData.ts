@@ -100,8 +100,6 @@ export function getRawCatalogJson(slug: string): RawCatalog | null {
 // Si el fetch falla (offline, 404, CORS, JSON inválido), se cae al JSON empaquetado.
 // ============================================
 
-/** Cache en memoria del catálogo remoto por slug para no golpear la red en cada render. */
-const remoteCache: Record<string, RawCatalog> = {}
 
 function buildRemoteCatalogUrl(slug: string): string | null {
   const base = import.meta.env.VITE_CATALOG_REMOTE_BASE?.trim()
@@ -130,15 +128,10 @@ function isValidRawCatalog(data: unknown): data is RawCatalog {
  * Incluye cache-busting con `?t=` para forzar revalidación del CDN.
  */
 export async function fetchRemoteCatalogJson(slug: string): Promise<RawCatalog | null> {
-  const cached = remoteCache[slug]
-  if (cached) return cached
-
   const url = buildRemoteCatalogUrl(slug)
   if (!url) return null
 
   try {
-    // Cache-busting: el objeto en S3 puede tener max-age largo, pero al
-    // agregar ?t=<timestamp> forzamos un fetch fresco en cada boot del app.
     const bust = `${url}${url.includes('?') ? '&' : '?'}t=${Date.now()}`
     const res = await fetch(bust, { cache: 'no-cache' })
     if (!res.ok) {
@@ -150,7 +143,6 @@ export async function fetchRemoteCatalogJson(slug: string): Promise<RawCatalog |
       console.warn(`[catalog] Remote JSON for ${slug} is not a valid RawCatalog`)
       return null
     }
-    remoteCache[slug] = data
     return data
   } catch (err) {
     console.warn(`[catalog] Remote fetch ${slug} threw:`, err)
@@ -178,19 +170,13 @@ export async function resolveRawCatalog(slug: string): Promise<RawCatalog | null
   const fromSheets = await fetchCatalogFromSheets()
   if (fromSheets) return fromSheets
 
-  const remote = await fetchRemoteCatalogJson(slug)
-  if (remote) return remote
-
-  return getRawCatalogJson(slug)
+  return fetchRemoteCatalogJson(slug)
 }
 
-/** Limpia el cache en memoria — útil para pruebas o un "reload catalog" manual. */
+/** No-op — mantenido por compatibilidad de API. */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function clearRemoteCatalogCache(slug?: string): void {
-  if (slug) {
-    delete remoteCache[slug]
-  } else {
-    for (const k of Object.keys(remoteCache)) delete remoteCache[k]
-  }
+  // Sin cache en memoria; cada llamada hace fetch fresco.
 }
 
 /**
@@ -201,10 +187,10 @@ export function clearRemoteCatalogCache(slug?: string): void {
  * 4) primer JSON en data/products
  */
 export function resolveCatalogSlug(explicit?: string): string {
-  if (explicit && CATALOG_BY_SLUG[explicit]) return explicit
+  if (explicit) return explicit
 
   const fromHost = resolveStoreSlug()
-  if (CATALOG_BY_SLUG[fromHost]) return fromHost
+  if (fromHost) return fromHost
 
   if (CATALOG_BY_SLUG.sweethome) return 'sweethome'
 
@@ -212,7 +198,5 @@ export function resolveCatalogSlug(explicit?: string): string {
   const first = slugs[0]
   if (first) return first
 
-  throw new Error(
-    'No hay ningún catálogo en data/products/*.json. Añade al menos un archivo JSON.',
-  )
+  return 'sweethome'
 }

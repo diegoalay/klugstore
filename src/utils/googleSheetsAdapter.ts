@@ -36,11 +36,6 @@
 import type { RawCatalog, RawCategory, RawProduct } from 'src/utils/catalogData'
 import { normalizeIconName } from 'src/utils/iconName'
 
-/** Cache por sesión: evita refetch del mismo par de URLs en cada navegación. */
-let sheetsCache: { rawCatalog: RawCatalog; at: number } | null = null
-
-/** TTL del cache — Google cachea la URL publicada ~5 min, no tiene sentido ir por debajo. */
-const SHEETS_CACHE_MS = 60_000
 
 // ============================================
 // CSV parser (RFC 4180 compliant, sin dependencias)
@@ -98,7 +93,7 @@ function parseCSV(csv: string): Record<string, string>[] {
 
   if (rows.length === 0) return []
 
-  const headers = (rows[0] ?? []).map((h) => h.trim())
+  const headers = (rows[0] ?? []).map((h) => h.trim().toLowerCase())
   return rows
     .slice(1)
     .filter((r) => r.some((c) => c.trim() !== ''))
@@ -247,12 +242,11 @@ function buildGvizCsvUrl(sheetId: string, tabName: string): string {
  */
 export async function fetchCatalogFromSheets(): Promise<RawCatalog | null> {
   const sheetId = import.meta.env.VITE_CATALOG_SHEETS_ID?.trim()
-  if (!sheetId) return null
-
-  // Cache de sesión (corto) para evitar double-fetch en navegaciones rápidas.
-  if (sheetsCache && Date.now() - sheetsCache.at < SHEETS_CACHE_MS) {
-    return sheetsCache.rawCatalog
+  if (!sheetId) {
+    console.warn('[sheets] VITE_CATALOG_SHEETS_ID no está definido en .env')
+    return null
   }
+  console.info('[sheets] Cargando catálogo desde Google Sheets:', sheetId)
 
   try {
     const productsUrl = buildGvizCsvUrl(sheetId, 'products')
@@ -304,7 +298,6 @@ export async function fetchCatalogFromSheets(): Promise<RawCatalog | null> {
       return null
     }
 
-    sheetsCache = { rawCatalog, at: Date.now() }
     return rawCatalog
   } catch (err) {
     console.warn('[sheets] excepción al bajar catálogo:', err)
@@ -312,7 +305,7 @@ export async function fetchCatalogFromSheets(): Promise<RawCatalog | null> {
   }
 }
 
-/** Limpia el cache en memoria — útil tras editar el sheet y querer ver cambios ya. */
+/** No-op — mantenido por compatibilidad de API. */
 export function clearSheetsCache(): void {
-  sheetsCache = null
+  // Sin cache en memoria; cada llamada hace fetch fresco.
 }
