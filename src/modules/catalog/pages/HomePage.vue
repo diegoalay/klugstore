@@ -35,9 +35,7 @@ const catalogStore = useCatalogStore()
 const storeConfig = useStoreConfigStore()
 useCatalogHomeHash()
 
-const seoTitle = computed(
-  () => `${storeConfig.storeName} — Decoración y hogar | Catálogo en línea Guatemala`,
-)
+const seoTitle = computed(() => `Catálogo | ${storeConfig.seoTitleSuffix}`)
 const seoDescription = computed(() => {
   const base =
     storeConfig.config?.description ??

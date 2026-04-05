@@ -33,8 +33,8 @@ const products = computed(() => {
 const categoryPath = computed(() => `/catalog/categoria/${route.params.categorySlug as string}`)
 
 const seoTitle = computed(() => {
-  if (!category.value) return `Categoría — ${storeConfig.storeName}`
-  return `${category.value.name} — Decoración hogar | ${storeConfig.storeName}`
+  if (!category.value) return `Categoría | ${storeConfig.seoTitleSuffix}`
+  return `${category.value.name} | ${storeConfig.seoTitleSuffix}`
 })
 
 const seoDescription = computed(() => {

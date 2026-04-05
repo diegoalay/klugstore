@@ -217,8 +217,8 @@ const productPath = computed(() => {
 })
 
 const seoTitle = computed(() => {
-  if (!product.value) return `Producto no encontrado — ${storeConfig.storeName}`
-  return `${product.value.name} — ${storeConfig.storeName}`
+  if (!product.value) return `Producto no encontrado | ${storeConfig.seoTitleSuffix}`
+  return `${product.value.name} | ${storeConfig.seoTitleSuffix}`
 })
 
 const seoDescription = computed(() => {

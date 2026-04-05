@@ -1,12 +1,19 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { StoreConfig, StoreTheme } from 'src/types'
+import { resolveStoreSlug } from 'src/utils/storeResolver'
 
 export const useStoreConfigStore = defineStore('storeConfig', () => {
   const config = ref<StoreConfig | null>(null)
   const loading = ref(false)
 
   const storeName = computed(() => config.value?.name ?? 'KlugStore')
+
+  /** Slug de tienda (p. ej. `sweethome`); antes de cargar config se infiere del host. */
+  const storeSlug = computed(() => config.value?.slug ?? resolveStoreSlug())
+
+  /** Sufijo de `<title>` tipo `Catálogo | SWEETHOME`. */
+  const seoTitleSuffix = computed(() => storeSlug.value.toUpperCase())
   const logo = computed(() => config.value?.logo ?? '')
   const theme = computed<StoreTheme | null>(() => config.value?.theme ?? null)
   const whatsappNumber = computed(() => config.value?.whatsappNumber ?? '')
@@ -38,6 +45,8 @@ export const useStoreConfigStore = defineStore('storeConfig', () => {
     config,
     loading,
     storeName,
+    storeSlug,
+    seoTitleSuffix,
     logo,
     theme,
     whatsappNumber,

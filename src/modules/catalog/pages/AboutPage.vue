@@ -88,7 +88,7 @@ const { openWhatsAppGeneral } = useWhatsApp()
 const accent = computed(() => storeConfig.theme?.secondaryColor ?? '#d19793')
 
 usePageSeo({
-  title: computed(() => `Sobre nosotros — ${storeConfig.storeName} | Decoración y hogar Guatemala`),
+  title: computed(() => `Sobre nosotros | ${storeConfig.seoTitleSuffix}`),
   description: computed(() =>
     truncateSeoDescription(
       `${storeConfig.storeName}: decoración para el hogar, piezas curadas y compra por WhatsApp en Guatemala. Historia, valores y cómo comprar.`,

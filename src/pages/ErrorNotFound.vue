@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useStoreConfigStore } from 'src/stores'
 import { usePageSeo } from 'src/composables/usePageSeo'
 
 const route = useRoute()
+const storeConfig = useStoreConfigStore()
 const path = computed(() => route.path || '/')
 
 usePageSeo({
-  title: 'Página no encontrada (404)',
+  title: computed(() => `Página no encontrada | ${storeConfig.seoTitleSuffix}`),
   description: 'La página que buscas no existe en este sitio.',
   path,
   noIndex: true,
