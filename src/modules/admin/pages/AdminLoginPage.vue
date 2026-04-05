@@ -10,11 +10,22 @@
           v-model="pass"
           outlined
           stack-label
-          type="password"
+          :type="showPassword ? 'text' : 'password'"
           label="Contraseña"
           autocomplete="current-password"
           @keyup.enter="login"
-        />
+        >
+          <template #append>
+            <q-icon
+              :name="showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+              class="cursor-pointer"
+              :aria-label="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+              tabindex="0"
+              @click="showPassword = !showPassword"
+              @keyup.enter="showPassword = !showPassword"
+            />
+          </template>
+        </q-input>
       </q-card-section>
       <q-card-actions align="right">
         <q-btn color="dark" unelevated label="Entrar" @click="login" />
@@ -48,6 +59,7 @@ const draftStore = useAdminCatalogDraftStore()
 
 const user = ref('')
 const pass = ref('')
+const showPassword = ref(false)
 
 async function login() {
   if (!tryAdminLogin(user.value, pass.value)) {

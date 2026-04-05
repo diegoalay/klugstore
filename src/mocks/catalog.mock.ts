@@ -6,6 +6,7 @@ import {
   resolveRawCatalog,
 } from 'src/utils/catalogData'
 import { slugifyCatalogText } from 'src/utils/slugify'
+import { normalizeIconName } from 'src/utils/iconName'
 
 const CDN_HOST = 'https://klugsystem-public-storage.s3.us-east-1.amazonaws.com'
 
@@ -138,7 +139,11 @@ function buildCatalogData(raw: RawCatalog, slug: string): CatalogData {
       slug: c.slug,
       order: c.order,
     }
-    if (c.icon) cat.icon = c.icon
+    // Normaliza nombres cortos (`faucet`) o formato completo (`fa-solid fa-faucet`)
+    // al mismo formato final que espera Quasar. Soporta los dos estilos para
+    // retrocompatibilidad con JSON existente.
+    const icon = normalizeIconName(c.icon)
+    if (icon) cat.icon = icon
     return cat
   })
 

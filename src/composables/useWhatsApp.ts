@@ -13,7 +13,9 @@ export function useWhatsApp() {
       currency: product.currency || storeConfig.currency,
     }).format(product.price)
 
-    return `Hola! Me interesa el producto:\n\n*${product.name}*\nPrecio: ${price}\n\nQuisiera más información.`
+    const productUrl = `${window.location.origin}/catalog/producto/${product.slug}`
+
+    return `Hola! Me interesa el producto:\n\n*${product.name}*\nPrecio: ${price}\n${productUrl}\n\nQuisiera más información.`
   }
 
   function openWhatsApp(product: Product) {

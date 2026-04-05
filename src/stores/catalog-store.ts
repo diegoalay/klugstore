@@ -5,6 +5,7 @@ import {
   applyCatalogSortMode,
   type CatalogSortMode,
 } from 'src/utils/catalogSort'
+import { normalizeForSearch } from 'src/utils/slugify'
 
 export type { CatalogSortMode } from 'src/utils/catalogSort'
 
@@ -28,13 +29,16 @@ export const useCatalogStore = defineStore('catalog', () => {
     }
 
     if (searchQuery.value.trim()) {
-      const q = searchQuery.value.toLowerCase().trim()
-      result = result.filter(
-        (p) =>
-          p.name.toLowerCase().includes(q) ||
-          p.description.toLowerCase().includes(q) ||
-          (p.tags && p.tags.some((t) => t.toLowerCase().includes(q))),
-      )
+      // Búsqueda case-insensitive y diacritic-insensitive:
+      //   "cancion" encuentra "Canción", "canción", "CANCIÓN"
+      //   "nino"    encuentra "niño"
+      const q = normalizeForSearch(searchQuery.value)
+      result = result.filter((p) => {
+        const haystack = normalizeForSearch(
+          [p.name, p.description, ...(p.tags ?? [])].join(' '),
+        )
+        return haystack.includes(q)
+      })
     }
 
     return applyCatalogSortMode(result, catalogSort.value)

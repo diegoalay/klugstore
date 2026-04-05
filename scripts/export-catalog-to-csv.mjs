@@ -32,6 +32,19 @@ if (!existsSync(jsonPath)) {
   process.exit(1)
 }
 
+/**
+ * Convierte `fa-solid fa-wine-bottle` → `wine-bottle` para el sheet.
+ * Deja intactos estilos no-solid: `fa-regular fa-heart` queda igual
+ * porque requiere el prefijo explícito para que el adapter lo respete.
+ */
+function shortenIconForSheet(icon) {
+  const raw = String(icon ?? '').trim()
+  if (!raw) return ''
+  const solidMatch = /^fa-solid\s+fa-(.+)$/.exec(raw)
+  if (solidMatch) return solidMatch[1]
+  return raw
+}
+
 function csvEscape(value) {
   const s = value == null ? '' : String(value)
   if (s.includes(',') || s.includes('"') || s.includes('\n') || s.includes('\r')) {
@@ -58,7 +71,10 @@ const categoriesCsv = toCSV(
   (data.categories ?? []).map((c) => ({
     slug: c.slug,
     name: c.name,
-    icon: c.icon ?? '',
+    // Forma corta para el Sheet: `fa-solid fa-wine-bottle` → `wine-bottle`.
+    // El adapter le agrega `fa-solid fa-` automáticamente al leer. Si hay
+    // un estilo no-solid (regular/light/brands/etc), se mantiene completo.
+    icon: shortenIconForSheet(c.icon ?? ''),
     order: c.order ?? 0,
   })),
 )

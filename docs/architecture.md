@@ -94,6 +94,7 @@ klugstore/
 │   │   ├── useCatalog.ts        # Hook de carga con 3 fuentes + reloadCatalog()
 │   │   ├── useCatalogHash.ts    # Estado de filtros en el hash de la URL (#cat=&q=)
 │   │   ├── usePageSeo.ts        # Título/description/canonical por ruta
+│   │   ├── useProductQuickView.ts # Estado del diálogo de vista rápida de producto
 │   │   └── useWhatsApp.ts       # Generar wa.me links con mensaje pre-armado
 │   ├── css/
 │   │   ├── app.scss             # Estilos globales + CSS variables de marca
@@ -104,8 +105,19 @@ klugstore/
 │   ├── modules/
 │   │   ├── catalog/             # Módulo público (catálogo + detalle + about)
 │   │   │   ├── CatalogLayout.vue
-│   │   │   ├── components/      # ProductCard, ProductGrid, CategoryNav, StoreHeader
-│   │   │   └── pages/           # HomePage, CategoryPage, ProductDetailPage, AboutPage
+│   │   │   ├── components/
+│   │   │   │   ├── ProductCard.vue          # Tarjeta del grid con badge sold/discount
+│   │   │   │   ├── ProductGrid.vue          # Grid responsive + scroll reveal
+│   │   │   │   ├── ProductDetailView.vue    # Vista compartida: detalle + quick-view dialog
+│   │   │   │   ├── ProductQuickViewDialog.vue  # Modal del quick view (desde el grid)
+│   │   │   │   ├── CategoryNav.vue          # Chips de categorías con scroll horizontal
+│   │   │   │   ├── CatalogSortSelect.vue    # Selector de modo de orden
+│   │   │   │   └── StoreHeader.vue          # Banner + nombre/descripción de la tienda
+│   │   │   └── pages/
+│   │   │       ├── HomePage.vue             # Listado principal + destacados
+│   │   │       ├── CategoryPage.vue         # Listado por categoría
+│   │   │       ├── ProductDetailPage.vue    # Wrapper delgado (SEO + back link) → ProductDetailView
+│   │   │       └── AboutPage.vue            # Historia de la marca
 │   │   ├── admin/               # Módulo privado (MVP de edición)
 │   │   │   ├── AdminLayout.vue  # Shell + router-view; logout limpia Pinia
 │   │   │   └── pages/           # AdminLoginPage, AdminCatalogPage
@@ -253,7 +265,9 @@ URL**. Reglas en orden:
   "name": "SweetHome GT",
   "currency": "GTQ",
   "categories": [
-    { "slug": "jarrones", "name": "Jarrones y Floreros", "icon": "fa-solid fa-wine-bottle", "order": 1 },
+    // `icon` acepta forma corta (`wine-bottle`) o completa (`fa-solid fa-wine-bottle`).
+    // El normalizador interno antepone `fa-solid fa-` a los nombres cortos.
+    { "slug": "jarrones", "name": "Jarrones y Floreros", "icon": "wine-bottle", "order": 1 },
     ...
   ],
   "products": [

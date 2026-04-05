@@ -137,6 +137,8 @@
       </div>
     </q-page-container>
 
+    <ProductQuickViewDialog />
+
     <!-- WhatsApp FAB -->
     <q-page-sticky position="bottom-right" :offset="[20, 20]">
       <q-btn
@@ -217,10 +219,13 @@ import { useRoute, useRouter } from 'vue-router'
 import type { QInput } from 'quasar'
 import { useStoreConfigStore, useCatalogStore } from 'src/stores'
 import { useCatalog } from 'src/composables/useCatalog'
-import { stashCatalogHashBeforeProductNavigation } from 'src/composables/useCatalogHash'
 import { useWhatsApp } from 'src/composables/useWhatsApp'
+import { useProductQuickView } from 'src/composables/useProductQuickView'
+import ProductQuickViewDialog from './components/ProductQuickViewDialog.vue'
 import { resolveStoreSlug } from 'src/utils/storeResolver'
 import { applyCatalogSortMode } from 'src/utils/catalogSort'
+import { normalizeForSearch } from 'src/utils/slugify'
+import type { Product } from 'src/types'
 
 const route = useRoute()
 const router = useRouter()
@@ -228,6 +233,7 @@ const storeConfig = useStoreConfigStore()
 const catalogStore = useCatalogStore()
 const { loadCatalog } = useCatalog()
 const { openWhatsAppGeneral } = useWhatsApp()
+const { openProductQuickView } = useProductQuickView()
 
 const showSearch = ref(false)
 /** Ligado al store para que #cat=&q= en la URL restaure el texto al recargar */
@@ -244,16 +250,17 @@ const isCatalogActive = computed(() =>
 const isAboutActive = computed(() => route.path === '/about')
 
 const searchResults = computed(() => {
-  const q = searchQuery.value.toLowerCase().trim()
+  // Búsqueda case-insensitive y diacritic-insensitive:
+  //   "cancion" → encuentra "Canción", "canción", "CANCIÓN"
+  //   "nino"    → encuentra "niño"
+  const q = normalizeForSearch(searchQuery.value)
   if (!q) return []
   const list = catalogStore.products.filter((p) => {
     if (!p.visible) return false
-    return (
-      p.name.toLowerCase().includes(q) ||
-      p.description.toLowerCase().includes(q) ||
-      (p.tags && p.tags.some((t) => t.toLowerCase().includes(q))) ||
-      (p.categoryName && p.categoryName.toLowerCase().includes(q))
+    const haystack = normalizeForSearch(
+      [p.name, p.description, p.categoryName ?? '', ...(p.tags ?? [])].join(' '),
     )
+    return haystack.includes(q)
   })
   return applyCatalogSortMode(list, catalogStore.catalogSort).slice(0, 8)
 })
@@ -278,13 +285,8 @@ function goHome() {
   void router.push({ name: 'catalog-home' })
 }
 
-function goToProduct(product: { slug: string }) {
-  stashCatalogHashBeforeProductNavigation()
-  void router.push({
-    name: 'catalog-product',
-    params: { productSlug: product.slug },
-  })
-  // Cerrar búsqueda tras navegar
+function goToProduct(product: Product) {
+  openProductQuickView(product)
   showSearch.value = false
   searchQuery.value = ''
   catalogStore.setSearchQuery('')

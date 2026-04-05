@@ -71,15 +71,37 @@ Columnas (en este orden, la primera fila son los headers):
 |---|---|---|---|
 | `slug` | texto | Sí | `jarrones` |
 | `name` | texto | Sí | `Jarrones y Floreros` |
-| `icon` | texto | No | `fa-solid fa-wine-bottle` |
+| `icon` | texto | No | `wine-bottle` |
 | `order` | número | Sí | `1` |
 
 - El `slug` debe ser en minúsculas, sin espacios ni tildes (usa guiones si
   necesitas separar palabras: `tablas-queso`, `temporada-otono`).
-- El `icon` es el nombre del icono de Font Awesome en formato
-  `fa-solid fa-<nombre>`. Si no sabes cuál usar, déjalo vacío.
+- El `icon` acepta **solo el nombre corto** del icono Font Awesome
+  (`wine-bottle`, `faucet`, `cheese`, `leaf`, `chess-bishop`, `fire`,
+  `kitchen-set`, `utensils`, `layer-group`, etc). El app automáticamente
+  le antepone `fa-solid fa-` para formar el nombre completo. Si dejas la
+  celda vacía, la categoría aparece sin icono.
+  - Puedes buscar iconos en <https://fontawesome.com/icons?s=solid&f=classic>
+    y copiar el nombre que aparece debajo (el del botón copy).
+  - Si necesitas un icono de otro estilo (regular, light, brands), escribe
+    el formato completo: `fa-regular fa-heart`, `fa-brands fa-instagram`, etc.
+    Solo en ese caso el app respeta el prefijo explícito.
 - El `order` determina el orden en que aparecen las categorías en el menú
   (1 = primera, 2 = segunda, ...).
+
+**Ejemplo de la pestaña `categories`:**
+
+| slug | name | icon | order |
+|---|---|---|---|
+| jarrones | Jarrones y Floreros | `wine-bottle` | 1 |
+| trays-bandejas | Trays y Bandejas | `layer-group` | 2 |
+| tablas-queso | Tablas de Queso | `cheese` | 3 |
+| esculturas | Esculturas | `chess-bishop` | 4 |
+| candeleros | Candeleros | `fire` | 5 |
+| baja-platos | Baja Platos | `utensils` | 6 |
+| temporada-otono | Temporada de Otoño | `leaf` | 7 |
+| utensilios-decoracion | Utensilios y Decoración | `kitchen-set` | 8 |
+| grifos | Grifos | `faucet` | 9 |
 
 ---
 

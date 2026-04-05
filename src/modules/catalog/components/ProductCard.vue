@@ -90,20 +90,19 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { QCard } from 'quasar'
 import { useStoreConfigStore } from 'src/stores'
 import { useWhatsApp } from 'src/composables/useWhatsApp'
-import { stashCatalogHashBeforeProductNavigation } from 'src/composables/useCatalogHash'
+import { useProductQuickView } from 'src/composables/useProductQuickView'
 import type { Product } from 'src/types'
 
 const props = defineProps<{
   product: Product
 }>()
 
-const router = useRouter()
 const storeConfig = useStoreConfigStore()
 const { openWhatsApp } = useWhatsApp()
+const { openProductQuickView } = useProductQuickView()
 
 const isSold = computed(() => props.product.sold === true)
 
@@ -180,11 +179,7 @@ const discountPercent = computed(() => {
 })
 
 function goToProduct() {
-  stashCatalogHashBeforeProductNavigation()
-  void router.push({
-    name: 'catalog-product',
-    params: { productSlug: props.product.slug },
-  })
+  openProductQuickView(props.product)
 }
 
 function handleWhatsApp() {

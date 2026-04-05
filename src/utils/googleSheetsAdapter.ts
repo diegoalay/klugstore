@@ -34,6 +34,7 @@
 // ============================================
 
 import type { RawCatalog, RawCategory, RawProduct } from 'src/utils/catalogData'
+import { normalizeIconName } from 'src/utils/iconName'
 
 /** Cache por sesión: evita refetch del mismo par de URLs en cada navegación. */
 let sheetsCache: { rawCatalog: RawCatalog; at: number } | null = null
@@ -167,7 +168,9 @@ function rowsToRawCatalog(
         name: (r['name'] ?? slug).trim(),
         order: parseNumberCell(r['order'], 999),
       }
-      const icon = (r['icon'] ?? '').trim()
+      // Acepta nombres cortos (`faucet`) o formato completo
+      // (`fa-solid fa-faucet`). Se normaliza al formato completo aquí.
+      const icon = normalizeIconName(r['icon'])
       if (icon) cat.icon = icon
       return cat
     })
