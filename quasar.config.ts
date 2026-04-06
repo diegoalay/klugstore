@@ -2,7 +2,7 @@ import { defineConfig } from '#q-app/wrappers'
 
 export default defineConfig(() => {
   return {
-    boot: ['fontawesome-pro'],
+    boot: ['fontawesome-pro', 'firebase'],
 
     css: ['app.scss'],
 
