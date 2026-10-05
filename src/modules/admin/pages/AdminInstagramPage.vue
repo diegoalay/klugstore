@@ -5,11 +5,13 @@
 
       <div class="ig-topbar">
         <div>
-          <div class="ig-eyebrow"><q-icon name="fa-brands fa-instagram" size="14px" /> Instagram</div>
+          <div class="ig-eyebrow">
+            <q-icon name="fa-brands fa-instagram" size="14px" /> Instagram
+          </div>
           <div class="ig-title">Crear productos desde tus publicaciones</div>
           <div class="ig-note">
-            Para traer publicaciones nuevas corre <code>npm run sync:instagram</code>. Los nombres y precios son
-            sugerencias: revísalos antes de guardar.
+            Para traer publicaciones nuevas corre <code>npm run sync:instagram</code>. Los nombres y
+            precios son sugerencias: revísalos antes de guardar.
           </div>
         </div>
         <div class="ig-actions">
@@ -23,7 +25,9 @@
             class="ig-search"
             hide-bottom-space
           >
-            <template #prepend><q-icon name="fa-solid fa-magnifying-glass" size="xs" color="grey-6" /></template>
+            <template #prepend
+              ><q-icon name="fa-solid fa-magnifying-glass" size="xs" color="grey-6"
+            /></template>
           </q-input>
           <q-btn-toggle
             v-model="status"
@@ -53,27 +57,43 @@
               <q-icon name="fa-regular fa-image" size="22px" />
               <span>Foto caducada: vuelve a sincronizar</span>
             </div>
-            <span class="ig-photos"><q-icon name="fa-regular fa-images" size="11px" /> {{ item.post.imageUrls.length }}</span>
-            <q-badge v-if="item.suggestion.sold" color="deep-orange-6" class="ig-sold">Vendido</q-badge>
+            <span class="ig-photos"
+              ><q-icon name="fa-regular fa-images" size="11px" />
+              {{ item.post.imageUrls.length }}</span
+            >
+            <q-badge v-if="item.suggestion.sold" color="deep-orange-6" class="ig-sold"
+              >Vendido</q-badge
+            >
           </a>
 
           <div class="ig-body">
             <div class="ig-date">{{ formatDate(item.post.postedAt) }}</div>
             <div class="ig-name">{{ item.suggestion.name }}</div>
             <div class="ig-price">
-              {{ item.suggestion.price !== null ? formatCurrency(item.suggestion.price) : 'Sin precio en el texto' }}
+              {{
+                item.suggestion.price !== null
+                  ? formatCurrency(item.suggestion.price)
+                  : 'Sin precio en el texto'
+              }}
             </div>
             <div v-if="item.similarTo && item.post.status === 'pending'" class="ig-similar">
-              <q-icon name="fa-solid fa-triangle-exclamation" size="11px" />
-              <span>
+              <p class="ig-similar-text">
+                <q-icon name="fa-solid fa-triangle-exclamation" size="11px" />
                 Parecido a
                 <button type="button" class="ig-link" @click="openProductEditor(item.similarTo.id)">
                   «{{ item.similarTo.name }}»
                 </button>
-              </span>
-              <button type="button" class="ig-link ig-link--action" @click="linkTo(item.post, item.similarTo.id)">
-                Es el mismo
-              </button>
+              </p>
+              <q-btn
+                outline
+                no-caps
+                dense
+                color="brown-7"
+                icon="fa-solid fa-link"
+                label="Es el mismo"
+                class="admin-btn-sm ig-same-btn"
+                @click="confirmLink(item.post, item.similarTo)"
+              />
             </div>
           </div>
 
@@ -89,7 +109,14 @@
                 class="admin-btn ig-primary"
                 @click="createFrom(item)"
               />
-              <q-btn outline round color="grey-6" icon="fa-solid fa-eye-slash" class="admin-btn ig-secondary" @click="ignore(item.post)">
+              <q-btn
+                outline
+                round
+                color="grey-6"
+                icon="fa-solid fa-eye-slash"
+                class="admin-btn ig-secondary"
+                @click="ignore(item.post)"
+              >
                 <q-tooltip>Ignorar (no es un producto)</q-tooltip>
               </q-btn>
             </template>
@@ -105,6 +132,16 @@
                 :disable="!item.post.productId"
                 @click="item.post.productId && openProductEditor(item.post.productId)"
               />
+              <q-btn
+                outline
+                round
+                color="grey-6"
+                icon="fa-solid fa-link-slash"
+                class="admin-btn ig-secondary"
+                @click="unlink(item.post)"
+              >
+                <q-tooltip>Desvincular (vuelve a pendientes; el producto no se borra)</q-tooltip>
+              </q-btn>
             </template>
             <template v-else>
               <q-btn
@@ -124,11 +161,24 @@
 
       <div v-else-if="!igStore.loading" class="ig-empty">
         <q-icon name="fa-brands fa-instagram" size="40px" color="grey-5" />
-        <p>{{ igStore.posts.length ? 'No hay publicaciones en esta vista.' : 'Todavía no hay publicaciones sincronizadas.' }}</p>
+        <p>
+          {{
+            igStore.posts.length
+              ? 'No hay publicaciones en esta vista.'
+              : 'Todavía no hay publicaciones sincronizadas.'
+          }}
+        </p>
       </div>
 
       <div v-if="filtered.length > visible.length" class="ig-more">
-        <q-btn outline no-caps color="dark" label="Mostrar más" class="admin-btn" @click="pageSize += PAGE" />
+        <q-btn
+          outline
+          no-caps
+          color="dark"
+          label="Mostrar más"
+          class="admin-btn"
+          @click="pageSize += PAGE"
+        />
       </div>
 
       <ProductFormDialog
@@ -144,17 +194,27 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from 'vue'
-import { Notify } from 'quasar'
+import { Dialog, Notify } from 'quasar'
+import type { Product } from '@/types'
 import { usePageSeo } from '@/composables/usePageSeo'
 import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
 import { useAdminFirestoreCatalogStore } from '@/stores/admin-firestore-catalog-store'
-import { useAdminInstagramStore, type InstagramPost, type InstagramPostStatus } from '@/stores/admin-instagram-store'
+import {
+  useAdminInstagramStore,
+  type InstagramPost,
+  type InstagramPostStatus,
+} from '@/stores/admin-instagram-store'
 import { findSimilarName, parseInstagramCaption, suggestCategory } from '@/utils/instagramCaption'
 import { normalizeForSearch } from '@/utils/slugify'
 import { formatCurrency } from '@/utils/format'
 import ProductFormDialog from '@/components/admin/ProductFormDialog.vue'
 
-usePageSeo({ title: 'Instagram | Admin', description: 'Crear productos desde Instagram.', path: '/admin/instagram', noIndex: true })
+usePageSeo({
+  title: 'Instagram | Admin',
+  description: 'Crear productos desde Instagram.',
+  path: '/admin/instagram',
+  noIndex: true,
+})
 
 const PAGE = 48
 const igStore = useAdminInstagramStore()
@@ -202,19 +262,28 @@ const visible = computed(() =>
   filtered.value.slice(0, pageSize.value).map((post) => {
     const suggestion = parseInstagramCaption(post.caption)
     const similarName = findSimilarName(suggestion.name, productNames.value)
-    return { post, suggestion, similarTo: similarName ? (productByName.value.get(similarName) ?? null) : null }
+    return {
+      post,
+      suggestion,
+      similarTo: similarName ? (productByName.value.get(similarName) ?? null) : null,
+    }
   }),
 )
 
 type Item = (typeof visible.value)[number]
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('es-GT', { day: 'numeric', month: 'short', year: 'numeric' })
+  return new Date(iso).toLocaleDateString('es-GT', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  })
 }
 
 function createFrom({ post, suggestion }: Item) {
   const slugs = catalog.categories.map((c) => c.slug)
-  const categoryId = suggestCategory(`${suggestion.name} ${suggestion.description}`, slugs) ?? slugs[0] ?? ''
+  const categoryId =
+    suggestCategory(`${suggestion.name} ${suggestion.description}`, slugs) ?? slugs[0] ?? ''
   const prefill = {
     name: suggestion.name,
     description: suggestion.description,
@@ -232,15 +301,33 @@ function createFrom({ post, suggestion }: Item) {
   })
 }
 
-/** El post es un producto que ya existe: se vincula sin crear un duplicado. */
-async function linkTo(post: InstagramPost, productId: string) {
-  await igStore.setStatus(post.id, 'imported', productId)
-  Notify.create({ type: 'positive', message: 'Publicación vinculada al producto existente' })
+/** El post es un producto que ya existe: se vincula sin crear un duplicado (con confirmación). */
+function confirmLink(post: InstagramPost, product: Product) {
+  Dialog.create({
+    title: '¿Es la misma pieza?',
+    message: `La publicación quedará vinculada a «${product.name}» y no se creará un producto nuevo. Podrá deshacerlo desde la pestaña «Creados».`,
+    cancel: { label: 'Cancelar', flat: true, noCaps: true },
+    ok: { label: 'Sí, vincular', color: 'dark', unelevated: true, noCaps: true },
+  }).onOk(() => {
+    void igStore
+      .setStatus(post.id, 'imported', product.id)
+      .then(() =>
+        Notify.create({ type: 'positive', message: 'Publicación vinculada al producto existente' }),
+      )
+  })
 }
 
 async function ignore(post: InstagramPost) {
   await igStore.setStatus(post.id, 'ignored')
-  Notify.create({ message: 'Publicación ignorada', actions: [{ label: 'Deshacer', color: 'white', handler: () => void restore(post) }] })
+  Notify.create({
+    message: 'Publicación ignorada',
+    actions: [{ label: 'Deshacer', color: 'white', handler: () => void restore(post) }],
+  })
+}
+
+async function unlink(post: InstagramPost) {
+  await igStore.setStatus(post.id, 'pending')
+  Notify.create({ message: 'Publicación devuelta a pendientes' })
 }
 
 async function restore(post: InstagramPost) {
@@ -424,9 +511,9 @@ function onRequestDelete() {
 
 .ig-similar {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px 6px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   margin-top: 6px;
   font-size: 0.72rem;
   color: #b26a00;
@@ -445,10 +532,25 @@ function onRequestDelete() {
   text-decoration: underline;
   cursor: pointer;
   text-align: left;
+}
 
-  &--action {
-    margin-left: auto;
-    color: #000;
+.ig-similar-text {
+  margin: 0;
+  line-height: 1.45;
+
+  .q-icon {
+    margin-right: 4px;
+    vertical-align: -1px;
+  }
+}
+
+.ig-same-btn {
+  font-size: 0.72rem;
+  padding: 0 10px;
+
+  :deep(.q-icon) {
+    font-size: 10px;
+    margin-right: 6px;
   }
 }
 

@@ -203,7 +203,9 @@ async function reuploadImage(originalUrl, productId, index) {
   try {
     const res = await fetch(originalUrl)
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    const contentType = res.headers.get('content-type') || 'image/jpeg'
+    const contentType = res.headers.get('content-type') || ''
+    // Links privados (Google Drive) responden 200 con una página de login: no es una foto.
+    if (!contentType.startsWith('image/')) throw new Error(`no es una imagen (${contentType || 'sin tipo'})`)
     const buffer = Buffer.from(await res.arrayBuffer())
     const ext = guessExtension(originalUrl, contentType)
     const path = `stores/${storeSlug}/products/${productId}/migrated-${index}.${ext}`

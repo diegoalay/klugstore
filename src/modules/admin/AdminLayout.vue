@@ -2,28 +2,43 @@
   <q-layout view="hHh lpR fFf" class="admin-layout">
     <q-header class="admin-header">
       <q-toolbar class="admin-toolbar">
-        <router-link :to="{ name: 'admin-catalog' }" class="admin-brand">
-          <q-icon name="fa-solid fa-house-chimney" size="16px" class="admin-brand-icon" />
-          <span>SweetHome <em>Admin</em></span>
-        </router-link>
+        <div class="admin-toolbar-inner">
+          <router-link :to="{ name: 'admin-catalog' }" class="admin-brand">
+            <q-icon name="fa-solid fa-house-chimney" size="16px" class="admin-brand-icon" />
+            <span>SweetHome <em>Admin</em></span>
+          </router-link>
 
-        <q-space />
+          <q-space />
 
-        <template v-if="isAuthed">
-          <q-btn flat no-caps icon="fa-solid fa-store" label="Ver tienda" to="/catalog" class="admin-btn admin-header-btn" />
-          <q-btn flat round icon="fa-solid fa-arrow-right-from-bracket" class="admin-btn admin-header-btn" @click="logout">
-            <q-tooltip>Salir</q-tooltip>
-          </q-btn>
-        </template>
-        <q-btn
-          v-else
-          flat
-          no-caps
-          icon="fa-solid fa-arrow-left"
-          label="Catálogo público"
-          to="/catalog"
-          class="admin-btn admin-header-btn"
-        />
+          <template v-if="isAuthed">
+            <q-btn
+              flat
+              no-caps
+              icon="fa-solid fa-store"
+              label="Ver tienda"
+              to="/catalog"
+              class="admin-btn admin-header-btn"
+            />
+            <q-btn
+              flat
+              round
+              icon="fa-solid fa-arrow-right-from-bracket"
+              class="admin-btn admin-header-btn"
+              @click="logout"
+            >
+              <q-tooltip>Salir</q-tooltip>
+            </q-btn>
+          </template>
+          <q-btn
+            v-else
+            flat
+            no-caps
+            icon="fa-solid fa-arrow-left"
+            label="Catálogo público"
+            to="/catalog"
+            class="admin-btn admin-header-btn"
+          />
+        </div>
       </q-toolbar>
 
       <!-- Navegación compartida por todas las pantallas del admin; marca la activa. -->
@@ -83,8 +98,18 @@ async function logout() {
 
 .admin-toolbar {
   min-height: 52px;
-  padding: 0 20px;
+  padding: 0;
+}
+
+/* Mismo ancho y margen que el contenido de las páginas del admin (1280px / 24px). */
+.admin-toolbar-inner {
+  display: flex;
+  align-items: center;
   gap: 4px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 .admin-brand {
@@ -132,7 +157,7 @@ async function logout() {
   gap: 6px;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 8px 20px;
+  padding: 8px 24px;
   overflow-x: auto;
   scrollbar-width: none;
 
@@ -169,7 +194,7 @@ async function logout() {
 }
 
 @media (max-width: 599px) {
-  .admin-toolbar,
+  .admin-toolbar-inner,
   .admin-nav-inner {
     padding-left: 12px;
     padding-right: 12px;

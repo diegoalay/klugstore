@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { findSimilarName, nameSimilarity, parseInstagramCaption, suggestCategory } from '@/utils/instagramCaption'
+import {
+  findSimilarName,
+  nameSimilarity,
+  parseInstagramCaption,
+  suggestCategory,
+  updateCaptionForProduct,
+} from '@/utils/instagramCaption'
 
 describe('Instagram caption parsing', () => {
   it('keeps a short product name and reads the quetzal price', () => {
@@ -84,5 +90,27 @@ describe('category suggestion', () => {
   it('returns null when nothing matches or the category does not exist', () => {
     expect(suggestCategory('Producto misterioso', slugs)).toBeNull()
     expect(suggestCategory('Grifo estilo cascada', slugs)).toBeNull()
+  })
+})
+
+describe('updating a post caption from the product', () => {
+  it('adds VENDIDO and keeps the rest of the text', () => {
+    const r = updateCaptionForProduct('Bandeja de acacia 🌿\nQ250\n#hogar', { sold: true, price: 250 })
+    expect(r.caption).toBe('VENDIDO Bandeja de acacia 🌿\nQ250\n#hogar')
+    expect(r.changed).toBe(true)
+  })
+
+  it('removes VENDIDO when the piece is available again', () => {
+    expect(updateCaptionForProduct('VENDIDO Bandeja\nQ250', { sold: false, price: 250 }).caption).toBe('Bandeja\nQ250')
+  })
+
+  it('updates only the first price', () => {
+    expect(updateCaptionForProduct('Set de 3\nPrecio: Q 300 (antes Q350)', { price: 275 }).caption).toBe(
+      'Set de 3\nPrecio: Q 275 (antes Q350)',
+    )
+  })
+
+  it('reports no change when the post is already up to date', () => {
+    expect(updateCaptionForProduct('VENDIDO Bandeja\nQ250', { sold: true, price: 250 }).changed).toBe(false)
   })
 })

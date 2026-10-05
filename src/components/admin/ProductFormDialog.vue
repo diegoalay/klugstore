@@ -24,6 +24,30 @@
             <q-toggle v-model="draft.visible" dense label="Visible en la tienda" color="positive" />
             <q-toggle v-model="draftSold" dense label="Vendido" color="deep-orange-6" />
           </div>
+
+          <div v-if="draft.source?.type === 'instagram'" class="form-ig">
+            <div class="form-ig-head">
+              <q-icon name="fa-brands fa-instagram" size="14px" />
+              <span>Publicación de Instagram</span>
+              <a :href="draft.source.url" target="_blank" rel="noopener noreferrer">Ver</a>
+            </div>
+            <q-btn
+              outline
+              no-caps
+              no-wrap
+              color="dark"
+              icon="fa-solid fa-arrows-rotate"
+              label="Actualizar publicación en Instagram"
+              class="admin-btn form-ig-btn"
+              :loading="igCaption === undefined"
+              :disable="igCaption === null"
+              @click="prepareInstagramUpdate"
+            />
+            <p class="form-ig-hint">
+              Copia el texto con lo de este formulario (vendido, precio) y abre la publicación: en Instagram toca
+              <strong>··· › Editar</strong>, pega y guarda.
+            </p>
+          </div>
         </section>
 
         <section class="form-info">
@@ -112,17 +136,57 @@
         />
       </div>
     </q-card>
+
+    <q-dialog v-model="igConfirmOpen">
+      <q-card class="ig-confirm">
+        <div class="ig-confirm-head">
+          <div>
+            <div class="form-eyebrow">Instagram</div>
+            <div class="ig-confirm-title">Actualizar la publicación</div>
+          </div>
+          <q-btn round flat icon="fa-solid fa-xmark" color="grey-7" class="admin-btn-sm" v-close-popup />
+        </div>
+        <div class="ig-confirm-body">
+          <ul class="ig-confirm-changes">
+            <li v-for="c in igUpdate.changes" :key="c">
+              <q-icon name="fa-solid fa-check" size="11px" /> {{ c }}
+            </li>
+          </ul>
+          <div class="ig-confirm-label">Texto que vas a pegar</div>
+          <pre class="ig-confirm-preview">{{ igUpdate.caption }}</pre>
+          <p class="form-ig-hint">
+            Al confirmar se copia el texto y se abre la publicación. En Instagram toca <strong>··· › Editar</strong>,
+            pega y guarda.
+          </p>
+        </div>
+        <div class="form-footer">
+          <q-space />
+          <q-btn
+            unelevated
+            no-caps
+            color="dark"
+            icon="fa-brands fa-instagram"
+            label="Copiar y abrir Instagram"
+            class="admin-btn form-save-btn"
+            @click="confirmInstagramUpdate"
+          />
+        </div>
+      </q-card>
+    </q-dialog>
   </q-dialog>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, watch } from 'vue'
-import { useQuasar, Notify, Dialog } from 'quasar'
+import { useQuasar, Notify, Dialog, copyToClipboard } from 'quasar'
 import type { Product } from '@/types'
 import { slugifyCatalogText, productSlug } from '@/utils/slugify'
 import { useAdminFirestoreCatalogStore } from '@/stores/admin-firestore-catalog-store'
 import ProductImageManager from '@/components/admin/ProductImageManager.vue'
 import { nextProductId, persistExternalImages } from '@/utils/productImages'
+import { parseInstagramCaption, updateCaptionForProduct } from '@/utils/instagramCaption'
+import { formatCurrency } from '@/utils/format'
+import { useAdminInstagramStore } from '@/stores/admin-instagram-store'
 
 const NEW_CATEGORY_VALUE = '__new_category__'
 
@@ -252,6 +316,69 @@ function close() {
   open.value = false
 }
 
+// Texto actual del post de Instagram (undefined = cargando, null = no disponible).
+// Se carga al abrir para que el clic copie y abra sin esperar la red: los navegadores
+// bloquean portapapeles y pestañas nuevas si no ocurren justo después del clic.
+const igStore = useAdminInstagramStore()
+const igCaption = ref<string | null | undefined>(null)
+
+watch(
+  () => [props.modelValue, draft.source?.postId] as const,
+  async ([isOpen, postId]) => {
+    if (!isOpen || !postId) {
+      igCaption.value = null
+      return
+    }
+    igCaption.value = undefined
+    try {
+      igCaption.value = (await igStore.fetchPost(postId))?.caption ?? null
+    } catch {
+      igCaption.value = null
+    }
+  },
+  { immediate: true },
+)
+
+const igConfirmOpen = ref(false)
+const igUpdate = reactive({ caption: '', changes: [] as string[] })
+
+/** Calcula el texto nuevo y lo que cambia; si hay cambios, pide confirmación. */
+function prepareInstagramUpdate() {
+  if (typeof igCaption.value !== 'string') return
+  const sold = !!draft.sold
+  const price = Number(draft.price) || 0
+  const before = parseInstagramCaption(igCaption.value)
+  const { caption, changed } = updateCaptionForProduct(igCaption.value, { sold, price })
+  if (!changed) {
+    Notify.create({ message: 'La publicación ya está al día con este producto.' })
+    return
+  }
+  const changes: string[] = []
+  if (before.sold !== sold) changes.push(sold ? 'Se agrega «VENDIDO» al inicio' : 'Se quita «VENDIDO»')
+  if (before.price !== null && before.price !== price) {
+    changes.push(`Precio: ${formatCurrency(before.price)} → ${formatCurrency(price)}`)
+  }
+  igUpdate.caption = caption
+  igUpdate.changes = changes
+  igConfirmOpen.value = true
+}
+
+function confirmInstagramUpdate() {
+  const url = draft.source?.url
+  if (!url) return
+  igConfirmOpen.value = false
+  window.open(url, '_blank', 'noopener')
+  void copyToClipboard(igUpdate.caption)
+    .then(() =>
+      Notify.create({
+        type: 'positive',
+        message: 'Texto copiado. En Instagram: ··· › Editar, pega y guarda.',
+        timeout: 6000,
+      }),
+    )
+    .catch(() => Notify.create({ type: 'negative', message: 'No se pudo copiar el texto' }))
+}
+
 async function createCategoryFromPrompt(name: string) {
   const trimmed = name.trim()
   if (!trimmed) {
@@ -322,7 +449,8 @@ async function submit() {
     close()
   } catch (err) {
     console.error(err)
-    Notify.create({ type: 'negative', message: 'No se pudo guardar' })
+    const reason = err instanceof Error && err.message ? `: ${err.message}` : ''
+    Notify.create({ type: 'negative', message: `No se pudo guardar${reason}` })
   } finally {
     saving.value = false
   }
@@ -410,6 +538,114 @@ async function submit() {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 12px;
+}
+
+.ig-confirm {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.ig-confirm-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ig-confirm-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.ig-confirm-body {
+  padding: 18px 24px;
+  background: #faf8f5;
+}
+
+.ig-confirm-changes {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 2px 0;
+
+    .q-icon {
+      color: #21ba45;
+    }
+  }
+}
+
+.ig-confirm-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+  margin-bottom: 6px;
+}
+
+.ig-confirm-preview {
+  margin: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.form-ig {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+}
+
+.form-ig-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+
+  a {
+    margin-left: auto;
+    color: #000;
+    font-weight: 600;
+  }
+}
+
+.form-ig-btn {
+  width: 100%;
+  font-size: 0.82rem;
+
+  :deep(.q-icon) {
+    font-size: 13px;
+    margin-right: 8px;
+  }
+}
+
+.form-ig-hint {
+  margin: 8px 0 0;
+  font-size: 0.72rem;
+  color: #8a8a8a;
+  line-height: 1.4;
 }
 
 .form-grid {

@@ -19,8 +19,14 @@ export async function persistExternalImages(
       if (img.url.includes(OWN_STORAGE)) return { ...img, order: i }
       const res = await fetch(img.url)
       if (!res.ok) throw new Error(`No se pudo descargar la foto ${i + 1} (HTTP ${res.status})`)
+      // Un link privado (p. ej. Google Drive) responde 200 con una página de inicio de
+      // sesión: sin esta validación se guardaría esa página como si fuera la foto.
+      const contentType = res.headers.get('content-type') ?? ''
+      if (!contentType.startsWith('image/')) {
+        throw new Error(`La foto ${i + 1} no es una imagen (¿link privado o vencido?)`)
+      }
       const ref = storageRef(storage, `stores/${storeSlug}/products/${productId}/imported-${Date.now()}-${i}.jpg`)
-      await uploadBytes(ref, await res.blob(), { contentType: res.headers.get('content-type') ?? 'image/jpeg' })
+      await uploadBytes(ref, await res.blob(), { contentType })
       return { ...img, url: await getDownloadURL(ref), order: i }
     }),
   )

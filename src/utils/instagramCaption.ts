@@ -127,3 +127,20 @@ export function suggestCategory(text: string, availableSlugs: string[]): string 
   }
   return null
 }
+
+/**
+ * Texto actualizado de un post a partir del estado del producto: agrega o quita
+ * "VENDIDO" al inicio y corrige el primer precio. El resto de la redacción
+ * (emojis, hashtags, saltos de línea) no se toca.
+ */
+export function updateCaptionForProduct(
+  caption: string,
+  product: { sold?: boolean; price: number },
+): { caption: string; changed: boolean } {
+  let next = caption.replace(SOLD_RE, '')
+  next = next.replace(PRICE_RE, (match, amount: string) =>
+    match.replace(amount, Number.isInteger(product.price) ? String(product.price) : product.price.toFixed(2)),
+  )
+  if (product.sold) next = `VENDIDO ${next}`
+  return { caption: next, changed: next !== caption }
+}

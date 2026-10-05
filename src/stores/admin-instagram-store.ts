@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { collection, doc, getDocs, orderBy, query, updateDoc } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, orderBy, query, updateDoc } from 'firebase/firestore'
 import { db } from '@/boot/firebase'
 import { resolveCatalogSlug } from '@/utils/catalogData'
 
@@ -48,5 +48,13 @@ export const useAdminInstagramStore = defineStore('adminInstagram', () => {
     posts.value = posts.value.map((p) => (p.id === postId ? { ...p, ...data } : p))
   }
 
-  return { posts, loading, loaded, countByStatus, load, setStatus }
+  /** Un post puntual (p. ej. el de un producto), sin cargar la lista completa. */
+  async function fetchPost(postId: string): Promise<InstagramPost | null> {
+    const cached = posts.value.find((p) => p.id === postId)
+    if (cached) return cached
+    const snap = await getDoc(doc(postsRef(), postId))
+    return snap.exists() ? { id: snap.id, ...(snap.data() as Omit<InstagramPost, 'id'>) } : null
+  }
+
+  return { posts, loading, loaded, countByStatus, load, setStatus, fetchPost }
 })

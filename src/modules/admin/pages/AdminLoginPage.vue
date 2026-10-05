@@ -22,7 +22,6 @@
             <q-input
               v-model="email"
               outlined
-              stack-label
               type="email"
               label="Correo"
               autocomplete="username"
@@ -31,13 +30,12 @@
               @keyup.enter="login"
             >
               <template #prepend>
-                <q-icon name="fa-regular fa-envelope" size="xs" color="grey-7" />
+                <q-icon name="fa-regular fa-envelope" />
               </template>
             </q-input>
             <q-input
               v-model="pass"
               outlined
-              stack-label
               :type="showPassword ? 'text' : 'password'"
               label="Contraseña"
               autocomplete="current-password"
@@ -46,7 +44,7 @@
               @keyup.enter="login"
             >
               <template #prepend>
-                <q-icon name="fa-regular fa-lock-keyhole" size="xs" color="grey-7" />
+                <q-icon name="fa-regular fa-lock-keyhole" />
               </template>
               <template #append>
                 <q-icon
