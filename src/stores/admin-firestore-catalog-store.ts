@@ -12,7 +12,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore'
 import { db } from '@/boot/firebase'
-import type { Product, ProductImage } from '@/types'
+import type { Product, ProductImage, ProductSource } from '@/types'
 import { resolveCatalogSlug } from '@/utils/catalogData'
 import { productSlug } from '@/utils/slugify'
 import {
@@ -42,6 +42,7 @@ export interface AdminProductDoc {
   featured?: boolean
   tags?: string[]
   stock?: number
+  source?: ProductSource
 }
 
 function docToProduct(id: string, data: AdminProductDoc, catNameBySlug: Map<string, string>): Product {
@@ -71,6 +72,7 @@ function docToProduct(id: string, data: AdminProductDoc, catNameBySlug: Map<stri
   }
   if (data.discount) p.discount = data.discount
   if (typeof data.stock === 'number') p.stock = data.stock
+  if (data.source) p.source = data.source
   return p
 }
 
@@ -85,7 +87,7 @@ export const useAdminFirestoreCatalogStore = defineStore('adminFirestoreCatalog'
   const loading = ref(false)
   const sourceReady = ref(false)
   const filter = ref('')
-  const sortMode = ref<AdminCatalogSortMode>('default')
+  const sortMode = ref<AdminCatalogSortMode>('name-asc')
 
   const catalogSlug = computed(() => resolveCatalogSlug())
 
@@ -156,6 +158,7 @@ export const useAdminFirestoreCatalogStore = defineStore('adminFirestoreCatalog'
     if (p.featured) d.featured = true
     if (p.tags?.length) d.tags = p.tags
     if (typeof p.stock === 'number') d.stock = p.stock
+    if (p.source) d.source = p.source
     return d
   }
 
@@ -200,7 +203,7 @@ export const useAdminFirestoreCatalogStore = defineStore('adminFirestoreCatalog'
     loading.value = false
     sourceReady.value = false
     filter.value = ''
-    sortMode.value = 'default'
+    sortMode.value = 'name-asc'
   }
 
   return {

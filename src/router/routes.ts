@@ -70,6 +70,12 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/modules/admin/pages/AdminCatalogPage.vue'),
         meta: { requiresAdmin: true },
       },
+      {
+        path: 'instagram',
+        name: 'admin-instagram',
+        component: () => import('@/modules/admin/pages/AdminInstagramPage.vue'),
+        meta: { requiresAdmin: true },
+      },
     ],
   },
   {

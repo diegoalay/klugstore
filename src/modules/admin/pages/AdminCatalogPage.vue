@@ -85,6 +85,17 @@
             <div class="admin-card-badges">
               <q-badge v-if="!p.visible" color="grey-8" rounded class="admin-badge">Oculto</q-badge>
               <q-badge v-if="p.sold" color="deep-orange-6" rounded class="admin-badge">Vendido</q-badge>
+              <a
+                v-if="p.source?.type === 'instagram'"
+                :href="p.source.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="admin-ig-badge"
+                @click.stop
+              >
+                <q-icon name="fa-brands fa-instagram" size="12px" />
+                <q-tooltip>Creado desde Instagram: ver publicación</q-tooltip>
+              </a>
             </div>
 
             <q-btn
@@ -133,7 +144,8 @@
       <ProductFormDialog
         v-model="editorOpen"
         :product="editorProduct"
-        @saved="reload"
+        :prefill="editorPrefill"
+        @saved="onProductSaved"
         @request-delete="onRequestDeleteFromForm"
       />
 
@@ -187,7 +199,13 @@ function formatListPrice(p: Product): string {
 // Diálogo de producto (crear / editar): editor compartido con el catálogo público
 // ============================================
 
-const { editorOpen, editorProduct, openProductEditor, confirmDeleteProduct } = useAdminProductEditor()
+const { editorOpen, editorProduct, editorPrefill, openProductEditor, handleEditorSaved, confirmDeleteProduct } =
+  useAdminProductEditor()
+
+async function onProductSaved(productId: string) {
+  await handleEditorSaved(productId)
+  await reload()
+}
 
 function openAddProductDialog() {
   void openProductEditor(null)
@@ -225,6 +243,18 @@ const categoriesDialogOpen = ref(false)
 </script>
 
 <style scoped lang="scss">
+.admin-ig-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+  text-decoration: none;
+}
+
 .admin-page {
   background: #faf8f5;
   min-height: 100vh;

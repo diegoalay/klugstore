@@ -145,6 +145,7 @@
       v-if="isAdmin"
       v-model="editorOpen"
       :product="editorProduct"
+      :prefill="editorPrefill"
       @saved="refreshCatalogAfterEdit"
       @request-delete="deleteFromEditor"
     />
@@ -280,7 +281,7 @@ const { loadCatalog, reloadCatalog } = useCatalog()
 const AdminProductFormDialog = defineAsyncComponent(
   () => import('@/components/admin/ProductFormDialog.vue'),
 )
-const { editorOpen, editorProduct, confirmDeleteProduct } = useAdminProductEditor()
+const { editorOpen, editorProduct, editorPrefill, confirmDeleteProduct } = useAdminProductEditor()
 
 async function refreshCatalogAfterEdit() {
   await reloadCatalog(resolveStoreSlug())
@@ -393,12 +394,15 @@ onServerPrefetch(async () => {
 })
 
 onMounted(async () => {
+  const storeSlug = resolveStoreSlug()
   if (catalogStore.products.length > 0) {
-    // Ya se cargó durante SSR e hidrató — no repetir el fetch.
+    // Hidratado desde SSR/SSG: se muestra al instante, pero esos datos son del
+    // momento del build. Se refresca en segundo plano para ver productos o
+    // cambios publicados después del último deploy.
     loading.value = false
+    void reloadCatalog(storeSlug)
     return
   }
-  const storeSlug = resolveStoreSlug()
   await loadCatalog(storeSlug)
   loading.value = false
 })

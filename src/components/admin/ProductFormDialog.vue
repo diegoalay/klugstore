@@ -78,6 +78,7 @@
               dense
               label="ID interno (se genera solo)"
               class="form-field span-2"
+              @update:model-value="onWorkingIdInput"
             />
           </div>
         </section>
@@ -121,6 +122,7 @@ import type { Product } from '@/types'
 import { slugifyCatalogText, productSlug } from '@/utils/slugify'
 import { useAdminFirestoreCatalogStore } from '@/stores/admin-firestore-catalog-store'
 import ProductImageManager from '@/components/admin/ProductImageManager.vue'
+import { nextProductId, persistExternalImages } from '@/utils/productImages'
 
 const NEW_CATEGORY_VALUE = '__new_category__'
 
@@ -130,11 +132,13 @@ const store = useAdminFirestoreCatalogStore()
 const props = defineProps<{
   modelValue: boolean
   product?: Product | null
+  /** Valores iniciales al crear (p. ej. desde un post de Instagram). */
+  prefill?: Partial<Product> | null
 }>()
 
 const emit = defineEmits<{
   'update:modelValue': [boolean]
-  saved: []
+  saved: [productId: string]
   'request-delete': []
 }>()
 
@@ -204,32 +208,43 @@ const draftTags = computed({
       .filter(Boolean)),
 })
 
+/** Reemplaza el borrador completo: sin esto quedaban campos del producto anterior (sold, source…). */
+function resetDraft(next: Product) {
+  for (const key of Object.keys(draft) as (keyof Product)[]) delete draft[key]
+  Object.assign(draft, next, { images: next.images.map((i) => ({ ...i })) })
+}
+
+// Al crear, el ID sigue el esquema de la base `{categoría}-{nn}` (editable a mano).
+let idWasEdited = false
+function autoId() {
+  return draft.categoryId ? nextProductId(draft.categoryId, store.products.map((p) => p.id)) : ''
+}
+
 watch(
   () => [props.modelValue, props.product] as const,
   ([isOpen, product]) => {
     if (!isOpen) return
     if (product) {
-      Object.assign(draft, product, { images: product.images.map((i) => ({ ...i })) })
+      resetDraft(product)
       workingId.value = product.id
     } else {
-      Object.assign(draft, blankDraft())
-      workingId.value = ''
+      resetDraft({ ...blankDraft(), ...(props.prefill ?? {}) })
+      idWasEdited = false
+      workingId.value = autoId()
     }
     previousCategoryId.value = draft.categoryId
   },
   { immediate: true },
 )
 
-// Autogenera el ID desde el nombre mientras se crea (el usuario puede sobreescribirlo).
-let idWasEdited = false
-watch(workingId, (v, old) => {
-  if (v !== old) idWasEdited = true
-})
+function onWorkingIdInput() {
+  idWasEdited = true
+}
+
 watch(
-  () => draft.name,
-  (name) => {
-    if (isEdit.value || idWasEdited) return
-    workingId.value = slugifyCatalogText(name || '')
+  () => draft.categoryId,
+  () => {
+    if (!isEdit.value && !idWasEdited) workingId.value = autoId()
   },
 )
 
@@ -294,15 +309,16 @@ async function submit() {
 
   saving.value = true
   try {
+    const id = (isEdit.value ? workingId.value : workingId.value.trim()) || draft.id
+    draft.images = await persistExternalImages(draft.images, storeSlug.value, id)
     if (isEdit.value) {
-      draft.id = workingId.value
+      draft.id = id
       await store.saveProduct({ ...draft })
     } else {
-      const id = workingId.value.trim()
       await store.createProduct(id, { ...draft, id })
     }
     Notify.create({ type: 'positive', message: isEdit.value ? 'Cambios guardados' : 'Producto creado' })
-    emit('saved')
+    emit('saved', id)
     close()
   } catch (err) {
     console.error(err)

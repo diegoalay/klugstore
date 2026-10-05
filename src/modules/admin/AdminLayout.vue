@@ -8,6 +8,24 @@
           v-if="showAdminNav"
           flat
           no-caps
+          icon="fa-solid fa-boxes-stacked"
+          label="Productos"
+          :to="{ name: 'admin-catalog' }"
+          class="admin-btn admin-header-btn"
+        />
+        <q-btn
+          v-if="showAdminNav"
+          flat
+          no-caps
+          icon="fa-brands fa-instagram"
+          label="Instagram"
+          :to="{ name: 'admin-instagram' }"
+          class="admin-btn admin-header-btn"
+        />
+        <q-btn
+          v-if="showAdminNav"
+          flat
+          no-caps
           icon="fa-solid fa-store"
           label="Ver tienda"
           to="/catalog"
@@ -50,7 +68,7 @@ const route = useRoute()
 const router = useRouter()
 const draftStore = useAdminCatalogDraftStore()
 
-const showAdminNav = computed(() => route.name === 'admin-catalog')
+const showAdminNav = computed(() => route.meta.requiresAdmin === true)
 
 async function logout() {
   await signOutAdmin()

@@ -50,6 +50,13 @@ export interface Category {
   productCount?: number
 }
 
+/** De dónde salió el producto; ausente = creado a mano en el admin. */
+export interface ProductSource {
+  type: 'instagram'
+  postId: string
+  url: string
+}
+
 export interface Product {
   id: string
   name: string
@@ -78,6 +85,7 @@ export interface Product {
   order: number
   /** Cantidad en inventario. Opcional — si falta, no se muestra ni se valida. */
   stock?: number
+  source?: ProductSource
 }
 
 export interface ProductImage {

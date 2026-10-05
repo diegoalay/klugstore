@@ -7,6 +7,8 @@ import { useAdminFirestoreCatalogStore } from '@/stores/admin-firestore-catalog-
 const editorOpen = ref(false)
 const editorProduct = shallowRef<Product | null>(null)
 const editorLoading = ref(false)
+const editorPrefill = shallowRef<Partial<Product> | null>(null)
+let onCreated: ((productId: string) => void | Promise<void>) | null = null
 
 /**
  * Abre el diálogo de edición de producto. Desde el catálogo público el
@@ -17,6 +19,8 @@ export function useAdminProductEditor() {
   const store = useAdminFirestoreCatalogStore()
 
   async function openProductEditor(productId: string | null) {
+    editorPrefill.value = null
+    onCreated = null
     if (productId === null) {
       editorProduct.value = null
       editorOpen.value = true
@@ -41,6 +45,24 @@ export function useAdminProductEditor() {
     editorOpen.value = true
   }
 
+  /** Crear un producto con valores iniciales (p. ej. un post de Instagram). */
+  function openProductEditorWithPrefill(
+    prefill: Partial<Product>,
+    afterCreate?: (productId: string) => void | Promise<void>,
+  ) {
+    editorProduct.value = null
+    editorPrefill.value = prefill
+    onCreated = afterCreate ?? null
+    editorOpen.value = true
+  }
+
+  /** Llamar desde @saved del diálogo: avisa a quien abrió el editor con prefill. */
+  async function handleEditorSaved(productId: string) {
+    const callback = onCreated
+    onCreated = null
+    if (!editorProduct.value && callback) await callback(productId)
+  }
+
   /** Confirma y borra; `onDeleted` refresca la vista que lo llamó. */
   function confirmDeleteProduct(product: Product, onDeleted?: () => void | Promise<void>) {
     Dialog.create({
@@ -63,5 +85,14 @@ export function useAdminProductEditor() {
     })
   }
 
-  return { editorOpen, editorProduct, editorLoading, openProductEditor, confirmDeleteProduct }
+  return {
+    editorOpen,
+    editorProduct,
+    editorPrefill,
+    editorLoading,
+    openProductEditor,
+    openProductEditorWithPrefill,
+    handleEditorSaved,
+    confirmDeleteProduct,
+  }
 }

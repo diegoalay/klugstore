@@ -25,3 +25,6 @@ backups/
 
 # Archivos temporales que Quasar genera al compilar quasar.config
 quasar.config.*.temporary.compiled*
+
+# Token de la API de Instagram (importación de posts) — nunca se sube al repo
+.instagram-token
