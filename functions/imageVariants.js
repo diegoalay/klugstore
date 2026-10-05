@@ -11,7 +11,10 @@
  *   stores/{store}/products/{id}/{nombre}.{ext}
  *     → stores/{store}/products/{id}/variants/{nombre}_{ancho}.webp
  */
-import sharp from 'sharp'
+// sharp se carga al convertir (no al importar el módulo): la CLI de Firebase analiza el
+// código con otro runtime (x64) y fallaba al cargar el binario nativo; también acorta el arranque.
+let sharpPromise
+const loadSharp = () => (sharpPromise ??= import('sharp').then((m) => m.default))
 
 export const VARIANT_WIDTHS = [480, 720, 1080]
 
@@ -42,7 +45,8 @@ export function variantPath(originalPath, width) {
 }
 
 /** Redimensiona a `width` (sin agrandar), corrige la orientación EXIF y exporta WebP. */
-export function renderVariant(buffer, width) {
+export async function renderVariant(buffer, width) {
+  const sharp = await loadSharp()
   return sharp(buffer).rotate().resize({ width, withoutEnlargement: true }).webp({ quality: 74 }).toBuffer()
 }
 
