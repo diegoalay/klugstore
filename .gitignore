@@ -16,3 +16,12 @@ yarn-error.log*
 
 # npm credentials (Font Awesome Pro token)
 .npmrc
+
+# Service account keys (Firebase Admin SDK) — nunca se suben al repo
+serviceAccountKey*.json
+*-firebase-adminsdk-*.json
+
+backups/
+
+# Archivos temporales que Quasar genera al compilar quasar.config
+quasar.config.*.temporary.compiled*
