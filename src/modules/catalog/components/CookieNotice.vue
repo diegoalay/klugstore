@@ -92,6 +92,8 @@ function dismiss() {
     left: 12px;
     right: 84px;
     max-width: none;
+    /* Encima de la barra de navegación inferior. */
+    bottom: calc(76px + env(safe-area-inset-bottom));
   }
 }
 </style>

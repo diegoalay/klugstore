@@ -44,6 +44,28 @@
             </router-link>
           </nav>
 
+          <!-- Celular: Instagram y WhatsApp van aquí en lugar de botones flotantes. -->
+          <div class="toolbar-social">
+            <a
+              v-if="socialLinks?.instagram"
+              :href="socialLinks.instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="toolbar-social-btn toolbar-social-btn--ig"
+              aria-label="Síguenos en Instagram"
+            >
+              <q-icon name="fa-brands fa-instagram" />
+            </a>
+            <button
+              type="button"
+              class="toolbar-social-btn toolbar-social-btn--wa"
+              aria-label="Escríbenos por WhatsApp"
+              @click="openWhatsAppGeneral('floating_button')"
+            >
+              <q-icon name="fa-brands fa-whatsapp" />
+            </button>
+          </div>
+
           <q-btn
             flat
             round
@@ -58,27 +80,6 @@
         </div>
       </q-toolbar>
 
-      <!-- Nav inferior (solo mobile) -->
-      <nav class="catalog-nav catalog-nav--mobile" aria-label="Principal móvil">
-        <router-link
-          :to="{ name: 'catalog-home' }"
-          class="nav-link"
-          :class="{ 'nav-link--active': isCatalogActive }"
-        >
-          Catálogo
-        </router-link>
-        <router-link
-          :to="{ name: 'about' }"
-          class="nav-link"
-          :class="{ 'nav-link--active': isAboutActive }"
-        >
-          Nosotros
-        </router-link>
-        <router-link :to="{ name: 'faq' }" class="nav-link" :class="{ 'nav-link--active': isFaqActive }">
-          FAQs
-        </router-link>
-        <router-link :to="adminRoute" class="nav-link nav-link--admin" rel="nofollow">Admin</router-link>
-      </nav>
 
       <div v-if="showSearch" ref="searchBarRef" class="search-bar">
         <div class="search-bar-track">
@@ -173,6 +174,7 @@
       v-if="socialLinks?.instagram"
       position="bottom-right"
       :offset="[20, 80]"
+      class="catalog-fab"
     >
       <q-btn
         fab-mini
@@ -187,7 +189,7 @@
     </q-page-sticky>
 
     <!-- WhatsApp FAB -->
-    <q-page-sticky position="bottom-right" :offset="[20, 20]">
+    <q-page-sticky position="bottom-right" :offset="[20, 20]" class="catalog-fab">
       <q-btn
         fab-mini
         icon="fa-brands fa-whatsapp"
@@ -264,6 +266,7 @@
     </q-footer>
 
     <CookieNotice />
+    <MobileBottomNav :search-open="showSearch" @search="toggleSearchFromBottomNav" />
   </q-layout>
 </template>
 
@@ -279,6 +282,7 @@ import ProductQuickViewDialog from './components/ProductQuickViewDialog.vue'
 import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
 import CookieNotice from './components/CookieNotice.vue'
 import TrustStrip from './components/TrustStrip.vue'
+import MobileBottomNav from './components/MobileBottomNav.vue'
 import { resolveStoreSlug } from '@/utils/storeResolver'
 import { formatCurrency } from '@/utils/format'
 import { useAdminSession } from '@/composables/useAdminSession'
@@ -399,6 +403,12 @@ watch(searchQuery, (term) => {
   searchTrackTimer = setTimeout(() => trackSearch(term, searchMatches.value.length), 1200)
 })
 
+/** "Buscar" de la barra inferior (celular): sube al inicio y abre/cierra el buscador. */
+function toggleSearchFromBottomNav() {
+  if (!showSearch.value) window.scrollTo({ top: 0, behavior: 'smooth' })
+  void toggleSearch()
+}
+
 async function toggleSearch() {
   showSearch.value = !showSearch.value
   if (showSearch.value) {
@@ -488,9 +498,6 @@ onMounted(async () => {
       height: 34px;
     }
 
-    .catalog-nav--mobile {
-      display: none;
-    }
   }
 }
 
@@ -549,13 +556,8 @@ onMounted(async () => {
   background: rgba(209, 151, 147, 0.08);
 }
 
-.catalog-nav--mobile {
-  display: none;
-}
-
 /* Menú deslizable: "Admin" queda fuera de la vista a la derecha. */
-.catalog-nav--desktop,
-.catalog-nav--mobile {
+.catalog-nav--desktop {
   overflow-x: auto;
   scrollbar-width: none;
 
@@ -581,30 +583,53 @@ onMounted(async () => {
   opacity: 0.7;
 }
 
-/* Celular: el menú pasa a su propia fila bajo el logo (con "Preguntas" ya no cabe al lado). */
-@media (max-width: 599px) {
-  .catalog-nav--desktop {
-    display: none;
+.toolbar-social {
+  display: none;
+}
+
+.toolbar-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 0;
+  color: #fff;
+  font-size: 17px;
+  cursor: pointer;
+  text-decoration: none;
+
+  &--ig {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
   }
 
-  .catalog-nav--mobile {
+  &--wa {
+    background: #25d366;
+  }
+}
+
+/* Celular: menú y búsqueda viven en la barra inferior (MobileBottomNav); arriba el logo
+   y, a la derecha, Instagram/WhatsApp en lugar de los botones flotantes. */
+@media (max-width: 599px) {
+  .catalog-nav--desktop,
+  .nav-search-btn,
+  .catalog-fab {
+    display: none !important;
+  }
+
+  .toolbar-social {
     display: flex;
-    margin: 0 16px 12px;
-
-    /* Las 3 opciones llenan el ancho; "Admin" queda afuera y aparece al deslizar. */
-    .nav-link {
-      flex: 0 0 calc((100% - 4px) / 3);
-      text-align: center;
-    }
-
-    .nav-link--admin {
-      flex: 0 0 auto;
-    }
+    gap: 8px;
   }
 
   .catalog-toolbar {
     padding: 12px 16px;
     min-height: 60px;
+  }
+
+  .catalog-footer {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
   }
 }
 
