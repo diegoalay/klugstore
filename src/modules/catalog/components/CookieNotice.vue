@@ -2,7 +2,7 @@
   <transition name="cookie-fade">
     <div v-if="visible" class="cookie-notice" role="region" aria-label="Aviso de cookies">
       <p>
-        Usamos cookies de analítica para mejorar el catálogo.
+        Usamos cookies de analítica y de Meta para mejorar el catálogo y medir nuestros anuncios.
         <router-link to="/privacidad">Más información</router-link>
       </p>
       <button type="button" class="cookie-ok" @click="dismiss">Entendido</button>

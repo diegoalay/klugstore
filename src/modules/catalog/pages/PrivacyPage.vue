@@ -3,7 +3,7 @@
     <article class="privacy-content">
       <p class="privacy-eyebrow">Legal</p>
       <h1>Política de privacidad y cookies</h1>
-      <p class="privacy-updated">Última actualización: 4 de octubre de 2026</p>
+      <p class="privacy-updated">Última actualización: 5 de octubre de 2026</p>
 
       <p>
         En <strong>{{ storeName }}</strong> respetamos su privacidad. Esta página explica qué
@@ -30,16 +30,21 @@
         <li>Saber qué productos y categorías interesan más.</li>
         <li>Detectar productos que se buscan y aún no ofrecemos.</li>
         <li>Mejorar el funcionamiento y el diseño del catálogo.</li>
+        <li>Medir los resultados de nuestros anuncios en Facebook e Instagram.</li>
       </ul>
       <p>No vendemos ni compartimos esta información con terceros para fines publicitarios.</p>
 
       <h2>Cookies</h2>
       <p>
-        Usamos <strong>Google Analytics</strong> (a través de Firebase), que guarda cookies en su
-        navegador para distinguir visitas de forma anónima:
+        Usamos <strong>Google Analytics</strong> (a través de Firebase) y el <strong>píxel de Meta</strong>, que
+        guardan cookies en su navegador para distinguir visitas de forma anónima:
       </p>
       <ul>
         <li><code>_ga</code> y <code>_ga_*</code>: medición de visitas. Duración hasta 2 años.</li>
+        <li>
+          <code>_fbp</code> (píxel de Meta): permite saber si una visita llegó desde nuestros anuncios en Facebook
+          o Instagram y si terminó en un contacto por WhatsApp. Duración hasta 3 meses.
+        </li>
       </ul>
       <p>
         También guardamos en su navegador si ya cerró el aviso de cookies, para no volver a

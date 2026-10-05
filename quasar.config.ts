@@ -2,7 +2,7 @@ import { defineConfig } from '#q-app'
 
 export default defineConfig((ctx) => {
   return {
-    boot: ['chunk-recovery', 'fontawesome-pro', 'firebase'],
+    boot: ['chunk-recovery', 'fontawesome-pro', 'firebase', 'meta-pixel'],
 
     css: ['app.scss'],
 

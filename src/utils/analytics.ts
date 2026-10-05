@@ -15,6 +15,12 @@ function track(name: string, params: EventParams = {}): void {
   })
 }
 
+/** Evento estándar del píxel de Meta (si está cargado; ver boot/meta-pixel.ts). */
+function metaTrack(event: 'ViewContent' | 'Search' | 'Contact', params: Record<string, unknown>): void {
+  if (typeof window === 'undefined') return
+  window.fbq?.('track', event, params)
+}
+
 function itemParams(p: Product) {
   return {
     item_id: p.id,
@@ -32,6 +38,13 @@ export function trackWhatsAppClick(source: WhatsAppSource, product?: Product): v
     source,
     ...(product ? { ...itemParams(product), value: product.price, currency: product.currency || 'GTQ' } : {}),
   })
+  // Conversión para optimizar anuncios en Meta: alguien abrió WhatsApp para comprar.
+  metaTrack('Contact', {
+    content_category: source,
+    ...(product
+      ? { content_ids: [product.id], content_name: product.name, value: product.price, currency: product.currency || 'GTQ' }
+      : {}),
+  })
 }
 
 /** Vista de ficha (página o vista rápida). `sold` distingue interés en piezas ya vendidas. */
@@ -41,6 +54,14 @@ export function trackViewItem(product: Product): void {
     value: product.price,
     sold: product.sold === true,
     items: [itemParams(product)],
+  })
+  metaTrack('ViewContent', {
+    content_ids: [product.id],
+    content_name: product.name,
+    content_type: 'product',
+    content_category: product.categoryName ?? product.categoryId,
+    value: product.price,
+    currency: product.currency || 'GTQ',
   })
 }
 
@@ -52,6 +73,7 @@ export function trackAskSimilar(product: Product): void {
 /** Búsqueda; results_count = 0 indica productos que la gente pide y no hay. */
 export function trackSearch(term: string, resultsCount: number): void {
   track('search', { search_term: term.trim().toLowerCase(), results_count: resultsCount })
+  metaTrack('Search', { search_string: term.trim().toLowerCase() })
 }
 
 export function trackSelectCategory(categoryId: string | null): void {
