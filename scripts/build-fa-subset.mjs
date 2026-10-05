@@ -59,11 +59,36 @@ const codepoints = { solid: new Set(), regular: new Set(), brands: new Set() }
 const codeOf = { core: new Map(), brands: new Map() }
 let removed = 0
 
+/**
+ * Separa el CSS en reglas de primer nivel. No sirve un regex: hay íconos cuyo valor es una
+ * llave (`.fa-bracket-curly-left{--fa:"\\{"}`) y @media/@keyframes anidan reglas.
+ */
+function splitRules(css) {
+  const rules = []
+  let depth = 0
+  let quote = null
+  let start = 0
+  for (let i = 0; i < css.length; i++) {
+    const ch = css[i]
+    if (quote) {
+      if (ch === '\\') i++
+      else if (ch === quote) quote = null
+      continue
+    }
+    if (ch === '"' || ch === "'") quote = ch
+    else if (ch === '{') depth++
+    else if (ch === '}' && --depth === 0) {
+      rules.push(css.slice(start, i + 1))
+      start = i + 1
+    }
+  }
+  return rules
+}
+
 /** Deja las reglas base y solo las reglas de íconos cuyo nombre está en `names`. */
 function filterCss(file, names, codes) {
   const css = readFileSync(join(FA, `css/${file}`), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '')
-  // Reglas planas o @font-face/@keyframes con un nivel de anidación.
-  const rules = css.match(/@[^{]+\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}|[^{}]+\{[^{}]*\}/g) ?? []
+  const rules = splitRules(css)
   const kept = []
   for (const rule of rules) {
     const m = iconRule.exec(rule.trim())
