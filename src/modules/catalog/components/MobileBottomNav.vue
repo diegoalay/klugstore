@@ -33,7 +33,7 @@ defineProps<{ searchOpen: boolean }>()
 const emit = defineEmits<{ search: [] }>()
 
 const ITEMS = [
-  { name: 'catalog-home', label: 'Catálogo', icon: 'fa-solid fa-store' },
+  { name: 'catalog-home', label: 'Catálogo', icon: 'fa-solid fa-bag-shopping' },
   { name: 'about', label: 'Nosotros', icon: 'fa-solid fa-heart' },
   { name: 'faq', label: 'FAQs', icon: 'fa-solid fa-circle-question' },
 ] as const
