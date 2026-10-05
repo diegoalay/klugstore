@@ -63,7 +63,7 @@
         type="button"
         class="admin-edit-chip"
         aria-label="Editar producto"
-        @click.stop="openProductEditor(product.id)"
+        @click.stop="openProductEditorLazy(product.id)"
       >
         <q-icon name="fa-solid fa-pen" size="11px" /> Editar
       </button>
@@ -119,7 +119,7 @@ import { useWhatsApp } from '@/composables/useWhatsApp'
 import { useProductQuickView } from '@/composables/useProductQuickView'
 import { formatCurrency } from '@/utils/format'
 import { useAdminSession } from '@/composables/useAdminSession'
-import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
+import { openProductEditorLazy } from '@/composables/openProductEditorLazy'
 import type { Product } from '@/types'
 import { CARD_WIDTHS, imageSrc, imageSrcset, onImageVariantError } from '@/utils/imageVariants'
 
@@ -130,7 +130,6 @@ const props = defineProps<{
 }>()
 
 const { isAdmin } = useAdminSession()
-const { openProductEditor } = useAdminProductEditor()
 
 const storeConfig = useStoreConfigStore()
 const { openWhatsApp, openWhatsAppSimilar } = useWhatsApp()
@@ -203,7 +202,10 @@ const formattedPrice = computed(() =>
 
 const formattedComparePrice = computed(() => {
   if (!props.product.compareAtPrice) return ''
-  return formatCurrency(props.product.compareAtPrice, props.product.currency || storeConfig.currency)
+  return formatCurrency(
+    props.product.compareAtPrice,
+    props.product.currency || storeConfig.currency,
+  )
 })
 
 const discountPercent = computed(() => {
@@ -258,7 +260,9 @@ function handleWhatsApp() {
   .product-card {
     opacity: 1;
     transform: none;
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    transition:
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
   }
 }
 

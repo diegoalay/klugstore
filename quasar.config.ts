@@ -2,7 +2,8 @@ import { defineConfig } from '#q-app'
 
 export default defineConfig((ctx) => {
   return {
-    boot: ['chunk-recovery', 'fontawesome-pro', 'firebase', 'meta-pixel'],
+    // 'firebase-idle' agenda el SDK de Firebase para cuando el navegador esté libre (utils/firebaseLazy).
+    boot: ['chunk-recovery', 'fontawesome-pro', 'firebase-idle', 'meta-pixel'],
 
     css: ['app.scss'],
 

@@ -1,6 +1,5 @@
-import { logEvent } from 'firebase/analytics'
-import { analyticsReady } from '@/boot/firebase'
 import type { Product } from '@/types'
+import { loadFirebase } from '@/utils/firebaseLazy'
 
 /**
  * Eventos de negocio del catálogo (GA4 vía Firebase). Nunca se envían datos
@@ -10,13 +9,21 @@ type EventParams = Record<string, string | number | boolean | undefined | object
 
 function track(name: string, params: EventParams = {}): void {
   if (typeof window === 'undefined') return
-  void analyticsReady.then((analytics) => {
-    if (analytics) logEvent(analytics, name, params)
-  })
+  // Firebase se carga diferido (utils/firebaseLazy): un evento previo a la carga la
+  // dispara y espera a que termine; no se pierde.
+  void Promise.all([loadFirebase(), import('firebase/analytics')])
+    .then(async ([{ analyticsReady }, { logEvent }]) => {
+      const analytics = await analyticsReady
+      if (analytics) logEvent(analytics, name, params)
+    })
+    .catch(() => undefined)
 }
 
 /** Evento estándar del píxel de Meta (si está cargado; ver boot/meta-pixel.ts). */
-function metaTrack(event: 'ViewContent' | 'Search' | 'Contact', params: Record<string, unknown>): void {
+function metaTrack(
+  event: 'ViewContent' | 'Search' | 'Contact',
+  params: Record<string, unknown>,
+): void {
   if (typeof window === 'undefined') return
   window.fbq?.('track', event, params)
 }
@@ -30,19 +37,27 @@ function itemParams(p: Product) {
   }
 }
 
-export type WhatsAppSource = 'product_card' | 'product_detail' | 'floating_button' | 'about_page' | 'faq_page'
+export type WhatsAppSource =
+  'product_card' | 'product_detail' | 'floating_button' | 'about_page' | 'faq_page'
 
 /** Clic en "Comprar"/WhatsApp: la conversión real del catálogo. */
 export function trackWhatsAppClick(source: WhatsAppSource, product?: Product): void {
   track('whatsapp_click', {
     source,
-    ...(product ? { ...itemParams(product), value: product.price, currency: product.currency || 'GTQ' } : {}),
+    ...(product
+      ? { ...itemParams(product), value: product.price, currency: product.currency || 'GTQ' }
+      : {}),
   })
   // Conversión para optimizar anuncios en Meta: alguien abrió WhatsApp para comprar.
   metaTrack('Contact', {
     content_category: source,
     ...(product
-      ? { content_ids: [product.id], content_name: product.name, value: product.price, currency: product.currency || 'GTQ' }
+      ? {
+          content_ids: [product.id],
+          content_name: product.name,
+          value: product.price,
+          currency: product.currency || 'GTQ',
+        }
       : {}),
   })
 }

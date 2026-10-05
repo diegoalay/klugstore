@@ -35,11 +35,20 @@
             >
               Nosotros
             </router-link>
-            <router-link :to="{ name: 'faq' }" class="nav-link" :class="{ 'nav-link--active': isFaqActive }">
+            <router-link
+              :to="{ name: 'faq' }"
+              class="nav-link"
+              :class="{ 'nav-link--active': isFaqActive }"
+            >
               FAQs
             </router-link>
             <!-- Fuera de la vista: solo se alcanza deslizando el menú hacia la derecha. -->
-            <router-link :to="adminRoute" class="nav-link nav-link--admin" rel="nofollow" data-nav-extra>
+            <router-link
+              :to="adminRoute"
+              class="nav-link nav-link--admin"
+              rel="nofollow"
+              data-nav-extra
+            >
               Admin
             </router-link>
           </nav>
@@ -79,7 +88,6 @@
           />
         </div>
       </q-toolbar>
-
 
       <div v-if="showSearch" ref="searchBarRef" class="search-bar">
         <div class="search-bar-track">
@@ -136,14 +144,19 @@
               <p v-if="product.measure" class="search-result-measure">
                 {{ product.measure }}
               </p>
-              <p class="search-result-price">{{ formatCurrency(product.price, product.currency) }}</p>
+              <p class="search-result-price">
+                {{ formatCurrency(product.price, product.currency) }}
+              </p>
             </div>
             <q-icon name="fa-solid fa-chevron-right" size="xs" class="search-result-arrow" />
           </div>
         </div>
 
         <!-- Sin resultados -->
-        <div v-else-if="resultsOpen && searchQuery && searchResults.length === 0" class="search-empty">
+        <div
+          v-else-if="resultsOpen && searchQuery && searchResults.length === 0"
+          class="search-empty"
+        >
           <q-icon name="fa-solid fa-magnifying-glass" size="sm" />
           <p>No se encontraron productos para "{{ searchQuery }}"</p>
         </div>
@@ -160,14 +173,7 @@
 
     <ProductQuickViewDialog />
 
-    <AdminProductFormDialog
-      v-if="isAdmin"
-      v-model="editorOpen"
-      :product="editorProduct"
-      :prefill="editorPrefill"
-      @saved="refreshCatalogAfterEdit"
-      @request-delete="deleteFromEditor"
-    />
+    <CatalogProductEditor v-if="isAdmin" @changed="refreshCatalogAfterEdit" />
 
     <!-- Instagram FAB -->
     <q-page-sticky
@@ -271,7 +277,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onMounted, onBeforeUnmount, onServerPrefetch, watch, defineAsyncComponent } from 'vue'
+import {
+  ref,
+  computed,
+  nextTick,
+  onMounted,
+  onBeforeUnmount,
+  onServerPrefetch,
+  watch,
+  defineAsyncComponent,
+} from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { QInput } from 'quasar'
 import { useStoreConfigStore, useCatalogStore } from '@/stores'
@@ -279,13 +294,13 @@ import { useCatalog } from '@/composables/useCatalog'
 import { useWhatsApp } from '@/composables/useWhatsApp'
 import { useProductQuickView } from '@/composables/useProductQuickView'
 import ProductQuickViewDialog from './components/ProductQuickViewDialog.vue'
-import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
 import CookieNotice from './components/CookieNotice.vue'
 import TrustStrip from './components/TrustStrip.vue'
 import MobileBottomNav from './components/MobileBottomNav.vue'
 import { resolveStoreSlug } from '@/utils/storeResolver'
 import { formatCurrency } from '@/utils/format'
 import { useAdminSession } from '@/composables/useAdminSession'
+import { whenIdle } from '@/utils/firebaseLazy'
 import { trackSearch } from '@/utils/analytics'
 import { applyCatalogSortMode } from '@/utils/catalogSort'
 import { normalizeForSearch } from '@/utils/slugify'
@@ -304,23 +319,14 @@ function onLayoutScroll(details: { position: number }) {
 const catalogStore = useCatalogStore()
 const { loadCatalog, reloadCatalog } = useCatalog()
 
-// Editor de producto para admins: se carga aparte para no sumar el código del
-// admin (escritura a Firestore/Storage) al catálogo que ven los clientes.
-const AdminProductFormDialog = defineAsyncComponent(
-  () => import('@/components/admin/ProductFormDialog.vue'),
+// Editor de producto para admins: se carga aparte (con su store de Firestore/Storage)
+// para no sumar el código del admin ni el SDK de Firebase al catálogo de los clientes.
+const CatalogProductEditor = defineAsyncComponent(
+  () => import('@/components/admin/CatalogProductEditor.vue'),
 )
-const { editorOpen, editorProduct, editorPrefill, handleEditorSaved, confirmDeleteProduct } = useAdminProductEditor()
 
-async function refreshCatalogAfterEdit(productId?: string) {
-  if (productId) await handleEditorSaved(productId)
+async function refreshCatalogAfterEdit() {
   await reloadCatalog(resolveStoreSlug())
-}
-
-function deleteFromEditor() {
-  const p = editorProduct.value
-  if (!p) return
-  editorOpen.value = false
-  confirmDeleteProduct(p, refreshCatalogAfterEdit)
 }
 const { openWhatsAppGeneral } = useWhatsApp()
 const { openProductQuickView } = useProductQuickView()
@@ -344,13 +350,14 @@ const resultsOpen = ref(true)
 watch(searchQuery, () => (resultsOpen.value = true))
 
 function closeResultsOnOutsideClick(event: PointerEvent) {
-  if (searchBarRef.value && !searchBarRef.value.contains(event.target as Node)) resultsOpen.value = false
+  if (searchBarRef.value && !searchBarRef.value.contains(event.target as Node))
+    resultsOpen.value = false
 }
 onMounted(() => document.addEventListener('pointerdown', closeResultsOnOutsideClick))
 onBeforeUnmount(() => document.removeEventListener('pointerdown', closeResultsOnOutsideClick))
 
-const isCatalogActive = computed(() =>
-  route.path === '/catalog' || route.path.startsWith('/catalog/'),
+const isCatalogActive = computed(
+  () => route.path === '/catalog' || route.path.startsWith('/catalog/'),
 )
 // Por nombre y no por path: Firebase Hosting sirve /about/ (con barra final).
 const isAboutActive = computed(() => route.name === 'about')
@@ -397,7 +404,11 @@ const searchMatches = computed(() => {
 })
 
 const searchResults = computed(() =>
-  applyCatalogSortMode(searchMatches.value, catalogStore.catalogSort, catalogStore.categoryOrder).slice(0, 8),
+  applyCatalogSortMode(
+    searchMatches.value,
+    catalogStore.catalogSort,
+    catalogStore.categoryOrder,
+  ).slice(0, 8),
 )
 
 // Se registra la búsqueda cuando el usuario deja de escribir (no cada tecla).
@@ -477,7 +488,8 @@ onMounted(async () => {
     // momento del build. Se refresca en segundo plano para ver productos o
     // cambios publicados después del último deploy.
     loading.value = false
-    void reloadCatalog(storeSlug)
+    // Tras la primera pintura y con el navegador libre: el refresco carga Firebase.
+    void whenIdle().then(() => reloadCatalog(storeSlug))
     return
   }
   await loadCatalog(storeSlug)
@@ -502,7 +514,6 @@ onMounted(async () => {
     .catalog-logo {
       height: 38px;
     }
-
   }
 }
 
@@ -606,7 +617,13 @@ onMounted(async () => {
   text-decoration: none;
 
   &--ig {
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+    background: radial-gradient(
+      circle at 30% 107%,
+      #fdf497 0%,
+      #fd5949 45%,
+      #d6249f 60%,
+      #285aeb 90%
+    );
   }
 
   &--wa {
@@ -781,7 +798,9 @@ onMounted(async () => {
   color: var(--ks-text-secondary, #6b6b6b);
   padding: 4px;
   border-radius: 999px;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 
   &:hover {
     color: var(--ks-text, #000);

@@ -109,9 +109,7 @@
           </q-carousel-slide>
         </q-carousel>
 
-        <div class="lightbox-counter">
-          {{ lightboxSlide + 1 }} / {{ product.images.length }}
-        </div>
+        <div class="lightbox-counter">{{ lightboxSlide + 1 }} / {{ product.images.length }}</div>
       </div>
     </q-dialog>
 
@@ -212,7 +210,9 @@
                 <strong>{{ step.title }}.</strong> {{ step.detail }}
               </li>
             </ol>
-            <router-link to="/preguntas-frecuentes" class="purchase-faq-link">Ver preguntas frecuentes</router-link>
+            <router-link to="/preguntas-frecuentes" class="purchase-faq-link"
+              >Ver preguntas frecuentes</router-link
+            >
           </details>
         </div>
       </template>
@@ -228,7 +228,9 @@
         />
         <p class="cta-hint cta-hint--sold">
           Esta pieza ya fue vendida.
-          <a href="#" class="cta-sold-link" @click.prevent="onAskSimilarClick">Ver piezas disponibles de la categoría</a>
+          <a href="#" class="cta-sold-link" @click.prevent="onAskSimilarClick"
+            >Ver piezas disponibles de la categoría</a
+          >
         </p>
       </template>
 
@@ -247,7 +249,7 @@ import { useStoreConfigStore } from '@/stores'
 import { useWhatsApp } from '@/composables/useWhatsApp'
 import { formatCurrency } from '@/utils/format'
 import { useAdminSession } from '@/composables/useAdminSession'
-import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
+import { openProductEditorLazy } from '@/composables/openProductEditorLazy'
 import { useProductQuickView } from '@/composables/useProductQuickView'
 import { trackViewItem, trackAskSimilar } from '@/utils/analytics'
 import { PAYMENT_METHODS, PURCHASE_STEPS } from '@/content/purchaseInfo'
@@ -255,13 +257,12 @@ import type { Product } from '@/types'
 import { DETAIL_WIDTHS, imageSrc, imageSrcset, onImageVariantError } from '@/utils/imageVariants'
 
 const { isAdmin } = useAdminSession()
-const { openProductEditor } = useAdminProductEditor()
 const { closeProductQuickView } = useProductQuickView()
 
 // Cierra la vista rápida (si está abierta) para que no quede mostrando datos viejos tras guardar.
 function editProduct() {
   closeProductQuickView()
-  void openProductEditor(props.product.id)
+  void openProductEditorLazy(props.product.id)
 }
 
 const props = withDefaults(
@@ -308,8 +309,7 @@ watch(
 const theme = computed(() => storeConfig.theme)
 
 const activeImage = computed(
-  () =>
-    props.product.images[activeImageIndex.value] ?? props.product.images[0] ?? null,
+  () => props.product.images[activeImageIndex.value] ?? props.product.images[0] ?? null,
 )
 
 const formattedPrice = computed(() =>
@@ -318,7 +318,10 @@ const formattedPrice = computed(() =>
 
 const formattedComparePrice = computed(() => {
   if (!props.product.compareAtPrice) return ''
-  return formatCurrency(props.product.compareAtPrice, props.product.currency || storeConfig.currency)
+  return formatCurrency(
+    props.product.compareAtPrice,
+    props.product.currency || storeConfig.currency,
+  )
 })
 
 const discountPercent = computed(() => {
@@ -345,9 +348,7 @@ function handleWhatsApp() {
 }
 
 async function copyShareLink() {
-  const url =
-    props.shareUrl ??
-    (typeof window !== 'undefined' ? window.location.href : '')
+  const url = props.shareUrl ?? (typeof window !== 'undefined' ? window.location.href : '')
   if (!url) return
 
   try {
