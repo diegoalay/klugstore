@@ -10,26 +10,11 @@
       </div>
 
       <div class="cat-body">
-        <div v-for="(c, idx) in rows" :key="c.slug" class="cat-row">
-          <div class="cat-order">
-            <q-btn
-              flat
-              round
-              icon="fa-solid fa-chevron-up"
-              color="grey-6"
-              class="admin-btn-sm"
-              :disable="idx === 0"
-              @click="move(idx, -1)"
-            />
-            <q-btn
-              flat
-              round
-              icon="fa-solid fa-chevron-down"
-              color="grey-6"
-              class="admin-btn-sm"
-              :disable="idx === rows.length - 1"
-              @click="move(idx, 1)"
-            />
+        <p class="cat-hint">Arrastra desde <q-icon name="fa-solid fa-grip-vertical" size="11px" /> para cambiar el orden en la tienda.</p>
+        <div ref="listRef" class="cat-list">
+        <div v-for="c in rows" :key="c.slug" class="cat-row">
+          <div class="cat-drag" title="Arrastrar para ordenar" aria-label="Arrastrar para ordenar">
+            <q-icon name="fa-solid fa-grip-vertical" size="14px" />
           </div>
 
           <q-select
@@ -42,11 +27,12 @@
             outlined
             dense
             options-dense
+            dropdown-icon="fa-solid fa-chevron-down"
             class="cat-icon-select"
             popup-content-class="cat-icon-popup"
           >
             <template #selected>
-              <q-icon :name="categoryIconClass(c.icon)" size="16px" />
+              <span class="cat-icon-preview"><q-icon :name="categoryIconClass(c.icon)" size="16px" /></span>
             </template>
             <template #option="scope">
               <q-item v-bind="scope.itemProps">
@@ -74,9 +60,10 @@
             <q-tooltip v-if="productCount(c.slug) > 0">Tiene productos — muévelos antes de borrarla</q-tooltip>
           </q-btn>
         </div>
+        </div>
 
         <div class="cat-row cat-row--new">
-          <div class="cat-order" />
+          <div class="cat-drag cat-drag--spacer" />
           <q-select
             v-model="newIcon"
             :options="CATEGORY_ICON_OPTIONS"
@@ -87,10 +74,11 @@
             outlined
             dense
             options-dense
+            dropdown-icon="fa-solid fa-chevron-down"
             class="cat-icon-select"
           >
             <template #selected>
-              <q-icon :name="categoryIconClass(newIcon)" size="16px" />
+              <span class="cat-icon-preview"><q-icon :name="categoryIconClass(newIcon)" size="16px" /></span>
             </template>
             <template #option="scope">
               <q-item v-bind="scope.itemProps">
@@ -139,7 +127,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onBeforeUnmount } from 'vue'
+import Sortable from 'sortablejs'
 import { useQuasar, Notify } from 'quasar'
 import { slugifyCatalogText } from '@/utils/slugify'
 import { CATEGORY_ICON_OPTIONS, categoryIconClass } from '@/utils/categoryIcons'
@@ -178,13 +167,38 @@ function productCount(slug: string): number {
   return countBySlug.value.get(slug) ?? 0
 }
 
-function move(idx: number, delta: number) {
+function reorder(from: number, to: number) {
   const next = [...rows.value]
-  const [item] = next.splice(idx, 1)
+  const [item] = next.splice(from, 1)
   if (!item) return
-  next.splice(idx + delta, 0, item)
+  next.splice(to, 0, item)
   rows.value = next
 }
+
+// Arrastrar y soltar (SortableJS, funciona también en táctil). Sortable mueve
+// el DOM; se deshace ese movimiento y se reordena el array para que Vue siga
+// siendo dueño del DOM.
+const listRef = ref<HTMLElement | null>(null)
+let sortable: Sortable | null = null
+
+watch(listRef, (el) => {
+  sortable?.destroy()
+  sortable = null
+  if (!el) return
+  sortable = Sortable.create(el, {
+    handle: '.cat-drag',
+    animation: 150,
+    ghostClass: 'cat-row--ghost',
+    onEnd: ({ item, from, oldIndex, newIndex }) => {
+      if (oldIndex === undefined || newIndex === undefined || oldIndex === newIndex) return
+      from.removeChild(item)
+      from.insertBefore(item, from.children[oldIndex] ?? null)
+      reorder(oldIndex, newIndex)
+    },
+  })
+})
+
+onBeforeUnmount(() => sortable?.destroy())
 
 function add() {
   const name = newName.value.trim()
@@ -281,21 +295,68 @@ async function save() {
   }
 }
 
-.cat-order {
+.cat-hint {
+  margin: 0 0 4px;
+  font-size: 0.75rem;
+  color: #9a9a9a;
+}
+
+.cat-list {
   display: flex;
   flex-direction: column;
-  width: 32px;
-  flex-shrink: 0;
+  gap: 8px;
+}
 
-  :deep(.q-btn) {
-    min-height: 22px !important;
-    height: 22px;
+.cat-row--ghost {
+  opacity: 0.4;
+  background: #f3e6e5;
+}
+
+.cat-drag {
+  width: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  color: #b0b0b0;
+  cursor: grab;
+  touch-action: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &--spacer {
+    cursor: default;
   }
 }
 
 .cat-icon-select {
-  width: 64px;
+  width: 72px;
   flex-shrink: 0;
+
+  :deep(.q-field__control) {
+    padding: 0 8px 0 10px;
+  }
+
+  :deep(.q-field__native) {
+    justify-content: center;
+  }
+
+  :deep(.q-select__dropdown-icon) {
+    font-size: 11px;
+    color: #9a9a9a;
+    margin-left: 4px;
+  }
+}
+
+.cat-icon-preview {
+  width: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ks-text, #000);
 }
 
 .cat-name {

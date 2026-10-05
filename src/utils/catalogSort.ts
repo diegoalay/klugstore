@@ -52,7 +52,6 @@ export type AdminCatalogSortMode =
   | 'hidden-first'
 
 export const ADMIN_CATALOG_SORT_OPTIONS: { value: AdminCatalogSortMode; label: string }[] = [
-  { value: 'default', label: 'Orden de la fuente (Sheet / JSON)' },
   { value: 'name-asc', label: 'Nombre A → Z' },
   { value: 'name-desc', label: 'Nombre Z → A' },
   { value: 'price-asc', label: 'Precio: menor a mayor' },
