@@ -190,16 +190,35 @@
         </p>
       </template>
 
+      <button v-if="isAdmin" type="button" class="admin-edit-link" @click="editProduct">
+        <q-icon name="fa-solid fa-pen" size="11px" /> Editar producto
+      </button>
+
       <slot name="footer" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import { useStoreConfigStore } from 'src/stores'
-import { useWhatsApp } from 'src/composables/useWhatsApp'
-import type { Product } from 'src/types'
+import { ref, computed, watch, onMounted } from 'vue'
+import { useStoreConfigStore } from '@/stores'
+import { useWhatsApp } from '@/composables/useWhatsApp'
+import { formatCurrency } from '@/utils/format'
+import { useAdminSession } from '@/composables/useAdminSession'
+import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
+import { useProductQuickView } from '@/composables/useProductQuickView'
+import { trackViewItem, trackAskSimilar } from '@/utils/analytics'
+import type { Product } from '@/types'
+
+const { isAdmin } = useAdminSession()
+const { openProductEditor } = useAdminProductEditor()
+const { closeProductQuickView } = useProductQuickView()
+
+// Cierra la vista rápida (si está abierta) para que no quede mostrando datos viejos tras guardar.
+function editProduct() {
+  closeProductQuickView()
+  void openProductEditor(props.product.id)
+}
 
 const props = withDefaults(
   defineProps<{
@@ -236,6 +255,12 @@ watch(
   },
 )
 
+onMounted(() => trackViewItem(props.product))
+watch(
+  () => props.product.id,
+  () => trackViewItem(props.product),
+)
+
 const theme = computed(() => storeConfig.theme)
 
 const activeImage = computed(
@@ -244,18 +269,12 @@ const activeImage = computed(
 )
 
 const formattedPrice = computed(() =>
-  new Intl.NumberFormat('es-GT', {
-    style: 'currency',
-    currency: props.product.currency || storeConfig.currency,
-  }).format(props.product.price),
+  formatCurrency(props.product.price, props.product.currency || storeConfig.currency),
 )
 
 const formattedComparePrice = computed(() => {
   if (!props.product.compareAtPrice) return ''
-  return new Intl.NumberFormat('es-GT', {
-    style: 'currency',
-    currency: props.product.currency || storeConfig.currency,
-  }).format(props.product.compareAtPrice)
+  return formatCurrency(props.product.compareAtPrice, props.product.currency || storeConfig.currency)
 })
 
 const discountPercent = computed(() => {
@@ -278,7 +297,7 @@ function openLightbox(index: number) {
 }
 
 function handleWhatsApp() {
-  openWhatsApp(props.product)
+  openWhatsApp(props.product, 'product_detail')
 }
 
 async function copyShareLink() {
@@ -311,11 +330,32 @@ async function copyShareLink() {
 }
 
 function onAskSimilarClick() {
+  trackAskSimilar(props.product)
   emit('askSimilar')
 }
 </script>
 
 <style lang="scss" scoped>
+.admin-edit-link {
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ks-text-secondary, #6b7280);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--ks-primary, #000);
+  }
+}
+
 .product-detail-container {
   max-width: 960px;
   margin: 0 auto;

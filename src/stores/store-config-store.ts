@@ -1,13 +1,24 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { StoreConfig, StoreTheme } from 'src/types'
-import { resolveStoreSlug } from 'src/utils/storeResolver'
+import type { StoreConfig, StoreTheme } from '@/types'
+import { resolveStoreSlug } from '@/utils/storeResolver'
 
 export const useStoreConfigStore = defineStore('storeConfig', () => {
   const config = ref<StoreConfig | null>(null)
   const loading = ref(false)
 
-  const storeName = computed(() => config.value?.name ?? 'KlugStore')
+  /**
+   * Antes de que cargue la config real (Firestore/Sheets), no hay que
+   * mostrar un nombre de marca genérico/equivocado — se usa el slug de la
+   * tienda resuelto por hostname (ya funciona sin esperar red) en vez de un
+   * nombre fijo tipo "KlugStore", que no tiene nada que ver con la tienda
+   * real y se alcanzaba a ver en cada recarga.
+   */
+  const storeName = computed(() => config.value?.name ?? capitalize(resolveStoreSlug()))
+
+  function capitalize(s: string): string {
+    return s ? s.charAt(0).toUpperCase() + s.slice(1) : s
+  }
 
   /** Slug de tienda (p. ej. `sweethome`); antes de cargar config se infiere del host. */
   const storeSlug = computed(() => config.value?.slug ?? resolveStoreSlug())
@@ -26,6 +37,10 @@ export const useStoreConfigStore = defineStore('storeConfig', () => {
   }
 
   function applyTheme(t: StoreTheme) {
+    // No-op en SSR: no hay `document` en Node. El cliente aplica el tema al
+    // hidratar (este mismo store se vuelve a poblar con `onMounted` si hace
+    // falta, o ya llega con el estado serializado del servidor).
+    if (typeof document === 'undefined') return
     const root = document.documentElement
     root.style.setProperty('--ks-primary', t.primaryColor)
     root.style.setProperty('--ks-secondary', t.secondaryColor)

@@ -5,16 +5,17 @@
       <div class="banner-overlay" />
     </div>
 
-    <div class="store-info" :class="{ 'with-banner': !!banner }">
-      <h1 class="store-name">{{ storeName }}</h1>
-      <p v-if="description" class="store-description">{{ description }}</p>
+    <!-- Oculto a la vista pero presente para SEO y lectores de pantalla (único h1 de la portada). -->
+    <div class="store-info visually-hidden">
+      <h1>{{ storeName }}</h1>
+      <p v-if="description">{{ description }}</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useStoreConfigStore } from 'src/stores'
+import { useStoreConfigStore } from '@/stores'
 
 const storeConfig = useStoreConfigStore()
 
@@ -26,7 +27,19 @@ const banner = computed(() => storeConfig.config?.banner ?? '')
 <style lang="scss" scoped>
 .store-header {
   position: relative;
-  margin-bottom: 24px;
+  padding-top: 24px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .store-banner {
@@ -53,44 +66,13 @@ const banner = computed(() => storeConfig.config?.banner ?? '')
   );
 }
 
-.store-info {
-  padding: 24px 20px 0;
-  max-width: 960px;
-  margin: 0 auto;
-
-  &.with-banner {
-    margin-top: -40px;
-    position: relative;
-    z-index: 1;
-  }
-}
-
-.store-name {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--ks-text, #1a1a2e);
-  margin: 0 0 8px;
-  line-height: 1.2;
-}
-
-.store-description {
-  font-size: 0.95rem;
-  color: var(--ks-text-secondary, #6b7280);
-  margin: 0;
-  line-height: 1.5;
-}
-
 @media (max-width: 768px) {
+  .store-header {
+    padding-top: 16px;
+  }
+
   .store-banner {
     height: 160px;
-  }
-
-  .store-name {
-    font-size: 1.4rem;
-  }
-
-  .store-info {
-    padding: 16px 16px 0;
   }
 }
 </style>

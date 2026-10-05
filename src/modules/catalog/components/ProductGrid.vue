@@ -1,8 +1,17 @@
 <template>
   <div class="product-grid-wrapper">
-    <div v-if="title" class="grid-header">
-      <h2 class="grid-title">{{ title }}</h2>
-      <p v-if="subtitle" class="grid-subtitle">{{ subtitle }}</p>
+    <div v-if="title || $slots.actions" class="grid-header">
+      <div class="grid-heading">
+        <h2 v-if="title" class="grid-title">
+          {{ title }}
+          <span v-if="showCount" class="grid-count">{{ products.length }}</span>
+        </h2>
+        <p v-else-if="showCount" class="grid-count-text">
+          {{ products.length }} {{ products.length === 1 ? 'producto' : 'productos' }}
+        </p>
+        <p v-if="subtitle" class="grid-subtitle">{{ subtitle }}</p>
+      </div>
+      <slot name="actions" />
     </div>
 
     <div v-if="products.length" class="product-grid">
@@ -21,13 +30,14 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from 'src/types'
+import type { Product } from '@/types'
 import ProductCard from './ProductCard.vue'
 
 defineProps<{
   products: Product[]
   title?: string
   subtitle?: string
+  showCount?: boolean
 }>()
 </script>
 
@@ -39,14 +49,45 @@ defineProps<{
 }
 
 .grid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-bottom: 16px;
 }
 
+.grid-heading {
+  min-width: 0;
+}
+
 .grid-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--ks-text, #1a1a2e);
-  margin: 0 0 4px;
+  margin: 0;
+}
+
+.grid-count {
+  align-self: center;
+  line-height: 18px;
+  height: 22px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ks-secondary, #d19793) 14%, transparent);
+  color: var(--ks-secondary, #d19793);
+}
+
+.grid-count-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ks-text-secondary, #6b7280);
+  margin: 0;
 }
 
 .grid-subtitle {

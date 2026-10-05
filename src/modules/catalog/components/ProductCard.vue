@@ -47,6 +47,16 @@
       >
         Destacado
       </q-badge>
+
+      <button
+        v-if="isAdmin"
+        type="button"
+        class="admin-edit-chip"
+        aria-label="Editar producto"
+        @click.stop="openProductEditor(product.id)"
+      >
+        <q-icon name="fa-solid fa-pen" size="11px" /> Editar
+      </button>
     </div>
 
     <q-card-section class="product-info">
@@ -95,14 +105,20 @@
 <script setup lang="ts">
 import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
 import { QCard } from 'quasar'
-import { useStoreConfigStore } from 'src/stores'
-import { useWhatsApp } from 'src/composables/useWhatsApp'
-import { useProductQuickView } from 'src/composables/useProductQuickView'
-import type { Product } from 'src/types'
+import { useStoreConfigStore } from '@/stores'
+import { useWhatsApp } from '@/composables/useWhatsApp'
+import { useProductQuickView } from '@/composables/useProductQuickView'
+import { formatCurrency } from '@/utils/format'
+import { useAdminSession } from '@/composables/useAdminSession'
+import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
+import type { Product } from '@/types'
 
 const props = defineProps<{
   product: Product
 }>()
+
+const { isAdmin } = useAdminSession()
+const { openProductEditor } = useAdminProductEditor()
 
 const storeConfig = useStoreConfigStore()
 const { openWhatsApp } = useWhatsApp()
@@ -161,18 +177,12 @@ onBeforeUnmount(() => {
 const theme = computed(() => storeConfig.theme)
 
 const formattedPrice = computed(() =>
-  new Intl.NumberFormat('es-GT', {
-    style: 'currency',
-    currency: props.product.currency || storeConfig.currency,
-  }).format(props.product.price),
+  formatCurrency(props.product.price, props.product.currency || storeConfig.currency),
 )
 
 const formattedComparePrice = computed(() => {
   if (!props.product.compareAtPrice) return ''
-  return new Intl.NumberFormat('es-GT', {
-    style: 'currency',
-    currency: props.product.currency || storeConfig.currency,
-  }).format(props.product.compareAtPrice)
+  return formatCurrency(props.product.compareAtPrice, props.product.currency || storeConfig.currency)
 })
 
 const discountPercent = computed(() => {
@@ -187,7 +197,7 @@ function goToProduct() {
 }
 
 function handleWhatsApp() {
-  openWhatsApp(props.product)
+  openWhatsApp(props.product, 'product_card')
 }
 </script>
 
@@ -278,6 +288,32 @@ function handleWhatsApp() {
   font-size: 0.7rem;
   padding: 4px 10px;
   border-radius: 8px;
+}
+
+.admin-edit-chip {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.78);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #000;
+  }
 }
 
 // ============================================

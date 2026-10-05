@@ -1,7 +1,7 @@
-import { useCatalogStore, useStoreConfigStore } from 'src/stores'
-import { loadCatalogFromSource } from 'src/mocks/catalog.mock'
-import { clearRemoteCatalogCache } from 'src/utils/catalogData'
-import { clearSheetsCache } from 'src/utils/googleSheetsAdapter'
+import { useCatalogStore, useStoreConfigStore } from '@/stores'
+import { loadCatalogFromSource } from '@/mocks/catalog.mock'
+import { clearRemoteCatalogCache } from '@/utils/catalogData'
+import { clearSheetsCache } from '@/utils/googleSheetsAdapter'
 
 export function useCatalog() {
   const catalogStore = useCatalogStore()

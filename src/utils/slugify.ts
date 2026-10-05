@@ -8,6 +8,11 @@ export function slugifyCatalogText(text: string): string {
     .replace(/(^-|-$)/g, '')
 }
 
+/** URL pública de un producto: `{nombre-slugificado}-{id}` (app, admin, sitemap y SSG). */
+export function productSlug(name: string, id: string): string {
+  return `${slugifyCatalogText(name)}-${id}`
+}
+
 /**
  * Normaliza un texto para búsqueda case-insensitive y diacritic-insensitive.
  *

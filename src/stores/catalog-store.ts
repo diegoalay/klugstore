@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Product, Category } from 'src/types'
+import type { Product, Category } from '@/types'
 import {
   applyCatalogSortMode,
   type CatalogSortMode,
-} from 'src/utils/catalogSort'
-import { normalizeForSearch } from 'src/utils/slugify'
+} from '@/utils/catalogSort'
+import { normalizeForSearch } from '@/utils/slugify'
 
-export type { CatalogSortMode } from 'src/utils/catalogSort'
+export type { CatalogSortMode } from '@/utils/catalogSort'
 
 export const useCatalogStore = defineStore('catalog', () => {
   const products = ref<Product[]>([])
@@ -21,8 +21,14 @@ export const useCatalogStore = defineStore('catalog', () => {
     [...categories.value].sort((a, b) => a.order - b.order),
   )
 
+  const categoriesWithStock = computed(() => {
+    const used = new Set(products.value.filter((p) => p.available).map((p) => p.categoryId))
+    return sortedCategories.value.filter((c) => used.has(c.id))
+  })
+
+  // Los vendidos no se listan en el catálogo; su ficha sigue accesible por link directo.
   const filteredProducts = computed(() => {
-    let result = [...products.value]
+    let result = products.value.filter((p) => p.available)
 
     if (activeCategory.value) {
       result = result.filter((p) => p.categoryId === activeCategory.value)
@@ -92,6 +98,7 @@ export const useCatalogStore = defineStore('catalog', () => {
     searchQuery,
     catalogSort,
     sortedCategories,
+    categoriesWithStock,
     filteredProducts,
     featuredProducts,
     availableProducts,

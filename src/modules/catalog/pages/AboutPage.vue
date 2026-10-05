@@ -66,7 +66,7 @@
             unelevated
             icon="fa-brands fa-whatsapp"
             label="Escríbenos"
-            @click="openWhatsAppGeneral()"
+            @click="openWhatsAppGeneral('about_page')"
           />
         </div>
       </div>
@@ -77,9 +77,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useStoreConfigStore } from 'src/stores'
-import { useWhatsApp } from 'src/composables/useWhatsApp'
-import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
+import { useStoreConfigStore } from '@/stores'
+import { useWhatsApp } from '@/composables/useWhatsApp'
+import { usePageSeo, truncateSeoDescription } from '@/composables/usePageSeo'
 
 const router = useRouter()
 const storeConfig = useStoreConfigStore()

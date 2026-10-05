@@ -33,8 +33,8 @@
 // Los booleanos (`visible`, `featured`) aceptan TRUE/FALSE, true/false, 1/0, sí/no.
 // ============================================
 
-import type { RawCatalog, RawCategory, RawProduct } from 'src/utils/catalogData'
-import { normalizeIconName } from 'src/utils/iconName'
+import type { RawCatalog, RawCategory, RawProduct } from '@/utils/catalogData'
+import { normalizeIconName } from '@/utils/iconName'
 
 
 // ============================================

@@ -1,8 +1,8 @@
 import { watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useCatalogStore } from 'src/stores'
-import { parseCatalogSortParam, type CatalogSortMode } from 'src/utils/catalogSort'
+import { useCatalogStore } from '@/stores'
+import { parseCatalogSortParam, type CatalogSortMode } from '@/utils/catalogSort'
 
 /** Guarda el hash actual (#cat=&q=&sort=) antes de abrir un producto para poder restaurarlo al volver. */
 export const CATALOG_RETURN_HASH_KEY = 'ks-catalog-return-hash'
@@ -29,7 +29,7 @@ function restoreCatalogHashFromStashIfNeeded(routeName: string | symbol | undefi
 /** Lee estado del catálogo desde el hash: #cat=&q=&sort= */
 export function parseCatalogHash(): { cat: string | null; q: string; sort: CatalogSortMode } {
   const raw = window.location.hash.replace(/^#/, '').trim()
-  if (!raw) return { cat: null, q: '', sort: 'name-asc' as CatalogSortMode }
+  if (!raw) return { cat: null, q: '', sort: 'name-asc' }
   const sp = new URLSearchParams(raw)
   return {
     cat: sp.get('cat'),

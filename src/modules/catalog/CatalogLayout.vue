@@ -117,14 +117,7 @@
               <p v-if="product.measure" class="search-result-measure">
                 {{ product.measure }}
               </p>
-              <p class="search-result-price">
-                {{
-                  new Intl.NumberFormat('es-GT', {
-                    style: 'currency',
-                    currency: product.currency,
-                  }).format(product.price)
-                }}
-              </p>
+              <p class="search-result-price">{{ formatCurrency(product.price, product.currency) }}</p>
             </div>
             <q-icon name="fa-solid fa-chevron-right" size="xs" class="search-result-arrow" />
           </div>
@@ -147,6 +140,14 @@
     </q-page-container>
 
     <ProductQuickViewDialog />
+
+    <AdminProductFormDialog
+      v-if="isAdmin"
+      v-model="editorOpen"
+      :product="editorProduct"
+      @saved="refreshCatalogAfterEdit"
+      @request-delete="deleteFromEditor"
+    />
 
     <!-- Instagram FAB -->
     <q-page-sticky
@@ -174,7 +175,7 @@
         color="positive"
         class="whatsapp-fab"
         aria-label="Escríbenos por WhatsApp"
-        @click="openWhatsAppGeneral()"
+        @click="openWhatsAppGeneral('floating_button')"
       />
     </q-page-sticky>
 
@@ -234,31 +235,63 @@
         <p class="footer-copyright">
           © 2026 <strong>SweetHomeGT</strong> — un producto de
           <strong>SolayTech</strong>
+          <span aria-hidden="true"> · </span>
+          <router-link to="/privacidad" class="footer-admin-link">Privacidad</router-link>
+          <span aria-hidden="true"> · </span>
+          <router-link :to="isAdmin ? '/admin/catalogo' : '/admin/login'" class="footer-admin-link" rel="nofollow">
+            {{ isAdmin ? 'Panel' : 'Acceso' }}
+          </router-link>
         </p>
       </div>
     </q-footer>
+
+    <CookieNotice />
   </q-layout>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onMounted, watch } from 'vue'
+import { ref, computed, nextTick, onMounted, onServerPrefetch, watch, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { QInput } from 'quasar'
-import { useStoreConfigStore, useCatalogStore } from 'src/stores'
-import { useCatalog } from 'src/composables/useCatalog'
-import { useWhatsApp } from 'src/composables/useWhatsApp'
-import { useProductQuickView } from 'src/composables/useProductQuickView'
+import { useStoreConfigStore, useCatalogStore } from '@/stores'
+import { useCatalog } from '@/composables/useCatalog'
+import { useWhatsApp } from '@/composables/useWhatsApp'
+import { useProductQuickView } from '@/composables/useProductQuickView'
 import ProductQuickViewDialog from './components/ProductQuickViewDialog.vue'
-import { resolveStoreSlug } from 'src/utils/storeResolver'
-import { applyCatalogSortMode } from 'src/utils/catalogSort'
-import { normalizeForSearch } from 'src/utils/slugify'
-import type { Product } from 'src/types'
+import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
+import CookieNotice from './components/CookieNotice.vue'
+import { resolveStoreSlug } from '@/utils/storeResolver'
+import { formatCurrency } from '@/utils/format'
+import { useAdminSession } from '@/composables/useAdminSession'
+import { trackSearch } from '@/utils/analytics'
+import { applyCatalogSortMode } from '@/utils/catalogSort'
+import { normalizeForSearch } from '@/utils/slugify'
+import type { Product } from '@/types'
 
 const route = useRoute()
 const router = useRouter()
 const storeConfig = useStoreConfigStore()
+const { isAdmin } = useAdminSession()
 const catalogStore = useCatalogStore()
-const { loadCatalog } = useCatalog()
+const { loadCatalog, reloadCatalog } = useCatalog()
+
+// Editor de producto para admins: se carga aparte para no sumar el código del
+// admin (escritura a Firestore/Storage) al catálogo que ven los clientes.
+const AdminProductFormDialog = defineAsyncComponent(
+  () => import('@/components/admin/ProductFormDialog.vue'),
+)
+const { editorOpen, editorProduct, confirmDeleteProduct } = useAdminProductEditor()
+
+async function refreshCatalogAfterEdit() {
+  await reloadCatalog(resolveStoreSlug())
+}
+
+function deleteFromEditor() {
+  const p = editorProduct.value
+  if (!p) return
+  editorOpen.value = false
+  confirmDeleteProduct(p, refreshCatalogAfterEdit)
+}
 const { openWhatsAppGeneral } = useWhatsApp()
 const { openProductQuickView } = useProductQuickView()
 
@@ -276,20 +309,31 @@ const isCatalogActive = computed(() =>
 )
 const isAboutActive = computed(() => route.path === '/about')
 
-const searchResults = computed(() => {
+const searchMatches = computed(() => {
   // Búsqueda case-insensitive y diacritic-insensitive:
   //   "cancion" → encuentra "Canción", "canción", "CANCIÓN"
   //   "nino"    → encuentra "niño"
   const q = normalizeForSearch(searchQuery.value)
   if (!q) return []
-  const list = catalogStore.products.filter((p) => {
-    if (!p.visible) return false
+  return catalogStore.products.filter((p) => {
+    if (!p.visible || !p.available) return false
     const haystack = normalizeForSearch(
       [p.name, p.description, p.categoryName ?? '', ...(p.tags ?? [])].join(' '),
     )
     return haystack.includes(q)
   })
-  return applyCatalogSortMode(list, catalogStore.catalogSort).slice(0, 8)
+})
+
+const searchResults = computed(() =>
+  applyCatalogSortMode(searchMatches.value, catalogStore.catalogSort).slice(0, 8),
+)
+
+// Se registra la búsqueda cuando el usuario deja de escribir (no cada tecla).
+let searchTrackTimer: ReturnType<typeof setTimeout> | undefined
+watch(searchQuery, (term) => {
+  clearTimeout(searchTrackTimer)
+  if (!term || term.trim().length < 2) return
+  searchTrackTimer = setTimeout(() => trackSearch(term, searchMatches.value.length), 1200)
 })
 
 async function toggleSearch() {
@@ -333,7 +377,27 @@ watch(
   { immediate: true },
 )
 
+/**
+ * El catálogo tiene que cargarse durante el render del servidor (SSR/SSG),
+ * no solo al montar en el navegador — si no, el HTML que reciben los bots
+ * (Google, WhatsApp, etc.) sale vacío y el prerenderizado no sirve de nada.
+ * `onServerPrefetch` corre en el servidor y se espera antes de mandar el
+ * HTML; es un no-op en el cliente. `onMounted` sigue existiendo para la
+ * navegación normal dentro del SPA ya hidratado (cambios de tienda, recarga
+ * manual, etc.).
+ */
+onServerPrefetch(async () => {
+  const storeSlug = resolveStoreSlug()
+  await loadCatalog(storeSlug)
+  loading.value = false
+})
+
 onMounted(async () => {
+  if (catalogStore.products.length > 0) {
+    // Ya se cargó durante SSR e hidrató — no repetir el fetch.
+    loading.value = false
+    return
+  }
   const storeSlug = resolveStoreSlug()
   await loadCatalog(storeSlug)
   loading.value = false
@@ -763,5 +827,16 @@ onMounted(async () => {
   font-size: 0.75rem;
   color: var(--ks-text-secondary, #6b7280);
   margin: 0;
+}
+
+.footer-admin-link {
+  color: inherit;
+  opacity: 0.6;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
 }
 </style>

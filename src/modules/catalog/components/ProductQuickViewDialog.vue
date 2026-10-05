@@ -43,9 +43,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import ProductDetailView from 'src/modules/catalog/components/ProductDetailView.vue'
-import { useProductQuickView } from 'src/composables/useProductQuickView'
-import { stashCatalogHashBeforeProductNavigation } from 'src/composables/useCatalogHash'
+import ProductDetailView from '@/modules/catalog/components/ProductDetailView.vue'
+import { useProductQuickView } from '@/composables/useProductQuickView'
+import { stashCatalogHashBeforeProductNavigation } from '@/composables/useCatalogHash'
 
 const router = useRouter()
 const { quickViewProduct, closeProductQuickView } = useProductQuickView()

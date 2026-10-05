@@ -17,6 +17,10 @@ const DEFAULT_SLUG = 'sweethome'
 
 // Dominios de producción explícitamente mapeados a un slug de tienda.
 const DOMAIN_MAP: Record<string, string> = {
+  // Dominio nuevo (en migración, 2026-10-04).
+  'sweethome.gt': 'sweethome',
+  'www.sweethome.gt': 'sweethome',
+  // Dominio viejo — se mantiene mapeado por si queda tráfico/enlaces viejos.
   'sweethome.com.gt': 'sweethome',
   'www.sweethome.com.gt': 'sweethome',
   // Dominios de Firebase Hosting (preview / default) también apuntan a sweethome.

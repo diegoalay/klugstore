@@ -2,8 +2,8 @@
  * CSV compatible con la guía de Google Sheets (mismas columnas que
  * scripts/export-catalog-to-csv.mjs).
  */
-import type { Product } from 'src/types'
-import type { RawCategory } from 'src/utils/catalogData'
+import type { Product } from '@/types'
+import type { RawCategory } from '@/utils/catalogData'
 
 export function csvEscape(value: unknown): string {
   const s =

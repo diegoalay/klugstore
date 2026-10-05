@@ -1,6 +1,5 @@
 <template>
   <div class="catalog-sort">
-    <div id="catalog-sort-label" class="catalog-sort__label">Ordenar por</div>
     <div class="catalog-sort__track">
       <q-select
         :model-value="modelValue"
@@ -15,7 +14,7 @@
         dropdown-icon="fa-solid fa-chevron-down"
         popup-content-class="catalog-sort-menu"
         class="catalog-sort__control"
-        aria-labelledby="catalog-sort-label"
+        aria-label="Ordenar productos"
         @update:model-value="emit('update:modelValue', $event)"
       />
     </div>
@@ -23,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CatalogSortMode } from 'src/utils/catalogSort'
+import type { CatalogSortMode } from '@/utils/catalogSort'
 
 defineProps<{
   modelValue: CatalogSortMode
@@ -37,17 +36,7 @@ const emit = defineEmits<{
 
 <style lang="scss" scoped>
 .catalog-sort {
-  max-width: 280px;
-}
-
-.catalog-sort__label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ks-text-secondary, #6b7280);
-  margin-bottom: 6px;
-  padding-left: 4px;
+  width: 200px;
 }
 
 .catalog-sort__track {
@@ -92,10 +81,9 @@ const emit = defineEmits<{
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 599px) {
   .catalog-sort {
-    max-width: none;
-    width: 100%;
+    width: 170px;
   }
 }
 </style>

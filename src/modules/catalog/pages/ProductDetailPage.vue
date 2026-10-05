@@ -31,10 +31,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import ProductDetailView from 'src/modules/catalog/components/ProductDetailView.vue'
-import { useCatalogStore, useStoreConfigStore } from 'src/stores'
-import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
-import { CATALOG_RETURN_HASH_KEY } from 'src/composables/useCatalogHash'
+import ProductDetailView from '@/modules/catalog/components/ProductDetailView.vue'
+import { useCatalogStore, useStoreConfigStore } from '@/stores'
+import { usePageSeo, truncateSeoDescription, SITE_ORIGIN } from '@/composables/usePageSeo'
+import { useProductJsonLd } from '@/composables/useProductJsonLd'
+import { CATALOG_RETURN_HASH_KEY } from '@/composables/useCatalogHash'
 
 const route = useRoute()
 const router = useRouter()
@@ -71,7 +72,15 @@ usePageSeo({
   title: seoTitle,
   description: seoDescription,
   path: productPath,
+  image: computed(() => product.value?.images[0]?.url),
+  type: 'product',
   noIndex: computed(() => !product.value),
+})
+
+useProductJsonLd({
+  product,
+  storeName: computed(() => storeConfig.storeName),
+  url: computed(() => `${SITE_ORIGIN}${productPath.value}`),
 })
 
 function askForSimilar() {

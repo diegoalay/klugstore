@@ -7,15 +7,15 @@
 
     <CategoryNav />
 
-    <div class="category-sort-row">
-      <CatalogSortSelect
-        :model-value="catalogSort"
-        :options="CATALOG_SORT_OPTIONS"
-        @update:model-value="catalogStore.setCatalogSort"
-      />
-    </div>
-
-    <ProductGrid :products="products" />
+    <ProductGrid :products="products" show-count>
+      <template #actions>
+        <CatalogSortSelect
+          :model-value="catalogSort"
+          :options="CATALOG_SORT_OPTIONS"
+          @update:model-value="catalogStore.setCatalogSort"
+        />
+      </template>
+    </ProductGrid>
   </q-page>
 </template>
 
@@ -23,9 +23,9 @@
 import { computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
-import { useCatalogStore, useStoreConfigStore } from 'src/stores'
-import { CATALOG_SORT_OPTIONS } from 'src/utils/catalogSort'
-import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
+import { useCatalogStore, useStoreConfigStore } from '@/stores'
+import { CATALOG_SORT_OPTIONS } from '@/utils/catalogSort'
+import { usePageSeo, truncateSeoDescription } from '@/composables/usePageSeo'
 import CategoryNav from '../components/CategoryNav.vue'
 import CatalogSortSelect from '../components/CatalogSortSelect.vue'
 import ProductGrid from '../components/ProductGrid.vue'
@@ -112,12 +112,6 @@ watch(
   line-height: 1.5;
 }
 
-.category-sort-row {
-  max-width: 960px;
-  margin: 0 auto 20px;
-  padding: 0 20px;
-}
-
 @media (max-width: 768px) {
   .category-header-section {
     padding: 16px 16px 16px;
@@ -127,8 +121,5 @@ watch(
     font-size: 1.3rem;
   }
 
-  .category-sort-row {
-    padding: 0 16px;
-  }
 }
 </style>

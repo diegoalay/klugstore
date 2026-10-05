@@ -3,23 +3,6 @@
     <StoreHeader />
     <CategoryNav />
 
-    <div class="catalog-sort-row">
-      <CatalogSortSelect
-        :model-value="catalogSort"
-        :options="CATALOG_SORT_OPTIONS"
-        @update:model-value="catalogStore.setCatalogSort"
-      />
-      <button
-        type="button"
-        class="refresh-btn"
-        :class="{ 'refresh-btn--spinning': refreshing }"
-        aria-label="Actualizar catálogo"
-        :disabled="refreshing"
-        @click="handleRefresh"
-      >
-        <q-icon name="fa-solid fa-arrows-rotate" size="xs" />
-      </button>
-    </div>
 
     <!-- Featured section (only when no category filter) -->
     <section v-if="!activeCategory && featuredProducts.length" class="section-featured">
@@ -32,22 +15,26 @@
 
     <!-- All / filtered products -->
     <section class="section-products">
-      <ProductGrid
-        :products="filteredProducts"
-        :title="sectionTitle"
-      />
+      <ProductGrid :products="filteredProducts" :title="sectionTitle" show-count>
+        <template #actions>
+          <CatalogSortSelect
+            :model-value="catalogSort"
+            :options="CATALOG_SORT_OPTIONS"
+            @update:model-value="catalogStore.setCatalogSort"
+          />
+        </template>
+      </ProductGrid>
     </section>
   </q-page>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useCatalogStore, useStoreConfigStore } from 'src/stores'
-import { useCatalog } from 'src/composables/useCatalog'
-import { useCatalogHomeHash } from 'src/composables/useCatalogHash'
-import { CATALOG_SORT_OPTIONS } from 'src/utils/catalogSort'
-import { usePageSeo, truncateSeoDescription } from 'src/composables/usePageSeo'
+import { useCatalogStore, useStoreConfigStore } from '@/stores'
+import { useCatalogHomeHash } from '@/composables/useCatalogHash'
+import { CATALOG_SORT_OPTIONS } from '@/utils/catalogSort'
+import { usePageSeo, truncateSeoDescription } from '@/composables/usePageSeo'
 import StoreHeader from '../components/StoreHeader.vue'
 import CategoryNav from '../components/CategoryNav.vue'
 import CatalogSortSelect from '../components/CatalogSortSelect.vue'
@@ -56,19 +43,7 @@ import ProductGrid from '../components/ProductGrid.vue'
 const catalogStore = useCatalogStore()
 const { catalogSort } = storeToRefs(catalogStore)
 const storeConfig = useStoreConfigStore()
-const { reloadCatalog } = useCatalog()
 useCatalogHomeHash()
-
-const refreshing = ref(false)
-
-async function handleRefresh() {
-  refreshing.value = true
-  try {
-    await reloadCatalog()
-  } finally {
-    refreshing.value = false
-  }
-}
 
 const seoTitle = computed(() => `Catálogo | ${storeConfig.seoTitleSuffix}`)
 const seoDescription = computed(() => {
@@ -109,61 +84,5 @@ const sectionTitle = computed(() => {
 
 .section-products {
   margin-bottom: 24px;
-}
-
-.catalog-sort-row {
-  max-width: 960px;
-  margin: 0 auto 20px;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.refresh-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--ks-secondary, #d19793);
-  background: rgba(209, 151, 147, 0.1);
-  color: var(--ks-secondary, #d19793);
-  cursor: pointer;
-  transition:
-    background 0.2s ease,
-    transform 0.15s ease;
-  flex-shrink: 0;
-  margin-top: 20px;
-
-  &:hover {
-    background: rgba(209, 151, 147, 0.2);
-  }
-
-  &:active {
-    transform: scale(0.93);
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-
-  &--spinning :deep(.q-icon) {
-    animation: spin 0.7s linear infinite;
-  }
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (max-width: 768px) {
-  .catalog-sort-row {
-    padding: 0 16px;
-    margin-bottom: 16px;
-  }
 }
 </style>

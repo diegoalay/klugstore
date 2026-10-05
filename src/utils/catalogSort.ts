@@ -1,4 +1,4 @@
-import type { Product } from 'src/types'
+import type { Product } from '@/types'
 
 export type CatalogSortMode = 'default' | 'price-asc' | 'price-desc' | 'name-asc' | 'name-desc'
 

@@ -1,5 +1,5 @@
 import { shallowRef } from 'vue'
-import type { Product } from 'src/types'
+import type { Product } from '@/types'
 
 const quickViewProduct = shallowRef<Product | null>(null)
 
