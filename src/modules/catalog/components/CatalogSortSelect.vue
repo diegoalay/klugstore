@@ -76,8 +76,11 @@ const emit = defineEmits<{
       0 0 0 2px color-mix(in srgb, var(--ks-secondary, #d19793) 38%, transparent);
   }
 
+  // Mismo tamaño que las flechas de la barra de categorías (12px).
   :deep(.q-select__dropdown-icon) {
     color: var(--ks-secondary, #d19793);
+    font-size: 12px;
+    margin-right: 10px;
   }
 }
 

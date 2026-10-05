@@ -15,7 +15,7 @@
 
     <!-- All / filtered products -->
     <section class="section-products">
-      <ProductGrid :products="filteredProducts" :title="sectionTitle" show-count>
+      <ProductGrid :products="filteredProducts" :title="sectionTitle" :subtitle="sectionSubtitle" show-count>
         <template #actions>
           <CatalogSortSelect
             :model-value="catalogSort"
@@ -32,6 +32,7 @@
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useCatalogStore, useStoreConfigStore } from '@/stores'
+import { SOLD_CATEGORY_ID } from '@/stores/catalog-store'
 import { useCatalogHomeHash } from '@/composables/useCatalogHash'
 import { CATALOG_SORT_OPTIONS } from '@/utils/catalogSort'
 import { usePageSeo, truncateSeoDescription } from '@/composables/usePageSeo'
@@ -63,7 +64,14 @@ const activeCategory = computed(() => catalogStore.activeCategory)
 const filteredProducts = computed(() => catalogStore.filteredProducts)
 const featuredProducts = computed(() => catalogStore.featuredProducts)
 
+const showingSold = computed(() => activeCategory.value === SOLD_CATEGORY_ID)
+
+const sectionSubtitle = computed(() =>
+  showingSold.value ? 'Ya encontraron hogar. ¿Busca algo parecido? Pídalo por WhatsApp.' : undefined,
+)
+
 const sectionTitle = computed(() => {
+  if (showingSold.value) return 'Piezas vendidas'
   if (activeCategory.value) {
     const cat = catalogStore.categories.find((c) => c.id === activeCategory.value)
     return cat?.name ?? 'Productos'

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
-import { useCatalogStore } from '@/stores/catalog-store'
+import { SOLD_CATEGORY_ID, useCatalogStore } from '@/stores/catalog-store'
 import { makeCategory, makeProduct } from './fixtures'
 
 describe('public catalog store', () => {
@@ -36,6 +36,13 @@ describe('public catalog store', () => {
   it('hides categories that only have sold products', () => {
     const store = seed()
     expect(store.categoriesWithStock.map((c) => c.id)).toEqual(['vases', 'faucets'])
+  })
+
+  it('lists only sold pieces in the "Vendidos" tab', () => {
+    const store = seed()
+    store.setActiveCategory(SOLD_CATEGORY_ID)
+    expect(store.filteredProducts.map((p) => p.id)).toEqual(['garden-01'])
+    expect(store.soldProducts).toHaveLength(1)
   })
 
   it('filters by the active category', () => {

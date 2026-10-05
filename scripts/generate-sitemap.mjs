@@ -186,6 +186,7 @@ async function main() {
   urls.push({ loc: `${BASE}/`, changefreq: 'weekly', priority: '1.0' })
   urls.push({ loc: `${BASE}/catalog`, changefreq: 'weekly', priority: '0.9' })
   urls.push({ loc: `${BASE}/about`, changefreq: 'monthly', priority: '0.7' })
+  urls.push({ loc: `${BASE}/preguntas-frecuentes`, changefreq: 'monthly', priority: '0.6' })
   urls.push({ loc: `${BASE}/privacidad`, changefreq: 'yearly', priority: '0.2' })
 
   for (const c of data.categories) {

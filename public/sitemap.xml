@@ -19,6 +19,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sweethome.gt/preguntas-frecuentes</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://sweethome.gt/privacidad</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>yearly</changefreq>
@@ -44,6 +50,12 @@
   </url>
   <url>
     <loc>https://sweethome.gt/catalog/categoria/cheese-boards</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/categoria/christmas-season</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -133,6 +145,18 @@
     <priority>0.65</priority>
   </url>
   <url>
+    <loc>https://sweethome.gt/catalog/producto/carreta-otonal-decorativa-toque-de-sofisticacion-para-tu-autumn-season-09</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/calabaza-decorativa-color-negro-hello-fall-un-toque-de-autumn-season-11</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
     <loc>https://sweethome.gt/catalog/producto/set-de-3-candeleros-de-metal-color-dorado-candle-holders-01</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -206,6 +230,30 @@
   </url>
   <url>
     <loc>https://sweethome.gt/catalog/producto/set-de-3-velas-aromaticas-candle-holders-13</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/set-2-candeleros-de-madera-color-blanco-candle-holders-14</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/farol-de-madera-clara-estilo-vintage-para-decoracion-candle-holders-15</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/linternas-de-metal-negro-con-velas-led-candle-holders-16</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/set-3-candeleros-de-madera-color-gris-candle-holders-20</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
@@ -289,7 +337,157 @@
     <priority>0.65</priority>
   </url>
   <url>
+    <loc>https://sweethome.gt/catalog/producto/linterna-de-agua-navidena-estilo-farol-con-dragon-y-santa-christmas-season-01</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/linterna-de-agua-navidena-estilo-farol-con-santa-claus-christmas-season-02</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/linterna-de-agua-navidena-estilo-farol-con-cascanueces-christmas-season-03</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/set-de-4-figuras-reno-navideno-y-arboles-para-decoracion-christmas-season-04</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/hombre-de-nieve-navideno-que-aporta-encanto-y-diversion-christmas-season-05</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/reno-navideno-para-decoracion-de-arbol-color-dorado-christmas-season-06</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/anade-toques-de-alegria-navidena-a-tu-hogar-con-este-christmas-season-07</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/arbol-navideno-de-metal-blanco-estilo-vintage-con-luz-christmas-season-08</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/decoracion-angelical-para-arbol-de-navidad-con-luz-christmas-season-09</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/sets-de-3-campanas-de-navidad-vintage-christmas-season-10</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/adorno-navideno-de-cascanueces-christmas-season-11</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/adorno-navideno-de-cascanueces-christmas-season-12</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/adorno-navideno-de-cascanueces-dorado-y-rosado-christmas-season-13</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/adorno-navideno-de-cascanueces-color-dorado-christmas-season-14</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/adorno-navideno-de-cascanueces-color-gris-y-blanco-christmas-season-15</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/decoracion-navidena-de-hombres-de-nieve-de-resina-christmas-season-16</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/reno-navideno-para-decoracion-color-blanco-de-ceramica-christmas-season-17</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/decoracion-navidena-con-purpurina-de-santa-clause-con-christmas-season-18</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/decoracion-navidena-con-purpurina-de-santa-clause-con-christmas-season-19</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/decoracion-navidena-de-arbol-de-gnomo-de-resina-christmas-season-20</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/decoracion-navidena-de-arbol-con-bombillas-christmas-season-21</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
     <loc>https://sweethome.gt/catalog/producto/grifo-estilo-casacada-doble-manija-color-negro-faucets-01</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/grifo-estilo-cascada-de-una-manija-color-plateado-faucets-02</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/grifo-estilo-cascada-de-doble-manija-color-dorado-faucets-03</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/grifo-estilo-cascada-de-una-manija-color-plateado-faucets-04</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/grifo-estilo-cascada-de-una-manija-color-dorado-faucets-05</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
@@ -302,6 +500,36 @@
   </url>
   <url>
     <loc>https://sweethome.gt/catalog/producto/estatua-de-jardin-de-gnomos-garden-02</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/gnomo-de-jardin-solar-con-regadera-con-luces-led-para-garden-03</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/exquisitas-velas-no-solo-iluminan-cualquier-espacio-garden-04</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/prensa-de-ajo-de-metal-garden-05</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/divertida-estatuas-de-jardin-de-gnomos-de-inodoro-garden-06</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/comedero-para-aves-colgante-al-aire-libre-garden-07</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
@@ -529,6 +757,132 @@
     <priority>0.65</priority>
   </url>
   <url>
+    <loc>https://sweethome.gt/catalog/producto/cadena-decorativa-de-eslabones-de-madera-kitchen-decor-38</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/mantel-de-lino-de-algodon-duradero-kitchen-decor-39</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/mantel-de-lino-de-algodon-duradero-kitchen-decor-40</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/mantel-de-lino-de-algodon-duradero-kitchen-decor-41</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/panera-de-acacia-ideal-para-tu-cocina-kitchen-decor-42</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/set-de-6-moldes-para-tartaleta-ideales-para-preparar-kitchen-decor-43</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/contenedor-de-almacenamiento-color-gris-hermetico-con-kitchen-decor-46</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/contenedor-de-almacenamiento-de-ceramica-color-negro-kitchen-decor-47</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/contenedor-de-almacenamiento-color-blanco-hermetico-con-kitchen-decor-50</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/juego-de-cubiertos-para-8-kitchen-decor-54</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/mantel-de-lino-de-algodon-duradero-kitchen-decor-55</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/juego-de-cubiertos-de-24-piezas-de-acero-inoxidable-incluye-kitchen-decor-58</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/set-de-6-moldes-para-tartaleta-ideales-para-preparar-kitchen-decor-60</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/manten-el-desorden-de-la-cocina-bajo-control-organizando-kitchen-decor-62</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/rotulo-de-welcome-para-darle-un-adorno-increible-a-la-kitchen-decor-63</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/contenedor-de-almacenamiento-color-gris-hermetico-con-kitchen-decor-64</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/set-de-3-toallas-de-tela-de-cocina-haz-que-tu-cocina-kitchen-decor-68</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/sets-de-4-individuales-cuadrados-para-mesa-de-comedor-color-kitchen-decor-69</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/set-de-3-organizadores-para-pan-de-metal-color-negro-cuenta-kitchen-decor-71</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/set-de-3-contenedores-de-almacenamiento-de-vidrio-con-kitchen-decor-76</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/cesta-de-almacenamiento-de-cuerda-de-algodon-kitchen-decor-77</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
     <loc>https://sweethome.gt/catalog/producto/escultura-abstracta-hombres-de-cerillas-sculptures-01</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -578,6 +932,12 @@
   </url>
   <url>
     <loc>https://sweethome.gt/catalog/producto/esculturas-blancas-entrelazadas-sculptures-09</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/esculturas-de-caballo-de-resina-arte-abstracto-y-sculptures-10</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
@@ -745,6 +1105,96 @@
     <priority>0.65</priority>
   </url>
   <url>
+    <loc>https://sweethome.gt/catalog/producto/bandeja-de-mostrador-de-bano-esta-hecha-de-material-de-trays-28</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/set-de-2-bandejas-de-madera-de-acacia-trays-29</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/bandeja-de-acacia-cafe-brilloso-par-almacenar-articulos-del-trays-30</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/try-escalera-de-tres-niveles-de-madera-color-cafe-oscuro-trays-31</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/bandeja-de-metal-giratoria-circular-trays-38</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/bandeja-de-madera-cafe-brilloso-almacenar-articulos-del-trays-39</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/try-de-escalera-de-tres-niveles-de-madera-color-blanco-trays-40</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/try-de-tres-niveles-de-madera-color-cafe-oscuro-estilo-trays-41</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/mini-try-de-dos-niveles-de-madera-elegante-puedes-trays-42</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/mini-try-de-dos-niveles-de-madera-oscura-trays-43</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/try-de-dos-niveles-de-madera-estilo-moderno-y-trays-44</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/try-de-dos-niveles-de-madera-estilo-moderno-y-trays-45</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/divisor-de-bambu-multifuncional-como-servir-alimentos-o-trays-46</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/sets-2-bandejas-organizadoras-ovaladas-de-mdf-ideal-para-trays-47</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/bandeja-organizadora-de-mdf-forma-de-hoja-ideal-para-trays-48</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
     <loc>https://sweethome.gt/catalog/producto/florero-de-ceramica-rustico-de-vasija-vases-01</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -848,6 +1298,36 @@
   </url>
   <url>
     <loc>https://sweethome.gt/catalog/producto/juego-de-16-mini-jarrones-trasnparentes-vases-18</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/pampas-de-ramas-esponjosas-pequenas-de-mesa-vases-19</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/pampas-de-ramas-con-esferas-pequenas-de-mesa-vases-20</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/arte-de-pared-enmarcado-de-jarron-minimalista-ideal-para-vases-21</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/set-de-12-rosas-blancas-realistas-y-pueden-mantener-la-vases-22</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sweethome.gt/catalog/producto/bandeja-de-acrilico-cuadrada-con-diseno-de-flores-color-vases-24</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>

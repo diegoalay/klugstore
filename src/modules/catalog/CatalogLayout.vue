@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="hHh lpR fff">
-    <q-header class="catalog-header" :style="headerStyle">
+  <q-layout view="hHh lpR fff" @scroll="onLayoutScroll">
+    <q-header class="catalog-header" :class="{ 'is-compact': compactHeader }" :style="headerStyle">
       <q-toolbar class="catalog-toolbar">
         <div class="catalog-brand" @click="goHome">
           <img
@@ -15,7 +15,12 @@
         <q-space />
 
         <div class="toolbar-end">
-          <nav class="catalog-nav catalog-nav--desktop" aria-label="Principal">
+          <nav
+            ref="desktopNavRef"
+            class="catalog-nav catalog-nav--desktop"
+            :class="{ 'is-fitted': navFitted }"
+            aria-label="Principal"
+          >
             <router-link
               :to="{ name: 'catalog-home' }"
               class="nav-link"
@@ -29,6 +34,13 @@
               :class="{ 'nav-link--active': isAboutActive }"
             >
               Nosotros
+            </router-link>
+            <router-link :to="{ name: 'faq' }" class="nav-link" :class="{ 'nav-link--active': isFaqActive }">
+              FAQs
+            </router-link>
+            <!-- Fuera de la vista: solo se alcanza deslizando el menú hacia la derecha. -->
+            <router-link :to="adminRoute" class="nav-link nav-link--admin" rel="nofollow" data-nav-extra>
+              Admin
             </router-link>
           </nav>
 
@@ -62,12 +74,18 @@
         >
           Nosotros
         </router-link>
+        <router-link :to="{ name: 'faq' }" class="nav-link" :class="{ 'nav-link--active': isFaqActive }">
+          FAQs
+        </router-link>
+        <router-link :to="adminRoute" class="nav-link nav-link--admin" rel="nofollow">Admin</router-link>
       </nav>
 
-      <div v-if="showSearch" class="search-bar">
+      <div v-if="showSearch" ref="searchBarRef" class="search-bar">
         <div class="search-bar-track">
           <q-input
             ref="searchInputRef"
+            @focus="resultsOpen = true"
+            @keydown.esc="resultsOpen = false"
             v-model="searchQuery"
             dense
             outlined
@@ -90,7 +108,7 @@
         </div>
 
         <!-- Dropdown de resultados -->
-        <div v-if="searchQuery && searchResults.length > 0" class="search-results">
+        <div v-if="resultsOpen && searchQuery && searchResults.length > 0" class="search-results">
           <div
             v-for="product in searchResults"
             :key="product.id"
@@ -124,7 +142,7 @@
         </div>
 
         <!-- Sin resultados -->
-        <div v-else-if="searchQuery && searchResults.length === 0" class="search-empty">
+        <div v-else-if="resultsOpen && searchQuery && searchResults.length === 0" class="search-empty">
           <q-icon name="fa-solid fa-magnifying-glass" size="sm" />
           <p>No se encontraron productos para "{{ searchQuery }}"</p>
         </div>
@@ -183,6 +201,7 @@
     <!-- Footer -->
     <q-footer class="catalog-footer">
       <div class="footer-content">
+        <TrustStrip />
         <div v-if="socialLinks" class="social-links">
           <q-btn
             v-if="socialLinks.instagram"
@@ -237,11 +256,9 @@
           © 2026 <strong>SweetHomeGT</strong> — un producto de
           <strong>SolayTech</strong>
           <span aria-hidden="true"> · </span>
-          <router-link to="/privacidad" class="footer-admin-link">Privacidad</router-link>
+          <router-link to="/preguntas-frecuentes" class="footer-admin-link">FAQs</router-link>
           <span aria-hidden="true"> · </span>
-          <router-link :to="isAdmin ? '/admin/catalogo' : '/admin/login'" class="footer-admin-link" rel="nofollow">
-            {{ isAdmin ? 'Panel' : 'Acceso' }}
-          </router-link>
+          <router-link to="/privacidad" class="footer-admin-link">Privacidad</router-link>
         </p>
       </div>
     </q-footer>
@@ -251,7 +268,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onMounted, onServerPrefetch, watch, defineAsyncComponent } from 'vue'
+import { ref, computed, nextTick, onMounted, onBeforeUnmount, onServerPrefetch, watch, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { QInput } from 'quasar'
 import { useStoreConfigStore, useCatalogStore } from '@/stores'
@@ -261,6 +278,7 @@ import { useProductQuickView } from '@/composables/useProductQuickView'
 import ProductQuickViewDialog from './components/ProductQuickViewDialog.vue'
 import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
 import CookieNotice from './components/CookieNotice.vue'
+import TrustStrip from './components/TrustStrip.vue'
 import { resolveStoreSlug } from '@/utils/storeResolver'
 import { formatCurrency } from '@/utils/format'
 import { useAdminSession } from '@/composables/useAdminSession'
@@ -273,6 +291,12 @@ const route = useRoute()
 const router = useRouter()
 const storeConfig = useStoreConfigStore()
 const { isAdmin } = useAdminSession()
+
+// Encabezado fijo que se compacta al bajar (menos alto, logo menor, sombra).
+const compactHeader = ref(false)
+function onLayoutScroll(details: { position: number }) {
+  compactHeader.value = details.position > 40
+}
 const catalogStore = useCatalogStore()
 const { loadCatalog, reloadCatalog } = useCatalog()
 
@@ -305,10 +329,48 @@ const searchQuery = computed({
 const loading = ref(true)
 const searchInputRef = ref<QInput | null>(null)
 
+// Lista de resultados: se cierra con clic fuera del buscador o Escape (el texto se
+// conserva) y vuelve a abrirse al enfocar el buscador o seguir escribiendo.
+const searchBarRef = ref<HTMLElement | null>(null)
+const resultsOpen = ref(true)
+watch(searchQuery, () => (resultsOpen.value = true))
+
+function closeResultsOnOutsideClick(event: PointerEvent) {
+  if (searchBarRef.value && !searchBarRef.value.contains(event.target as Node)) resultsOpen.value = false
+}
+onMounted(() => document.addEventListener('pointerdown', closeResultsOnOutsideClick))
+onBeforeUnmount(() => document.removeEventListener('pointerdown', closeResultsOnOutsideClick))
+
 const isCatalogActive = computed(() =>
   route.path === '/catalog' || route.path.startsWith('/catalog/'),
 )
 const isAboutActive = computed(() => route.path === '/about')
+const isFaqActive = computed(() => route.name === 'faq')
+const adminRoute = computed(() => (isAdmin.value ? '/admin/catalogo' : '/admin/login'))
+
+// El menú de escritorio se ajusta al ancho de Catálogo · Nosotros · FAQs; "Admin"
+// queda a la derecha, fuera de la vista, y solo se ve deslizando el menú.
+// Hasta medir (SSR/primer render) "Admin" no se muestra, para que no parpadee.
+const desktopNavRef = ref<HTMLElement | null>(null)
+const navFitted = ref(false)
+
+function fitDesktopNav() {
+  const nav = desktopNavRef.value
+  const extra = nav?.querySelector<HTMLElement>('[data-nav-extra]')
+  const last = extra?.previousElementSibling as HTMLElement | null
+  if (!nav || !last) return
+  const padding = parseFloat(getComputedStyle(nav).paddingRight) || 0
+  nav.style.maxWidth = `${last.offsetLeft + last.offsetWidth + padding}px`
+  nav.scrollLeft = 0
+  navFitted.value = true
+}
+
+onMounted(() => {
+  void nextTick(fitDesktopNav)
+  void document.fonts?.ready.then(fitDesktopNav)
+  window.addEventListener('resize', fitDesktopNav)
+})
+onBeforeUnmount(() => window.removeEventListener('resize', fitDesktopNav))
 
 const searchMatches = computed(() => {
   // Búsqueda case-insensitive y diacritic-insensitive:
@@ -411,6 +473,25 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .catalog-header {
   box-shadow: none;
+  transition: box-shadow 0.2s ease;
+
+  &.is-compact {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+
+    .catalog-toolbar {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      min-height: 56px;
+    }
+
+    .catalog-logo {
+      height: 34px;
+    }
+
+    .catalog-nav--mobile {
+      display: none;
+    }
+  }
 }
 
 .catalog-toolbar {
@@ -419,6 +500,9 @@ onMounted(async () => {
   width: 100%;
   padding: 18px 16px;
   min-height: 76px;
+  transition:
+    padding 0.2s ease,
+    min-height 0.2s ease;
 }
 
 .catalog-brand {
@@ -428,6 +512,7 @@ onMounted(async () => {
 }
 
 .catalog-logo {
+  transition: height 0.2s ease;
   height: 44px;
   width: auto;
   max-width: 160px;
@@ -466,6 +551,61 @@ onMounted(async () => {
 
 .catalog-nav--mobile {
   display: none;
+}
+
+/* Menú deslizable: "Admin" queda fuera de la vista a la derecha. */
+.catalog-nav--desktop,
+.catalog-nav--mobile {
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
+.catalog-nav--desktop {
+  position: relative;
+
+  &:not(.is-fitted) .nav-link--admin {
+    display: none;
+  }
+}
+
+.nav-link--admin {
+  opacity: 0.7;
+}
+
+/* Celular: el menú pasa a su propia fila bajo el logo (con "Preguntas" ya no cabe al lado). */
+@media (max-width: 599px) {
+  .catalog-nav--desktop {
+    display: none;
+  }
+
+  .catalog-nav--mobile {
+    display: flex;
+    margin: 0 16px 12px;
+
+    /* Las 3 opciones llenan el ancho; "Admin" queda afuera y aparece al deslizar. */
+    .nav-link {
+      flex: 0 0 calc((100% - 4px) / 3);
+      text-align: center;
+    }
+
+    .nav-link--admin {
+      flex: 0 0 auto;
+    }
+  }
+
+  .catalog-toolbar {
+    padding: 12px 16px;
+    min-height: 60px;
+  }
 }
 
 .nav-link {
@@ -557,30 +697,37 @@ onMounted(async () => {
     border-radius: 999px !important;
     min-height: 44px;
     background: #ffffff !important;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 16px;
+    padding-right: 12px;
   }
 
   :deep(.q-field__marginal) {
     height: 44px;
   }
 
-  /* Q outlined: quitar borde negro, usar rosa suave */
-  :deep(.q-field--outlined .q-field__control:before) {
+  /*
+   * Borde rosa suave en lugar del negro de Quasar. Las clases q-field--* están en
+   * el propio .search-input (la raíz del q-input), por eso van con "&".
+   */
+  &.q-field--outlined :deep(.q-field__control:before) {
     border: 1px solid rgba(209, 151, 147, 0.28);
   }
 
-  :deep(.q-field--outlined .q-field__control:hover:before) {
+  &.q-field--outlined :deep(.q-field__control:hover:before) {
     border-color: rgba(209, 151, 147, 0.45);
   }
 
-  :deep(.q-field--outlined.q-field--focused .q-field__control:before) {
-    border-color: var(--ks-secondary, #d19793);
-    border-width: 1px;
+  &.q-field--outlined :deep(.q-field__control:after) {
+    border: 0;
+    box-shadow: none;
   }
 
-  :deep(.q-field--outlined.q-field--focused .q-field__control:after) {
-    border-width: 0;
+  &.q-field--outlined.q-field--focused :deep(.q-field__control:before) {
+    border-color: var(--ks-secondary, #d19793);
+  }
+
+  &.q-field--focused :deep(.q-field__control) {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ks-secondary, #d19793) 18%, transparent);
   }
 
   :deep(.q-field__native) {

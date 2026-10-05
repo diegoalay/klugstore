@@ -24,7 +24,7 @@ function itemParams(p: Product) {
   }
 }
 
-export type WhatsAppSource = 'product_card' | 'product_detail' | 'floating_button' | 'about_page'
+export type WhatsAppSource = 'product_card' | 'product_detail' | 'floating_button' | 'about_page' | 'faq_page'
 
 /** Clic en "Comprar"/WhatsApp: la conversión real del catálogo. */
 export function trackWhatsAppClick(source: WhatsAppSource, product?: Product): void {

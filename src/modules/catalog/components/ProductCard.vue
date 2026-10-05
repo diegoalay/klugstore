@@ -93,10 +93,9 @@
         class="whatsapp-btn sold-btn"
         no-caps
         unelevated
-        disable
-        icon="fa-solid fa-circle-check"
-        label="Vendido"
-        @click.stop
+        icon="fa-brands fa-whatsapp"
+        label="Pedir algo similar"
+        @click.stop="openWhatsAppSimilar(product)"
       />
     </q-card-actions>
   </q-card>
@@ -121,7 +120,7 @@ const { isAdmin } = useAdminSession()
 const { openProductEditor } = useAdminProductEditor()
 
 const storeConfig = useStoreConfigStore()
-const { openWhatsApp } = useWhatsApp()
+const { openWhatsApp, openWhatsAppSimilar } = useWhatsApp()
 const { openProductQuickView } = useProductQuickView()
 
 const isSold = computed(() => props.product.sold === true)
@@ -427,13 +426,16 @@ function handleWhatsApp() {
 }
 
 .sold-btn {
-  background: #eeeeee !important;
-  color: #9a9a9a !important;
-  cursor: not-allowed !important;
-  opacity: 1 !important;
+  background: transparent !important;
+  color: var(--ks-text, #000) !important;
+  border: 1.5px solid var(--ks-text, #000);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 
-  :deep(.q-btn__content) {
-    letter-spacing: 0.06em;
+  &:hover {
+    background: var(--ks-text, #000) !important;
+    color: #fff !important;
   }
 }
 

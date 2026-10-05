@@ -9,6 +9,9 @@ import { normalizeForSearch } from '@/utils/slugify'
 
 export type { CatalogSortMode } from '@/utils/catalogSort'
 
+/** Pseudo-categoría de la barra: piezas vendidas (prueba social). */
+export const SOLD_CATEGORY_ID = 'sold'
+
 export const useCatalogStore = defineStore('catalog', () => {
   const products = ref<Product[]>([])
   const categories = ref<Category[]>([])
@@ -26,11 +29,15 @@ export const useCatalogStore = defineStore('catalog', () => {
     return sortedCategories.value.filter((c) => used.has(c.id))
   })
 
-  // Los vendidos no se listan en el catálogo; su ficha sigue accesible por link directo.
-  const filteredProducts = computed(() => {
-    let result = products.value.filter((p) => p.available)
+  const soldProducts = computed(() => products.value.filter((p) => p.sold))
 
-    if (activeCategory.value) {
+  // Los vendidos no se mezclan con lo disponible: tienen su propia pestaña
+  // ("Vendidos") y su ficha sigue accesible por link directo.
+  const filteredProducts = computed(() => {
+    const showingSold = activeCategory.value === SOLD_CATEGORY_ID
+    let result = showingSold ? [...soldProducts.value] : products.value.filter((p) => p.available)
+
+    if (activeCategory.value && !showingSold) {
       result = result.filter((p) => p.categoryId === activeCategory.value)
     }
 
@@ -99,6 +106,7 @@ export const useCatalogStore = defineStore('catalog', () => {
     catalogSort,
     sortedCategories,
     categoriesWithStock,
+    soldProducts,
     filteredProducts,
     featuredProducts,
     availableProducts,

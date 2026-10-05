@@ -36,7 +36,7 @@ import ProductCard from './ProductCard.vue'
 defineProps<{
   products: Product[]
   title?: string
-  subtitle?: string
+  subtitle?: string | undefined
   showCount?: boolean
 }>()
 </script>

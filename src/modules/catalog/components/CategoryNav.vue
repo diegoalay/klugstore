@@ -34,6 +34,19 @@
         <q-icon v-if="category.icon" :name="category.icon" size="14px" class="category-chip-icon" />
         {{ category.name }}
       </q-btn>
+
+      <q-btn
+        v-if="catalogStore.soldProducts.length"
+        :class="['category-chip', 'category-chip--sold', { 'category-chip--active': isCategoryChipActive(SOLD_CATEGORY_ID) }]"
+        flat
+        no-caps
+        unelevated
+        padding="8px 14px"
+        @click="selectCategory(SOLD_CATEGORY_ID)"
+      >
+        <q-icon name="fa-solid fa-heart" size="14px" class="category-chip-icon" />
+        Vendidos
+      </q-btn>
     </div>
     <button v-if="canScrollRight" type="button" class="nav-arrow nav-arrow--right" aria-label="Ver más categorías" @click="scrollBy(1)">
       <q-icon name="fa-solid fa-chevron-right" size="12px" />
@@ -45,6 +58,7 @@
 import { computed, ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCatalogStore } from '@/stores'
+import { SOLD_CATEGORY_ID } from '@/stores/catalog-store'
 import { trackSelectCategory } from '@/utils/analytics'
 
 const route = useRoute()
@@ -102,6 +116,12 @@ function isCategoryChipActive(categoryId: string): boolean {
 
 function selectCategory(categoryId: string | null) {
   trackSelectCategory(categoryId)
+  // "Vendidos" no es una categoría real (no tiene página propia): se muestra en la portada.
+  if (categoryId === SOLD_CATEGORY_ID && route.name === 'catalog-category') {
+    void router.push({ name: 'catalog-home' })
+    catalogStore.setActiveCategory(categoryId)
+    return
+  }
   if (route.name === 'catalog-category') {
     if (categoryId === null) {
       void router.push({ name: 'catalog-home' })

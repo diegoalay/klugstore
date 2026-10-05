@@ -42,6 +42,18 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/preguntas-frecuentes',
+    component: () => import('@/modules/catalog/CatalogLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'faq',
+        component: () => import('@/modules/catalog/pages/FaqPage.vue'),
+        meta: { title: 'Preguntas frecuentes' },
+      },
+    ],
+  },
+  {
     path: '/privacidad',
     component: () => import('@/modules/catalog/CatalogLayout.vue'),
     children: [

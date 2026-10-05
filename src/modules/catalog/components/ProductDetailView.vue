@@ -171,6 +171,27 @@
           <q-icon name="fa-solid fa-shield-check" size="xs" />
           Compra segura por WhatsApp
         </p>
+
+        <div class="purchase-info">
+          <div class="purchase-pay">
+            <div v-for="m in PAYMENT_METHODS" :key="m.title" class="purchase-pay-item">
+              <q-icon :name="m.icon" size="16px" />
+              <div>
+                <strong>{{ m.title }}</strong>
+                <span>{{ m.detail }}</span>
+              </div>
+            </div>
+          </div>
+          <details class="purchase-steps">
+            <summary>¿Cómo es el proceso?</summary>
+            <ol>
+              <li v-for="step in PURCHASE_STEPS" :key="step.title">
+                <strong>{{ step.title }}.</strong> {{ step.detail }}
+              </li>
+            </ol>
+            <router-link to="/preguntas-frecuentes" class="purchase-faq-link">Ver preguntas frecuentes</router-link>
+          </details>
+        </div>
       </template>
 
       <template v-else>
@@ -178,15 +199,13 @@
           class="cta-whatsapp cta-sold"
           no-caps
           unelevated
-          disable
-          icon="fa-solid fa-circle-check"
-          label="Vendido"
+          icon="fa-brands fa-whatsapp"
+          label="Pedir algo similar"
+          @click="openWhatsAppSimilar(product)"
         />
         <p class="cta-hint cta-hint--sold">
           Esta pieza ya fue vendida.
-          <a href="#" class="cta-sold-link" @click.prevent="onAskSimilarClick">
-            ¿Buscas algo similar?
-          </a>
+          <a href="#" class="cta-sold-link" @click.prevent="onAskSimilarClick">Ver piezas disponibles de la categoría</a>
         </p>
       </template>
 
@@ -208,6 +227,7 @@ import { useAdminSession } from '@/composables/useAdminSession'
 import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
 import { useProductQuickView } from '@/composables/useProductQuickView'
 import { trackViewItem, trackAskSimilar } from '@/utils/analytics'
+import { PAYMENT_METHODS, PURCHASE_STEPS } from '@/content/purchaseInfo'
 import type { Product } from '@/types'
 
 const { isAdmin } = useAdminSession()
@@ -238,7 +258,7 @@ const emit = defineEmits<{
 }>()
 
 const storeConfig = useStoreConfigStore()
-const { openWhatsApp } = useWhatsApp()
+const { openWhatsApp, openWhatsAppSimilar } = useWhatsApp()
 
 const activeImageIndex = ref(0)
 const selectedVariant = ref<string | null>(null)
@@ -336,6 +356,66 @@ function onAskSimilarClick() {
 </script>
 
 <style lang="scss" scoped>
+.purchase-info {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--ks-secondary, #d19793) 25%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--ks-accent, #e9e3ca) 25%, #fff);
+}
+
+.purchase-pay {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.purchase-pay-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--ks-text-secondary, #555);
+
+  .q-icon {
+    color: var(--ks-secondary, #d19793);
+    margin-top: 2px;
+  }
+
+  strong {
+    display: block;
+    color: var(--ks-text, #000);
+  }
+}
+
+.purchase-steps {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--ks-text-secondary, #555);
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--ks-text, #000);
+  }
+
+  ol {
+    margin: 8px 0 6px;
+    padding-left: 18px;
+    line-height: 1.5;
+  }
+
+  li + li {
+    margin-top: 4px;
+  }
+}
+
+.purchase-faq-link {
+  font-weight: 600;
+  color: var(--ks-text, #000);
+}
+
 .admin-edit-link {
   border: 0;
   background: none;
@@ -777,19 +857,17 @@ function onAskSimilarClick() {
 }
 
 .cta-sold {
-  background: #f0f0f0 !important;
-  color: #9a9a9a !important;
-  cursor: not-allowed !important;
-  opacity: 1 !important;
+  background: transparent !important;
+  color: var(--ks-text, #000) !important;
+  border: 1.5px solid var(--ks-text, #000) !important;
   box-shadow: none !important;
-  border: 1px solid #e5e5e5 !important;
-
-  :deep(.q-btn__content) {
-    letter-spacing: 0.06em;
-  }
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 
   &:hover {
-    box-shadow: none !important;
+    background: var(--ks-text, #000) !important;
+    color: #fff !important;
   }
 }
 
