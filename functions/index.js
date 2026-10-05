@@ -33,6 +33,13 @@ const ROLE_ADMIN = 0
 const ROLES = new Set([ROLE_ADMIN])
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+/**
+ * Las callables necesitan invocación pública en Cloud Run; la autorización la hace
+ * assertAdmin(). Explícito porque un primer deploy fallido dejó updateAdminUser y
+ * deleteAdminUser sin ese permiso (el navegador lo reportaba como error de CORS).
+ */
+const CALLABLE = { invoker: 'public' }
+
 const usersCol = () => getFirestore().collection('stores').doc(STORE).collection('users')
 
 async function assertAdmin(request) {
@@ -68,7 +75,7 @@ async function assertAnotherActiveAdmin(uid) {
   }
 }
 
-export const createAdminUser = onCall(async (request) => {
+export const createAdminUser = onCall(CALLABLE, async (request) => {
   const callerUid = await assertAdmin(request)
   const email = String(request.data?.email ?? '')
     .trim()
@@ -106,7 +113,7 @@ export const createAdminUser = onCall(async (request) => {
   return { uid: user.uid }
 })
 
-export const updateAdminUser = onCall(async (request) => {
+export const updateAdminUser = onCall(CALLABLE, async (request) => {
   const callerUid = await assertAdmin(request)
   const uid = String(request.data?.uid ?? '')
   const ref = usersCol().doc(uid)
@@ -138,7 +145,7 @@ export const updateAdminUser = onCall(async (request) => {
   return { uid }
 })
 
-export const deleteAdminUser = onCall(async (request) => {
+export const deleteAdminUser = onCall(CALLABLE, async (request) => {
   const callerUid = await assertAdmin(request)
   const uid = String(request.data?.uid ?? '')
   if (!uid) throw new HttpsError('invalid-argument', 'Falta el usuario.')
