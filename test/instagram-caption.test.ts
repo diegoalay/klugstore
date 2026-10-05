@@ -143,3 +143,12 @@ describe('updating a post when the description or measure changed', () => {
     expect(updateCaptionForProduct(pasted, product).changed).toBe(false)
   })
 })
+
+describe('emoji cleanup', () => {
+  it('drops skin-tone modifiers left behind by stripped emojis', () => {
+    const { description } = parseInstagramCaption(
+      'Adorno navideño de cascanueces, de cuerda 💫😍💂🏻🎄. Medida: 30 cm de altura. Precio: Q175',
+    )
+    expect(description).not.toMatch(/\p{Emoji_Modifier}/u)
+  })
+})

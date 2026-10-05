@@ -88,6 +88,12 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/modules/admin/pages/AdminInstagramPage.vue'),
         meta: { requiresAdmin: true },
       },
+      {
+        path: 'usuarios',
+        name: 'admin-users',
+        component: () => import('@/modules/admin/pages/AdminUsersPage.vue'),
+        meta: { requiresAdmin: true },
+      },
     ],
   },
   {

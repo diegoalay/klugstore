@@ -1,10 +1,6 @@
 import type { CatalogData, Category, Product, ProductImage, StoreTheme } from '@/types'
 import type { RawCatalog, RawProduct } from '@/utils/catalogData'
-import {
-  getRawCatalogJson,
-  resolveCatalogSlug,
-  resolveRawCatalog,
-} from '@/utils/catalogData'
+import { getRawCatalogJson, resolveCatalogSlug, resolveRawCatalog } from '@/utils/catalogData'
 import { productSlug } from '@/utils/slugify'
 import { normalizeIconName } from '@/utils/iconName'
 
@@ -108,14 +104,22 @@ function buildStoreConfig(raw: RawCatalog, fileSlug: string): CatalogData['store
     slug: key,
     description:
       raw.description ??
-      (key === 'sweethome' ? SWEETHOME_DESC_FALLBACK : `Catálogo ${raw.name || key}. Compra por WhatsApp.`),
-    logo: raw.logo ?? `${base}logos/${key}-logo.webp`,
-    logoInverse: raw.logoInverse ?? `${base}logos/${key}-logo-white.webp`,
+      (key === 'sweethome'
+        ? SWEETHOME_DESC_FALLBACK
+        : `Catálogo ${raw.name || key}. Compra por WhatsApp.`),
+    // SweetHome sirve su logo desde el propio sitio (public/brand), no desde el CDN.
+    logo:
+      raw.logo ??
+      (key === 'sweethome' ? '/brand/sweethome-logo.svg' : `${base}logos/${key}-logo.webp`),
+    logoInverse:
+      raw.logoInverse ??
+      (key === 'sweethome'
+        ? '/brand/sweethome-logo-oscuro.svg'
+        : `${base}logos/${key}-logo-white.webp`),
     whatsappNumber: String(
       raw.whatsappNumber ?? import.meta.env.VITE_WHATSAPP_DEFAULT_NUMBER ?? '50239742544',
     ),
-    whatsappMessage:
-      raw.whatsappMessage ?? 'Hola! Vi un producto en su catálogo y me interesa.',
+    whatsappMessage: raw.whatsappMessage ?? 'Hola! Vi un producto en su catálogo y me interesa.',
     currency: raw.currency || 'GTQ',
     locale: raw.locale ?? 'es-GT',
     theme: {
@@ -130,8 +134,7 @@ function buildStoreConfig(raw: RawCatalog, fileSlug: string): CatalogData['store
       cardStyle: t.cardStyle ?? defaultTheme.cardStyle,
       borderRadius: t.borderRadius ?? defaultTheme.borderRadius,
     },
-    socialLinks:
-      raw.socialLinks ?? (key === 'sweethome' ? SWEETHOME_SOCIAL_FALLBACK : {}),
+    socialLinks: raw.socialLinks ?? (key === 'sweethome' ? SWEETHOME_SOCIAL_FALLBACK : {}),
   }
 }
 

@@ -20,7 +20,9 @@ const NAME_MAX = 60
 function stripDecorations(text: string): string {
   return text
     .replace(HASHTAG_RE, '')
-    .replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}]/gu, '')
+    // Emoji_Modifier: tonos de piel (💂🏻); sin quitarlos queda un 🏻 suelto que se ve como □.
+    // Alternancia (no clase [..]): una clase con modificadores/ZWJ la marca no-misleading-character-class.
+    .replace(/\p{Extended_Pictographic}|\p{Emoji_Modifier}|\u{FE0F}|\u{200D}|\u{20E3}/gu, '')
     .replace(/\s+/g, ' ')
     .trim()
 }

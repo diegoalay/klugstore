@@ -21,7 +21,8 @@
     "postinstall": "quasar prepare",
     "build:spa": "npm run generate:sitemap && quasar build",
     "test:watch": "vitest",
-    "sync:instagram": "node scripts/sync-instagram.mjs"
+    "sync:instagram": "node scripts/sync-instagram.mjs",
+    "images:optimize": "node scripts/optimize-product-images.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-pro": "^7.3.1",
@@ -49,6 +50,7 @@
     "globals": "^17.13.0",
     "happy-dom": "^20.14.5",
     "prettier": "^3.9.9",
+    "subset-font": "^2.9.0",
     "typescript": "~6.0.3",
     "vite-plugin-checker": "^0.14.5",
     "vitest": "^5.0.3",

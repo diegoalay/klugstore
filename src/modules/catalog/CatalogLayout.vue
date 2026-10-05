@@ -331,7 +331,10 @@ const searchQuery = computed({
   get: () => catalogStore.searchQuery,
   set: (v: string) => catalogStore.setSearchQuery(v),
 })
-const loading = ref(true)
+// Si el catálogo ya viene del HTML pre-renderizado (estado hidratado de Pinia), no se
+// muestra el spinner: con `true` fijo el primer render del cliente no coincidía con el del
+// servidor y Vue descartaba toda la página pre-renderizada para volver a montarla.
+const loading = ref(catalogStore.products.length === 0)
 const searchInputRef = ref<QInput | null>(null)
 
 // Lista de resultados: se cierra con clic fuera del buscador o Escape (el texto se
@@ -349,7 +352,8 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', closeResultsOn
 const isCatalogActive = computed(() =>
   route.path === '/catalog' || route.path.startsWith('/catalog/'),
 )
-const isAboutActive = computed(() => route.path === '/about')
+// Por nombre y no por path: Firebase Hosting sirve /about/ (con barra final).
+const isAboutActive = computed(() => route.name === 'about')
 const isFaqActive = computed(() => route.name === 'faq')
 const adminRoute = computed(() => (isAdmin.value ? '/admin/catalogo' : '/admin/login'))
 
@@ -496,7 +500,7 @@ onMounted(async () => {
     }
 
     .catalog-logo {
-      height: 34px;
+      height: 38px;
     }
 
   }
@@ -521,9 +525,9 @@ onMounted(async () => {
 
 .catalog-logo {
   transition: height 0.2s ease;
-  height: 44px;
+  height: 50px;
   width: auto;
-  max-width: 160px;
+  max-width: 260px;
   object-fit: contain;
   display: block;
 }
@@ -531,7 +535,7 @@ onMounted(async () => {
 @media (max-width: 768px) {
   .catalog-logo {
     height: 38px;
-    max-width: 130px;
+    max-width: 200px;
   }
 }
 

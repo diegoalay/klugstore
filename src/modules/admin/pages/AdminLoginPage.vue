@@ -3,7 +3,7 @@
     <div class="login-wrap">
       <div class="login-brand">
         <img
-          src="https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/logos/sweethome-logo.webp"
+          src="/brand/sweethome-logo.svg"
           alt="SweetHome"
           class="login-logo"
           @error="logoFailed = true"
@@ -131,7 +131,11 @@ function friendlyAuthError(err: unknown): string {
   }
   if (code === 'auth/invalid-email') {
     return 'Correo inválido'
-  }  return 'No se pudo iniciar sesión'
+  }
+  if (code === 'auth/user-disabled' || code === 'admin/access-denied') {
+    return 'Esta cuenta no tiene acceso al admin'
+  }
+  return 'No se pudo iniciar sesión'
 }
 
 async function login() {

@@ -9,9 +9,17 @@
       >
         <img
           v-if="activeImage"
-          :src="activeImage.url"
+          :key="activeImage.url"
+          :src="imageSrc(activeImage.url, 1080)"
+          :srcset="imageSrcset(activeImage.url, DETAIL_WIDTHS)"
+          sizes="(max-width: 768px) 100vw, 480px"
           :alt="activeImage.alt || product.name"
+          width="1080"
+          height="1080"
+          fetchpriority="high"
+          decoding="async"
           class="detail-image"
+          @error="onImageVariantError($event, activeImage.url)"
         />
 
         <div v-else class="detail-image-placeholder" aria-label="Sin imagen">
@@ -50,7 +58,15 @@
           :class="['thumbnail', { active: activeImageIndex === index }]"
           @click="activeImageIndex = index"
         >
-          <img :src="img.url" :alt="img.alt" />
+          <img
+            :src="imageSrc(img.url, 480)"
+            :alt="img.alt"
+            width="64"
+            height="64"
+            loading="lazy"
+            decoding="async"
+            @error="onImageVariantError($event, img.url)"
+          />
         </div>
       </div>
     </div>
@@ -82,7 +98,14 @@
             :name="i"
             class="lightbox-slide"
           >
-            <img :src="img.url" :alt="img.alt" class="lightbox-image" />
+            <!-- Solo se monta la diapositiva visible (QCarousel): la grande se pide al abrirla. -->
+            <img
+              :src="imageSrc(img.url, 1080)"
+              :alt="img.alt"
+              class="lightbox-image"
+              decoding="async"
+              @error="onImageVariantError($event, img.url)"
+            />
           </q-carousel-slide>
         </q-carousel>
 
@@ -229,6 +252,7 @@ import { useProductQuickView } from '@/composables/useProductQuickView'
 import { trackViewItem, trackAskSimilar } from '@/utils/analytics'
 import { PAYMENT_METHODS, PURCHASE_STEPS } from '@/content/purchaseInfo'
 import type { Product } from '@/types'
+import { DETAIL_WIDTHS, imageSrc, imageSrcset, onImageVariantError } from '@/utils/imageVariants'
 
 const { isAdmin } = useAdminSession()
 const { openProductEditor } = useAdminProductEditor()
@@ -454,7 +478,7 @@ function onAskSimilarClick() {
   position: relative;
   border-radius: var(--ks-radius, 16px);
   overflow: hidden;
-  background: var(--ks-surface, #ffffff);
+  background: #f3eeea;
   aspect-ratio: 1;
   cursor: zoom-in;
   width: 100%;
@@ -467,6 +491,7 @@ function onAskSimilarClick() {
   max-width: 100%;
   object-fit: cover;
   display: block;
+  color: transparent; // sin texto alternativo visible mientras carga
 }
 
 .product-image-main.is-empty {
@@ -625,10 +650,13 @@ function onAskSimilarClick() {
     border-color: var(--ks-primary, #1a1a2e);
   }
 
+  background: #f3eeea;
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    color: transparent;
   }
 }
 

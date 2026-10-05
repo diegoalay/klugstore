@@ -20,14 +20,16 @@
     <link rel="preconnect" href="https://sweethome.gt" crossorigin />
     <!-- Preconnect: CDN de assets (imágenes y logos) -->
     <link rel="preconnect" href="https://klugsystem-public-storage.s3.us-east-1.amazonaws.com" crossorigin />
+    <!-- Preconnect: fotos de producto (Firebase Storage). Sin crossorigin: los <img> se piden sin CORS. -->
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
 
     <!-- Favicons -->
     <link
       rel="icon"
       type="image/svg+xml"
-      href="https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/logos/favicon/favicon.svg"
+      href="/favicon.svg"
     />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
 
     <!-- Theme Color (marca) -->
@@ -53,7 +55,7 @@
             "alternateName": ["SweetHome", "Sweet Home Guatemala"],
             "description": "SweetHome comercializa en línea productos para el hogar con foco en decoración temática: ayuda a transformar espacios en experiencias cálidas, estéticas y memorables, con picos en temporadas como Navidad.",
             "url": "https://sweethome.gt",
-            "logo": "https://sweethome.gt/logo.png"
+            "logo": "https://sweethome.gt/brand/sweethome-logo-1600.png"
           },
           {
             "@type": "Organization",
@@ -61,7 +63,7 @@
             "name": "SweetHome GT",
             "alternateName": ["SweetHome", "Sweet Home Guatemala"],
             "url": "https://sweethome.gt",
-            "logo": "https://sweethome.gt/logo.png",
+            "logo": "https://sweethome.gt/brand/sweethome-logo-1600.png",
             "description": "Tienda en línea guatemalteca de decoración y artículos para el hogar: estética, funcionalidad y regalos, con fuerte propuesta visual en redes y venta asistida por WhatsApp.",
             "brand": { "@id": "https://sweethome.gt/#brand" },
             "areaServed": {
@@ -160,5 +162,20 @@
         </p>
       </div>
     </noscript>
+    <!--
+      Respaldo CSR (csr.html: /admin y productos sin página pre-generada). En SSG sin PWA,
+      Quasar asume que toda página viene pre-renderizada y el plugin Meta hace
+      document.getElementById('qmeta-init').remove(): sin ese nodo la app revienta antes
+      de montarse y la página queda en blanco. Las páginas pre-renderizadas ya traen
+      data-server-rendered y su propio #qmeta-init, así que ahí no se toca nada.
+    -->
+    <script>
+      if (document.body.getAttribute('data-server-rendered') === null && !document.getElementById('qmeta-init')) {
+        window.__Q_META__ = { title: '', titleTemplate: null, meta: {}, link: {}, script: {}, htmlAttr: {}, bodyAttr: {} }
+        var qmeta = document.createElement('script')
+        qmeta.id = 'qmeta-init'
+        document.body.appendChild(qmeta)
+      }
+    </script>
   </body>
 </html>

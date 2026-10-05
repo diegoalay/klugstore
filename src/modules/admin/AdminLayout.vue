@@ -3,10 +3,7 @@
     <q-header class="admin-header">
       <q-toolbar class="admin-toolbar">
         <div class="admin-toolbar-inner">
-          <router-link :to="{ name: 'admin-catalog' }" class="admin-brand">
-            <q-icon name="fa-solid fa-house-chimney" size="16px" class="admin-brand-icon" />
-            <span>SweetHome <em>Admin</em></span>
-          </router-link>
+          <span class="admin-brand">SweetHome <em>Admin</em></span>
 
           <q-space />
 
@@ -73,6 +70,7 @@ import { signOutAdmin } from '@/utils/adminAuth'
 const NAV = [
   { name: 'admin-catalog', label: 'Productos', icon: 'fa-solid fa-boxes-stacked' },
   { name: 'admin-instagram', label: 'Instagram', icon: 'fa-brands fa-instagram' },
+  { name: 'admin-users', label: 'Usuarios', icon: 'fa-solid fa-users' },
 ] as const
 
 const route = useRoute()
@@ -113,11 +111,7 @@ async function logout() {
 }
 
 .admin-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
   color: #fff;
-  text-decoration: none;
   font-weight: 700;
   font-size: 1.05rem;
 
@@ -126,10 +120,6 @@ async function logout() {
     font-weight: 500;
     color: #d19793;
   }
-}
-
-.admin-brand-icon {
-  color: #d19793;
 }
 
 .admin-header-btn {

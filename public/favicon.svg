@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><g transform="translate(12.264186046511629 7.039999999999999) scale(0.2321860465116279)"><g fill="none" stroke="#d19793" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M18 210 C 48 152, 92 90, 152 26"/>
+  <g transform="translate(34 178) rotate(-104) scale(1.1)"><path d="M0 0 L5 0"/><path d="M5 0 C 13 -10, 31 -11, 44 0 C 31 8, 13 8, 5 0 Z"/></g>
+  <g transform="translate(49 152) rotate(-8) scale(1.05)"><path d="M0 0 L5 0"/><path d="M5 0 C 13 -10, 31 -11, 44 0 C 31 8, 13 8, 5 0 Z"/></g>
+  <g transform="translate(66 124) rotate(-102) scale(0.95)"><path d="M0 0 L5 0"/><path d="M5 0 C 13 -10, 31 -11, 44 0 C 31 8, 13 8, 5 0 Z"/></g>
+  <g transform="translate(86 96) rotate(-10) scale(0.86)"><path d="M0 0 L5 0"/><path d="M5 0 C 13 -10, 31 -11, 44 0 C 31 8, 13 8, 5 0 Z"/></g>
+  <g transform="translate(108 69) rotate(-100) scale(0.76)"><path d="M0 0 L5 0"/><path d="M5 0 C 13 -10, 31 -11, 44 0 C 31 8, 13 8, 5 0 Z"/></g>
+  <g transform="translate(131 45) rotate(-14) scale(0.64)"><path d="M0 0 L5 0"/><path d="M5 0 C 13 -10, 31 -11, 44 0 C 31 8, 13 8, 5 0 Z"/></g>
+  <g transform="translate(150 28) rotate(-52) scale(0.56)"><path d="M0 0 C 10 -10, 28 -11, 40 0 C 28 8, 10 8, 0 0 Z"/></g>
+</g></g></svg>

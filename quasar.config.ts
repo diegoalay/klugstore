@@ -26,6 +26,14 @@ export default defineConfig((ctx) => {
       },
 
       vueRouterMode: 'history',
+
+      // `HYDRATION_DEBUG=1 npm run build` deja el detalle de los "hydration mismatch" en
+      // la consola del build de producción (por defecto Vue solo dice que hubo uno).
+      extendViteConf(viteConf) {
+        if (process.env.HYDRATION_DEBUG) {
+          viteConf.define = { ...viteConf.define, __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true' }
+        }
+      },
       // Solo SPA: Firebase Hosting publica dist/spa; SSR usa su default (dist/ssr).
       ...(ctx.mode.spa ? { distDir: 'dist/spa' } : {}),
 

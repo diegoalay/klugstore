@@ -2,8 +2,11 @@ rules_version = '2';
 
 service firebase.storage {
   match /b/{bucket}/o {
+    // Mismo criterio que firestore.rules: perfil con role 0 y active true.
     function isAdmin() {
-      return request.auth != null;
+      return request.auth != null
+        && firestore.get(/databases/(default)/documents/stores/sweethome/users/$(request.auth.uid)).data.role == 0
+        && firestore.get(/databases/(default)/documents/stores/sweethome/users/$(request.auth.uid)).data.active == true;
     }
 
     // Fotos de producto: lectura pública (se sirven en el catálogo); solo

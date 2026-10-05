@@ -2,11 +2,18 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Todo usuario de Firebase Auth es admin. Es seguro solo porque el registro
-    // público está deshabilitado (Auth → disabledUserSignup): las cuentas
-    // únicamente se crean desde Firebase Console.
+    // Admin = perfil en stores/sweethome/users/{uid} con role 0 y active true.
+    // Los perfiles solo los escriben las Cloud Functions (functions/index.js), que
+    // también son las únicas que crean cuentas (el registro público está deshabilitado).
+    function adminProfilePath() {
+      return /databases/$(database)/documents/stores/sweethome/users/$(request.auth.uid);
+    }
+
     function isAdmin() {
-      return request.auth != null;
+      return request.auth != null
+        && exists(adminProfilePath())
+        && get(adminProfilePath()).data.role == 0
+        && get(adminProfilePath()).data.active == true;
     }
 
     // Catálogo público: lectura abierta (debe ser indexable y visible sin login).
@@ -22,6 +29,13 @@ service cloud.firestore {
       // Estado de integraciones (p. ej. lastSyncAt de Instagram): privado.
       match /integrations/{integrationId} {
         allow read, write: if isAdmin();
+      }
+
+      // Usuarios del admin: cada quien lee su propio perfil (para saber su rol al
+      // iniciar sesión); los admins ven la lista. Escritura solo vía Cloud Functions.
+      match /users/{userId} {
+        allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+        allow write: if false;
       }
 
       // Posts de Instagram sincronizados para crear productos: privados.

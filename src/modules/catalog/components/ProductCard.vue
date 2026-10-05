@@ -9,10 +9,20 @@
     <div class="product-image-container">
       <img
         v-if="product.images[0]?.url"
-        :src="product.images[0].url"
+        :src="imageSrc(product.images[0].url, 480)"
+        :srcset="imageSrcset(product.images[0].url, CARD_WIDTHS)"
+        sizes="(max-width: 768px) 50vw, 300px"
         :alt="product.images[0].alt || product.name"
+        width="480"
+        height="480"
+        ref="imageRef"
         class="product-image"
-        loading="lazy"
+        :class="{ 'is-loading': !imageLoaded }"
+        :loading="priority ? 'eager' : 'lazy'"
+        :fetchpriority="priority ? 'high' : 'auto'"
+        decoding="async"
+        @load="imageLoaded = true"
+        @error="onImageVariantError($event, product.images[0].url)"
       />
       <div v-else class="product-image-placeholder" aria-label="Sin imagen">
         <q-icon name="fa-regular fa-image" />
@@ -111,9 +121,12 @@ import { formatCurrency } from '@/utils/format'
 import { useAdminSession } from '@/composables/useAdminSession'
 import { useAdminProductEditor } from '@/composables/useAdminProductEditor'
 import type { Product } from '@/types'
+import { CARD_WIDTHS, imageSrc, imageSrcset, onImageVariantError } from '@/utils/imageVariants'
 
 const props = defineProps<{
   product: Product
+  /** Tarjeta visible al cargar la página: imagen sin lazy y con prioridad alta. */
+  priority?: boolean
 }>()
 
 const { isAdmin } = useAdminSession()
@@ -126,10 +139,19 @@ const { openProductQuickView } = useProductQuickView()
 const isSold = computed(() => props.product.sold === true)
 
 const cardRef = ref<InstanceType<typeof QCard> | null>(null)
-const isRevealed = ref(false)
+// Las tarjetas prioritarias (las que se ven al abrir) salen visibles desde el HTML
+// pre-renderizado: si esperaran al JS para aparecer, la página se ve vacía al cargar.
+const isRevealed = ref(props.priority === true)
 let observer: IntersectionObserver | null = null
 
+// Fade-in de la foto: arranca visible (SSR / sin JS se ve normal) y solo se oculta si al
+// hidratar todavía no terminó de bajar; mientras tanto se ve el fondo del contenedor.
+const imageRef = ref<HTMLImageElement | null>(null)
+const imageLoaded = ref(true)
+
 onMounted(() => {
+  if (imageRef.value && !imageRef.value.complete) imageLoaded.value = false
+  if (isRevealed.value) return
   // Respeta accesibilidad: si el usuario prefiere reducir animación, mostramos directo.
   if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
     isRevealed.value = true
@@ -244,7 +266,8 @@ function handleWhatsApp() {
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
-  background: var(--ks-bg, #f5f5f5);
+  // Placeholder en tono de marca mientras baja la foto.
+  background: #f3eeea;
 }
 
 .product-image-placeholder {
@@ -262,7 +285,15 @@ function handleWhatsApp() {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  // Oculta el texto alternativo (Firefox lo pinta mientras carga); el alt sigue para lectores.
+  color: transparent;
+  transition:
+    transform 0.3s ease,
+    opacity 0.35s ease;
+
+  &.is-loading {
+    opacity: 0;
+  }
 
   .product-card:hover & {
     transform: scale(1.05);
