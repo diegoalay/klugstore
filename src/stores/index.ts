@@ -1,4 +1,4 @@
-import { defineStore } from '#q-app/wrappers'
+import { defineStore } from '#q-app'
 import { createPinia } from 'pinia'
 
 export default defineStore((/* { ssrContext } */) => {
@@ -10,3 +10,4 @@ export default defineStore((/* { ssrContext } */) => {
 export { useCatalogStore } from './catalog-store'
 export { useStoreConfigStore } from './store-config-store'
 export { useAdminCatalogDraftStore } from './admin-catalog-draft-store'
+export { useAdminFirestoreCatalogStore } from './admin-firestore-catalog-store'

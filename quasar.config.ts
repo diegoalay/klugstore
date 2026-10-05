@@ -1,17 +1,20 @@
-import { defineConfig } from '#q-app/wrappers'
+import { defineConfig } from '#q-app'
 
-export default defineConfig(() => {
+export default defineConfig((ctx) => {
   return {
-    boot: ['fontawesome-pro', 'firebase'],
+    boot: ['chunk-recovery', 'fontawesome-pro', 'firebase'],
 
     css: ['app.scss'],
 
-    extras: [
-      'mdi-v7',
-      'roboto-font',
-    ],
+    extras: ['roboto-font'],
 
     build: {
+      // app-vite 3 solo expone al cliente variables con este prefijo (default: QCLI_).
+      // Nuestro .env y los scripts usan VITE_*; ninguna es secreta (config pública de Firebase).
+      env: {
+        clientPrefix: 'VITE_',
+      },
+
       target: {
         browser: ['es2022', 'firefox115', 'chrome115', 'safari14'],
         node: 'node20',
@@ -23,7 +26,8 @@ export default defineConfig(() => {
       },
 
       vueRouterMode: 'history',
-      distDir: 'dist/spa',
+      // Solo SPA: Firebase Hosting publica dist/spa; SSR usa su default (dist/ssr).
+      ...(ctx.mode.spa ? { distDir: 'dist/spa' } : {}),
 
       vitePlugins: [
         [
@@ -55,8 +59,9 @@ export default defineConfig(() => {
           dark: '#000000',
         },
       },
+      lang: 'es',
       iconSet: 'fontawesome-v6',
-      plugins: ['Notify', 'Loading', 'Dialog'],
+      plugins: ['Notify', 'Loading', 'Dialog', 'Meta'],
     },
 
     animations: [],
@@ -65,6 +70,13 @@ export default defineConfig(() => {
       prodPort: 3000,
       middlewares: ['render'],
       pwa: false,
+    },
+
+    ssg: {
+      pwa: false,
+      error404HtmlFilename: '404.html',
+      // El admin necesita sesión: se sirve como SPA (csr.html), no se pre-renderiza.
+      clientSideRenderingRoutes: ['/admin/**'],
     },
 
     pwa: {
