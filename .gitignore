@@ -28,3 +28,6 @@ quasar.config.*.temporary.compiled*
 
 # Token de la API de Instagram (importación de posts) — nunca se sube al repo
 .instagram-token
+
+# Font Awesome Pro reducido (scripts/build-fa-subset.mjs): se genera en dev/build
+src/css/fa-subset/
