@@ -3,6 +3,18 @@ import { useMeta } from 'quasar'
 
 /** Dominio público: canonical/og:url siempre apuntan a producción, también en dev. */
 export const SITE_ORIGIN = 'https://sweethome.gt'
+
+/**
+ * URL pública canónica de una ruta. Firebase Hosting sirve cada página pre-generada como
+ * carpeta (`/catalog/index.html`) y redirige `/catalog` → `/catalog/` con un 301, así que el
+ * canonical, og:url y el sitemap deben llevar la barra final; si no, Google ve cada URL como
+ * "página con redirección" y no la indexa desde el sitemap.
+ */
+export function canonicalUrl(path: string): string {
+  const clean = path.split(/[?#]/)[0] || '/'
+  const withSlash = clean.startsWith('/') ? clean : `/${clean}`
+  return `${SITE_ORIGIN}${withSlash.endsWith('/') ? withSlash : `${withSlash}/`}`
+}
 const DEFAULT_OG_IMAGE =
   'https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/og-image.png'
 
@@ -29,7 +41,7 @@ export function usePageSeo(opts: PageSeoInput) {
     const title = unref(opts.title)
     const description = unref(opts.description)
     const path = unref(opts.path)
-    const url = `${SITE_ORIGIN}${path.startsWith('/') ? path : `/${path}`}`
+    const url = canonicalUrl(path)
     const image = unref(opts.image) || DEFAULT_OG_IMAGE
     const robots = unref(opts.noIndex)
       ? 'noindex, follow'

@@ -33,7 +33,7 @@ import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ProductDetailView from '@/modules/catalog/components/ProductDetailView.vue'
 import { useCatalogStore, useStoreConfigStore } from '@/stores'
-import { usePageSeo, truncateSeoDescription, SITE_ORIGIN } from '@/composables/usePageSeo'
+import { usePageSeo, truncateSeoDescription, canonicalUrl } from '@/composables/usePageSeo'
 import { useProductJsonLd } from '@/composables/useProductJsonLd'
 import { CATALOG_RETURN_HASH_KEY } from '@/composables/useCatalogHash'
 
@@ -80,7 +80,7 @@ usePageSeo({
 useProductJsonLd({
   product,
   storeName: computed(() => storeConfig.storeName),
-  url: computed(() => `${SITE_ORIGIN}${productPath.value}`),
+  url: computed(() => canonicalUrl(productPath.value)),
 })
 
 function askForSimilar() {

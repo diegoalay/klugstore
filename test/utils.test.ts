@@ -43,3 +43,13 @@ describe('category icons', () => {
     expect(new Set(values).size).toBe(values.length)
   })
 })
+
+describe('canonicalUrl', () => {
+  it('always ends with a slash so it matches the URL Firebase serves', async () => {
+    const { canonicalUrl } = await import('@/composables/usePageSeo')
+    expect(canonicalUrl('/catalog')).toBe('https://sweethome.gt/catalog/')
+    expect(canonicalUrl('/catalog/')).toBe('https://sweethome.gt/catalog/')
+    expect(canonicalUrl('/')).toBe('https://sweethome.gt/')
+    expect(canonicalUrl('catalog/producto/x?y=1#z')).toBe('https://sweethome.gt/catalog/producto/x/')
+  })
+})

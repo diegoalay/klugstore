@@ -182,21 +182,22 @@ async function main() {
   const BASE = (data.publicUrl || process.env.SITEMAP_BASE_URL || 'https://sweethome.gt').replace(/\/$/, '')
   const lastmod = new Date().toISOString().slice(0, 10)
 
+  // Barra final: Firebase redirige /ruta → /ruta/ (ver canonicalUrl en usePageSeo.ts).
   const urls = []
   urls.push({ loc: `${BASE}/`, changefreq: 'weekly', priority: '1.0' })
-  urls.push({ loc: `${BASE}/catalog`, changefreq: 'weekly', priority: '0.9' })
-  urls.push({ loc: `${BASE}/about`, changefreq: 'monthly', priority: '0.7' })
-  urls.push({ loc: `${BASE}/preguntas-frecuentes`, changefreq: 'monthly', priority: '0.6' })
-  urls.push({ loc: `${BASE}/privacidad`, changefreq: 'yearly', priority: '0.2' })
+  urls.push({ loc: `${BASE}/catalog/`, changefreq: 'weekly', priority: '0.9' })
+  urls.push({ loc: `${BASE}/about/`, changefreq: 'monthly', priority: '0.7' })
+  urls.push({ loc: `${BASE}/preguntas-frecuentes/`, changefreq: 'monthly', priority: '0.6' })
+  urls.push({ loc: `${BASE}/privacidad/`, changefreq: 'yearly', priority: '0.2' })
 
   for (const c of data.categories) {
-    urls.push({ loc: `${BASE}/catalog/categoria/${c.slug}`, changefreq: 'weekly', priority: '0.8' })
+    urls.push({ loc: `${BASE}/catalog/categoria/${c.slug}/`, changefreq: 'weekly', priority: '0.8' })
   }
 
   for (const p of data.products) {
     if (p.visible === false) continue
     const slug = `${slugifyCatalogText(p.name)}-${p.id}`
-    urls.push({ loc: `${BASE}/catalog/producto/${slug}`, changefreq: 'weekly', priority: '0.65' })
+    urls.push({ loc: `${BASE}/catalog/producto/${slug}/`, changefreq: 'weekly', priority: '0.65' })
   }
 
   const body = urls
