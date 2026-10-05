@@ -1,8 +1,16 @@
-import { resolveStoreSlug } from 'src/utils/storeResolver'
+import { resolveStoreSlug } from '@/utils/storeResolver'
 
 // ============================================
 // Catálogos empaquetados (data/products/*.json)
 // ============================================
+
+/** Imagen con orden/alt explícitos (fuente: Firestore/admin). */
+export interface RawProductImage {
+  url: string
+  alt?: string
+  /** Orden explícito; si falta, se usa la posición en el array. 0/1 = portada. */
+  order?: number
+}
 
 export interface RawProduct {
   id: string
@@ -12,7 +20,12 @@ export interface RawProduct {
   measure?: string
   price: number
   tags?: string[]
-  images: string[]
+  /**
+   * Strings simples (fuente: Sheet/JSON, orden = posición en el array) u
+   * objetos con `order`/`alt` explícitos (fuente: Firestore/admin). La
+   * primera imagen por orden es siempre la portada.
+   */
+  images: Array<string | RawProductImage>
   discount?: string | null
   visible: boolean
   /**
@@ -22,6 +35,8 @@ export interface RawProduct {
   sold?: boolean
   /** Solo destacado si viene explícito en el JSON (por defecto: ninguno). */
   featured?: boolean
+  /** Cantidad en inventario. Opcional — si falta, no se muestra ni se valida. */
+  stock?: number
 }
 
 export interface RawCategory {
@@ -151,26 +166,37 @@ export async function fetchRemoteCatalogJson(slug: string): Promise<RawCatalog |
 }
 
 /**
- * Resolución unificada del catálogo, con 3 fuentes en orden de prioridad:
+ * Resolución unificada del catálogo, con 4 fuentes en orden de prioridad:
  *
- *   1. **Google Sheets** (via CSVs publicados) — si VITE_CATALOG_SHEETS_*_URL
- *      están definidos. La fuente más amigable para un editor no-técnico.
- *   2. **JSON remoto** (S3/CDN) — si VITE_CATALOG_REMOTE_BASE está definido.
- *   3. **JSON empaquetado** (data/products/{slug}.json) — fallback de desarrollo
+ *   1. **Firestore** (`stores/{slug}`) — la fuente real una vez migrada la
+ *      tienda. Si el doc no existe todavía, pasa a la siguiente fuente.
+ *   2. **Google Sheets** (via CSVs publicados) — si VITE_CATALOG_SHEETS_*_URL
+ *      están definidos. Se mantiene como puente mientras se completa la
+ *      migración a Firestore.
+ *   3. **JSON remoto** (S3/CDN) — si VITE_CATALOG_REMOTE_BASE está definido.
+ *   4. **JSON empaquetado** (data/products/{slug}.json) — fallback de desarrollo
  *      y red de seguridad si las otras fuentes fallan.
  *
- * Cualquier fuente que falle (red, CORS, JSON inválido) cae silenciosamente a
- * la siguiente. La app nunca se rompe; lo peor que pasa es mostrar el catálogo
- * empaquetado que el equipo técnico dejó en el último deploy.
+ * Cualquier fuente que falle (red, CORS, JSON inválido, permisos) cae
+ * silenciosamente a la siguiente. La app nunca se rompe; lo peor que pasa es
+ * mostrar el catálogo empaquetado que el equipo técnico dejó en el último
+ * deploy.
  */
 export async function resolveRawCatalog(slug: string): Promise<RawCatalog | null> {
+  const { fetchCatalogFromFirestore } = await import('@/utils/firestoreAdapter')
+  const fromFirestore = await fetchCatalogFromFirestore(slug)
+  if (fromFirestore) return fromFirestore
+
   // Import dinámico para evitar ciclo entre catalogData y googleSheetsAdapter
   // (el adapter importa tipos de este módulo).
-  const { fetchCatalogFromSheets } = await import('src/utils/googleSheetsAdapter')
+  const { fetchCatalogFromSheets } = await import('@/utils/googleSheetsAdapter')
   const fromSheets = await fetchCatalogFromSheets()
   if (fromSheets) return fromSheets
 
-  return fetchRemoteCatalogJson(slug)
+  const fromRemoteJson = await fetchRemoteCatalogJson(slug)
+  if (fromRemoteJson) return fromRemoteJson
+
+  return getRawCatalogJson(slug)
 }
 
 /** No-op — mantenido por compatibilidad de API. */

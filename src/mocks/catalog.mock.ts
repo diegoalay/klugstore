@@ -1,17 +1,33 @@
-import type { CatalogData, Category, Product, ProductImage, StoreTheme } from 'src/types'
-import type { RawCatalog } from 'src/utils/catalogData'
+import type { CatalogData, Category, Product, ProductImage, StoreTheme } from '@/types'
+import type { RawCatalog, RawProduct } from '@/utils/catalogData'
 import {
   getRawCatalogJson,
   resolveCatalogSlug,
   resolveRawCatalog,
-} from 'src/utils/catalogData'
-import { slugifyCatalogText } from 'src/utils/slugify'
-import { normalizeIconName } from 'src/utils/iconName'
+} from '@/utils/catalogData'
+import { productSlug } from '@/utils/slugify'
+import { normalizeIconName } from '@/utils/iconName'
 
 const CDN_HOST = 'https://klugsystem-public-storage.s3.us-east-1.amazonaws.com'
 
 function cdnAssetsBase(storeKey: string): string {
   return `${CDN_HOST}/${storeKey}/assets/`
+}
+
+/**
+ * Normaliza `RawProduct.images` (strings u objetos con `order`/`alt`
+ * explícitos) a `ProductImage[]`, siempre ordenado — la posición 0 es la
+ * portada. Strings mantienen su orden de array; objetos respetan su `order`
+ * si viene, si no también caen al orden de array.
+ */
+function mapProductImages(raw: RawProduct): ProductImage[] {
+  return raw.images
+    .map((img, i) =>
+      typeof img === 'string'
+        ? { url: img, alt: raw.name, order: i }
+        : { url: img.url, alt: img.alt ?? raw.name, order: img.order ?? i },
+    )
+    .sort((a, b) => a.order - b.order)
 }
 
 function mapAllProducts(raw: RawCatalog): Product[] {
@@ -23,20 +39,14 @@ function mapAllProducts(raw: RawCatalog): Product[] {
     // Productos vendidos nunca aparecen como destacados.
     const featured = visible && !sold && p.featured === true
 
-    const images: ProductImage[] = p.images.map((url, i) => ({
-      url,
-      alt: p.name,
-      order: i + 1,
-    }))
-
     const mapped: Product = {
       id: p.id,
       name: p.name,
-      slug: slugifyCatalogText(p.name) + '-' + p.id,
+      slug: productSlug(p.name, p.id),
       description: p.description,
       price: p.price,
       currency: raw.currency,
-      images,
+      images: mapProductImages(p),
       categoryId: p.category,
       categoryName: catNameBySlug.get(p.category) ?? p.category,
       tags: p.tags ?? [],
@@ -57,6 +67,9 @@ function mapAllProducts(raw: RawCatalog): Product[] {
     if (p.discount) {
       mapped.discount = p.discount
     }
+    if (typeof p.stock === 'number') {
+      mapped.stock = p.stock
+    }
     return mapped
   })
 }
@@ -65,7 +78,7 @@ function mapAllProducts(raw: RawCatalog): Product[] {
 const SWEETHOME_SOCIAL_FALLBACK = {
   instagram: 'https://www.instagram.com/sweethome.gt_',
   facebook: 'https://www.facebook.com/profile.php?id=100091776825836',
-  whatsapp: 'https://wa.me/50258705804',
+  whatsapp: 'https://wa.me/50239742544',
 }
 
 const SWEETHOME_DESC_FALLBACK =
@@ -98,10 +111,9 @@ function buildStoreConfig(raw: RawCatalog, fileSlug: string): CatalogData['store
       (key === 'sweethome' ? SWEETHOME_DESC_FALLBACK : `Catálogo ${raw.name || key}. Compra por WhatsApp.`),
     logo: raw.logo ?? `${base}logos/${key}-logo.webp`,
     logoInverse: raw.logoInverse ?? `${base}logos/${key}-logo-white.webp`,
-    whatsappNumber:
-      raw.whatsappNumber ??
-      import.meta.env.VITE_WHATSAPP_DEFAULT_NUMBER ??
-      '50258705804',
+    whatsappNumber: String(
+      raw.whatsappNumber ?? import.meta.env.VITE_WHATSAPP_DEFAULT_NUMBER ?? '50239742544',
+    ),
     whatsappMessage:
       raw.whatsappMessage ?? 'Hola! Vi un producto en su catálogo y me interesa.',
     currency: raw.currency || 'GTQ',

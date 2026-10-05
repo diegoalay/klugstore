@@ -1,0 +1,37 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Todo usuario de Firebase Auth es admin. Es seguro solo porque el registro
+    // público está deshabilitado (Auth → disabledUserSignup): las cuentas
+    // únicamente se crean desde Firebase Console.
+    function isAdmin() {
+      return request.auth != null;
+    }
+
+    // Catálogo público: lectura abierta (debe ser indexable y visible sin login).
+    match /stores/{storeId} {
+      allow read: if true;
+      allow write: if isAdmin();
+
+      match /categories/{categoryId} {
+        allow read: if true;
+        allow write: if isAdmin();
+      }
+
+      match /products/{productId} {
+        allow read: if true;
+        allow delete: if isAdmin();
+        allow create, update: if isAdmin()
+          && request.resource.data.name is string
+          && request.resource.data.price is number
+          && request.resource.data.price >= 0
+          && request.resource.data.images is list;
+      }
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -68,16 +68,16 @@ export interface Product {
   available: boolean
   visible: boolean
   /**
-   * Producto vendido. Se muestra en el catálogo como prueba social
-   * (con badge "Vendido") pero la acción de compra queda deshabilitada.
-   * Diferencia con `visible: false`:
-   *   - `visible: false` → se oculta completamente del catálogo
-   *   - `sold: true`      → se muestra pero no se puede comprar
+   * Producto vendido. No se lista en el catálogo público (listado, búsqueda,
+   * categorías), pero su ficha sigue accesible por link directo con la marca
+   * "Vendido" y la compra deshabilitada. `visible: false` lo oculta del todo.
    */
   sold?: boolean
   featured?: boolean
   variants?: ProductVariant[]
   order: number
+  /** Cantidad en inventario. Opcional — si falta, no se muestra ni se valida. */
+  stock?: number
 }
 
 export interface ProductImage {

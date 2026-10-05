@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { Notify } from 'quasar'
-import type { Product } from 'src/types'
-import { loadAllProductsFromResolvedSource } from 'src/mocks/catalog.mock'
-import type { RawCatalog } from 'src/utils/catalogData'
-import { resolveCatalogSlug, listCatalogSlugs, clearRemoteCatalogCache } from 'src/utils/catalogData'
-import { clearSheetsCache } from 'src/utils/googleSheetsAdapter'
+import type { Product } from '@/types'
+import { loadAllProductsFromResolvedSource } from '@/mocks/catalog.mock'
+import type { RawCatalog } from '@/utils/catalogData'
+import { resolveCatalogSlug, listCatalogSlugs, clearRemoteCatalogCache } from '@/utils/catalogData'
+import { clearSheetsCache } from '@/utils/googleSheetsAdapter'
 import {
   ADMIN_CATALOG_SORT_OPTIONS,
   applyAdminCatalogSort,
   type AdminCatalogSortMode,
-} from 'src/utils/catalogSort'
+} from '@/utils/catalogSort'
 
 function cloneProducts(list: Product[]): Product[] {
   return JSON.parse(JSON.stringify(list)) as Product[]

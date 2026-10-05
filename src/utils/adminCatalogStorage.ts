@@ -1,7 +1,5 @@
-import type { Product } from 'src/types'
-import { slugifyCatalogText } from 'src/utils/slugify'
-
-export const ADMIN_SESSION_KEY = 'ks-admin-auth'
+import type { Product } from '@/types'
+import { slugifyCatalogText } from '@/utils/slugify'
 
 export type AdminProductOverlay = {
   name?: string
@@ -57,16 +55,6 @@ function productToAddedPayload(p: Product): AdminAddedProductPayload {
   if (p.discount != null && p.discount !== '') o.discount = p.discount
   if (p.tags?.length) o.tags = [...p.tags]
   return o
-}
-
-export function isAdminSessionActive(): boolean {
-  if (typeof sessionStorage === 'undefined') return false
-  return sessionStorage.getItem(ADMIN_SESSION_KEY) === '1'
-}
-
-export function setAdminSession(active: boolean) {
-  if (active) sessionStorage.setItem(ADMIN_SESSION_KEY, '1')
-  else sessionStorage.removeItem(ADMIN_SESSION_KEY)
 }
 
 function mergeOverlayIntoProduct(p: Product, o: AdminProductOverlay): Product {
