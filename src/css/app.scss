@@ -46,6 +46,55 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 100vh;
 }
 
+// ============================================
+// Admin — tamaños de botón estandarizados
+// ============================================
+// Quasar no da una altura fija por defecto (varía según label/dense/icon),
+// así que sin esto cada botón del admin terminaba con una altura distinta.
+// Clases globales (no anidadas bajo .admin-layout) a propósito: los
+// q-dialog de Quasar se teletransportan a <body>, fuera del árbol del
+// layout, así que un selector tipo `.admin-layout .q-btn` nunca los
+// alcanzaría. Se aplican a mano con `class="admin-btn"` / `admin-btn-sm`
+// en cada botón del admin (toolbar, tarjetas, diálogos).
+//
+// Dos niveles: estándar (acciones principales) y chico (secundarias/
+// contextuales: borrar en una fila, cerrar un diálogo).
+.admin-btn.q-btn {
+  min-height: 40px;
+  border-radius: 10px;
+
+  &.q-btn--round {
+    width: 40px;
+    min-width: 40px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 13px;
+  }
+}
+
+.admin-btn-sm.q-btn {
+  min-height: 32px;
+  border-radius: 8px;
+
+  &.q-btn--round {
+    width: 32px;
+    min-width: 32px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 11px;
+  }
+}
+
+// Botones redondos con borde (toolbar): borde gris suave y fondo blanco,
+// mismo peso visual que el buscador y el selector de orden.
+.admin-btn.q-btn--round.q-btn--outline {
+  background: #fff !important;
+
+  &::before {
+    border-color: rgba(0, 0, 0, 0.18);
+  }
+}
+
 // Scrollbar
 ::-webkit-scrollbar {
   width: 6px;
