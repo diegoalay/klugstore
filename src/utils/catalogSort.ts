@@ -3,7 +3,7 @@ import type { Product } from '@/types'
 export type CatalogSortMode = 'default' | 'price-asc' | 'price-desc' | 'name-asc' | 'name-desc'
 
 export const CATALOG_SORT_OPTIONS: { value: CatalogSortMode; label: string }[] = [
-  { value: 'default', label: 'Orden del catálogo' },
+  { value: 'default', label: 'Orden de categorías' },
   { value: 'price-asc', label: 'Precio: menor a mayor' },
   { value: 'price-desc', label: 'Precio: mayor a menor' },
   { value: 'name-asc', label: 'Nombre A → Z' },
@@ -23,7 +23,15 @@ export function parseCatalogSortParam(value: string | null): CatalogSortMode {
   return SORT_SET.has(v) ? v : 'default'
 }
 
-export function applyCatalogSortMode(products: Product[], mode: CatalogSortMode): Product[] {
+/**
+ * `default` = orden de categorías definido en el admin (arrastrar y soltar) y,
+ * dentro de cada categoría, por nombre. Sin `categoryOrder` cae a `product.order`.
+ */
+export function applyCatalogSortMode(
+  products: Product[],
+  mode: CatalogSortMode,
+  categoryOrder?: ReadonlyMap<string, number>,
+): Product[] {
   const arr = [...products]
   switch (mode) {
     case 'price-asc':
@@ -39,7 +47,13 @@ export function applyCatalogSortMode(products: Product[], mode: CatalogSortMode)
         b.name.localeCompare(a.name, 'es', { sensitivity: 'base', numeric: true }),
       )
     default:
-      return arr.sort((a, b) => a.order - b.order)
+      if (!categoryOrder) return arr.sort((a, b) => a.order - b.order)
+      return arr.sort(
+        (a, b) =>
+          (categoryOrder.get(a.categoryId) ?? Number.MAX_SAFE_INTEGER) -
+            (categoryOrder.get(b.categoryId) ?? Number.MAX_SAFE_INTEGER) ||
+          a.name.localeCompare(b.name, 'es', { sensitivity: 'base', numeric: true }),
+      )
   }
 }
 

@@ -18,11 +18,14 @@ export const useCatalogStore = defineStore('catalog', () => {
   const loading = ref(false)
   const activeCategory = ref<string | null>(null)
   const searchQuery = ref('')
-  const catalogSort = ref<CatalogSortMode>('name-asc')
+  const catalogSort = ref<CatalogSortMode>('default')
 
   const sortedCategories = computed(() =>
     [...categories.value].sort((a, b) => a.order - b.order),
   )
+
+  /** Posición de cada categoría (orden del admin), para ordenar productos por categoría. */
+  const categoryOrder = computed(() => new Map(categories.value.map((c) => [c.id, c.order])))
 
   const categoriesWithStock = computed(() => {
     const used = new Set(products.value.filter((p) => p.available).map((p) => p.categoryId))
@@ -54,7 +57,7 @@ export const useCatalogStore = defineStore('catalog', () => {
       })
     }
 
-    return applyCatalogSortMode(result, catalogSort.value)
+    return applyCatalogSortMode(result, catalogSort.value, categoryOrder.value)
   })
 
   const featuredProducts = computed(() => products.value.filter((p) => p.featured && p.available))
@@ -94,7 +97,7 @@ export const useCatalogStore = defineStore('catalog', () => {
   }
 
   function getSortedProductsByCategory(categoryId: string): Product[] {
-    return applyCatalogSortMode(getProductsByCategory(categoryId), catalogSort.value)
+    return applyCatalogSortMode(getProductsByCategory(categoryId), catalogSort.value, categoryOrder.value)
   }
 
   return {
@@ -105,6 +108,7 @@ export const useCatalogStore = defineStore('catalog', () => {
     searchQuery,
     catalogSort,
     sortedCategories,
+    categoryOrder,
     categoriesWithStock,
     soldProducts,
     filteredProducts,

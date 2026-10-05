@@ -309,9 +309,10 @@ const { loadCatalog, reloadCatalog } = useCatalog()
 const AdminProductFormDialog = defineAsyncComponent(
   () => import('@/components/admin/ProductFormDialog.vue'),
 )
-const { editorOpen, editorProduct, editorPrefill, confirmDeleteProduct } = useAdminProductEditor()
+const { editorOpen, editorProduct, editorPrefill, handleEditorSaved, confirmDeleteProduct } = useAdminProductEditor()
 
-async function refreshCatalogAfterEdit() {
+async function refreshCatalogAfterEdit(productId?: string) {
+  if (productId) await handleEditorSaved(productId)
   await reloadCatalog(resolveStoreSlug())
 }
 
@@ -392,7 +393,7 @@ const searchMatches = computed(() => {
 })
 
 const searchResults = computed(() =>
-  applyCatalogSortMode(searchMatches.value, catalogStore.catalogSort).slice(0, 8),
+  applyCatalogSortMode(searchMatches.value, catalogStore.catalogSort, catalogStore.categoryOrder).slice(0, 8),
 )
 
 // Se registra la búsqueda cuando el usuario deja de escribir (no cada tecla).

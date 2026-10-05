@@ -45,6 +45,17 @@ describe('public catalog store', () => {
     expect(store.soldProducts).toHaveLength(1)
   })
 
+  it('defaults to the category order defined in the admin, then by name', () => {
+    const store = seed()
+    store.setCategories([
+      makeCategory({ id: 'faucets', name: 'Grifos', order: 1 }),
+      makeCategory({ id: 'vases', order: 2 }),
+      makeCategory({ id: 'garden', name: 'Jardín', order: 3 }),
+    ])
+    expect(store.catalogSort).toBe('default')
+    expect(store.filteredProducts.map((p) => p.id)).toEqual(['faucets-01', 'vases-01', 'vases-02'])
+  })
+
   it('filters by the active category', () => {
     const store = seed()
     store.setActiveCategory('faucets')
