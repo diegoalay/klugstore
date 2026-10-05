@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useStoreConfigStore } from 'src/stores'
-import { usePageSeo } from 'src/composables/usePageSeo'
+import { useStoreConfigStore } from '@/stores'
+import { usePageSeo } from '@/composables/usePageSeo'
 
 const route = useRoute()
 const storeConfig = useStoreConfigStore()

@@ -7,12 +7,7 @@
       content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width<% if (ctx.mode.cordova || ctx.mode.capacitor) { %>, viewport-fit=cover<% } %>"
     />
 
-    <!-- SEO Meta Tags -->
-    <title>SweetHome GT — Tienda en línea de decoración y hogar | Guatemala</title>
-    <meta
-      name="description"
-      content="SweetHome GT es una tienda en línea de productos para el hogar: decoración temática, Navidad, regalos y piezas que combinan estética y funcionalidad. Inspira tu espacio; compra por WhatsApp en Guatemala."
-    />
+    <!-- title, description, canonical, robots, og:* y twitter:* por página: usePageSeo (Quasar Meta) -->
     <meta name="author" content="SweetHome GT" />
     <meta
       name="keywords"
@@ -20,13 +15,9 @@
     />
     <meta name="geo.region" content="GT" />
     <meta name="geo.country" content="GT" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://sweethome.com.gt/" />
 
     <!-- Preconnect: origen principal del sitio -->
-    <link rel="preconnect" href="https://sweethome.com.gt" crossorigin />
+    <link rel="preconnect" href="https://sweethome.gt" crossorigin />
     <!-- Preconnect: CDN de assets (imágenes y logos) -->
     <link rel="preconnect" href="https://klugsystem-public-storage.s3.us-east-1.amazonaws.com" crossorigin />
 
@@ -44,43 +35,11 @@
     <meta name="msapplication-TileColor" content="#d19793" />
 
     <!-- Open Graph / Facebook / Instagram / WhatsApp -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sweethome.com.gt/" />
     <meta property="og:site_name" content="SweetHome GT" />
-    <meta
-      property="og:title"
-      content="SweetHome GT — Decoración y hogar en línea | Regalos, Navidad y ambientes cálidos"
-    />
-    <meta
-      property="og:description"
-      content="Productos para embellecer tu hogar: decoración temática, Navidad y regalos. Ambientes cálidos y memorables. Estética + funcionalidad. Compra en línea por WhatsApp."
-    />
-    <meta
-      property="og:image"
-      content="https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/og-image.png"
-    />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="SweetHome GT — decoración para el hogar y tienda en línea en Guatemala"
-    />
     <meta property="og:locale" content="es_GT" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://sweethome.com.gt/" />
-    <meta name="twitter:title" content="SweetHome GT — Decoración y hogar en línea | Regalos, Navidad y ambientes cálidos" />
-    <meta
-      name="twitter:description"
-      content="Decoración del hogar, temporadas y regalos. Crea ambientes cálidos; compra por WhatsApp en Guatemala."
-    />
-    <meta
-      name="twitter:image"
-      content="https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/og-image.png"
-    />
-    <meta name="twitter:image:alt" content="SweetHome GT — decoración y hogar en línea" />
 
     <!-- Structured Data (JSON-LD): Brand + Organization + OnlineStore + WebSite -->
     <script type="application/ld+json">
@@ -89,29 +48,29 @@
         "@graph": [
           {
             "@type": "Brand",
-            "@id": "https://sweethome.com.gt/#brand",
+            "@id": "https://sweethome.gt/#brand",
             "name": "SweetHome GT",
             "alternateName": ["SweetHome", "Sweet Home Guatemala"],
             "description": "SweetHome comercializa en línea productos para el hogar con foco en decoración temática: ayuda a transformar espacios en experiencias cálidas, estéticas y memorables, con picos en temporadas como Navidad.",
-            "url": "https://sweethome.com.gt",
-            "logo": "https://sweethome.com.gt/logo.png"
+            "url": "https://sweethome.gt",
+            "logo": "https://sweethome.gt/logo.png"
           },
           {
             "@type": "Organization",
-            "@id": "https://sweethome.com.gt/#organization",
+            "@id": "https://sweethome.gt/#organization",
             "name": "SweetHome GT",
             "alternateName": ["SweetHome", "Sweet Home Guatemala"],
-            "url": "https://sweethome.com.gt",
-            "logo": "https://sweethome.com.gt/logo.png",
+            "url": "https://sweethome.gt",
+            "logo": "https://sweethome.gt/logo.png",
             "description": "Tienda en línea guatemalteca de decoración y artículos para el hogar: estética, funcionalidad y regalos, con fuerte propuesta visual en redes y venta asistida por WhatsApp.",
-            "brand": { "@id": "https://sweethome.com.gt/#brand" },
+            "brand": { "@id": "https://sweethome.gt/#brand" },
             "areaServed": {
               "@type": "Country",
               "name": "Guatemala"
             },
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+502 5870-5804",
+              "telephone": "+502 3974-2544",
               "contactType": "sales",
               "availableLanguage": ["Spanish"],
               "areaServed": "GT"
@@ -119,16 +78,16 @@
             "sameAs": [
               "https://www.instagram.com/sweethome.gt_",
               "https://www.facebook.com/profile.php?id=100091776825836",
-              "https://wa.me/50258705804"
+              "https://wa.me/50239742544"
             ]
           },
           {
             "@type": "OnlineStore",
-            "@id": "https://sweethome.com.gt/#store",
+            "@id": "https://sweethome.gt/#store",
             "name": "SweetHome GT — Tienda en línea",
             "image": "https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/og-image.png",
-            "url": "https://sweethome.com.gt",
-            "telephone": "+502 5870-5804",
+            "url": "https://sweethome.gt",
+            "telephone": "+502 3974-2544",
             "priceRange": "Q$",
             "address": {
               "@type": "PostalAddress",
@@ -136,15 +95,15 @@
             },
             "paymentAccepted": "Efectivo, Transferencia, Depósito bancario",
             "currenciesAccepted": "GTQ",
-            "brand": { "@id": "https://sweethome.com.gt/#brand" }
+            "brand": { "@id": "https://sweethome.gt/#brand" }
           },
           {
             "@type": "WebSite",
-            "@id": "https://sweethome.com.gt/#website",
-            "url": "https://sweethome.com.gt",
+            "@id": "https://sweethome.gt/#website",
+            "url": "https://sweethome.gt",
             "name": "SweetHome GT",
             "description": "Catálogo en línea de decoración para el hogar, regalos y temporadas. Compra por WhatsApp en Guatemala.",
-            "publisher": { "@id": "https://sweethome.com.gt/#organization" },
+            "publisher": { "@id": "https://sweethome.gt/#organization" },
             "inLanguage": "es-GT"
           }
         ]
@@ -183,8 +142,8 @@
 
         <h2>¿Cómo comprar?</h2>
         <ol>
-          <li>Explora nuestro catálogo en <a href="https://sweethome.com.gt">sweethome.gt</a></li>
-          <li>Escríbenos por WhatsApp al <a href="https://wa.me/50258705804">+502 5870-5804</a></li>
+          <li>Explora nuestro catálogo en <a href="https://sweethome.gt">sweethome.gt</a></li>
+          <li>Escríbenos por WhatsApp al <a href="https://wa.me/50239742544">+502 3974-2544</a></li>
           <li>Coordina el pago y la entrega</li>
         </ol>
 
@@ -192,11 +151,11 @@
         <ul>
           <li><a href="https://www.instagram.com/sweethome.gt_">Instagram @sweethome.gt_</a></li>
           <li><a href="https://www.facebook.com/profile.php?id=100091776825836">Facebook</a></li>
-          <li><a href="https://wa.me/50258705804">WhatsApp +502 5870-5804</a></li>
+          <li><a href="https://wa.me/50239742544">WhatsApp +502 3974-2544</a></li>
         </ul>
 
         <p>
-          <a href="https://sweethome.com.gt">Visita nuestro catálogo completo</a> · SweetHome GT — un
+          <a href="https://sweethome.gt">Visita nuestro catálogo completo</a> · SweetHome GT — un
           producto de SolayTech © 2026
         </p>
       </div>

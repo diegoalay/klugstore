@@ -1,64 +1,59 @@
-import { watchEffect, type Ref } from 'vue'
-import { unref } from 'vue'
+import { unref, type Ref } from 'vue'
+import { useMeta } from 'quasar'
+
+/** Dominio público: canonical/og:url siempre apuntan a producción, también en dev. */
+export const SITE_ORIGIN = 'https://sweethome.gt'
+const DEFAULT_OG_IMAGE =
+  'https://klugsystem-public-storage.s3.us-east-1.amazonaws.com/sweethome/assets/images/og-image.png'
 
 export interface PageSeoInput {
   title: Ref<string> | string
   description: Ref<string> | string
   /** Ruta absoluta del sitio, p. ej. `/catalog` o `/catalog/producto/foo` */
   path: Ref<string> | string
-  /** Si true, añade noindex (p. ej. 404) */
+  /** Imagen para vista previa en WhatsApp/Facebook; por defecto la de la marca. */
+  image?: Ref<string | undefined> | string | undefined
+  /** `product` en fichas de producto. */
+  type?: 'website' | 'product'
+  /** Si true, añade noindex (p. ej. 404, admin) */
   noIndex?: Ref<boolean> | boolean
 }
 
-function setMetaContent(selector: string, content: string) {
-  const el = document.querySelector(selector)
-  if (el) el.setAttribute('content', content)
-}
-
-function setLinkHref(rel: string, href: string) {
-  const el = document.querySelector(`link[rel="${rel}"]`)
-  if (el) el.setAttribute('href', href)
-}
-
 /**
- * Actualiza title, description, canonical y etiquetas sociales básicas (SPA).
+ * Title, description, canonical y etiquetas sociales vía Quasar Meta: funciona
+ * en navegador y también durante SSR/SSG, así el HTML generado ya trae la
+ * vista previa correcta de cada página (lo que leen WhatsApp y Facebook).
  */
 export function usePageSeo(opts: PageSeoInput) {
-  watchEffect(() => {
+  useMeta(() => {
     const title = unref(opts.title)
     const description = unref(opts.description)
     const path = unref(opts.path)
-    const noIndex = unref(opts.noIndex) ?? false
+    const url = `${SITE_ORIGIN}${path.startsWith('/') ? path : `/${path}`}`
+    const image = unref(opts.image) || DEFAULT_OG_IMAGE
+    const robots = unref(opts.noIndex)
+      ? 'noindex, follow'
+      : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
 
-    const origin =
-      typeof window !== 'undefined' && window.location?.origin
-        ? window.location.origin
-        : 'https://sweethome.com.gt'
-    const normalizedPath = path.startsWith('/') ? path : `/${path}`
-    const url = `${origin}${normalizedPath}`
-
-    document.title = title
-
-    setMetaContent('meta[name="description"]', description)
-
-    if (noIndex) {
-      setMetaContent('meta[name="robots"]', 'noindex, follow')
-    } else {
-      setMetaContent(
-        'meta[name="robots"]',
-        'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-      )
+    return {
+      title,
+      meta: {
+        description: { name: 'description', content: description },
+        robots: { name: 'robots', content: robots },
+        ogType: { property: 'og:type', content: opts.type ?? 'website' },
+        ogTitle: { property: 'og:title', content: title },
+        ogDescription: { property: 'og:description', content: description },
+        ogUrl: { property: 'og:url', content: url },
+        ogImage: { property: 'og:image', content: image },
+        ogImageAlt: { property: 'og:image:alt', content: title },
+        twitterTitle: { name: 'twitter:title', content: title },
+        twitterDescription: { name: 'twitter:description', content: description },
+        twitterImage: { name: 'twitter:image', content: image },
+      },
+      link: {
+        canonical: { rel: 'canonical', href: url },
+      },
     }
-
-    setLinkHref('canonical', url)
-
-    setMetaContent('meta[property="og:title"]', title)
-    setMetaContent('meta[property="og:description"]', description)
-    setMetaContent('meta[property="og:url"]', url)
-
-    setMetaContent('meta[name="twitter:title"]', title)
-    setMetaContent('meta[name="twitter:description"]', description)
-    setMetaContent('meta[name="twitter:url"]', url)
   })
 }
 
