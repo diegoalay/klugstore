@@ -162,21 +162,33 @@ export const useAdminFirestoreCatalogStore = defineStore('adminFirestoreCatalog'
     return d
   }
 
+  /**
+   * Deja la copia local igual a lo que quedó en Firestore (misma conversión que
+   * al cargar). Sin esto, reabrir un producto recién guardado mostraba los datos
+   * anteriores hasta recargar la página.
+   */
+  function upsertLocal(id: string, data: AdminProductDoc) {
+    const catNameBySlug = new Map(categories.value.map((c) => [c.slug, c.name]))
+    const fresh = docToProduct(id, data, catNameBySlug)
+    const idx = products.value.findIndex((x) => x.id === id)
+    products.value =
+      idx >= 0 ? products.value.map((x, i) => (i === idx ? fresh : x)) : [...products.value, fresh]
+  }
+
   async function saveProduct(p: Product): Promise<void> {
-    await setDoc(
-      doc(storeRef(), 'products', p.id),
-      { ...toDoc(p), updatedAt: serverTimestamp() },
-      { merge: false },
-    )
+    const data = toDoc(p)
+    await setDoc(doc(storeRef(), 'products', p.id), { ...data, updatedAt: serverTimestamp() }, { merge: false })
+    upsertLocal(p.id, data)
   }
 
   async function createProduct(id: string, p: Product): Promise<void> {
+    const data = toDoc(p)
     await setDoc(doc(storeRef(), 'products', id), {
-      ...toDoc(p),
+      ...data,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })
-    products.value = [...products.value, p]
+    upsertLocal(id, data)
   }
 
   async function deleteProduct(id: string): Promise<void> {

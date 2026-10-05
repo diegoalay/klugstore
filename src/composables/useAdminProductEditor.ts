@@ -56,11 +56,16 @@ export function useAdminProductEditor() {
     editorOpen.value = true
   }
 
-  /** Llamar desde @saved del diálogo: avisa a quien abrió el editor con prefill. */
+  /**
+   * Llamar desde @saved del diálogo. El modal queda abierto: pasa a mostrar la
+   * versión guardada (y, si era nuevo, a modo edición para no crearlo dos veces).
+   */
   async function handleEditorSaved(productId: string) {
     const callback = onCreated
     onCreated = null
     if (!editorProduct.value && callback) await callback(productId)
+    editorPrefill.value = null
+    editorProduct.value = store.products.find((p) => p.id === productId) ?? editorProduct.value
   }
 
   /** Confirma y borra; `onDeleted` refresca la vista que lo llamó. */

@@ -25,7 +25,7 @@
             <q-toggle v-model="draftSold" dense label="Vendido" color="deep-orange-6" />
           </div>
 
-          <div v-if="draft.source?.type === 'instagram'" class="form-ig">
+          <div v-if="isEdit && draft.source?.type === 'instagram'" class="form-ig">
             <div class="form-ig-head">
               <q-icon name="fa-brands fa-instagram" size="14px" />
               <span>Publicación de Instagram</span>
@@ -44,7 +44,7 @@
               @click="prepareInstagramUpdate"
             />
             <p class="form-ig-hint">
-              Copia el texto con lo de este formulario (vendido, precio) y abre la publicación: en Instagram toca
+              Copia el texto con lo de este formulario (descripción, medidas, precio y vendido) y abre la publicación: en Instagram toca
               <strong>··· › Editar</strong>, pega y guarda.
             </p>
           </div>
@@ -152,7 +152,11 @@
               <q-icon name="fa-solid fa-check" size="11px" /> {{ c }}
             </li>
           </ul>
-          <div class="ig-confirm-label">Texto que vas a pegar</div>
+          <div class="ig-confirm-label">Texto actual en Instagram</div>
+          <pre class="ig-confirm-preview ig-confirm-preview--current">{{ igUpdate.current }}</pre>
+          <div class="ig-confirm-label">
+            <q-icon name="fa-solid fa-arrow-down" size="10px" /> Texto nuevo (el que vas a pegar)
+          </div>
           <pre class="ig-confirm-preview">{{ igUpdate.caption }}</pre>
           <p class="form-ig-hint">
             Al confirmar se copia el texto y se abre la publicación. En Instagram toca <strong>··· › Editar</strong>,
@@ -184,8 +188,7 @@ import { slugifyCatalogText, productSlug } from '@/utils/slugify'
 import { useAdminFirestoreCatalogStore } from '@/stores/admin-firestore-catalog-store'
 import ProductImageManager from '@/components/admin/ProductImageManager.vue'
 import { nextProductId, persistExternalImages } from '@/utils/productImages'
-import { parseInstagramCaption, updateCaptionForProduct } from '@/utils/instagramCaption'
-import { formatCurrency } from '@/utils/format'
+import { updateCaptionForProduct } from '@/utils/instagramCaption'
 import { useAdminInstagramStore } from '@/stores/admin-instagram-store'
 
 const NEW_CATEGORY_VALUE = '__new_category__'
@@ -340,24 +343,22 @@ watch(
 )
 
 const igConfirmOpen = ref(false)
-const igUpdate = reactive({ caption: '', changes: [] as string[] })
+const igUpdate = reactive({ current: '', caption: '', changes: [] as string[] })
 
 /** Calcula el texto nuevo y lo que cambia; si hay cambios, pide confirmación. */
 function prepareInstagramUpdate() {
   if (typeof igCaption.value !== 'string') return
-  const sold = !!draft.sold
-  const price = Number(draft.price) || 0
-  const before = parseInstagramCaption(igCaption.value)
-  const { caption, changed } = updateCaptionForProduct(igCaption.value, { sold, price })
+  const { caption, changed, changes } = updateCaptionForProduct(igCaption.value, {
+    sold: !!draft.sold,
+    price: Number(draft.price) || 0,
+    description: draft.description,
+    measure: draft.measure ?? null,
+  })
   if (!changed) {
     Notify.create({ message: 'La publicación ya está al día con este producto.' })
     return
   }
-  const changes: string[] = []
-  if (before.sold !== sold) changes.push(sold ? 'Se agrega «VENDIDO» al inicio' : 'Se quita «VENDIDO»')
-  if (before.price !== null && before.price !== price) {
-    changes.push(`Precio: ${formatCurrency(before.price)} → ${formatCurrency(price)}`)
-  }
+  igUpdate.current = igCaption.value
   igUpdate.caption = caption
   igUpdate.changes = changes
   igConfirmOpen.value = true
@@ -446,7 +447,6 @@ async function submit() {
     }
     Notify.create({ type: 'positive', message: isEdit.value ? 'Cambios guardados' : 'Producto creado' })
     emit('saved', id)
-    close()
   } catch (err) {
     console.error(err)
     const reason = err instanceof Error && err.message ? `: ${err.message}` : ''
@@ -566,6 +566,12 @@ async function submit() {
   background: #faf8f5;
 }
 
+.ig-confirm-preview--current {
+  background: #f1efec;
+  color: #8a8a8a;
+  border-style: dashed;
+}
+
 .ig-confirm-changes {
   list-style: none;
   margin: 0 0 14px;
@@ -595,8 +601,8 @@ async function submit() {
 }
 
 .ig-confirm-preview {
-  margin: 0;
-  max-height: 220px;
+  margin: 0 0 14px;
+  max-height: 180px;
   overflow-y: auto;
   white-space: pre-wrap;
   font-family: inherit;

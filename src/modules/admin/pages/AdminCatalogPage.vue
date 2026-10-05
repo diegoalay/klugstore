@@ -204,7 +204,6 @@ const { editorOpen, editorProduct, editorPrefill, openProductEditor, handleEdito
 
 async function onProductSaved(productId: string) {
   await handleEditorSaved(productId)
-  await reload()
 }
 
 function openAddProductDialog() {

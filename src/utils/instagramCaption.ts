@@ -128,19 +128,53 @@ export function suggestCategory(text: string, availableSlugs: string[]): string 
   return null
 }
 
+export interface CaptionProductState {
+  sold?: boolean
+  price: number
+  description?: string
+  measure?: string | null
+}
+
+const formatPrice = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2))
+const sameText = (a?: string | null, b?: string | null) =>
+  normalizeForSearch(a ?? '').replace(/\s+/g, ' ').trim() === normalizeForSearch(b ?? '').replace(/\s+/g, ' ').trim()
+
 /**
- * Texto actualizado de un post a partir del estado del producto: agrega o quita
- * "VENDIDO" al inicio y corrige el primer precio. El resto de la redacción
- * (emojis, hashtags, saltos de línea) no se toca.
+ * Texto actualizado de un post a partir del producto, con la lista de cambios.
+ * - Solo vendido/precio: edita el texto original (respeta emojis y redacción).
+ * - Descripción o medida distintas: lo arma desde el producto y conserva los hashtags.
+ * El resultado vuelve a leerse igual con parseInstagramCaption (no da cambios falsos
+ * después de pegarlo y re-sincronizar).
  */
 export function updateCaptionForProduct(
   caption: string,
-  product: { sold?: boolean; price: number },
-): { caption: string; changed: boolean } {
-  let next = caption.replace(SOLD_RE, '')
-  next = next.replace(PRICE_RE, (match, amount: string) =>
-    match.replace(amount, Number.isInteger(product.price) ? String(product.price) : product.price.toFixed(2)),
-  )
-  if (product.sold) next = `VENDIDO ${next}`
-  return { caption: next, changed: next !== caption }
+  product: CaptionProductState,
+): { caption: string; changed: boolean; changes: string[] } {
+  const before = parseInstagramCaption(caption)
+  const changes: string[] = []
+  const descriptionChanged = product.description !== undefined && !sameText(before.description, product.description)
+  const measureChanged = product.measure !== undefined && !sameText(before.measure, product.measure)
+
+  let next: string
+  if (descriptionChanged || measureChanged) {
+    if (descriptionChanged) changes.push('Se actualiza la descripción')
+    if (measureChanged) changes.push(product.measure ? 'Se actualiza la medida' : 'Se quita la medida')
+    const hashtags = before.tags.map((t) => `#${t}`).join(' ')
+    next = [
+      `${product.sold ? 'VENDIDO ' : ''}${(product.description ?? before.description).trim()}`,
+      ...(product.measure ? [`Medidas: ${product.measure}`] : []),
+      `Precio: Q${formatPrice(product.price)}`,
+      ...(hashtags ? ['', hashtags] : []),
+    ].join('\n')
+  } else {
+    next = caption.replace(SOLD_RE, '')
+    next = next.replace(PRICE_RE, (match, amount: string) => match.replace(amount, formatPrice(product.price)))
+    if (product.sold) next = `VENDIDO ${next}`
+  }
+
+  if (before.sold !== !!product.sold) changes.unshift(product.sold ? 'Se agrega «VENDIDO» al inicio' : 'Se quita «VENDIDO»')
+  if (before.price !== null && before.price !== product.price) {
+    changes.push(`Precio: Q${formatPrice(before.price)} → Q${formatPrice(product.price)}`)
+  }
+  return { caption: next, changed: next !== caption, changes }
 }

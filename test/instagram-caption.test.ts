@@ -114,3 +114,32 @@ describe('updating a post caption from the product', () => {
     expect(updateCaptionForProduct('VENDIDO Bandeja\nQ250', { sold: true, price: 250 }).changed).toBe(false)
   })
 })
+
+describe('updating a post when the description or measure changed', () => {
+  const original = '🎄 Adorno navideño de cascanueces, decoración de madera.\nMedidas: 30 cm de altura\nQ175\n#navidad #decoracion'
+
+  it('does not report changes when the product still matches the post', () => {
+    const s = parseInstagramCaption(original)
+    const r = updateCaptionForProduct(original, { price: 175, description: s.description, measure: s.measure })
+    expect(r.changed).toBe(false)
+  })
+
+  it('rebuilds from the product and keeps the hashtags when the description changed', () => {
+    const r = updateCaptionForProduct(original, {
+      price: 175,
+      description: 'Adorno navideño de cascanueces de madera pintado a mano.',
+      measure: '30 cm de altura',
+    })
+    expect(r.changed).toBe(true)
+    expect(r.changes).toContain('Se actualiza la descripción')
+    expect(r.caption).toContain('pintado a mano')
+    expect(r.caption).toContain('Precio: Q175')
+    expect(r.caption).toContain('#navidad #decoracion')
+  })
+
+  it('is stable: once pasted, checking again reports no changes', () => {
+    const product = { sold: true, price: 190, description: 'Cascanueces de madera.', measure: '30 cm de altura' }
+    const pasted = updateCaptionForProduct(original, product).caption
+    expect(updateCaptionForProduct(pasted, product).changed).toBe(false)
+  })
+})
